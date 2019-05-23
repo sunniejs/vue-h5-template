@@ -11,12 +11,12 @@
     Button
   } from 'vant'
   export default {
-    data() {
-      return {};
-    },
-
     components: {
       'van-button': Button
+    },
+
+    data() {
+      return {}
     },
 
     computed: {},
