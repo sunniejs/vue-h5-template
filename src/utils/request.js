@@ -1,9 +1,10 @@
 import axios from 'axios'
 import store from '@/store'
 import { Toast } from 'vant'
+import { api } from '@/config'
 // create an axios instance
 const service = axios.create({
-  baseURL: process.env.BASE_URL, // url = base url + request url
+  baseURL: api.base_api, // url = base url + request url
   withCredentials: true, // send cookies when cross-domain requests
   timeout: 5000 // request timeout
 })

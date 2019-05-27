@@ -7,30 +7,32 @@
 </template>
 
 <script>
-  import {
-    Button
-  } from 'vant'
-  export default {
-    components: {
-      'van-button': Button
-    },
+// import { api } from '@/config'
+import {
+  Button
+} from 'vant'
+export default {
+  components: {
+    'van-button': Button
+  },
 
-    data() {
-      return {}
-    },
+  data () {
+    return {}
+  },
 
-    computed: {},
+  computed: {},
 
-    mounted() {},
+  mounted () {
+    console.log(process.env)
+  },
 
-    methods: {}
-  }
+  methods: {}
+}
 
 </script>
 <style lang='scss' scoped>
-  h1 {
-    background: red;
-    width: 375px;
-  }
-
+h1 {
+  background: red;
+  width: 375px;
+}
 </style>
