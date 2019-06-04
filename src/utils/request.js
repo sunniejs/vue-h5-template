@@ -34,22 +34,17 @@ service.interceptors.request.use(
 service.interceptors.response.use(
   response => {
     Toast.clear()
-    // 如果是数据流
-    if (response.config.responseType === 'arraybuffer') {
-      return response.data
-    } else {
-      const res = response.data
-      if (res.status !== 200) {
-        // 登录超时,重新登录
-        if (res.status === 401) {
-          store.dispatch('FedLogOut').then(() => {
-            location.reload()
-          })
-        }
-        return Promise.reject(res || 'error')
-      } else {
-        return Promise.resolve(res)
+    const res = response.data
+    if (res.status && res.status !== 200) {
+      // 登录超时,重新登录
+      if (res.status === 401) {
+        store.dispatch('FedLogOut').then(() => {
+          location.reload()
+        })
       }
+      return Promise.reject(res || 'error')
+    } else {
+      return Promise.resolve(res)
     }
   },
   error => {

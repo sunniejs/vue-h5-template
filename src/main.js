@@ -7,6 +7,7 @@ import 'lib-flexible/flexible.js'
 import App from './App'
 import store from './store'
 import router from './router'
+import filters from './filter'
 Vue.config.productionTip = false
 
 new Vue({
