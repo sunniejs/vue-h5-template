@@ -47,7 +47,8 @@ module.exports = {
     overlay: {
       warnings: false,
       errors: true
-    }
+    },
+    disableHostCheck: true
   },
   configureWebpack: config => {
     // 为生产环境修改配置...
@@ -88,6 +89,7 @@ module.exports = {
       if (process.env.NODE_ENV === 'development') {
         args[0].cdn = cdn.dev
       }
+      console.log(args)
       return args
     })
 

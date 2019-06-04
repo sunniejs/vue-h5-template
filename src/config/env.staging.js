@@ -1,7 +1,8 @@
 module.exports = {
   title: 'vue-h5-template',
+  baseUrl: 'https://test.top1buyer.com',
   api: {
-    base_api: 'https://xxx.xxx.com/admin',
+    base_api: 'https://test.top1buyer.com/wx',
     common_api: 'https://xxx.xxx.com/common'
   },
   // package appid,appSecret

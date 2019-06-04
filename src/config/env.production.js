@@ -1,6 +1,7 @@
 // 正式
 module.exports = {
   title: 'vue-h5-template',
+  baseUrl:'http://localhost:9018',
   api: {
     base_api: 'https://xxx.xxx.com/admin',
     common_api: 'https://xxx.xxx.com/common'
