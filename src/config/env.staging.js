@@ -1,5 +1,5 @@
 module.exports = {
-  title: 'vue-h5-template',
+  title: '蚁小宝',
   baseUrl: 'https://test.top1buyer.com',
   api: {
     base_api: 'https://test.top1buyer.com/wx',

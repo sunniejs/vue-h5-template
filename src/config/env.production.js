@@ -1,6 +1,6 @@
 // 正式
 module.exports = {
-  title: 'vue-h5-template',
+  title: '蚁小宝',
   baseUrl:'http://localhost:9018',
   api: {
     base_api: 'https://xxx.xxx.com/admin',
