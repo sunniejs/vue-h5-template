@@ -20,7 +20,9 @@ const cdn = {
   // 开发环境
   dev: {
     css: [],
-    js: []
+    js: [
+      'https://cdnjs.cloudflare.com/ajax/libs/babel-polyfill/7.4.4/polyfill.js'
+    ]
   },
   // 生产环境
   build: {
@@ -37,7 +39,7 @@ const cdn = {
   }
 }
 module.exports = {
-  publicPath: process.env.NODE_ENV === 'development' ? '/' : '/antpublic/',
+  publicPath: process.env.NODE_ENV === 'development' ? '/' : '/app/', // 需要区分生产环境和开发环境，不然build会报错
   outputDir: 'dist',
   assetsDir: 'static',
   lintOnSave: process.env.NODE_ENV === 'development',
@@ -50,14 +52,13 @@ module.exports = {
       errors: true
     }
   },
- 
+
   configureWebpack: config => {
     // 为生产环境修改配置...
     if (process.env.NODE_ENV === 'production') {
       // externals里的模块不打包
       Object.assign(config, {
         name: name,
-     //   entry:["@babel/polyfill", "./src/main.js"],
         externals: externals
       })
     }
@@ -65,18 +66,9 @@ module.exports = {
     if (process.env.NODE_ENV === 'development') {
     }
   },
-  // configureWebpack: {
-  //   name: name,
-  //   resolve: {
-  //     alias: {
-  //       '@': resolve('src')
-  //     }
-  //   }
-  // },
   chainWebpack(config) {
     config.plugins.delete('preload') // TODO: need test
     config.plugins.delete('prefetch') // TODO: need test
-    // config.entry.app = ["babel-polyfill", resolve('src/main.js')]
     // alias
     config.resolve.alias
       .set('@', resolve('src'))
@@ -88,7 +80,6 @@ module.exports = {
      */
     config.plugin('html').tap(args => {
       if (process.env.NODE_ENV === 'production') {
-        console.log(args)
         args[0].cdn = cdn.build
       }
       if (process.env.NODE_ENV === 'development') {
