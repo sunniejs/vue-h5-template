@@ -7,12 +7,12 @@
           <div class="cell-title">绑定手机号</div>
           <div class="cell-item">
             <div class="item-left">+86</div>
-            <input v-model="verifyCodeForm.account" type="tel" placeholder="请输入手机号">
+            <input v-reset-page v-model="verifyCodeForm.account" type="tel" placeholder="请输入手机号">
           </div>
           <div class="cell-item">
             <div class="item-left"> 验证码</div>
             <div class="code-cell-warp">
-              <input v-model="verifyCodeForm.code" type="tel" placeholder="请输入验证码">
+              <input v-reset-page v-model="verifyCodeForm.code" type="tel" placeholder="请输入验证码">
               <div :class="['registered-get-code',codeCountdown?'disabled-btn':'']" :disabled="codeCountdown" @click="sendMsgCode">
                 {{ codeCountdown ? `${codeCountdown}后重新发送` : '发送验证码' }}
               </div>
@@ -66,7 +66,10 @@ export default {
       // 绑定手机
       bindPhoneNumber(this.verifyCodeForm).then(res => {
         // 绑定成功后关闭弹窗
-        this.visible = false
+        Toast({
+          message: '绑定成功'
+        })
+        this.$emit('close')
       }).catch(() => {
       })
     },

@@ -4,12 +4,10 @@ import { api } from '@/config'
 // 签名
 import _bale from '@/utils/package'
 // api
-const { common_api } = api
-
 // 登录
 export function login(params) {
   return request({
-    url: common_api + '/wechat/login.do',
+    url:  '/wechat/login.do',
     method: 'post',
     data: qs.stringify(_bale('login', params))
   })
@@ -17,16 +15,10 @@ export function login(params) {
 /**
  * 登录接口请求token与userinfo
  * @param params
- * 入参  code:"021gj0OV1om5PU0k9VNV1VMQNV1gj0OK"
- * 返回  {
- *          accessToken:'xxx',
- *          refreshToken:'xxx',
- *          userInfo:{}
- *       }
  */
 export function loginByCode(params) {
   return request({
-    url: common_api + '/wechat/auth2',
+    url:   '/wechat/auth2',
     method: 'post',
     data: qs.stringify(_bale('auth2', params))
   })
@@ -37,7 +29,7 @@ export function loginByCode(params) {
  */
 export function getUserInfo(params) {
   return request({
-    url: common_api + '/user/get_user',
+    url:  '/user/get_user',
     method: 'post',
     data: qs.stringify(_bale('get_user', params))
   })
@@ -49,7 +41,7 @@ export function getUserInfo(params) {
  */
 export function getAccountInfo(params) {
   return request({
-    url: common_api + '/wechat/selectVipUserInfo',
+    url:   '/wechat/selectVipUserInfo',
     method: 'post',
     data: qs.stringify(_bale('selectVipUserInfo', params))
   })
@@ -61,7 +53,7 @@ export function getAccountInfo(params) {
  */
 export function sendCode(params) {
   return request({
-    url: common_api + '/wechat/send_phone_code',
+    url:  '/wechat/send_phone_code',
     method: 'post',
     data: qs.stringify(_bale('send_phone_code', params))
   })
@@ -73,7 +65,7 @@ export function sendCode(params) {
  */
 export function bindPhoneNumber(params) {
   return request({
-    url: common_api + '/wechat/addPhoneNumber',
+    url:  '/wechat/addPhoneNumber',
     method: 'post',
     data: qs.stringify(_bale('addPhoneNumber', params))
   })

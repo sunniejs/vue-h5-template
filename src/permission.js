@@ -5,9 +5,14 @@ import wechatAuth from './plugins/wechatAuth' // 微信登录插件
 const qs = require('qs')
 router.beforeEach((to, from, next) => {
   // next()
-  console.log(store.getters.loginStatus)
+  // store.dispatch('user/fedLogOut').then(() => {
+  //   // location.reload()
+  // })
+  // store.dispatch('user/setLoginStatus', 0)
+  // alert(store.getters.loginStatus)
+  // return false
+  // alert(store.getters.loginStatus)
   const loginStatus = Number(store.getters.loginStatus)
-  // console.log(loginStatus === 1)
   document.title = getPageTitle(to.meta.title)
   if (loginStatus === 0) {
     // 微信未授权登录跳转到授权登录页面
@@ -22,7 +27,9 @@ router.beforeEach((to, from, next) => {
     } else {
       loginUrl = url
     }
+    // alert(loginUrl)
     wechatAuth.redirect_uri = loginUrl
+    // 无论拒绝还是授权都设置成1
     store.dispatch('user/setLoginStatus', 1)
     window.location.href = wechatAuth.authUrl
   } else if (loginStatus === 1) {
@@ -31,27 +38,32 @@ router.beforeEach((to, from, next) => {
       wechatAuth.returnFromWechat(to.fullPath)
     } catch (err) {
       store.dispatch('user/setLoginStatus', 0)
-      next()
+     location.reload()
+      //  next()
     }
+    // 同意授权 to.fullPath 携带code参数，拒绝授权没有code参数
+    // alert(to.fullPath)
     // 重新赋值，不然获取不到code
     const code = wechatAuth.code
-    store
-      .dispatch('user/loginWechatAuth', code)
-      .then(res => {
-        console.log(res)
-        if (res.status === 200) {
+    // alert(code)
+    if (code) {
+      store
+        .dispatch('user/loginWechatAuth', code)
+        .then(res => {
           store.dispatch('user/setLoginStatus', 2)
-        } else {
+          next()
+        })
+        .catch(() => {
           store.dispatch('user/setLoginStatus', 0)
-        }
-        next()
-      })
-      .catch(() => {
-        store.dispatch('user/setLoginStatus', 0)
-        next()
-      })
+          location.reload()
+        })
+    } else {
+      store.dispatch('user/setLoginStatus', 0)
+      location.reload()
+    }
   } else {
-    //
+    // alert(to.fullPath)
+    
     next()
   }
 })

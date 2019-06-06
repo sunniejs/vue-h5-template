@@ -118,7 +118,7 @@ div:focus {
 .app-container {
 }
 .van-hairline--top-bottom::after {
-  border-width:  0!important;
+  border-width: 0 !important;
 }
 .van-cell {
   line-height: 30px !important;
@@ -142,4 +142,27 @@ div:focus {
   height: 100%;
   max-width: 10rem;
   min-width: 10rem;
+}
+.my-header {
+  position: relative;
+  width: 100%;
+  background: #fff;
+  border-bottom:1px solid #E9E9E9;
+  .back-icon {
+    position: absolute;
+    width: 44px;
+    height: 44px;
+    box-sizing: border-box;
+    background: url('../../assets/images/arrow-left.png') no-repeat center
+      center;
+    background-size: 70% 70%;
+  }
+  .header-title {
+    font-size: 17px;
+    font-weight: 600;
+    height: 44px;
+    line-height: 44px;
+    text-align: center;
+    
+  }
 }

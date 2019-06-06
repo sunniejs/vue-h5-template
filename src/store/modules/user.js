@@ -71,6 +71,12 @@ const actions = {
   // 保存用户个人信息
   setUserInfo({ commit, state }, query) {
     commit('SET_USERINFO', saveUserInfo(query))
+  },
+  // 登出
+  fedLogOut({ commit, state }, query) {
+    removeToken()
+    removeUserInfo()
+    commit('SET_LOGIN_STATUS', saveLoginStatus(0))
   }
 }
 

@@ -1,17 +1,15 @@
 'use strict'
 const path = require('path')
-const defaultSettings = require('./src/config/index.js')
 function resolve(dir) {
   return path.join(__dirname, dir)
 }
 
-const name = defaultSettings.title || 'vue mobile template' // page title
 const port = 9018 // dev port
 const externals = {
   vue: 'Vue',
   'vue-router': 'VueRouter',
   vuex: 'Vuex',
-  'mint-ui': 'MINT',
+  vant: 'vant',
   axios: 'axios',
   'crypto-js': 'CryptoJS'
 }
@@ -26,6 +24,7 @@ const cdn = {
   build: {
     css: ['https://cdn.jsdelivr.net/npm/vant@beta/lib/index.css'],
     js: [
+      // 'https://cdnjs.cloudflare.com/ajax/libs/babel-polyfill/7.4.4/polyfill.min.js',
       'https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.10/vue.min.js',
       'https://cdnjs.cloudflare.com/ajax/libs/vue-router/3.0.6/vue-router.min.js',
       'https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js',
@@ -36,7 +35,7 @@ const cdn = {
   }
 }
 module.exports = {
-  publicPath: '/',
+  publicPath: process.env.NODE_ENV === 'production' ? '/antpublic/' : '/',
   outputDir: 'dist',
   assetsDir: 'static',
   lintOnSave: process.env.NODE_ENV === 'development',
@@ -50,29 +49,22 @@ module.exports = {
     },
     disableHostCheck: true
   },
-  configureWebpack: config => {
-    // 为生产环境修改配置...
-    if (process.env.NODE_ENV === 'production') {
-      // externals里的模块不打包
-      Object.assign(config, {
-        externals: externals
-      })
-    }
-    // 为开发环境修改配置...
-    if (process.env.NODE_ENV === 'development') {
-    }
-  },
-  // configureWebpack: {
-  //   name: name,
-  //   resolve: {
-  //     alias: {
-  //       '@': resolve('src')
-  //     }
+  // configureWebpack: config => {
+  //   // 为生产环境修改配置...
+  //   if (process.env.NODE_ENV === 'production') {
+  //     // externals里的模块不打包
+  //     Object.assign(config, {
+  //       externals: externals
+  //     })
+  //   }
+  //   // 为开发环境修改配置...
+  //   if (process.env.NODE_ENV === 'development') {
   //   }
   // },
   chainWebpack(config) {
     config.plugins.delete('preload') // TODO: need test
     config.plugins.delete('prefetch') // TODO: need test
+    config
     // alias
     config.resolve.alias
       .set('@', resolve('src'))
@@ -82,16 +74,16 @@ module.exports = {
     /**
      * 添加CDN参数到htmlWebpackPlugin配置中， 详见public/index.html 修改
      */
-    config.plugin('html').tap(args => {
-      if (process.env.NODE_ENV === 'production') {
-        args[0].cdn = cdn.build
-      }
-      if (process.env.NODE_ENV === 'development') {
-        args[0].cdn = cdn.dev
-      }
-      console.log(args)
-      return args
-    })
+    // config.plugin('html').tap(args => {
+    //   if (process.env.NODE_ENV === 'production') {
+    //     args[0].cdn = cdn.build
+    //   }
+    //   if (process.env.NODE_ENV === 'development') {
+    //     args[0].cdn = cdn.dev
+    //   }
+    //   console.log(args)
+    //   return args
+    // })
 
     // set preserveWhitespace
     config.module

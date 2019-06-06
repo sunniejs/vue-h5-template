@@ -9,8 +9,8 @@
             <div class="user-name">{{ vipInfo.nickName|formatName }}<span class="user-level"></span></div>
             <div class="user-code">代购编号：{{ vipInfo.userCode }}</div>
           </div>
-          <div class="qrcode-warp" @click="showQrcode($event)">
-            <qrcode :value="vipInfo.userCode" tag="img" :options="{ width: 45,margin:0 }"></qrcode>
+          <div class="qrcode-warp" @click="showUserQrcode($event)">
+            <qrcode v-if="vipInfo.userPhone!==''"  :value="vipInfo.userPhone" tag="img" :options="{ width: 145,margin:0 }"></qrcode>
           </div>
         </div>
         <div class="account-info">
@@ -42,49 +42,60 @@
       </van-cell-group>
     </div>
     <!-- 绑定手机 -->
-    <msg-code :visible="codeVisible"></msg-code>
-    <!-- 二维码大图 -->
-    <van-popup v-model="qrcodeVisible" style="padding:10px;border-radius:10px">
-      <div class="popup-container">
-        <img :src="qrSrc" alt="">
-      </div>
-    </van-popup>
+    <msg-code :visible="codeVisible" @close="()=>{ codeVisible = false }"></msg-code>
+    <!-- 二维码 -->
+    <qrcode-popup :visible="qrcodeVisible" :src="qrSrc" :title="qrTitle" :tips="qrTips" @close="()=>{ qrcodeVisible = false }">
+    </qrcode-popup>
   </div>
 </template>
 <script>
 import VueQrcode from '@chenfengyuan/vue-qrcode'
-import { Popup, Cell, CellGroup } from 'vant'
+import { Cell, CellGroup } from 'vant'
 import VerificationCode from '@/components/VerificationCode'
+import QrCodePopup from '@/components/QrCodePopup'
 import { getAccountInfo } from '@/api/user'
 export default {
   components: {
     'van-cell-group': CellGroup,
     'van-cell': Cell,
     'msg-code': VerificationCode,
-    'qrcode': VueQrcode,
-    'van-popup': Popup
+    'qrcode-popup': QrCodePopup,
+    'qrcode': VueQrcode
   },
   data () {
     return {
       qrcodeVisible: false,
       codeVisible: false,
       vipInfo: {},
-      qrSrc: ''
+      qrSrc: '',
+      qrTitle: '',
+      qrTips: ''
     }
   },
-  computed: {},
-  created () {
+  computed: {
+  },
+  mounted () {
+
     this.init()
   },
   methods: {
     // 获取初始数据
-    async init () {
+    init () {
+      
       // 获取全部的会员信息
-      const { data } = await getAccountInfo()
-      this.vipInfo = data.vipUserInfo
+      getAccountInfo().then(res => {
+        this.vipInfo = res.data.vipUserInfo
+        // 手机号为空的时候绑定
+        if (this.vipInfo && this.vipInfo.userPhone === '') {
+          this.codeVisible = true
+        }
+      })
     },
-    showQrcode (event) {
+    // 展示会员二维码
+    showUserQrcode (event) {
       this.qrSrc = event.target.currentSrc
+      this.qrTitle = '小蚁货仓会员码'
+      this.qrTips = '<p>会员码用于会员储值及支付</p> <p>请勿随意泄漏给</p>'
       this.qrcodeVisible = true
     }
   }
@@ -135,9 +146,13 @@ h1 {
           font-size: 13px;
         }
       }
-      .qr-code {
+      .qrcode-warp {
         width: 50px;
         height: 50px;
+        img {
+          width: 100%;
+          height: 100%;
+        }
       }
     }
     .account-info {

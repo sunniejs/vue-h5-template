@@ -3,7 +3,7 @@ module.exports = {
   baseUrl: 'https://test.top1buyer.com',
   api: {
     base_api: 'https://test.top1buyer.com/wx',
-    common_api: 'https://xxx.xxx.com/common'
+    common_api: 'https://test.top1buyer.com/wx'
   },
   // package appid,appSecret
   APPID: 'Pc690487e95992c395633866b',
