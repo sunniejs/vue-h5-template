@@ -1,14 +1,43 @@
 'use strict'
 const path = require('path')
-const defaultSettings = require('./src/config/index.js') 
+const defaultSettings = require('./src/config/index.js')
 function resolve(dir) {
   return path.join(__dirname, dir)
 }
 
 const name = defaultSettings.title || 'vue mobile template' // page title
 const port = 9018 // dev port
+const externals = {
+  vue: 'Vue',
+  'vue-router': 'VueRouter',
+  vuex: 'Vuex',
+  vant: 'vant',
+  axios: 'axios',
+  'crypto-js': 'CryptoJS'
+}
+// cdn
+const cdn = {
+  // 开发环境
+  dev: {
+    css: [],
+    js: []
+  },
+  // 生产环境
+  build: {
+    css: ['https://cdn.jsdelivr.net/npm/vant@beta/lib/index.css'],
+    js: [
+      'https://cdnjs.cloudflare.com/ajax/libs/babel-polyfill/7.4.4/polyfill.js',
+      'https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.10/vue.min.js',
+      'https://cdnjs.cloudflare.com/ajax/libs/vue-router/3.0.6/vue-router.min.js',
+      'https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js',
+      'https://cdnjs.cloudflare.com/ajax/libs/vuex/3.1.1/vuex.min.js',
+      'https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.9-1/crypto-js.min.js',
+      'https://cdn.jsdelivr.net/npm/vant@beta/lib/vant.min.js'
+    ]
+  }
+}
 module.exports = {
-  publicPath: '/',
+  publicPath: process.env.NODE_ENV === 'development' ? '/' : '/vueapp/',
   outputDir: 'dist',
   assetsDir: 'static',
   lintOnSave: process.env.NODE_ENV === 'development',
@@ -21,37 +50,53 @@ module.exports = {
       errors: true
     }
   },
-  // css: {
-  //   loaderOptions: {
-  //     postcss: {
-  //       plugins: [
-  //         require('postcss-plugin-px2rem')({
-  //           rootValue: 75, // 换算基数， 默认100  ，这样的话把根标签的字体规定为1rem为50px,这样就可以从设计稿上量出多少个px直接在代码中写多上px了。
-  //           // unitPrecision: 5, //允许REM单位增长到的十进制数字。
-  //           // propWhiteList: [],  //默认值是一个空数组，这意味着禁用白名单并启用所有属性。
-  //           // propBlackList: [], //黑名单
-  //           exclude: /(node_module)/, // 默认false，可以（reg）利用正则表达式排除某些文件夹的方法，例如/(node_module)\/如果想把前端UI框架内的px也转换成rem，请把此属性设为默认值
-  //           // selectorBlackList: [], //要忽略并保留为px的选择器
-  //           // ignoreIdentifier: false,  //（boolean/string）忽略单个属性的方法，启用ignoreidentifier后，replace将自动设置为true。
-  //           // replace: true, // （布尔值）替换包含REM的规则，而不是添加回退。
-  //           mediaQuery: false, // （布尔值）允许在媒体查询中转换px。
-  //           minPixelValue: 3 // 设置要替换的最小像素值(3px会被转rem)。 默认 0
-  //         })
-  //       ]
+ 
+  configureWebpack: config => {
+    // 为生产环境修改配置...
+    if (process.env.NODE_ENV === 'production') {
+      // externals里的模块不打包
+      Object.assign(config, {
+        name: name,
+        entry:["@babel/polyfill", "./src/main.js"],
+        externals: externals
+      })
+    }
+    // 为开发环境修改配置...
+    if (process.env.NODE_ENV === 'development') {
+    }
+  },
+  // configureWebpack: {
+  //   name: name,
+  //   resolve: {
+  //     alias: {
+  //       '@': resolve('src')
   //     }
   //   }
   // },
-  configureWebpack: {
-    name: name,
-    resolve: {
-      alias: {
-        '@': resolve('src')
-      }
-    }
-  },
   chainWebpack(config) {
     config.plugins.delete('preload') // TODO: need test
     config.plugins.delete('prefetch') // TODO: need test
+    // config.entry.app = ["babel-polyfill", resolve('src/main.js')]
+    // alias
+    config.resolve.alias
+      .set('@', resolve('src'))
+      .set('assets', resolve('src/assets'))
+      .set('views', resolve('src/views'))
+      .set('components', resolve('src/components'))
+    /**
+     * 添加CDN参数到htmlWebpackPlugin配置中， 详见public/index.html 修改
+     */
+    config.plugin('html').tap(args => {
+      if (process.env.NODE_ENV === 'production') {
+        console.log(args)
+        args[0].cdn = cdn.build
+      }
+      if (process.env.NODE_ENV === 'development') {
+        args[0].cdn = cdn.dev
+      }
+      return args
+    })
+
     // set preserveWhitespace
     config.module
       .rule('vue')
@@ -70,7 +115,6 @@ module.exports = {
       )
 
     config.when(process.env.NODE_ENV !== 'development', config => {
-      console.log(config)
       config
         .plugin('ScriptExtHtmlWebpackPlugin')
         .after('html')
