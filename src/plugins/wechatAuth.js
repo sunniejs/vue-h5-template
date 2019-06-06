@@ -101,8 +101,8 @@ class VueWechatAuthPlugin {
 
 const vueWechatAuthPlugin = new VueWechatAuthPlugin()
 
-if (typeof window !== 'undefined' && window.Vue) {
-  window.Vue.use(VueWechatAuthPlugin)
-}
+// if (typeof window !== 'undefined' && window.Vue) {
+//   window.Vue.use(VueWechatAuthPlugin)
+// }
 
 export default vueWechatAuthPlugin

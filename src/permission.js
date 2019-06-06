@@ -4,14 +4,6 @@ import getPageTitle from '@/utils/get-page-title'
 import wechatAuth from './plugins/wechatAuth' // 微信登录插件
 const qs = require('qs')
 router.beforeEach((to, from, next) => {
-  // next()
-  // store.dispatch('user/fedLogOut').then(() => {
-  //   // location.reload()
-  // })
-  // store.dispatch('user/setLoginStatus', 0)
-  // alert(store.getters.loginStatus)
-  // return false
-  // alert(store.getters.loginStatus)
   const loginStatus = Number(store.getters.loginStatus)
   document.title = getPageTitle(to.meta.title)
   if (loginStatus === 0) {
