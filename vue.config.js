@@ -37,7 +37,7 @@ const cdn = {
   }
 }
 module.exports = {
-  publicPath: process.env.NODE_ENV === 'development' ? '/' : '/vueapp/',
+  publicPath: process.env.NODE_ENV === 'development' ? '/' : '/antpublic/',
   outputDir: 'dist',
   assetsDir: 'static',
   lintOnSave: process.env.NODE_ENV === 'development',
@@ -57,7 +57,7 @@ module.exports = {
       // externals里的模块不打包
       Object.assign(config, {
         name: name,
-        entry:["@babel/polyfill", "./src/main.js"],
+     //   entry:["@babel/polyfill", "./src/main.js"],
         externals: externals
       })
     }

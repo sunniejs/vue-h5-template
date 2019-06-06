@@ -15,7 +15,7 @@ export const constantRoutes = [
 const createRouter = () =>
   new Router({
     mode: 'history', // require service support
-    base:  '/vueapp/',
+    base:  '/antpublic/',
     scrollBehavior: () => ({ y: 0 }),
     routes: constantRoutes
   })
