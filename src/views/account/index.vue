@@ -113,15 +113,21 @@ export default {
     },
 
     // 获取门禁二维码值
-    async doorAccessKey () {
+    doorAccessKey () {
       this.qrTitle = '小蚁货仓入场券'
       this.qrTips = '<p>凭入场券二维码入场</p>'
+      // 如果不存在入场券
       if (!this.accesskey) {
-        const { data } = await getDoorKey()
-        this.accesskey = data.doorKey
+        // 请求入场券
+        getDoorKey().then(res => {
+          this.accesskey = res.data.doorKey
+          this.qrSrc = this.accesskey
+          this.qrcodeVisible = true
+        }).catch(() => { })
+      } else {
+        this.qrSrc = this.accesskey
+        this.qrcodeVisible = true
       }
-      this.qrSrc = this.accesskey
-      this.qrcodeVisible = true
     }
   }
 }
