@@ -9,8 +9,8 @@
             <div class="user-name">{{ vipInfo.nickName|formatName }}<span class="user-level"></span></div>
             <div class="user-code">代购编号：{{ vipInfo.userCode }}</div>
           </div>
-          <div class="qrcode-warp" @click="showUserQrcode($event)">
-            <qrcode v-if="vipInfo.userPhone!==''"  :value="vipInfo.userPhone" tag="img" :options="{ width: 145,margin:0 }"></qrcode>
+          <div class="qrcode-warp" @click="showUserQrcode()">
+            <qrcode v-if="vipInfo.userPhone!==''" :value="vipInfo.userPhone" tag="img" :options="{ width: 45,margin:0 }"></qrcode>
           </div>
         </div>
         <div class="account-info">
@@ -27,7 +27,7 @@
     </div>
     <div>
       <van-cell-group>
-        <van-cell is-link>
+        <van-cell is-link @click="doorAccessKey">
           <div slot="title" class="account-cell">
             <span class="icon-ticket"></span>
             <span class="custom-text">我的入场券 </span>
@@ -42,9 +42,10 @@
       </van-cell-group>
     </div>
     <!-- 绑定手机 -->
-    <msg-code :visible="codeVisible" @close="()=>{ codeVisible = false }"></msg-code>
+    <msg-code :visible="codeVisible" @close="closeCodePop"></msg-code>
     <!-- 二维码 -->
     <qrcode-popup :visible="qrcodeVisible" :src="qrSrc" :title="qrTitle" :tips="qrTips" @close="()=>{ qrcodeVisible = false }">
+
     </qrcode-popup>
   </div>
 </template>
@@ -53,7 +54,7 @@ import VueQrcode from '@chenfengyuan/vue-qrcode'
 import { Cell, CellGroup } from 'vant'
 import VerificationCode from '@/components/VerificationCode'
 import QrCodePopup from '@/components/QrCodePopup'
-import { getAccountInfo } from '@/api/user'
+import { getAccountInfo, getDoorKey } from '@/api/user'
 export default {
   components: {
     'van-cell-group': CellGroup,
@@ -69,33 +70,57 @@ export default {
       vipInfo: {},
       qrSrc: '',
       qrTitle: '',
-      qrTips: ''
+      qrTips: '',
+      accesskey: null,
+      access: this.$route.query.access
     }
   },
   computed: {
   },
   mounted () {
-
+    // console.log(this.access)
     this.init()
+
   },
   methods: {
     // 获取初始数据
     init () {
-      
       // 获取全部的会员信息
       getAccountInfo().then(res => {
         this.vipInfo = res.data.vipUserInfo
         // 手机号为空的时候绑定
         if (this.vipInfo && this.vipInfo.userPhone === '') {
           this.codeVisible = true
+          // 点击入场券进入的
+        } else if (this.access === '1') {
+          this.doorAccessKey()
         }
       })
     },
+    closeCodePop () {
+      this.codeVisible = false
+      // 点击入场券进入的 绑定完之后弹出入场券
+      if (this.access === '1') {
+        this.doorAccessKey()
+      }
+    },
     // 展示会员二维码
-    showUserQrcode (event) {
-      this.qrSrc = event.target.currentSrc
+    showUserQrcode () {
+      this.qrSrc = this.vipInfo.userPhone
       this.qrTitle = '小蚁货仓会员码'
       this.qrTips = '<p>会员码用于会员储值及支付</p> <p>请勿随意泄漏给</p>'
+      this.qrcodeVisible = true
+    },
+
+    // 获取门禁二维码值
+    async doorAccessKey () {
+      this.qrTitle = '小蚁货仓入场券'
+      this.qrTips = '<p>凭入场券二维码入场</p>'
+      if (!this.accesskey) {
+        const { data } = await getDoorKey()
+        this.accesskey = data.doorKey
+      }
+      this.qrSrc = this.accesskey
       this.qrcodeVisible = true
     }
   }

@@ -60,7 +60,7 @@ module.exports = {
         //  entry: ['@babel/polyfill', './src/main.js'],
         externals: externals,
         optimization: {
-          minimize: false
+          minimize: false // 换行
         }
       })
     }

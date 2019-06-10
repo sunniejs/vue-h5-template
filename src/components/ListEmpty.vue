@@ -24,7 +24,6 @@ export default {
   justify-content: center;
   align-items: center;
   margin-top: 55px;
- 
   .empty-tips {
     color: #999999;
     font-size: 17px;

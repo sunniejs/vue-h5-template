@@ -35,7 +35,6 @@ service.interceptors.response.use(
   response => {
     Toast.clear()
     const res = response.data
-
     if (res.status && res.status !== 200) {
       Toast({
         message: res.info

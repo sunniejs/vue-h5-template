@@ -70,3 +70,16 @@ export function bindPhoneNumber(params) {
     data: qs.stringify(_bale('addPhoneNumber', params))
   })
 }
+
+/**
+ * 获取门禁二维码值
+ * @param params
+ */
+export function getDoorKey(params) {
+  return request({
+    url:  '/user/getDoorKey',
+    method: 'post',
+    data: qs.stringify(_bale('getDoorKey', params))
+  })
+}
+

@@ -16,6 +16,7 @@ export const constantRoutes = [
       keepAlive: false
     }
   },
+  
   {
     path: '/coupon',
     name: 'coupon',

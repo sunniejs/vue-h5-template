@@ -11,7 +11,7 @@
           {{title}}
         </div>
         <div class="qrcode-bottom">
-          <img class="qrcode-img" :src="src" alt="">
+          <qrcode :value="src" tag="img" :options="{ width: 145,margin:0 }"></qrcode>
           <div class="qrcode-tips" v-html="tips">
           </div>
         </div>
@@ -21,13 +21,15 @@
 </template>
 
 <script>
+import VueQrcode from '@chenfengyuan/vue-qrcode'
 import { Popup, Toast } from 'vant'
 import * as Validate from '@/utils/validate'
 import { bindPhoneNumber, sendCode } from '@/api/user'
 export default {
   name: 'QrCodePopup',
   components: {
-    'van-popup': Popup
+    'van-popup': Popup,
+    'qrcode': VueQrcode
   },
   props: {
     visible: {
@@ -116,10 +118,6 @@ export default {
       justify-content: center;
       align-items: center;
       padding: 25px 0 41px 0;
-      .qrcode-img {
-        height: 190px;
-        width: 190px;
-      }
       .qrcode-tips {
         font-size: 15px;
         color: #666666;

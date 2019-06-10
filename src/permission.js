@@ -3,6 +3,7 @@ import store from './store'
 import getPageTitle from '@/utils/get-page-title'
 import wechatAuth from './plugins/wechatAuth' // 微信登录插件
 const qs = require('qs')
+
 router.beforeEach((to, from, next) => {
   const loginStatus = Number(store.getters.loginStatus)
   document.title = getPageTitle(to.meta.title)
@@ -30,7 +31,7 @@ router.beforeEach((to, from, next) => {
       wechatAuth.returnFromWechat(to.fullPath)
     } catch (err) {
       store.dispatch('user/setLoginStatus', 0)
-     location.reload()
+      location.reload()
       //  next()
     }
     // 同意授权 to.fullPath 携带code参数，拒绝授权没有code参数
@@ -55,7 +56,6 @@ router.beforeEach((to, from, next) => {
     }
   } else {
     // alert(to.fullPath)
-    
     next()
   }
 })
