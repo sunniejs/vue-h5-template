@@ -1,7 +1,7 @@
 <!-- home.vue  -->
 <template>
   <div class="app-container">
-    <template v-if="{{ vipInfo }}">
+    <template v-if="vipInfo">
       <div class="user-info-container">
         <div class="user-info-warpper">
           <div class="user-info">
