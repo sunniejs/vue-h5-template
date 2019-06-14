@@ -76,7 +76,7 @@ const actions = {
   fedLogOut({ commit, state }, query) {
     removeToken()
     removeUserInfo()
-    commit('SET_LOGIN_STATUS', saveLoginStatus(0))
+    removeLoginStatus()
   }
 }
 
