@@ -19,7 +19,7 @@ export function saveLoginStatus(status) {
   //storage.set(LoginStatusKey, status)
     var date=new Date();
     date.setTime(date.getTime()+5*60*1000); //设置date为当前时间+5分
-    document.cookie=LoginStatusKey+"="+status+"; expires="+date.toGMTString(); //将date赋值给expires
+    document.cookie=LoginStatusKey+"="+status+"; expires="+date.toGMTString() // 将date赋值给expires
   return status
 }
 
