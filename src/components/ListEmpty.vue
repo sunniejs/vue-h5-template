@@ -1,8 +1,8 @@
 <!-- ListEmpty.vue -->
 <template>
   <div class="list-empty">
-    <slot name='emptyImg'></slot>
-    <div class="empty-tips">{{tips}}</div>
+    <slot name="emptyImg"></slot>
+    <div class="empty-tips">{{ tips }}</div>
   </div>
 </template>
 <script>
@@ -13,7 +13,7 @@ export default {
       type: String,
       default: ''
     }
-  },
+  }
 }
 
 </script>

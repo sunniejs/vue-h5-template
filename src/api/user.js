@@ -1,13 +1,12 @@
 import qs from 'qs'
 import request from '@/utils/request'
-import { api } from '@/config'
 // 签名
 import _bale from '@/utils/package'
 // api
 // 登录
 export function login(params) {
   return request({
-    url:  '/wechat/login.do',
+    url: '/wechat/login.do',
     method: 'post',
     data: qs.stringify(_bale('login', params))
   })
@@ -18,7 +17,7 @@ export function login(params) {
  */
 export function loginByCode(params) {
   return request({
-    url:   '/wechat/auth2',
+    url: '/wechat/auth2',
     method: 'post',
     data: qs.stringify(_bale('auth2', params))
   })
@@ -29,7 +28,7 @@ export function loginByCode(params) {
  */
 export function getUserInfo(params) {
   return request({
-    url:  '/user/get_user',
+    url: '/user/get_user',
     method: 'post',
     data: qs.stringify(_bale('get_user', params))
   })
@@ -41,7 +40,7 @@ export function getUserInfo(params) {
  */
 export function getAccountInfo(params) {
   return request({
-    url:   '/wechat/selectVipUserInfo',
+    url: '/wechat/selectVipUserInfo',
     method: 'post',
     data: qs.stringify(_bale('selectVipUserInfo', params))
   })
@@ -53,7 +52,7 @@ export function getAccountInfo(params) {
  */
 export function sendCode(params) {
   return request({
-    url:  '/wechat/send_phone_code',
+    url: '/wechat/send_phone_code',
     method: 'post',
     data: qs.stringify(_bale('send_phone_code', params))
   })
@@ -65,7 +64,7 @@ export function sendCode(params) {
  */
 export function bindPhoneNumber(params) {
   return request({
-    url:  '/wechat/addPhoneNumber',
+    url: '/wechat/addPhoneNumber',
     method: 'post',
     data: qs.stringify(_bale('addPhoneNumber', params))
   })
@@ -77,9 +76,8 @@ export function bindPhoneNumber(params) {
  */
 export function getDoorKey(params) {
   return request({
-    url:  '/user/getDoorKey',
+    url: '/user/getDoorKey',
     method: 'post',
     data: qs.stringify(_bale('getDoorKey', params))
   })
 }
-

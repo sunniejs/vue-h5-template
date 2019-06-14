@@ -9,8 +9,17 @@ export function loadLoginStatus() {
   return cookies.get(LoginStatusKey) || 0
 }
 
+// export function saveLoginStatus(status) {
+//   cookies.set(LoginStatusKey, status, { expires: 7 })
+//   return status
+// }
+
+ 
 export function saveLoginStatus(status) {
-  cookies.set(LoginStatusKey, status, { expires: 7 })
+  //storage.set(LoginStatusKey, status)
+    var date=new Date();
+    date.setTime(date.getTime()+5*60*1000); //设置date为当前时间+5分
+    document.cookie=LoginStatusKey+"="+status+"; expires="+date.toGMTString(); //将date赋值给expires
   return status
 }
 

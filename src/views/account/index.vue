@@ -78,9 +78,7 @@ export default {
   computed: {
   },
   mounted () {
-    // console.log(this.access)
     this.init()
-
   },
   methods: {
     // 获取初始数据
