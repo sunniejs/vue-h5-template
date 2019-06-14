@@ -5,7 +5,7 @@
       <div class="user-info-container">
         <div class="user-info-warpper">
           <div class="user-info">
-            <img class="user-avatar" :src="vipInfo.userImg" alt="用户头像">
+            <img class="user-avatar" :src="vipInfo.userImg">
             <div class="user-info-center">
               <div class="user-name">{{ vipInfo.nickName|formatName }}<span class="user-level"></span></div>
               <div class="user-code">代购编号：{{ vipInfo.userCode }}</div>
@@ -68,7 +68,7 @@ export default {
     return {
       qrcodeVisible: false,
       codeVisible: false,
-      vipInfo: {},
+      vipInfo: null,
       qrSrc: '',
       qrTitle: '',
       qrTips: '',
