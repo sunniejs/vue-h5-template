@@ -1,7 +1,7 @@
 <!-- verificationCode.vue -->
 <template>
   <div class="app-container">
-    <van-popup v-model="visible" class="modal-popup" position="right">
+    <van-popup v-model="visible" transition="none" class="modal-popup"  >
       <div class="verification-code-container">
         <div class="cell-box">
           <div class="cell-title">绑定手机号</div>

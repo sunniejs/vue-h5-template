@@ -6,6 +6,7 @@ import {
   saveUserInfo,
   removeToken,
   removeUserInfo,
+  removeLoginStatus,
   loadLoginStatus,
   loadToken,
   loadUserInfo

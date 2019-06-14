@@ -2,7 +2,7 @@
 <template>
   <div class="app-container">
     <!-- 二维码大图 -->
-    <van-popup v-model="visible" class="modal-popup">
+    <van-popup v-model="visible" transition="none" class="modal-popup">
       <div class="qrcode-popup-container">
         <div class="qrcode-close" @click="closePopup">
           取消

@@ -8,6 +8,7 @@ router.beforeEach((to, from, next) => {
   //  store.dispatch('user/fedLogOut').then(() => {
   // })
   const loginStatus = Number(store.getters.loginStatus)
+  console.log('loginStatus='+loginStatus)
   document.title = getPageTitle(to.meta.title)
   if (loginStatus === 0) {
     // 微信未授权登录跳转到授权登录页面
