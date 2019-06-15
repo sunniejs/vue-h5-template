@@ -5,11 +5,10 @@ import wechatAuth from './plugins/wechatAuth' // 微信登录插件
 const qs = require('qs')
 
 router.beforeEach((to, from, next) => {
-  //  store.dispatch('user/fedLogOut').then(() => {
-  // })
   const loginStatus = Number(store.getters.loginStatus)
   console.log('loginStatus=' + loginStatus)
   console.log('token=' + store.getters.token)
+  // 页面标题
   document.title = getPageTitle(to.meta.title)
   if (loginStatus === 0) {
     // 微信未授权登录跳转到授权登录页面
@@ -24,33 +23,35 @@ router.beforeEach((to, from, next) => {
     } else {
       loginUrl = url
     }
-    // alert(loginUrl)
+    // 设置微信授权回调地址
     wechatAuth.redirect_uri = loginUrl
     // 无论拒绝还是授权都设置成1
     store.dispatch('user/setLoginStatus', 1)
+    // 跳转到微信授权页面
     window.location.href = wechatAuth.authUrl
   } else if (loginStatus === 1) {
-    // 微信已经授权回调获取code
+    // 用户已授权，获取code
     try {
+      // 通过回调链接设置code status
       wechatAuth.returnFromWechat(to.fullPath)
     } catch (err) {
+      // 失败，设置状态未登录，刷新页面
       store.dispatch('user/setLoginStatus', 0)
       location.reload()
-      //  next()
     }
     // 同意授权 to.fullPath 携带code参数，拒绝授权没有code参数
-    // alert(to.fullPath)
-    // 重新赋值，不然获取不到code
     const code = wechatAuth.code
-    // alert(code)
     if (code) {
+      // 拿到code 访问服务端的登录接口
       store
         .dispatch('user/loginWechatAuth', code)
         .then(res => {
+          // 成功设置已登录状态
           store.dispatch('user/setLoginStatus', 2)
           next()
         })
         .catch(() => {
+          // 失败，设置状态未登录，刷新页面
           store.dispatch('user/setLoginStatus', 0)
           location.reload()
         })
@@ -59,7 +60,7 @@ router.beforeEach((to, from, next) => {
       location.reload()
     }
   } else {
-    // alert(to.fullPath)
+   // 已登录直接进入
     next()
   }
 })

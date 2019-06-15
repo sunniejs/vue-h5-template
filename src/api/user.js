@@ -1,25 +1,15 @@
 import qs from 'qs'
 import request from '@/utils/request'
-// 签名
-import _bale from '@/utils/package'
-// api
-// 登录
-export function login(params) {
-  return request({
-    url: '/wechat/login.do',
-    method: 'post',
-    data: qs.stringify(_bale('login', params))
-  })
-}
+
 /**
  * 登录接口请求token与userinfo
- * @param params
+ * @param params {code: code}
  */
 export function loginByCode(params) {
   return request({
     url: '/wechat/auth2',
     method: 'post',
-    data: qs.stringify(_bale('auth2', params))
+    data: qs.stringify(params)
   })
 }
 /**
@@ -30,54 +20,19 @@ export function getUserInfo(params) {
   return request({
     url: '/user/get_user',
     method: 'post',
-    data: qs.stringify(_bale('get_user', params))
+    data: qs.stringify(params)
   })
 }
 
 /**
- * 公众号会员中心
- * @param params
+ * 默认请求url import { api } from '@/config' 的 base_api + /wechat/auth2
+ * 请求common_api打头的参照如下示例：
+ * import { api } from '@/config'
+ * export function loginByCode(params) {
+ *  return request({
+ *     url:api.common_api+ '/wechat/auth2',
+ *     method: 'post',
+ *     data: qs.stringify(params)
+ *  })
+ * }
  */
-export function getAccountInfo(params) {
-  return request({
-    url: '/wechat/selectVipUserInfo',
-    method: 'post',
-    data: qs.stringify(_bale('selectVipUserInfo', params))
-  })
-}
-
-/**
- * 发送手机验证码
- * @param params
- */
-export function sendCode(params) {
-  return request({
-    url: '/wechat/send_phone_code',
-    method: 'post',
-    data: qs.stringify(_bale('send_phone_code', params))
-  })
-}
-
-/**
- * 微信公众号添加手机号
- * @param params
- */
-export function bindPhoneNumber(params) {
-  return request({
-    url: '/wechat/addPhoneNumber',
-    method: 'post',
-    data: qs.stringify(_bale('addPhoneNumber', params))
-  })
-}
-
-/**
- * 获取门禁二维码值
- * @param params
- */
-export function getDoorKey(params) {
-  return request({
-    url: '/user/getDoorKey',
-    method: 'post',
-    data: qs.stringify(_bale('getDoorKey', params))
-  })
-}

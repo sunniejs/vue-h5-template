@@ -11,8 +11,7 @@ const externals = {
   'vue-router': 'VueRouter',
   vuex: 'Vuex',
   vant: 'vant',
-  axios: 'axios',
-  'crypto-js': 'CryptoJS'
+  axios: 'axios'
 }
 // cdn
 const cdn = {
@@ -30,15 +29,13 @@ const cdn = {
       'https://cdnjs.cloudflare.com/ajax/libs/vue-router/3.0.6/vue-router.min.js',
       'https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js',
       'https://cdnjs.cloudflare.com/ajax/libs/vuex/3.1.1/vuex.min.js',
-      'https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.9-1/crypto-js.min.js',
       'https://cdn.jsdelivr.net/npm/vant@beta/lib/vant.min.js'
     ]
   }
 }
 module.exports = {
-  publicPath: process.env.NODE_ENV === 'production' ? '/antpublic/' : '/',
+  publicPath: process.env.NODE_ENV === 'development' ? '/' : '/app/', // 需要根据环境设置，不然会报错
   outputDir: 'dist',
- // outputDir: '../../../phpStudy/PHPTutorial/WWW/antpublic',
   assetsDir: 'static',
   lintOnSave: process.env.NODE_ENV === 'development',
   productionSourceMap: false,
@@ -57,7 +54,6 @@ module.exports = {
       // externals里的模块不打包
       Object.assign(config, {
         name: defaultSettings.title,
-        //  entry: ['@babel/polyfill', './src/main.js'],
         externals: externals,
         optimization: {
           minimize: false // 换行
@@ -104,9 +100,7 @@ module.exports = {
 
     config
       // https://webpack.js.org/configuration/devtool/#development
-      .when(process.env.NODE_ENV === 'development', config =>
-        config.devtool('cheap-source-map')
-      )
+      .when(process.env.NODE_ENV === 'development', config => config.devtool('cheap-source-map'))
 
     config.when(process.env.NODE_ENV !== 'development', config => {
       config

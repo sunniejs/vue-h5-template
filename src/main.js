@@ -10,10 +10,11 @@ import '@/filters' // filters
 import '@/utils/directives' // directives
 import '@/permission' // permission control
 import wechatAuth from './plugins/wechatAuth' // 微信登录插件
-
+// 设置appid
 Vue.use(wechatAuth, {
   appid: process.env.VUE_APP_WECHAT_APPID
 })
+// 手机端调试工具
 import VCconsole from 'vconsole'
 Vue.use(VCconsole)
 Vue.config.productionTip = false

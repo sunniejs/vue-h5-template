@@ -20,7 +20,7 @@ service.interceptors.request.use(
       })
     }
     if (store.getters.token) {
-      config.headers['ukey'] = store.getters.token
+      config.headers['token'] = store.getters.token
     }
     return config
   },
@@ -35,6 +35,7 @@ service.interceptors.response.use(
   response => {
     Toast.clear()
     const res = response.data
+    // 这里注意修改成你访问的服务端接口规则
     if (res.status && res.status !== 200) {
       Toast({
         message: res.info

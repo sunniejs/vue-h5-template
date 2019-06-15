@@ -1,4 +1,3 @@
-import { login } from '@/api/user'
 import { loginByCode } from '@/api/user'
 import {
   saveToken,
@@ -30,27 +29,15 @@ const mutations = {
 }
 
 const actions = {
-  loginUrl({ commit }, path) {
-    //    const url = baseUrl + path
-    return new Promise((resolve, reject) => {
-      login({ redirectUri: path })
-        .then(response => {
-          resolve(response)
-        })
-        .catch(error => {
-          reject(error)
-        })
-    })
-  },
-  // 登录相关
-  loginWechatAuth({ commit, state }, code) {
+  // 登录相关，通过code获取token和用户信息
+  loginWechatAuth({ commit }, code) {
     const data = {
       code: code
     }
     return new Promise((resolve, reject) => {
       loginByCode(data)
         .then(res => {
-          console.log(res)
+          // 存用户信息，token
           commit('SET_USERINFO', saveUserInfo(res.data.user))
           commit('SET_TOKEN', saveToken(res.data.token))
           resolve(res)
@@ -61,20 +48,18 @@ const actions = {
     })
   },
   // 设置状态
-  setLoginStatus({ commit, state }, query) {
+  setLoginStatus({ commit }, query) {
     if (query === 0 || query === 1) {
-      // 上线打开注释，本地调试注释掉
+      // 上线打开注释，本地调试注释掉，保持信息最新
       removeToken()
       removeUserInfo()
     }
+    // 设置不同的登录状态
     commit('SET_LOGIN_STATUS', saveLoginStatus(query))
   },
-  // 保存用户个人信息
-  setUserInfo({ commit, state }, query) {
-    commit('SET_USERINFO', saveUserInfo(query))
-  },
   // 登出
-  fedLogOut({ commit, state }, query) {
+  fedLogOut() {
+    // 删除token，用户信息，登陆状态
     removeToken()
     removeUserInfo()
     removeLoginStatus()
