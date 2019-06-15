@@ -1,4 +1,3 @@
-
 import Vue from 'vue'
 import 'normalize.css/normalize.css' // A modern alternative to CSS resets
 import '@/assets/css/index.scss' // global css
@@ -7,7 +6,8 @@ import 'lib-flexible/flexible.js'
 import App from './App'
 import store from './store'
 import router from './router'
-import filters from './filters'
+import '@/filters' // filters
+import '@/permission' // permission 权限
 Vue.config.productionTip = false
 
 new Vue({
