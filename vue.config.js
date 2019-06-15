@@ -12,17 +12,14 @@ const externals = {
   'vue-router': 'VueRouter',
   vuex: 'Vuex',
   vant: 'vant',
-  axios: 'axios',
-  'crypto-js': 'CryptoJS'
+  axios: 'axios'
 }
 // cdn
 const cdn = {
   // 开发环境
   dev: {
     css: [],
-    js: [
-      'https://cdnjs.cloudflare.com/ajax/libs/babel-polyfill/7.4.4/polyfill.js'
-    ]
+    js: ['https://cdnjs.cloudflare.com/ajax/libs/babel-polyfill/7.4.4/polyfill.js']
   },
   // 生产环境
   build: {
@@ -101,9 +98,7 @@ module.exports = {
 
     config
       // https://webpack.js.org/configuration/devtool/#development
-      .when(process.env.NODE_ENV === 'development', config =>
-        config.devtool('cheap-source-map')
-      )
+      .when(process.env.NODE_ENV === 'development', config => config.devtool('cheap-source-map'))
 
     config.when(process.env.NODE_ENV !== 'development', config => {
       config
