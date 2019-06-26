@@ -16,6 +16,7 @@
   },
   "dependencies": {
     "axios": "0.18.0",
+    "fastclick": "^1.0.6",
     "lib-flexible": "^0.3.2",
     "normalize.css": "7.0.0",
     "vant": "^1.6.19",
