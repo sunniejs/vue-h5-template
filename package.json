@@ -15,7 +15,7 @@
     "svgo": "svgo -f src/icons/svg --config=src/icons/svgo.yml"
   },
   "dependencies": {
-    "axios": "0.18.0",
+    "axios": "0.19.0",
     "fastclick": "^1.0.6",
     "lib-flexible": "^0.3.2",
     "normalize.css": "7.0.0",
