@@ -19,7 +19,7 @@
     "fastclick": "^1.0.6",
     "lib-flexible": "^0.3.2",
     "normalize.css": "7.0.0",
-    "vant": "^1.6.19",
+    "vant": "^2.2.14",
     "vue": "2.6.10",
     "vue-router": "3.0.6",
     "vuex": "3.1.0"
