@@ -4,7 +4,6 @@ const defaultSettings = require('./src/config/index.js')
 function resolve(dir) {
   return path.join(__dirname, dir)
 }
-
 const name = defaultSettings.title || 'vue mobile template' // page title
 const port = 9018 // dev port
 const externals = {
@@ -19,13 +18,12 @@ const cdn = {
   // 开发环境
   dev: {
     css: [],
-    js: ['https://cdnjs.cloudflare.com/ajax/libs/babel-polyfill/7.4.4/polyfill.js']
+    js: []
   },
   // 生产环境
   build: {
     css: ['https://cdn.jsdelivr.net/npm/vant@beta/lib/index.css'],
     js: [
-      'https://cdnjs.cloudflare.com/ajax/libs/babel-polyfill/7.4.4/polyfill.js',
       'https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.10/vue.min.js',
       'https://cdnjs.cloudflare.com/ajax/libs/vue-router/3.0.6/vue-router.min.js',
       'https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js',
@@ -36,7 +34,8 @@ const cdn = {
   }
 }
 module.exports = {
-  publicPath: process.env.NODE_ENV === 'development' ? '/' : '/app/', // 需要区分生产环境和开发环境，不然build会报错
+  publicPath: './', // router hash 模式使用
+  // publicPath: process.env.NODE_ENV === 'development' ? '/' : '/app/', //router history模式使用 需要区分生产环境和开发环境，不然build会报错
   outputDir: 'dist',
   assetsDir: 'static',
   lintOnSave: process.env.NODE_ENV === 'development',
@@ -60,8 +59,8 @@ module.exports = {
       })
     }
     // 为开发环境修改配置...
-    if (process.env.NODE_ENV === 'development') {
-    }
+    // if (process.env.NODE_ENV === 'development') {
+    // }
   },
   chainWebpack(config) {
     config.plugins.delete('preload') // TODO: need test
@@ -70,8 +69,10 @@ module.exports = {
     config.resolve.alias
       .set('@', resolve('src'))
       .set('assets', resolve('src/assets'))
+      .set('api', resolve('src/api'))
       .set('views', resolve('src/views'))
       .set('components', resolve('src/components'))
+
     /**
      * 添加CDN参数到htmlWebpackPlugin配置中， 详见public/index.html 修改
      */
@@ -114,23 +115,18 @@ module.exports = {
       config.optimization.splitChunks({
         chunks: 'all',
         cacheGroups: {
-          libs: {
-            name: 'chunk-libs',
-            test: /[\\/]node_modules[\\/]/,
-            priority: 10,
-            chunks: 'initial' // only package third parties that are initially dependent
-          },
-          // elementUI: {
-          //   name: 'chunk-elementUI', // split elementUI into a single package
-          //   priority: 20, // the weight needs to be larger than libs and app or it will be packaged into libs or app
-          //   test: /[\\/]node_modules[\\/]_?element-ui(.*)/ // in order to adapt to cnpm
-          // },
           commons: {
             name: 'chunk-commons',
             test: resolve('src/components'), // can customize your rules
             minChunks: 3, //  minimum common number
             priority: 5,
             reuseExistingChunk: true
+          },
+          libs: {
+            name: 'chunk-libs',
+            chunks: 'initial', // only package third parties that are initially dependent
+            test: /[\\/]node_modules[\\/]/,
+            priority: 10
           }
         }
       })

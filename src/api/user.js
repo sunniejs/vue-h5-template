@@ -1,14 +1,20 @@
 import qs from 'qs'
 import request from '@/utils/request'
-import { api } from '@/config'
 // api
-const { common_api } = api
 
 // 登录
 export function login(params) {
   return request({
-    url: common_api + '/ruleCommon/queryrule',
+    url: '/user/login',
     method: 'post',
+    data: qs.stringify(params)
+  })
+}
+// 用户信息
+export function getUserInfo(params) {
+  return request({
+    url: '/user/userinfo',
+    method: 'get',
     data: qs.stringify(params)
   })
 }

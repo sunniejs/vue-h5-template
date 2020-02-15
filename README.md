@@ -1,18 +1,23 @@
 # vue-h5-template
 
 基于vue-cli3.0+webpack 4+vant ui + sass+ rem适配方案+axios封装，构建手机端模板脚手架
+[demo](https://solui.cn/vue-h5-template/#/)建议手机端查看
 
 #### 介绍
 [关于项目介绍](https://segmentfault.com/a/1190000019275330)
 
- 1. vuecli3.0      
- 2. 多环境开发       
- 3. axios封装         
- 4. rem适配方案        
- 5. 生产环境cdn优化首屏加速
- 6. babel低版本浏览器兼容
- 7. 环境发布脚本
-
+- Vue-cli4    
+- VantUI组件按需加载       
+- Sass         
+- Webpack 4        
+- Vuex
+- Axios封装
+- rem适配方案
+- 多环境配置
+- 生产环境cdn优化首屏加速
+- babel低版本浏览器兼容
+- Eslint+Pettier统一开发规范
+ 
 #### 多环境
 
 
