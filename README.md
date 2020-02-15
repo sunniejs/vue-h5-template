@@ -4,7 +4,7 @@
 [demo](https://solui.cn/vue-h5-template/#/)建议手机端查看
 
 #### 介绍
-[关于项目介绍](https://segmentfault.com/a/1190000019275330)
+[关于项目介绍](https://juejin.im/post/5cfefc73f265da1bba58f9f7)
 
 - Vue-cli4    
 - VantUI组件按需加载       
