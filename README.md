@@ -43,9 +43,16 @@
 
 # 关于我
 
-您可以扫描添加下方的微信并备注 Sol 加交流群，给我提意见，交流学习。
+获取更多技术相关文章，关注公众号”前端女塾“。
+
+回复加群，即可加入”前端仙女群“
+ <p>
+  <img src="./static/gognzhonghao.jpg" width="256" style="display:inline;">
+</p>
+扫描添加下方的微信并备注 Sol 加交流群，交流学习，及时获取代码最新动态。
+
 <p>
-  <img src="https://tweapp.top1buyer.com/mine.jpg" width="256" style="display:inline;">
+  <img src="./static/me.png" width="256" style="display:inline;">
 </p>
  
 如果对你有帮助送我一颗小星星（づ￣3￣）づ╭❤～
