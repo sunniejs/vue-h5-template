@@ -6,15 +6,19 @@
 
 [demo](https://solui.cn/vue-h5-template/#/)建议手机端查看
 
+### Node 版本要求
 
+`Vue CLI` 需要 Node.js 8.9 或更高版本 (推荐 8.11.0+)。你可以使用 [nvm](https://github.com/nvm-sh/nvm) 或 [nvm-windows](https://github.com/coreybutler/nvm-windows) 在同一台电脑中管理多个 Node 版本。
+
+本示例 Node.js 12.14.1
 
 <span id="top">目录</span>
 
 - [√ 配置多环境变量](#env)
 - [√ rem 适配方案](#rem)
-- Vue-cli4
-- VantUI 组件按需加载
-- Sass
+- [√ Vue-cli4](https://cli.vuejs.org/zh/guide/)
+- [√ VantUI 组件按需加载](#vant) 
+- [√ Sass](#sass)  
 - Webpack 4
 - Vuex
 - Axios 封装
@@ -45,6 +49,7 @@
 
 &emsp;&emsp;以 `VUE_APP_` 开头的变量，在代码中可以通过 `process.env.VUE_APP_` 访问。  
 &emsp;&emsp;比如,`VUE_APP_ENV = 'development'` 通过`process.env.VUE_APP_ENV` 访问
+&emsp;&emsp; 除了 `VUE_APP_*` 变量之外，在你的应用代码中始终可用的还有两个特殊的变量`NODE_ENV` 和`BASE_URL`
 
 在项目根目录中新建.env
 
@@ -141,7 +146,7 @@ module.exports = {
 
 很多小伙伴会问我，适配的问题。
 
-举个例子：设计给了你一张 750px \* 1334px 图片，在 iPhone6 上铺面屏幕,其他机型适配。 
+举个例子：设计给了你一张 750px \* 1334px 图片，在 iPhone6 上铺满屏幕,其他机型适配。 
 
 - 当`rootValue: 70` , 样式 `width: 750px;height: 1334px;` 图片会撑满 iPhone6 屏幕，这个时候切换其他机型，图片也会跟着撑满。  
 - 当`rootValue: 37.5` 的时候，样式 `width: 375px;height: 667px;` 图片会撑满 iPhone6 屏幕。  
@@ -165,6 +170,72 @@ module.exports = {
     height: 667px;
   }
 </style>
+```
+
+[▲ 回顶部](#top)
+
+### <span id="vant">✅ VantUI 组件按需加载 </span>
+
+项目采用[自动按需引入组件 (推荐)](https://youzan.github.io/vant/#/zh-CN/quickstart#fang-shi-yi.-zi-dong-an-xu-yin-ru-zu-jian-tui-jian)
+
+下面安装插件介绍：
+
+[babel-plugin-import](https://github.com/ant-design/babel-plugin-import) 是一款 `babel` 插件，它会在编译过程中将 `import` 的写法自动转换为按需引入的方式
+
+# 安装插件
+
+```javascript
+npm i babel-plugin-import -D
+
+// 对于使用 babel7 的用户，可以在 babel.config.js 中配置
+module.exports = {
+  presets: [['@vue/cli-plugin-babel/preset', {useBuiltIns: 'entry'}]],
+  plugins: [
+    [
+      'import',
+      {
+        libraryName: 'vant',
+        libraryDirectory: 'es',
+        style: true
+      },
+      'vant'
+    ]
+  ]
+}
+```
+
+# 使用组件
+
+项目在 `src/plugins/vant.js` 下统一管理组件，用哪个引入哪个，无需在页面里重复引用
+
+```javascript
+// 按需全局引入 vant组件
+import Vue from 'vue'
+import {Button, List, Cell, Tabbar, TabbarItem} from 'vant'
+Vue.use(Button)
+Vue.use(Cell)
+Vue.use(List)
+Vue.use(Tabbar).use(TabbarItem)
+
+```
+[▲ 回顶部](#top)
+
+### <span id="sass">✅ Sass </span>
+
+首先 你可能会遇到 `node-sass` 安装不成功，别放弃多试几次！！！  
+
+在 `src/assets/css/`文件夹下包含了三个文件  
+- `index.scss` 主入口，主要引入其他两个scss文件，和公共样式
+- `variables.scss` 定义变量
+- `mixin.scss` 定义 `mixin` 方法
+
+你可以直接在vue文件下写 sass 语法
+
+```html
+<style lang="scss" scoped>
+ 
+</style>
+
 ```
 
 [▲ 回顶部](#top)
