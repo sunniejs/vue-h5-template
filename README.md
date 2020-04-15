@@ -6,46 +6,23 @@
 
 [demo](https://solui.cn/vue-h5-template/#/)建议手机端查看
 
+
+
+<span id="top">目录</span>
+
+- [√ 配置多环境变量](#env)
+- [√ rem 适配方案](#rem)
 - Vue-cli4
 - VantUI 组件按需加载
 - Sass
 - Webpack 4
 - Vuex
 - Axios 封装
-- rem 适配方案
 - 生产环境 cdn 优化首屏加速
 - babel 低版本浏览器兼容
 - Eslint+Pettier 统一开发规范
 
-<span id="top">目录</span>
-
-- [√ 配置多环境变量](#env)
-- [√ rem 适配方案](#rem)
-- [√ 配置基础 vue.config.js](#base)
-- [√ 配置 proxy 跨域](#proxy)
-- [√ 修复 HMR(热更新)失效](#hmr)
-- [√ 修复 Lazy loading routes Error： Cyclic dependency](#lazyloading)
-- [√ 添加别名 alias](#alias)
-- [√ 压缩图片](#compressimage)
-- [√ 自动生成雪碧图](#spritesmith)
-- [√ SVG 转 font 字体](#font)
-- [√ 使用 SVG 组件](#svg)
-- [√ 去除多余无效的 css](#removecss)
-- [√ 添加打包分析](#analyze)
-- [√ 配置 externals 引入 cdn 资源](#externals)
-- [√ 多页面打包 multi-page](#multiple-pages)
-- [√ 删除 moment 语言包](#moment)
-- [√ 去掉 console.log](#log)
-- [√ 利用 splitChunks 单独打包第三方模块](#splitchunks)
-- [√ 开启 gzip 压缩](#gzip)
-- [√ 开启 stylelint 检测 scss, css 语法](#stylelint)
-- [√ 为 sass 提供全局样式，以及全局变量](#globalscss)
-- [√ 为 stylus 提供全局变量](#globalstylus)
-- [√ 预渲染 prerender-spa-plugin](#prerender)
-- [√ 添加 IE 兼容](#ie)
-- [√ 静态资源自动打包上传阿里 oss、华为 obs](#alioss)
-- [√ 完整依赖](#allconfig)
-
+ 
 ### <span id="env">✅ 配置多环境变量 </span>
 
 &emsp;&emsp;NODE_ENV 和 BASE_URL 是两个特殊变量，在代码中始终可用
