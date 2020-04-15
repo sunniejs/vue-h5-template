@@ -2,12 +2,12 @@
   "name": "vue-h5-template",
   "version": "2.0.0",
   "description": "A vue h5 template with Vant UI",
-  "author": "Sunnie <s406803045@163.com>",
+  "author": "Sunnie <sunniejs@163.com>",
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve --open",
-    "build:prod": "vue-cli-service build",
-    "build:stage": "vue-cli-service build --mode staging",
+    "build": "vue-cli-service build",
+    "stage": "vue-cli-service build --mode staging",
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
