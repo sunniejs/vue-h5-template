@@ -5,7 +5,7 @@ function resolve(dir) {
   return path.join(__dirname, dir)
 }
 const name = defaultSettings.title || 'vue mobile template' // page title
-const port = 9018 // dev port
+
 const externals = {
   vue: 'Vue',
   'vue-router': 'VueRouter',
@@ -33,20 +33,22 @@ const cdn = {
     ]
   }
 }
+const IS_PROD = ['production', 'prod'].includes(process.env.NODE_ENV)
 module.exports = {
-  publicPath: './', // router hash 模式使用
-  // publicPath: process.env.NODE_ENV === 'development' ? '/' : '/app/', //router history模式使用 需要区分生产环境和开发环境，不然build会报错
-  outputDir: 'dist',
-  assetsDir: 'static',
-  lintOnSave: process.env.NODE_ENV === 'development',
-  productionSourceMap: false,
+  publicPath: './', // 署应用包时的基本 URL。 vue-router hash 模式使用
+  //  publicPath: '/app/', //署应用包时的基本 URL。  vue-router history模式使用
+  outputDir: 'dist', //  生产环境构建文件的目录
+  assetsDir: 'static', //  outputDir的静态资源(js、css、img、fonts)目录
+  lintOnSave: false,
+  productionSourceMap: !IS_PROD, // 生产环境的 source map
   devServer: {
-    port: port,
-    open: false,
+    port: 9020, // 端口
+    open: false, // 启动后打开浏览器
     overlay: {
+      //  当出现编译器错误或警告时，在浏览器中显示全屏覆盖层
       warnings: false,
       errors: true
-    },
+    }
     // proxy: {
     //   //配置跨域
     //   '/api': {

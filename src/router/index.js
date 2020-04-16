@@ -6,9 +6,10 @@ export const router = [
   {
     path: '/',
     name: 'index',
-    component: () => import('@/views/home/index'),
+    component: () => import('@/views/home/index'), // 路由懒加载
     meta: {
-      keepAlive: false
+      title: '首页', // 页面标题
+      keepAlive: false // keep-alive 标识
     }
   }
 ]

@@ -8,25 +8,33 @@
 
 ### Node 版本要求
 
-`Vue CLI` 需要 Node.js 8.9 或更高版本 (推荐 8.11.0+)。你可以使用 [nvm](https://github.com/nvm-sh/nvm) 或 [nvm-windows](https://github.com/coreybutler/nvm-windows) 在同一台电脑中管理多个 Node 版本。
+`Vue CLI` 需要 Node.js 8.9 或更高版本 (推荐 8.11.0+)。你可以使用 [nvm](https://github.com/nvm-sh/nvm) 或
+[nvm-windows](https://github.com/coreybutler/nvm-windows) 在同一台电脑中管理多个 Node 版本。
 
 本示例 Node.js 12.14.1
 
 <span id="top">目录</span>
 
+- [√ Vue-cli4](https://cli.vuejs.org/zh/guide/)
 - [√ 配置多环境变量](#env)
 - [√ rem 适配方案](#rem)
-- [√ Vue-cli4](https://cli.vuejs.org/zh/guide/)
-- [√ VantUI 组件按需加载](#vant) 
-- [√ Sass](#sass)  
-- Webpack 4
-- Vuex
-- Axios 封装
-- 生产环境 cdn 优化首屏加速
-- babel 低版本浏览器兼容
-- Eslint+Pettier 统一开发规范
+- [√ VantUI 组件按需加载](#vant)
+- [√ Sass](#sass)
+- [√ Webpack 4](#webpack)
 
- 
+- [√ Vuex](#vuex)
+- [√ Axios 封装](#axios)
+- [√ Vue-router](#router)
+- [√ vue.config.js 基础配置](#base)
+- [√ vue.config.js 配置 proxy 跨域](#proxy)
+- [√ vue.config.js 配置 proxy 跨域](#proxy)
+
+* Vuex
+* Axios 封装
+* 生产环境 cdn 优化首屏加速
+* babel 低版本浏览器兼容
+* Eslint+Pettier 统一开发规范
+
 ### <span id="env">✅ 配置多环境变量 </span>
 
 &emsp;&emsp;NODE_ENV 和 BASE_URL 是两个特殊变量，在代码中始终可用
@@ -48,8 +56,8 @@
 ##### 配置介绍
 
 &emsp;&emsp;以 `VUE_APP_` 开头的变量，在代码中可以通过 `process.env.VUE_APP_` 访问。  
-&emsp;&emsp;比如,`VUE_APP_ENV = 'development'` 通过`process.env.VUE_APP_ENV` 访问
-&emsp;&emsp; 除了 `VUE_APP_*` 变量之外，在你的应用代码中始终可用的还有两个特殊的变量`NODE_ENV` 和`BASE_URL`
+&emsp;&emsp;比如,`VUE_APP_ENV = 'development'` 通过`process.env.VUE_APP_ENV` 访问 &emsp;&emsp; 除了 `VUE_APP_*` 变量之外
+，在你的应用代码中始终可用的还有两个特殊的变量`NODE_ENV` 和`BASE_URL`
 
 在项目根目录中新建.env
 
@@ -146,14 +154,15 @@ module.exports = {
 
 很多小伙伴会问我，适配的问题。
 
-举个例子：设计给了你一张 750px \* 1334px 图片，在 iPhone6 上铺满屏幕,其他机型适配。 
+举个例子：设计给了你一张 750px \* 1334px 图片，在 iPhone6 上铺满屏幕,其他机型适配。
 
-- 当`rootValue: 70` , 样式 `width: 750px;height: 1334px;` 图片会撑满 iPhone6 屏幕，这个时候切换其他机型，图片也会跟着撑满。  
-- 当`rootValue: 37.5` 的时候，样式 `width: 375px;height: 667px;` 图片会撑满 iPhone6 屏幕。  
+- 当`rootValue: 70` , 样式 `width: 750px;height: 1334px;` 图片会撑满 iPhone6 屏幕，这个时候切换其他机型，图片也会跟着撑
+  满。
+- 当`rootValue: 37.5` 的时候，样式 `width: 375px;height: 667px;` 图片会撑满 iPhone6 屏幕。
 
-本案例采用  Vant 是基于 375 设计稿 , rootValue: 37.5。其他的你就可以根据你设计图，去做对应的设置了。
+本案例采用 Vant 是基于 375 设计稿 , rootValue: 37.5。其他的你就可以根据你设计图，去做对应的设置了。
 
-当然，想要撑满屏幕你可以使用100%，这里只是举例说明。
+当然，想要撑满屏幕你可以使用 100%，这里只是举例说明。
 
 ```html
 <img class="image" src="https://imgs.solui.cn/weapp/logo.png" />
@@ -176,13 +185,14 @@ module.exports = {
 
 ### <span id="vant">✅ VantUI 组件按需加载 </span>
 
-项目采用[自动按需引入组件 (推荐)](https://youzan.github.io/vant/#/zh-CN/quickstart#fang-shi-yi.-zi-dong-an-xu-yin-ru-zu-jian-tui-jian)
+项目采
+用[Vant 自动按需引入组件 (推荐)](https://youzan.github.io/vant/#/zh-CN/quickstart#fang-shi-yi.-zi-dong-an-xu-yin-ru-zu-jian-tui-jian)下
+面安装插件介绍：
 
-下面安装插件介绍：
+[babel-plugin-import](https://github.com/ant-design/babel-plugin-import) 是一款 `babel` 插件，它会在编译过程中将
+`import` 的写法自动转换为按需引入的方式
 
-[babel-plugin-import](https://github.com/ant-design/babel-plugin-import) 是一款 `babel` 插件，它会在编译过程中将 `import` 的写法自动转换为按需引入的方式
-
-# 安装插件
+#### 安装插件
 
 ```javascript
 npm i babel-plugin-import -D
@@ -204,7 +214,7 @@ module.exports = {
 }
 ```
 
-# 使用组件
+#### 使用组件
 
 项目在 `src/plugins/vant.js` 下统一管理组件，用哪个引入哪个，无需在页面里重复引用
 
@@ -216,26 +226,182 @@ Vue.use(Button)
 Vue.use(Cell)
 Vue.use(List)
 Vue.use(Tabbar).use(TabbarItem)
-
 ```
+
 [▲ 回顶部](#top)
 
 ### <span id="sass">✅ Sass </span>
 
-首先 你可能会遇到 `node-sass` 安装不成功，别放弃多试几次！！！  
+首先 你可能会遇到 `node-sass` 安装不成功，别放弃多试几次！！！
 
-在 `src/assets/css/`文件夹下包含了三个文件  
-- `index.scss` 主入口，主要引入其他两个scss文件，和公共样式
+在 `src/assets/css/`文件夹下包含了三个文件
+
+- `index.scss` 主入口，主要引入其他两个 scss 文件，和公共样式
 - `variables.scss` 定义变量
 - `mixin.scss` 定义 `mixin` 方法
 
-你可以直接在vue文件下写 sass 语法
+你可以直接在 vue 文件下写 sass 语法
 
 ```html
 <style lang="scss" scoped>
- 
+  .demo {
+    .title {
+      font-size: 12px;
+    }
+  }
 </style>
+```
 
+[▲ 回顶部](#top)
+
+### <span id="sass">✅ Sass </span>
+
+首先 你可能会遇到 `node-sass` 安装不成功，别放弃多试几次！！！
+
+在 `src/assets/css/`文件夹下包含了三个文件
+
+- `index.scss` 主入口，主要引入其他两个 scss 文件，和公共样式
+- `variables.scss` 定义变量
+- `mixin.scss` 定义 `mixin` 方法
+
+你可以直接在 vue 文件下写 sass 语法
+
+```html
+<style lang="scss" scoped>
+  .demo {
+    .title {
+      font-size: 12px;
+    }
+  }
+</style>
+```
+
+[▲ 回顶部](#top)
+
+### <span id="base">✅ Vue-router </span>
+
+本案例采用 `hash` 模式，开发者根据需求修改 `mode` `base`
+
+**注意**：如果你使用了 `history` 模式，`vue.config.js` 中的 `publicPath` 要做对应的**修改**
+
+前往:[vue.config.js 基础配置](#base)
+
+```javascript
+import Vue from 'vue'
+import Router from 'vue-router'
+
+Vue.use(Router)
+export const router = [
+  {
+    path: '/',
+    name: 'index',
+    component: () => import('@/views/home/index'), // 路由懒加载
+    meta: {
+      title: '首页', // 页面标题
+      keepAlive: false // keep-alive 标识
+    }
+  }
+]
+const createRouter = () =>
+  new Router({
+    // mode: 'history', // 如果你是 history模式 需要配置 vue.config.js publicPath
+    // base: '/app/',
+    scrollBehavior: () => ({y: 0}),
+    routes: router
+  })
+
+export default createRouter()
+```
+
+更多:[Vue Router](https://router.vuejs.org/zh/)
+
+[▲ 回顶部](#top)
+
+### <span id="base">✅ vue.config.js 基础配置 </span>
+
+如果你的 `Vue Router` 模式是 hash
+
+```javascript
+publicPath: './',
+```
+
+如果你的 `Vue Router` 模式是 history 这里的 publicPath 和你的 `Vue Router` `base` **保持一直**
+
+```javascript
+publicPath: '/app/',
+```
+
+```javascript
+const IS_PROD = ['production', 'prod'].includes(process.env.NODE_ENV)
+
+module.exports = {
+  publicPath: './', // 署应用包时的基本 URL。 vue-router hash 模式使用
+  //  publicPath: '/app/', // 署应用包时的基本 URL。  vue-router history模式使用
+  outputDir: 'dist', //  生产环境构建文件的目录
+  assetsDir: 'static', //  outputDir的静态资源(js、css、img、fonts)目录
+  lintOnSave: false,
+  productionSourceMap: !IS_PROD, // 生产环境的 source map
+  devServer: {
+    port: 9020, // 端口号
+    open: false, // 启动后打开浏览器
+    overlay: {
+      //  当出现编译器错误或警告时，在浏览器中显示全屏覆盖层
+      warnings: false,
+      errors: true
+    }
+    // ...
+  }
+}
+```
+
+[▲ 回顶部](#top)
+
+### <span id="proxy">✅ vue.config.js 配置 proxy 跨域 </span>
+
+```javascript
+module.exports = {
+  devServer: {
+    // ....
+    proxy: {
+      //配置跨域
+      '/api': {
+        target: 'https://test.xxx.com', // 接口的域名
+        ws: true, // 是否启用websockets
+        changOrigin: true, // 开启代理，在本地创建一个虚拟服务端
+        pathRewrite: {
+          '^/api': '/'
+        }
+      }
+    }
+  }
+}
+```
+
+使用
+
+```javascript
+<script>
+import axios from "axios"
+export default {
+  mounted() {
+    axios.get("/api/1").then(res => {
+    });
+  }
+};
+</script>
+```
+
+[▲ 回顶部](#top)
+
+### <span id="proxy">✅ vue.config.js 配置 proxy 跨域 </span>
+
+```javascript
+ publicPath: './', // 署应用包时的基本 URL router hash 模式使用
+  // publicPath: process.env.NODE_ENV === 'development' ? '/' : '/app/', //router history模式使用 需要区分生产环境和开发环境，不然build会报错
+  outputDir: 'dist',   //  生产环境构建文件的目录
+  assetsDir: 'static', //  outputDir的静态资源(js、css、img、fonts)目录
+  lintOnSave: false,
+  productionSourceMap: !IS_PROD, // 生产环境的 source map
 ```
 
 [▲ 回顶部](#top)
