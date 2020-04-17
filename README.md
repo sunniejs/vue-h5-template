@@ -53,8 +53,8 @@
 ##### 配置介绍
 
 &emsp;&emsp;以 `VUE_APP_` 开头的变量，在代码中可以通过 `process.env.VUE_APP_` 访问。  
-&emsp;&emsp;比如,`VUE_APP_ENV = 'development'` 通过`process.env.VUE_APP_ENV` 访问 
-&emsp;&emsp; 除了 `VUE_APP_*` 变量之外，在你的应用代码中始终可用的还有两个特殊的变量`NODE_ENV` 和`BASE_URL`
+&emsp;&emsp;比如,`VUE_APP_ENV = 'development'` 通过`process.env.VUE_APP_ENV` 访问 &emsp;&emsp; 除了 `VUE_APP_*` 变量之外
+，在你的应用代码中始终可用的还有两个特殊的变量`NODE_ENV` 和`BASE_URL`
 
 在项目根目录中新建.env
 
@@ -84,7 +84,10 @@ VUE_APP_ENV = 'production'
 ```
 
 这里我们并没有定义很多变量，只定义了基础的 VUE_APP_ENV `development` `staging` `production`  
-变量我们统一在 src/config/env.\*.js 里进行管理。修改起来方便，不需要重启项目，符合开发习惯。
+变量我们统一在 `src/config/env.*.js` 里进行管理。
+
+这里有个问题，既然这里有了根据不同环境设置变量的文件，为什么还要去 config 下新建三个对应的文件呢？ **修改起来方便，不需
+要重启项目，符合开发习惯。**
 
 config/index.js
 
@@ -151,15 +154,16 @@ module.exports = {
 
 很多小伙伴会问我，适配的问题。
 
-我们知道 `1rem` 等于`html` 根元素设定的 `font-size` 的 `px` 值。Vant UI 设置 `rootValue: 37.5`,你可以看到在 iPhone 6 下 看到 （`1rem 等于 37.5px`）：
+我们知道 `1rem` 等于`html` 根元素设定的 `font-size` 的 `px` 值。Vant UI 设置 `rootValue: 37.5`,你可以看到在 iPhone 6 下
+看到 （`1rem 等于 37.5px`）：
 
 ```html
 <html data-dpr="1" style="font-size: 37.5px;"></html>
 ```
-切换不同的机型，根元素可能会有不同的`font-size`。当你写css px 样式时，会被程序换算成 `rem` 达到适配。
 
+切换不同的机型，根元素可能会有不同的`font-size`。当你写 css px 样式时，会被程序换算成 `rem` 达到适配。
 
-因为我们用了Vant的组件，需要按照 `rootValue: 37.5` 来写样式。
+因为我们用了 Vant 的组件，需要按照 `rootValue: 37.5` 来写样式。
 
 举个例子：设计给了你一张 750px \* 1334px 图片，在 iPhone6 上铺满屏幕,其他机型适配。
 
@@ -167,7 +171,7 @@ module.exports = {
   满。
 - 当`rootValue: 37.5` 的时候，样式 `width: 375px;height: 667px;` 图片会撑满 iPhone6 屏幕。
 
-也就是iphone 6 下 375px宽度写CSS。其他的你就可以根据你设计图，去写对应的样式就可以了。
+也就是 iphone 6 下 375px 宽度写 CSS。其他的你就可以根据你设计图，去写对应的样式就可以了。
 
 当然，想要撑满屏幕你可以使用 100%，这里只是举例说明。
 
@@ -392,13 +396,15 @@ service.interceptors.response.use(
 export default service
 ```
 
+#### 接口管理
+
 在`src/api` 文件夹下统一管理接口
 
 - 你可以建立多个模块对接接口, 比如 `home.js` 里是首页的接口这里讲解 `user.js`
 - `url` 接口地址，请求的时候会拼接上 `config` 下的 `baseApi`
 - `method` 请求方法
-- `data` 请求参数  `qs.stringify(params)` 是对数据系列化操作
-- `hideloading` 默认 `false`,设置为 `true` 后，不显示loading ui 交互中有些接口不需要样用户感知
+- `data` 请求参数 `qs.stringify(params)` 是对数据系列化操作
+- `hideloading` 默认 `false`,设置为 `true` 后，不显示 loading ui 交互中有些接口不需要样用户感知
 
 ```javascript
 import qs from 'qs'
@@ -415,6 +421,18 @@ export function login(params) {
     // hideloading: true
   })
 }
+```
+
+#### 如何调用
+
+```javascript
+// 请求接口
+import {getUserInfo} from '@/api/user.js'
+
+const params = {user: 'sunnie'}
+getUserInfo()
+  .then(() => {})
+  .catch(() => {})
 ```
 
 [▲ 回顶部](#top)
@@ -486,7 +504,6 @@ module.exports = {
 使用 例如: `src/api/home.js`
 
 ```javascript
-
 export function getUserInfo(params) {
   return request({
     url: '/api/userinfo',
@@ -494,14 +511,12 @@ export function getUserInfo(params) {
     data: qs.stringify(params)
   })
 }
- 
 ```
 
 [▲ 回顶部](#top)
 
 ### <span id="proxy">✅ vue.config.js 配置 proxy 跨域 </span>
 
- 
 [▲ 回顶部](#top)
 
 #### 总结

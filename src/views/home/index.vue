@@ -17,7 +17,7 @@
 
 <script>
 // 请求接口
-import {getUserInfo} from '@/api/user.js'
+import { getUserInfo } from '@/api/user.js'
 export default {
   components: {},
 
@@ -51,9 +51,10 @@ export default {
     // 请求数据案例
     initData() {
       // 请求接口数据，仅作为展示，需要配置src->config下环境文件
+      const params = {user:'sunnie'}
       getUserInfo()
-        .then(() => {})
-        .catch(() => {})
+        .then(() => { })
+        .catch(() => { })
     },
     onChange(index) {
       if (index === 1) window.location.href = 'https://github.com/sunnie1992/vue-h5-template'
