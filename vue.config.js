@@ -48,12 +48,12 @@ module.exports = {
       //  当出现编译器错误或警告时，在浏览器中显示全屏覆盖层
       warnings: false,
       errors: true
-    }
+    },
     // proxy: {
     //   //配置跨域
     //   '/api': {
     //       target: "https://test.xxx.com",
-    //       ws:true,
+    //       // ws:true,
     //       changOrigin:true,
     //       pathRewrite:{
     //           '^/api':'/'

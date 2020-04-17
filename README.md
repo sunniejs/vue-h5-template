@@ -21,9 +21,8 @@
 - [√ VantUI 组件按需加载](#vant)
 - [√ Sass](#sass)
 - [√ Webpack 4](#webpack)
-
 - [√ Vuex](#vuex)
-- [√ Axios 封装](#axios)
+- [√ Axios 封装及接口管理](#axios)
 - [√ Vue-router](#router)
 - [√ vue.config.js 基础配置](#base)
 - [√ vue.config.js 配置 proxy 跨域](#proxy)
@@ -154,13 +153,23 @@ module.exports = {
 
 很多小伙伴会问我，适配的问题。
 
+我们知道 `1rem` 等于`html` 根元素设定的 `font-size` 的 `px` 值。Vant UI 设置 `rootValue: 37.5`,你可以看到在 iPhone 6 下 看到 （`1rem 等于 37.5px`）：
+
+```html
+<html data-dpr="1" style="font-size: 37.5px;"></html>
+```
+切换不同的机型，根元素可能会有不同的`font-size`。当你写css px 样式时，会被程序换算成 `rem` 达到适配。
+
+
+因为我们用了Vant的组件，需要按照 `rootValue: 37.5` 来写样式。
+
 举个例子：设计给了你一张 750px \* 1334px 图片，在 iPhone6 上铺满屏幕,其他机型适配。
 
 - 当`rootValue: 70` , 样式 `width: 750px;height: 1334px;` 图片会撑满 iPhone6 屏幕，这个时候切换其他机型，图片也会跟着撑
   满。
 - 当`rootValue: 37.5` 的时候，样式 `width: 375px;height: 667px;` 图片会撑满 iPhone6 屏幕。
 
-本案例采用 Vant 是基于 375 设计稿 , rootValue: 37.5。其他的你就可以根据你设计图，去做对应的设置了。
+也就是iphone 6 下 375px宽度写CSS。其他的你就可以根据你设计图，去写对应的样式就可以了。
 
 当然，想要撑满屏幕你可以使用 100%，这里只是举例说明。
 
@@ -317,6 +326,101 @@ export default createRouter()
 
 [▲ 回顶部](#top)
 
+### <span id="axios">✅ Axios 封装及接口管理</span>
+
+`utils/request.js` 封装 axios ,开发者需要根据后台接口做修改。
+
+- `service.interceptors.request.use` 里可以设置请求头，比如设置 `token`
+- `config.hideloading` 是在 api 文件夹下的接口参数里设置，下文会讲
+- `service.interceptors.response.use` 里可以对接口返回数据处理，比如 401 删除本地信息，重新登录
+
+```javascript
+import axios from 'axios'
+import store from '@/store'
+import {Toast} from 'vant'
+// 根据环境不同引入不同api地址
+import {baseApi} from '@/config'
+// create an axios instance
+const service = axios.create({
+  baseURL: baseApi, // url = base api url + request url
+  withCredentials: true, // send cookies when cross-domain requests
+  timeout: 5000 // request timeout
+})
+
+// request 拦截器 request interceptor
+service.interceptors.request.use(
+  config => {
+    // 不传递默认开启loading
+    if (!config.hideloading) {
+      // loading
+      Toast.loading({
+        forbidClick: true
+      })
+    }
+    if (store.getters.token) {
+      config.headers['X-Token'] = ''
+    }
+    return config
+  },
+  error => {
+    // do something with request error
+    console.log(error) // for debug
+    return Promise.reject(error)
+  }
+)
+// respone拦截器
+service.interceptors.response.use(
+  response => {
+    Toast.clear()
+    const res = response.data
+    if (res.status && res.status !== 200) {
+      // 登录超时,重新登录
+      if (res.status === 401) {
+        store.dispatch('FedLogOut').then(() => {
+          location.reload()
+        })
+      }
+      return Promise.reject(res || 'error')
+    } else {
+      return Promise.resolve(res)
+    }
+  },
+  error => {
+    Toast.clear()
+    console.log('err' + error) // for debug
+    return Promise.reject(error)
+  }
+)
+export default service
+```
+
+在`src/api` 文件夹下统一管理接口
+
+- 你可以建立多个模块对接接口, 比如 `home.js` 里是首页的接口这里讲解 `user.js`
+- `url` 接口地址，请求的时候会拼接上 `config` 下的 `baseApi`
+- `method` 请求方法
+- `data` 请求参数  `qs.stringify(params)` 是对数据系列化操作
+- `hideloading` 默认 `false`,设置为 `true` 后，不显示loading ui 交互中有些接口不需要样用户感知
+
+```javascript
+import qs from 'qs'
+// axios
+import request from '@/utils/request'
+//user api
+
+// 登录
+export function login(params) {
+  return request({
+    url: '/user/login', // 接口地址
+    method: 'post', //  method
+    data: qs.stringify(params)
+    // hideloading: true
+  })
+}
+```
+
+[▲ 回顶部](#top)
+
 ### <span id="base">✅ vue.config.js 基础配置 </span>
 
 如果你的 `Vue Router` 模式是 hash
@@ -358,6 +462,10 @@ module.exports = {
 
 ### <span id="proxy">✅ vue.config.js 配置 proxy 跨域 </span>
 
+如果你的项目需要跨域设置，你需要打来 `vue.config.js` `proxy` 注释 并且配置相应参数
+
+**注意**：你还需要将 `src/config/env.development.js` 里的 `baseApi` 设置成 '/'
+
 ```javascript
 module.exports = {
   devServer: {
@@ -366,7 +474,7 @@ module.exports = {
       //配置跨域
       '/api': {
         target: 'https://test.xxx.com', // 接口的域名
-        ws: true, // 是否启用websockets
+        // ws: true, // 是否启用websockets
         changOrigin: true, // 开启代理，在本地创建一个虚拟服务端
         pathRewrite: {
           '^/api': '/'
@@ -377,33 +485,25 @@ module.exports = {
 }
 ```
 
-使用
+使用 例如: `src/api/home.js`
 
 ```javascript
-<script>
-import axios from "axios"
-export default {
-  mounted() {
-    axios.get("/api/1").then(res => {
-    });
-  }
-};
-</script>
+
+export function getUserInfo(params) {
+  return request({
+    url: '/api/userinfo',
+    method: 'get',
+    data: qs.stringify(params)
+  })
+}
+ 
 ```
 
 [▲ 回顶部](#top)
 
 ### <span id="proxy">✅ vue.config.js 配置 proxy 跨域 </span>
 
-```javascript
- publicPath: './', // 署应用包时的基本 URL router hash 模式使用
-  // publicPath: process.env.NODE_ENV === 'development' ? '/' : '/app/', //router history模式使用 需要区分生产环境和开发环境，不然build会报错
-  outputDir: 'dist',   //  生产环境构建文件的目录
-  assetsDir: 'static', //  outputDir的静态资源(js、css、img、fonts)目录
-  lintOnSave: false,
-  productionSourceMap: !IS_PROD, // 生产环境的 source map
-```
-
+ 
 [▲ 回顶部](#top)
 
 #### 总结

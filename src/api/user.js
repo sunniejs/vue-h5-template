@@ -1,13 +1,15 @@
 import qs from 'qs'
+// axios
 import request from '@/utils/request'
-// api
+//user api
 
 // 登录
 export function login(params) {
   return request({
     url: '/user/login',
     method: 'post',
-    data: qs.stringify(params)
+    data: qs.stringify(params),
+   // hideloading: true
   })
 }
 // 用户信息
