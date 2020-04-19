@@ -61,7 +61,6 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
-// @import '@/assets/css/index.scss';
 .app-container {
   .warpper {
     padding: 12px;

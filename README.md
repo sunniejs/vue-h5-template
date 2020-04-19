@@ -25,8 +25,14 @@
 - [√ Axios 封装及接口管理](#axios)
 - [√ Vue-router](#router)
 - [√ vue.config.js 基础配置](#base)
-- [√ vue.config.js 配置 proxy 跨域](#proxy)
-- [√ vue.config.js 配置 proxy 跨域](#proxy)
+- [√ 配置 proxy 跨域](#proxy)
+- [√ 配置 alias 别名](#alias)
+- [√ 配置 打包分析](#bundle)
+- [√ 配置 externals 引入 cdn 资源 ](#externals)
+- [√ 去掉 console.log ](#console)
+- [√ splitChunks ](#console)
+- [√ 添加 IE 兼容 ](#ie)
+
 
 * Vuex
 * Axios 封装
@@ -476,7 +482,7 @@ module.exports = {
 
 [▲ 回顶部](#top)
 
-### <span id="proxy">✅ vue.config.js 配置 proxy 跨域 </span>
+### <span id="proxy">✅ 配置 proxy 跨域 </span>
 
 如果你的项目需要跨域设置，你需要打来 `vue.config.js` `proxy` 注释 并且配置相应参数
 
@@ -515,9 +521,159 @@ export function getUserInfo(params) {
 
 [▲ 回顶部](#top)
 
-### <span id="proxy">✅ vue.config.js 配置 proxy 跨域 </span>
+### <span id="alias">✅ 配置 alias 别名 </span>
+
+```javascript
+const path = require("path");
+const resolve = dir => path.join(__dirname, dir);
+const IS_PROD = ["production", "prod"].includes(process.env.NODE_ENV);
+
+module.exports = {
+  chainWebpack: config => {
+    // 添加别名
+    config.resolve.alias
+      .set('@', resolve('src'))
+      .set('assets', resolve('src/assets'))
+      .set('api', resolve('src/api'))
+      .set('views', resolve('src/views'))
+      .set('components', resolve('src/components'))
+  }
+};
+```
+[▲ 回顶部](#top)
+
+### <span id="bundle">✅ 配置 打包分析 </span>
+
+```javascript
+const BundleAnalyzerPlugin = require("webpack-bundle-analyzer")
+  .BundleAnalyzerPlugin;
+
+module.exports = {
+  chainWebpack: config => {
+    // 打包分析
+    if (IS_PROD) {
+      config.plugin("webpack-report").use(BundleAnalyzerPlugin, [
+        {
+          analyzerMode: "static"
+        }
+      ]);
+    }
+  }
+};
+```
+```bash
+npm run build
+```
+[▲ 回顶部](#top)
+
+### <span id="proxy">✅ 配置 externals 引入 cdn 资源 </span>
+
+```javascript
+const defaultSettings = require('./src/config/index.js')
+const name = defaultSettings.title || 'vue mobile template'
+const IS_PROD = ["production", "prod"].includes(process.env.NODE_ENV);
+
+// externals
+const externals = {
+  vue: 'Vue',
+  'vue-router': 'VueRouter',
+  vuex: 'Vuex',
+  vant: 'vant',
+  axios: 'axios'
+}
+// cdn
+const cdn = {
+  css: ['https://cdn.jsdelivr.net/npm/vant@beta/lib/index.css'],
+  js: [
+    'https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.10/vue.min.js',
+    'https://cdnjs.cloudflare.com/ajax/libs/vue-router/3.0.6/vue-router.min.js',
+    'https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js',
+    'https://cdnjs.cloudflare.com/ajax/libs/vuex/3.1.1/vuex.min.js',
+    'https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.9-1/crypto-js.min.js',
+    'https://cdn.jsdelivr.net/npm/vant@beta/lib/vant.min.js'
+  ]
+}
+module.exports = {
+  configureWebpack: config => {
+   config.name = name
+    // 为生产环境修改配置...
+    if (IS_PROD) {
+      // externals
+      config.externals = externals
+    };
+  },
+  chainWebpack: config => {
+    // 添加CDN参数到htmlWebpackPlugin配置中， 详见public/index.html 修改
+    config.plugin('html').tap(args => {
+      if (IS_PROD) {
+         // html中添加cdn
+        args[0].cdn = cdn
+      } 
+      return args
+    })
+  }
+};
+```
+ 在 public/index.html 中添加
+
+```javascript
+    <!-- 使用CDN的CSS文件 --> 
+    <% for (var i in
+      htmlWebpackPlugin.options.cdn&&htmlWebpackPlugin.options.cdn.css) { %>
+      <link href="<%= htmlWebpackPlugin.options.cdn.css[i] %>" rel="stylesheet" />
+    <% } %>
+     <!-- 使用CDN加速的JS文件，配置在vue.config.js下 -->
+    <% for (var i in
+      htmlWebpackPlugin.options.cdn&&htmlWebpackPlugin.options.cdn.js) { %>
+      <script src="<%= htmlWebpackPlugin.options.cdn.js[i] %>"></script>
+    <% } %>
+```
 
 [▲ 回顶部](#top)
+
+### <span id="console">✅ 去掉 console.log </span>
+
+```bash
+npm i -D babel-plugin-transform-remove-console
+```
+在 babel.config.js 中配置
+
+```javascript
+// 获取 VUE_APP_ENV 非 NODE_ENV，测试环境依然 console
+const IS_PROD = ['production', 'prod'].includes(process.env.VUE_APP_ENV)
+const plugins = [
+  [
+    'import',
+    {
+      libraryName: 'vant',
+      libraryDirectory: 'es',
+      style: true
+    },
+    'vant'
+  ]
+]
+// 去除 console.log
+if (IS_PROD) {
+  plugins.push('transform-remove-console')
+}
+
+module.exports = {
+  presets: [['@vue/cli-plugin-babel/preset', {useBuiltIns: 'entry'}]],
+  plugins
+}
+
+```
+
+[▲ 回顶部](#top)
+
+### <span id="ie">✅ 添加 IE 兼容 </span>
+
+[▲ 回顶部](#top)
+
+### <span id="console">✅ 去掉 console.log </span>
+[▲ 回顶部](#top)
+
+
 
 #### 总结
 
