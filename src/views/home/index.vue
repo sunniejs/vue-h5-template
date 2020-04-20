@@ -12,19 +12,14 @@
 </template>
 
 <script>
-import TabBar from '@/components/TabBar'
-// 请求接口
-import { getUserInfo } from '@/api/user.js'
-
 export default {
-
   data() {
     return {
       list: [
         'Vue-cli4',
-        ' 配置多环境变量',
-        ' VantUI 组件按需加载',
-        ' Sass',
+        '配置多环境变量',
+        'VantUI 组件按需加载',
+        'Sass',
         'Webpack 4',
         'Vuex',
         ' Axios 封装及接口管理',
@@ -43,27 +38,16 @@ export default {
 
   computed: {},
 
-  mounted() {
-    this.initData()
-  },
+  mounted() {},
 
-  methods: {
-    // 请求数据案例
-    initData() {
-      // 请求接口数据，仅作为展示，需要配置src->config下环境文件
-      const params = { user: 'sunnie' }
-      getUserInfo(params)
-        .then(() => { })
-        .catch(() => { })
-    }
-  }
+  methods: {}
 }
 </script>
 <style lang="scss" scoped>
 .app-container {
   .warpper {
     padding: 12px;
-    background: $background-color;
+    background: #fff;
     .demo-home__title {
       margin: 0 0 6px;
       font-size: 32px;

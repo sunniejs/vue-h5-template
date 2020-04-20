@@ -72,6 +72,8 @@ module.exports = {
         // 详情: https://cli.vuejs.org/guide/css.html#passing-options-to-pre-processor-loaders
         prependData: `
           @import "assets/css/index.scss";
+          @import "assets/css/mixin.scss";
+          @import "assets/css/variables.scss";
           $cdn: "${defaultSettings.$cdn}";
           `
       }
