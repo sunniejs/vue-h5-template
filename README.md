@@ -2,7 +2,7 @@
 
 基于 vue-cli3.0+webpack 4+vant ui + sass+ rem 适配方案+axios 封装，构建手机端模板脚手架
 
-[关于项目介绍](https://juejin.im/post/5cfefc73f265da1bba58f9f7)
+掘金: [vue-cli4 vant rem 移动端框架方案](https://juejin.im/post/5cfefc73f265da1bba58f9f7)
 
 [demo](https://solui.cn/vue-h5-template/#/)建议手机端查看
 
@@ -12,6 +12,19 @@
 [nvm-windows](https://github.com/coreybutler/nvm-windows) 在同一台电脑中管理多个 Node 版本。
 
 本示例 Node.js 12.14.1
+
+### 启动项目
+
+```bash
+
+git clone https://github.com/sunniejs/vue-h5-template.git
+
+cd vue-h5-template
+
+npm install
+
+npm run serve
+```
 
 <span id="top">目录</span>
 
@@ -30,9 +43,8 @@
 - [√ 配置 打包分析](#bundle)
 - [√ 配置 externals 引入 cdn 资源 ](#externals)
 - [√ 去掉 console.log ](#console)
-- [√ splitChunks ](#console)
+- [√ splitChunks 单独打包第三方模块](#chunks)
 - [√ 添加 IE 兼容 ](#ie)
-
 
 * Vuex
 * Axios 封装
@@ -466,7 +478,7 @@ module.exports = {
   outputDir: 'dist', //  生产环境构建文件的目录
   assetsDir: 'static', //  outputDir的静态资源(js、css、img、fonts)目录
   lintOnSave: false,
-  productionSourceMap: !IS_PROD, // 生产环境的 source map
+  productionSourceMap: false, // 如果你不需要生产环境的 source map，可以将其设置为 false 以加速生产环境构建。
   devServer: {
     port: 9020, // 端口号
     open: false, // 启动后打开浏览器
@@ -524,9 +536,9 @@ export function getUserInfo(params) {
 ### <span id="alias">✅ 配置 alias 别名 </span>
 
 ```javascript
-const path = require("path");
-const resolve = dir => path.join(__dirname, dir);
-const IS_PROD = ["production", "prod"].includes(process.env.NODE_ENV);
+const path = require('path')
+const resolve = dir => path.join(__dirname, dir)
+const IS_PROD = ['production', 'prod'].includes(process.env.NODE_ENV)
 
 module.exports = {
   chainWebpack: config => {
@@ -538,40 +550,52 @@ module.exports = {
       .set('views', resolve('src/views'))
       .set('components', resolve('src/components'))
   }
-};
+}
 ```
+
 [▲ 回顶部](#top)
 
 ### <span id="bundle">✅ 配置 打包分析 </span>
 
 ```javascript
-const BundleAnalyzerPlugin = require("webpack-bundle-analyzer")
-  .BundleAnalyzerPlugin;
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
 
 module.exports = {
   chainWebpack: config => {
     // 打包分析
     if (IS_PROD) {
-      config.plugin("webpack-report").use(BundleAnalyzerPlugin, [
+      config.plugin('webpack-report').use(BundleAnalyzerPlugin, [
         {
-          analyzerMode: "static"
+          analyzerMode: 'static'
         }
-      ]);
+      ])
     }
   }
-};
+}
 ```
+
 ```bash
 npm run build
 ```
+
 [▲ 回顶部](#top)
 
 ### <span id="proxy">✅ 配置 externals 引入 cdn 资源 </span>
 
+这个版本 CDN 不再引入，我测试了一下使用引入 CDN 和不使用,不使用会比使用时间少。网上不少文章测试 CDN 速度块，这个开发者可
+以实际测试一下。
+
+另外项目中使用的是公共 CDN 不稳定，域名解析也是需要时间的（如果你要使用请尽量使用同一个域名）
+
+因为页面每次遇到`<script>`标签都会停下来解析执行，所以应该尽可能减少`<script>`标签的数量 `HTTP`请求存在一定的开销，100K
+的文件比 5 个 20K 的文件下载的更快，所以较少脚本数量也是很有必要的
+
+暂时还没有研究放到自己的 cdn 服务器上。
+
 ```javascript
 const defaultSettings = require('./src/config/index.js')
 const name = defaultSettings.title || 'vue mobile template'
-const IS_PROD = ["production", "prod"].includes(process.env.NODE_ENV);
+const IS_PROD = ['production', 'prod'].includes(process.env.NODE_ENV)
 
 // externals
 const externals = {
@@ -581,45 +605,57 @@ const externals = {
   vant: 'vant',
   axios: 'axios'
 }
-// cdn
+// CDN外链，会插入到index.html中
 const cdn = {
-  css: ['https://cdn.jsdelivr.net/npm/vant@beta/lib/index.css'],
-  js: [
-    'https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.10/vue.min.js',
-    'https://cdnjs.cloudflare.com/ajax/libs/vue-router/3.0.6/vue-router.min.js',
-    'https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js',
-    'https://cdnjs.cloudflare.com/ajax/libs/vuex/3.1.1/vuex.min.js',
-    'https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.9-1/crypto-js.min.js',
-    'https://cdn.jsdelivr.net/npm/vant@beta/lib/vant.min.js'
-  ]
+  // 开发环境
+  dev: {
+    css: [],
+    js: []
+  },
+  // 生产环境
+  build: {
+    css: ['https://cdn.jsdelivr.net/npm/vant@2.4.7/lib/index.css'],
+    js: [
+      'https://cdn.jsdelivr.net/npm/vue@2.6.11/dist/vue.min.js',
+      'https://cdn.jsdelivr.net/npm/vue-router@3.1.5/dist/vue-router.min.js',
+      'https://cdn.jsdelivr.net/npm/axios@0.19.2/dist/axios.min.js',
+      'https://cdn.jsdelivr.net/npm/vuex@3.1.2/dist/vuex.min.js',
+      'https://cdn.jsdelivr.net/npm/vant@2.4.7/lib/index.min.js'
+    ]
+  }
 }
 module.exports = {
   configureWebpack: config => {
-   config.name = name
+    config.name = name
     // 为生产环境修改配置...
     if (IS_PROD) {
       // externals
       config.externals = externals
-    };
+    }
   },
   chainWebpack: config => {
-    // 添加CDN参数到htmlWebpackPlugin配置中， 详见public/index.html 修改
+    /**
+     * 添加CDN参数到htmlWebpackPlugin配置中
+     */
     config.plugin('html').tap(args => {
       if (IS_PROD) {
-         // html中添加cdn
-        args[0].cdn = cdn
-      } 
+        args[0].cdn = cdn.build
+      } else {
+        args[0].cdn = cdn.dev
+      }
       return args
     })
   }
-};
+}
 ```
- 在 public/index.html 中添加
+
+在 public/index.html 中添加
 
 ```javascript
-    <!-- 使用CDN的CSS文件 --> 
+    <!-- 使用CDN的CSS文件 -->
     <% for (var i in
       htmlWebpackPlugin.options.cdn&&htmlWebpackPlugin.options.cdn.css) { %>
+      <link href="<%= htmlWebpackPlugin.options.cdn.css[i] %>" rel="preload" as="style" />
       <link href="<%= htmlWebpackPlugin.options.cdn.css[i] %>" rel="stylesheet" />
     <% } %>
      <!-- 使用CDN加速的JS文件，配置在vue.config.js下 -->
@@ -633,9 +669,12 @@ module.exports = {
 
 ### <span id="console">✅ 去掉 console.log </span>
 
+保留了测试环境和本地环境的 `console.log`
+
 ```bash
 npm i -D babel-plugin-transform-remove-console
 ```
+
 在 babel.config.js 中配置
 
 ```javascript
@@ -661,19 +700,82 @@ module.exports = {
   presets: [['@vue/cli-plugin-babel/preset', {useBuiltIns: 'entry'}]],
   plugins
 }
+```
 
+[▲ 回顶部](#top)
+
+### <span id="chunks">✅ splitChunks 单独打包第三方模块</span>
+
+```javascript
+module.exports = {
+  chainWebpack: config => {
+    config.when(IS_PROD, config => {
+      config
+        .plugin('ScriptExtHtmlWebpackPlugin')
+        .after('html')
+        .use('script-ext-html-webpack-plugin', [
+          {
+            // 将 runtime 作为内联引入不单独存在
+            inline: /runtime\..*\.js$/
+          }
+        ])
+        .end()
+      config.optimization.splitChunks({
+        chunks: 'all',
+        cacheGroups: {
+          // cacheGroups 下可以可以配置多个组，每个组根据test设置条件，符合test条件的模块
+          commons: {
+            name: 'chunk-commons',
+            test: resolve('src/components'),
+            minChunks: 3, //  被至少用三次以上打包分离
+            priority: 5, // 优先级
+            reuseExistingChunk: true // 表示是否使用已有的 chunk，如果为 true 则表示如果当前的 chunk 包含的模块已经被抽取出去了，那么将不会重新生成新的。
+          },
+          node_vendors: {
+            name: 'chunk-libs',
+            chunks: 'initial', // 只打包初始时依赖的第三方
+            test: /[\\/]node_modules[\\/]/,
+            priority: 10
+          },
+          vantUI: {
+            name: 'chunk-vantUI', // 单独将 vantUI 拆包
+            priority: 20, // 数字大权重到，满足多个 cacheGroups 的条件时候分到权重高的
+            test: /[\\/]node_modules[\\/]_?vant(.*)/
+          }
+        }
+      })
+      config.optimization.runtimeChunk('single')
+    })
+  }
+}
 ```
 
 [▲ 回顶部](#top)
 
 ### <span id="ie">✅ 添加 IE 兼容 </span>
 
+```bash
+npm i -S @babel/polyfill
+```
+
+在 `main.js` 中添加
+
+```javascript
+import '@babel/polyfill'
+```
+
+配置 `babel.config.js`
+
+```javascript
+const plugins = []
+
+module.exports = {
+  presets: [['@vue/cli-plugin-babel/preset', {useBuiltIns: 'entry'}]],
+  plugins
+}
+```
+
 [▲ 回顶部](#top)
-
-### <span id="console">✅ 去掉 console.log </span>
-[▲ 回顶部](#top)
-
-
 
 #### 总结
 

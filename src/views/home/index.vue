@@ -8,36 +8,35 @@
       </h2>
     </div>
     <van-cell icon="success" v-for="item in list" :key="item" :title="item" />
-    <!-- tabbar -->
-    <TabBar></TabBar>
   </div>
 </template>
 
 <script>
 import TabBar from '@/components/TabBar'
 // 请求接口
-import {getUserInfo} from '@/api/user.js'
+import { getUserInfo } from '@/api/user.js'
 
 export default {
-  components: {
-    TabBar
-  },
 
   data() {
     return {
       list: [
         'Vue-cli4',
-        'VantUI组件按需加载',
-        'Sass',
+        ' 配置多环境变量',
+        ' VantUI 组件按需加载',
+        ' Sass',
         'Webpack 4',
-        'Vue-router',
         'Vuex',
-        'Axios封装',
-        'rem适配方案',
-        '多环境配置',
-        '生产环境cdn优化首屏加速',
-        'babel低版本浏览器兼容',
-        'Eslint+Pettier统一开发规范'
+        ' Axios 封装及接口管理',
+        'Vue-router',
+        'vue.config.js 基础配置',
+        '配置 proxy 跨域',
+        '配置 alias 别名',
+        '配置 打包分析',
+        '配置 externals 引入 cdn 资源',
+        '去掉 console.log',
+        'splitChunks 单独打包第三方模块',
+        ' 添加 IE 兼容'
       ]
     }
   },
@@ -52,19 +51,19 @@ export default {
     // 请求数据案例
     initData() {
       // 请求接口数据，仅作为展示，需要配置src->config下环境文件
-      const params = {user: 'sunnie'}
+      const params = { user: 'sunnie' }
       getUserInfo(params)
-        .then(() => {})
-        .catch(() => {})
+        .then(() => { })
+        .catch(() => { })
     }
   }
 }
 </script>
 <style lang="scss" scoped>
-// @import '@/assets/css/index.scss';
 .app-container {
   .warpper {
     padding: 12px;
+    background: $background-color;
     .demo-home__title {
       margin: 0 0 6px;
       font-size: 32px;

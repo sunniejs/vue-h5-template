@@ -1,15 +1,22 @@
 <template>
   <div>
-    <van-tabbar fixed v-model="active" @change="onChange">
-      <van-tabbar-item icon="home-o">首页</van-tabbar-item>
-      <van-tabbar-item icon="good-job-o">github</van-tabbar-item>
-    </van-tabbar>
+    <van-tabbar fixed route>
+      <van-tabbar-item to="/" icon="home-o">
+        首页
+      </van-tabbar-item>
+      <van-tabbar-item to="/about" icon="user-o">
+        关于我
+      </van-tabbar-item>
+      </van-tabbar>
+   <!--  <van-tabbar fixed v-model="active" @change="onChange">
+      <van-tabbar-item  to="/home" icon="home-o">首页</van-tabbar-item>
+      <van-tabbar-item  to="/about" icon="user-o">关于我</van-tabbar-item>
+    </van-tabbar> -->
   </div>
 </template>
 
 <script>
-import _ from 'lodash'
-console.log(_.join(['a', 'b'], '~'))
+
 export default {
   name: 'TabBar',
   data() {
@@ -18,9 +25,9 @@ export default {
     }
   },
   methods: {
-    onChange(index) {
-      if (index === 1) window.location.href = 'https://github.com/sunniejs/vue-h5-template'
-    }
+    // onChange(index) {
+    //   if (index === 1) window.location.href = 'https://github.com/sunniejs/vue-h5-template'
+    // }
   }
 }
 </script>

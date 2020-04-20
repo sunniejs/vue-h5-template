@@ -6,45 +6,31 @@
       <h2 class="demo-home__desc">
         A vue h5 template with Vant UI
       </h2>
+      <div class="list">
+        <div class="item">项目地址: <a href="https://github.com/sunniejs">https://github.com/sunniejs</a></div>
+        <div class="item">项目作者: sunnie</div>
+        <div class="item"></div>
+        <div class="author"></div>
+      </div>
     </div>
-    <van-cell icon="success" v-for="item in list" :key="item" :title="item" />
-    <!-- tabbar -->
-    <TabBar></TabBar>
   </div>
 </template>
 
 <script>
-import TabBar from '@/components/TabBar'
 // 请求接口
-import {getUserInfo} from '@/api/user.js'
+import { getUserInfo } from '@/api/user.js'
 
 export default {
-  components: {
-    TabBar
-  },
-
   data() {
     return {
-      list: [
-        'Vue-cli4',
-        'VantUI组件按需加载',
-        'Sass',
-        'Webpack 4',
-        'Vue-router',
-        'Vuex',
-        'Axios封装',
-        'rem适配方案',
-        '多环境配置',
-        '生产环境cdn优化首屏加速',
-        'babel低版本浏览器兼容',
-        'Eslint+Pettier统一开发规范'
-      ]
+
     }
   },
 
   computed: {},
 
   mounted() {
+
     this.initData()
   },
 
@@ -52,10 +38,10 @@ export default {
     // 请求数据案例
     initData() {
       // 请求接口数据，仅作为展示，需要配置src->config下环境文件
-      const params = {user: 'sunnie'}
+      const params = { user: 'sunnie' }
       getUserInfo(params)
-        .then(() => {})
-        .catch(() => {})
+        .then(() => { })
+        .catch(() => { })
     }
   }
 }
@@ -64,6 +50,7 @@ export default {
 .app-container {
   .warpper {
     padding: 12px;
+    background: $background-color;
     .demo-home__title {
       margin: 0 0 6px;
       font-size: 32px;
@@ -84,6 +71,23 @@ export default {
       margin: 0 0 20px;
       color: rgba(69, 90, 100, 0.6);
       font-size: 14px;
+    }
+    .list {
+      display: flex;
+      flex-direction: column;
+      color: #666;
+      font-size: 14px;
+      .item {
+        font-size: 14px;
+        line-height: 24px;
+      }
+    }
+
+    .author {
+      margin:10px auto;
+      width: 200px;
+      height: 200px;
+      background: url($cdn+'/weapp/me.png') center / contain no-repeat;
     }
   }
 }
