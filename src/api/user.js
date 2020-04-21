@@ -9,7 +9,6 @@ export function login(params) {
     url: '/user/login',
     method: 'post',
     data: qs.stringify(params)
-    // hideloading: true
   })
 }
 // 用户信息

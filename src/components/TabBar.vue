@@ -25,9 +25,7 @@ export default {
     }
   },
   methods: {
-    // onChange(index) {
-    //   if (index === 1) window.location.href = 'https://github.com/sunniejs/vue-h5-template'
-    // }
+  
   }
 }
 </script>

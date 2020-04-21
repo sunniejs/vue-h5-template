@@ -2,17 +2,19 @@
 <template>
   <div class="app-container">
     <div class="warpper">
-      <h1 class="demo-home__title"><img src="https://imgs.solui.cn/weapp/logo.png" /><span>VUE H5开发模板</span></h1>
-      <h2 class="demo-home__desc">
-        A vue h5 template with Vant UI
-      </h2>
       <div class="list">
-        <div class="author"></div>
+        <div class="logo"></div>
+        <div class="demo-home__title"> VUE H5开发模板</div>
         <div class="item">项目地址: <a href="https://github.com/sunniejs">https://github.com/sunniejs</a></div>
         <div class="item">项目作者: sunnie</div>
+
         <div class="item"></div>
-        <div class="wechat"></div>
-        <div>关注公众号：回复“加群”即可加 前端仙女群</div>
+        <div class="wechat">
+          <img :src="this.wechat" alt="">
+        </div>
+        <div class="item">关注公众号：回复“加群”即可加 前端仙女群</div>
+        <div class="item">{{userName}} <van-button v-if="userName==''" type="warning" size="small" @click="doDispatch">快点我~</van-button>
+        </div>
       </div>
     </div>
   </div>
@@ -20,14 +22,20 @@
 
 <script>
 // 请求接口
-import {getUserInfo} from '@/api/user.js'
-
+import { getUserInfo } from '@/api/user.js'
+import { mapGetters } from 'vuex'
 export default {
   data() {
-    return {}
+    return {
+      wechat: `${this.$cdn}/wx/640.gif`
+    }
   },
 
-  computed: {},
+  computed: {
+    ...mapGetters([
+      'userName'
+    ])
+  },
 
   mounted() {
     this.initData()
@@ -37,10 +45,17 @@ export default {
     // 请求数据案例
     initData() {
       // 请求接口数据，仅作为展示，需要配置src->config下环境文件
-      const params = {user: 'sunnie'}
+      const params = { user: 'sunnie' }
       getUserInfo(params)
-        .then(() => {})
-        .catch(() => {})
+        .then(() => { })
+        .catch(() => { })
+    },
+    // Action 通过 store.dispatch 方法触发
+    doDispatch() {
+      this.$store.dispatch('setUserName', '真乖，赶紧关注公众号，组织都在等你~')
+    },
+    goGithub(index) {
+      window.location.href = 'https://github.com/sunniejs/vue-h5-template'
     }
   }
 }
@@ -48,51 +63,46 @@ export default {
 <style lang="scss" scoped>
 .app-container {
   background: #fff;
-  height: 100%;
+  height: 100vh;
+  box-sizing: border-box;
   .warpper {
-    padding: 12px;
-    .demo-home__title {
-      margin: 0 0 6px;
-      font-size: 32px;
-      .demo-home__title img,
-      .demo-home__title span {
-        display: inline-block;
-        vertical-align: middle;
-      }
-      img {
-        width: 32px;
-      }
-      span {
-        margin-left: 16px;
-        font-weight: 500;
-      }
-    }
-    .demo-home__desc {
-      margin: 0 0 20px;
-      color: rgba(69, 90, 100, 0.6);
-      font-size: 14px;
-    }
+    padding: 50px 12px 12px 12px;
     .list {
       display: flex;
       flex-direction: column;
       align-items: center;
       color: #666;
       font-size: 14px;
+      .demo-home__title {
+        margin: 0 0 6px;
+        font-size: 32px;
+        .demo-home__title img,
+        .demo-home__title span {
+          display: inline-block;
+          vertical-align: middle;
+        }
+      }
       .item {
         font-size: 14px;
-        line-height: 24px;
+        line-height: 34px;
+        a {
+          text-decoration: underline;
+        }
       }
-    }
 
-    .author {
-      width: 200px;
-      height: 200px;
-      background: url($cdn+'/weapp/me.png') center / contain no-repeat;
-    }
-    .wechat {
-      width: 200px;
-      height: 200px;
-      background: url($cdn+'/wx/640.gif') center / contain no-repeat;
+      .logo {
+        width: 120px;
+        height: 120px;
+        background: url($cdn+'/weapp/logo.png') center / contain no-repeat;
+      }
+      .wechat {
+        width: 200px;
+        height: 200px;
+        img {
+          width: 100%;
+          height: auto;
+        }
+      }
     }
   }
 }

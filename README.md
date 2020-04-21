@@ -6,6 +6,10 @@
 
 [demo](https://solui.cn/vue-h5-template/#/)建议手机端查看
 
+<p>
+  <img src="./static/demo.png" width="256" style="display:inline;">
+</p>
+
 ### Node 版本要求
 
 `Vue CLI` 需要 Node.js 8.9 或更高版本 (推荐 8.11.0+)。你可以使用 [nvm](https://github.com/nvm-sh/nvm) 或
@@ -25,19 +29,17 @@ npm install
 
 npm run serve
 ```
-
 <span id="top">目录</span>
 
-- [√ Vue-cli4](https://cli.vuejs.org/zh/guide/)
+- [√ Vue-cli4](https://cli.vuejs.org/zh/guide/){:target="_blank"}
 - [√ 配置多环境变量](#env)
 - [√ rem 适配方案](#rem)
 - [√ VantUI 组件按需加载](#vant)
-- [√ Sass](#sass)
-- [√ Webpack 4](#webpack)
-- [√ Vuex](#vuex)
+- [√ Sass 全局样式](#sass)
+- [√ Vuex 状态管理](#vuex)
 - [√ Axios 封装及接口管理](#axios)
 - [√ Vue-router](#router)
-- [√ vue.config.js 基础配置](#base)
+- [√ Webpack 4 vue.config.js 基础配置](#base)
 - [√ 配置 proxy 跨域](#proxy)
 - [√ 配置 alias 别名](#alias)
 - [√ 配置 打包分析](#bundle)
@@ -45,12 +47,7 @@ npm run serve
 - [√ 去掉 console.log ](#console)
 - [√ splitChunks 单独打包第三方模块](#chunks)
 - [√ 添加 IE 兼容 ](#ie)
-
-* Vuex
-* Axios 封装
-* 生产环境 cdn 优化首屏加速
-* babel 低版本浏览器兼容
-* Eslint+Pettier 统一开发规范
+- [√ Eslint+Pettier 统一开发规范 ](#pettier)
 
 ### <span id="env">✅ 配置多环境变量 </span>
 
@@ -259,55 +256,138 @@ Vue.use(Tabbar).use(TabbarItem)
 
 [▲ 回顶部](#top)
 
-### <span id="sass">✅ Sass </span>
+### <span id="sass">✅ Sass 全局样式</span>
 
 首先 你可能会遇到 `node-sass` 安装不成功，别放弃多试几次！！！
 
-在 `src/assets/css/`文件夹下包含了三个文件
+目录结构，在 `src/assets/css/`文件夹下包含了三个文件
 
-- `index.scss` 主入口，主要引入其他两个 scss 文件，和公共样式
-- `variables.scss` 定义变量
-- `mixin.scss` 定义 `mixin` 方法
+```bash
+├── assets
+│   ├── css
+│   │   ├── index.scss               # 全局通用样式
+│   │   ├── mixin.scss               # 全局mixin
+│   │   └── variables.scss           # 全局变量
+```
 
-你可以直接在 vue 文件下写 sass 语法
+每个页面自己对应的样式都写在自己的 .vue 文件之中
 
 ```html
+<style lang="scss">
+  /* global styles */
+</style>
+
 <style lang="scss" scoped>
-  .demo {
-    .title {
-      font-size: 12px;
+  /* local styles */
+</style>
+```
+
+`vue.config.js` 配置注入 `sass` 的 `mixin` `variables` 到全局，不需要手动引入 ,配置`$cdn`通过变量形式引入 cdn 地址
+
+```javascript
+const IS_PROD = ['production', 'prod'].includes(process.env.NODE_ENV)
+
+module.exports = {
+  css: {
+    extract: IS_PROD,
+    sourceMap: false,
+    loaderOptions: {
+      scss: {
+        // 注入 `sass` 的 `mixin` `variables` 到全局, $cdn可以配置图片cdn
+        // 详情: https://cli.vuejs.org/guide/css.html#passing-options-to-pre-processor-loaders
+        prependData: `
+          @import "assets/css/mixin.scss";
+          @import "assets/css/variables.scss";
+          $cdn: "${defaultSettings.$cdn}";
+          `
+      }
     }
+  }
+}
+```
+
+在 `main.js` 中引用全局样式（发现在上面的，prependData 里设置`@import "assets/css/index.scss";`并没有应用全局样式这里在
+main.js 引入）
+
+设置 js 中可以访问 `$cdn`,`.vue` 文件中使用`this.$cdn`访问
+
+```javascript
+// 引入全局样式
+import '@/assets/css/index.scss'
+
+// 设置 js中可以访问 $cdn
+// 引入cdn
+import {$cdn} from '@/config'
+Vue.prototype.$cdn = $cdn
+```
+
+在 css 中引用
+
+```html
+<script>
+  console.log(this.$cdn)
+</script>
+<style lang="scss" scoped>
+  .logo {
+    width: 120px;
+    height: 120px;
+    background: url($cdn+'/weapp/logo.png') center / contain no-repeat;
   }
 </style>
 ```
 
 [▲ 回顶部](#top)
 
-### <span id="sass">✅ Sass </span>
+### <span id="vuex">✅ Vuex 状态管理</span>
 
-首先 你可能会遇到 `node-sass` 安装不成功，别放弃多试几次！！！
+目录结构
 
-在 `src/assets/css/`文件夹下包含了三个文件
-
-- `index.scss` 主入口，主要引入其他两个 scss 文件，和公共样式
-- `variables.scss` 定义变量
-- `mixin.scss` 定义 `mixin` 方法
-
-你可以直接在 vue 文件下写 sass 语法
-
-```html
-<style lang="scss" scoped>
-  .demo {
-    .title {
-      font-size: 12px;
-    }
-  }
-</style>
+```bash
+├── store
+│   ├── modules
+│   │   └── app.js
+│   ├── index.js
+│   ├── getters.js
 ```
 
+`main.js` 引入
+
+```javascript
+import Vue from 'vue'
+import App from './App.vue'
+import store from './store'
+new Vue({
+  el: '#app',
+  router,
+  store,
+  render: h => h(App)
+})
+```
+
+使用 
+
+```html
+<script>
+import { mapGetters } from 'vuex'
+export default {
+  computed: {
+    ...mapGetters([
+      'userName'
+    ])
+  },
+
+  methods: {
+    // Action 通过 store.dispatch 方法触发
+    doDispatch() {
+      this.$store.dispatch('setUserName', '真乖，赶紧关注公众号，组织都在等你~')
+    }
+  }
+}
+</script>
+```
 [▲ 回顶部](#top)
 
-### <span id="base">✅ Vue-router </span>
+### <span id="router">✅ Vue-router </span>
 
 本案例采用 `hash` 模式，开发者根据需求修改 `mode` `base`
 
@@ -430,13 +510,13 @@ import qs from 'qs'
 import request from '@/utils/request'
 //user api
 
-// 登录
-export function login(params) {
+// 用户信息
+export function getUserInfo(params) {
   return request({
-    url: '/user/login', // 接口地址
-    method: 'post', //  method
-    data: qs.stringify(params)
-    // hideloading: true
+    url: '/user/userinfo',
+    method: 'get',
+    data: qs.stringify(params),
+    hideloading: true // 隐藏 loading 组件
   })
 }
 ```
@@ -448,14 +528,14 @@ export function login(params) {
 import {getUserInfo} from '@/api/user.js'
 
 const params = {user: 'sunnie'}
-getUserInfo()
+getUserInfo(params)
   .then(() => {})
   .catch(() => {})
 ```
 
 [▲ 回顶部](#top)
 
-### <span id="base">✅ vue.config.js 基础配置 </span>
+### <span id="base">✅ Webpack 4 vue.config.js 基础配置 </span>
 
 如果你的 `Vue Router` 模式是 hash
 
@@ -580,7 +660,7 @@ npm run build
 
 [▲ 回顶部](#top)
 
-### <span id="proxy">✅ 配置 externals 引入 cdn 资源 </span>
+### <span id="externals">✅ 配置 externals 引入 cdn 资源 </span>
 
 这个版本 CDN 不再引入，我测试了一下使用引入 CDN 和不使用,不使用会比使用时间少。网上不少文章测试 CDN 速度块，这个开发者可
 以实际测试一下。
