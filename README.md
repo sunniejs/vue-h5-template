@@ -330,7 +330,7 @@ import {$cdn} from '@/config'
 Vue.prototype.$cdn = $cdn
 ```
 
-在 css 中引用
+在 css 和 js 使用
 
 ```html
 <script>
