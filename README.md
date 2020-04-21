@@ -295,7 +295,7 @@ Vue.use(Tabbar).use(TabbarItem)
 
 ```javascript
 const IS_PROD = ['production', 'prod'].includes(process.env.NODE_ENV)
-
+const defaultSettings = require('./src/config/index.js')
 module.exports = {
   css: {
     extract: IS_PROD,
