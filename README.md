@@ -7,7 +7,7 @@
 [查看 demo](https://solui.cn/vue-h5-template/#/) 建议手机端查看
 
 <p>
-  <img src="./static/demo.png" width="300" style="display:inline;">
+  <img src="./static/demo.png" width="320" style="display:inline;">
 </p>
 
 ### Node 版本要求
@@ -38,11 +38,11 @@ npm run serve
 - [√ VantUI 组件按需加载](#vant)
 - [√ Sass 全局样式](#sass)
 - [√ Vuex 状态管理](#vuex)
-- [√ Axios 封装及接口管理](#axios)
 - [√ Vue-router](#router)
+- [√ Axios 封装及接口管理](#axios)
 - [√ Webpack 4 vue.config.js 基础配置](#base)
-- [√ 配置 proxy 跨域](#proxy)
 - [√ 配置 alias 别名](#alias)
+- [√ 配置 proxy 跨域](#proxy)
 - [√ 配置 打包分析](#bundle)
 - [√ 配置 externals 引入 cdn 资源 ](#externals)
 - [√ 去掉 console.log ](#console)
@@ -510,7 +510,7 @@ export default service
 - `url` 接口地址，请求的时候会拼接上 `config` 下的 `baseApi`
 - `method` 请求方法
 - `data` 请求参数 `qs.stringify(params)` 是对数据系列化操作
-- `hideloading` 默认 `false`,设置为 `true` 后，不显示 loading ui 交互中有些接口不需要样用户感知
+- `hideloading` 默认 `false`,设置为 `true` 后，不显示 loading ui 交互中有些接口不需要让用户感知
 
 ```javascript
 import qs from 'qs'
@@ -582,6 +582,28 @@ module.exports = {
 
 [▲ 回顶部](#top)
 
+### <span id="alias">✅ 配置 alias 别名 </span>
+
+```javascript
+const path = require('path')
+const resolve = dir => path.join(__dirname, dir)
+const IS_PROD = ['production', 'prod'].includes(process.env.NODE_ENV)
+
+module.exports = {
+  chainWebpack: config => {
+    // 添加别名
+    config.resolve.alias
+      .set('@', resolve('src'))
+      .set('assets', resolve('src/assets'))
+      .set('api', resolve('src/api'))
+      .set('views', resolve('src/views'))
+      .set('components', resolve('src/components'))
+  }
+}
+```
+
+[▲ 回顶部](#top)
+
 ### <span id="proxy">✅ 配置 proxy 跨域 </span>
 
 如果你的项目需要跨域设置，你需要打来 `vue.config.js` `proxy` 注释 并且配置相应参数
@@ -621,27 +643,6 @@ export function getUserInfo(params) {
 
 [▲ 回顶部](#top)
 
-### <span id="alias">✅ 配置 alias 别名 </span>
-
-```javascript
-const path = require('path')
-const resolve = dir => path.join(__dirname, dir)
-const IS_PROD = ['production', 'prod'].includes(process.env.NODE_ENV)
-
-module.exports = {
-  chainWebpack: config => {
-    // 添加别名
-    config.resolve.alias
-      .set('@', resolve('src'))
-      .set('assets', resolve('src/assets'))
-      .set('api', resolve('src/api'))
-      .set('views', resolve('src/views'))
-      .set('components', resolve('src/components'))
-  }
-}
-```
-
-[▲ 回顶部](#top)
 
 ### <span id="bundle">✅ 配置 打包分析 </span>
 
