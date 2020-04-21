@@ -102,7 +102,8 @@ VUE_APP_ENV = 'production'
 这里我们并没有定义很多变量，只定义了基础的 VUE_APP_ENV `development` `staging` `production`  
 变量我们统一在 `src/config/env.*.js` 里进行管理。
 
-这里有个问题，既然这里有了根据不同环境设置变量的文件，为什么还要去 config 下新建三个对应的文件呢？ **修改起来方便，不需
+这里有个问题，既然这里有了根据不同环境设置变量的文件，为什么还要去 config 下新建三个对应的文件呢？   
+**修改起来方便，不需
 要重启项目，符合开发习惯。**
 
 config/index.js
