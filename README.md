@@ -222,24 +222,31 @@ module.exports = {
 
 #### 安装插件
 
-```javascript
+```bash
 npm i babel-plugin-import -D
+```
+
+在` babel.config.js` 设置
+
+```javascript
 
 // 对于使用 babel7 的用户，可以在 babel.config.js 中配置
-module.exports = {
-  presets: [['@vue/cli-plugin-babel/preset', {useBuiltIns: 'entry'}]],
-  plugins: [
-    [
-      'import',
-      {
-        libraryName: 'vant',
-        libraryDirectory: 'es',
-        style: true
-      },
-      'vant'
-    ]
+const plugins = [
+  [
+    'import',
+    {
+      libraryName: 'vant',
+      libraryDirectory: 'es',
+      style: true
+    },
+    'vant'
   ]
+]
+module.exports = {
+  presets: [['@vue/cli-plugin-babel/preset', {useBuiltIns: 'usage', corejs: 3}]],
+  plugins
 }
+
 ```
 
 #### 使用组件
