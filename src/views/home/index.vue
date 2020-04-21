@@ -31,16 +31,18 @@ export default {
         '配置 externals 引入 cdn 资源',
         '去掉 console.log',
         'splitChunks 单独打包第三方模块',
-        ' 添加 IE 兼容'
+        '添加 IE 兼容',
+        'Eslint+Pettier 统一开发规范'
+
       ]
     }
   },
 
   computed: {
-    
   },
 
-  mounted() {},
+  mounted() {
+  },
 
   methods: {}
 }

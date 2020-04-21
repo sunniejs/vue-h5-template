@@ -1,5 +1,8 @@
-//  IE 兼容
-import '@babel/polyfill'
+// 兼容 IE
+// https://github.com/zloirock/core-js/blob/master/docs/2019-03-19-core-js-3-babel-and-a-look-into-the-future.md#babelpolyfill
+import 'core-js/stable'
+import 'regenerator-runtime/runtime'
+
 import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
@@ -10,7 +13,7 @@ import '@/assets/css/index.scss'
 // 设置 js中可以访问 $cdn
 import {$cdn} from '@/config'
 Vue.prototype.$cdn = $cdn
- 
+
 // 全局引入按需引入UI库 vant
 import '@/plugins/vant'
 

@@ -15,13 +15,13 @@
     "core-js": "^3.6.4",
     "lib-flexible": "^0.3.2",
     "lodash": "^4.17.15",
+    "regenerator-runtime": "^0.13.5",
     "vant": "^2.4.7",
     "vue": "^2.6.11",
     "vue-router": "^3.1.5",
     "vuex": "^3.1.2"
   },
   "devDependencies": {
-    "@babel/polyfill": "^7.8.3",
     "@vue/cli-plugin-babel": "~4.2.0",
     "@vue/cli-plugin-eslint": "~4.2.0",
     "@vue/cli-service": "~4.2.0",

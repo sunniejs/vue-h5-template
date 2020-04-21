@@ -4,10 +4,10 @@
 
 掘金: [vue-cli4 vant rem 移动端框架方案](https://juejin.im/post/5cfefc73f265da1bba58f9f7)
 
-[demo](https://solui.cn/vue-h5-template/#/)建议手机端查看
+[查看 demo](https://solui.cn/vue-h5-template/#/) 建议手机端查看
 
 <p>
-  <img src="./static/demo.png" width="256" style="display:inline;">
+  <img src="./static/demo.png" width="300" style="display:inline;">
 </p>
 
 ### Node 版本要求
@@ -29,9 +29,10 @@ npm install
 
 npm run serve
 ```
+
 <span id="top">目录</span>
 
-- [√ Vue-cli4](https://cli.vuejs.org/zh/guide/){:target="_blank"}
+- √ Vue-cli4
 - [√ 配置多环境变量](#env)
 - [√ rem 适配方案](#rem)
 - [√ VantUI 组件按需加载](#vant)
@@ -364,27 +365,26 @@ new Vue({
 })
 ```
 
-使用 
+使用
 
 ```html
 <script>
-import { mapGetters } from 'vuex'
-export default {
-  computed: {
-    ...mapGetters([
-      'userName'
-    ])
-  },
+  import {mapGetters} from 'vuex'
+  export default {
+    computed: {
+      ...mapGetters(['userName'])
+    },
 
-  methods: {
-    // Action 通过 store.dispatch 方法触发
-    doDispatch() {
-      this.$store.dispatch('setUserName', '真乖，赶紧关注公众号，组织都在等你~')
+    methods: {
+      // Action 通过 store.dispatch 方法触发
+      doDispatch() {
+        this.$store.dispatch('setUserName', '真乖，赶紧关注公众号，组织都在等你~')
+      }
     }
   }
-}
 </script>
 ```
+
 [▲ 回顶部](#top)
 
 ### <span id="router">✅ Vue-router </span>
@@ -834,14 +834,23 @@ module.exports = {
 
 ### <span id="ie">✅ 添加 IE 兼容 </span>
 
+之前的方式 会报 `@babel/polyfill` is deprecated. Please, use required parts of `core-js` and
+`regenerator-runtime/runtime` separately
+
+`@babel/polyfill` 废弃，使用 `core-js` 和 `regenerator-runtime`
+
 ```bash
-npm i -S @babel/polyfill
+npm i --save core-js regenerator-runtime
 ```
 
 在 `main.js` 中添加
 
 ```javascript
-import '@babel/polyfill'
+// 兼容 IE
+// https://github.com/zloirock/core-js/blob/master/docs/2019-03-19-core-js-3-babel-and-a-look-into-the-future.md#babelpolyfill
+import 'core-js/stable'
+import 'regenerator-runtime/runtime'
+
 ```
 
 配置 `babel.config.js`
@@ -850,16 +859,42 @@ import '@babel/polyfill'
 const plugins = []
 
 module.exports = {
-  presets: [['@vue/cli-plugin-babel/preset', {useBuiltIns: 'entry'}]],
+  presets: [['@vue/cli-plugin-babel/preset', {useBuiltIns: 'usage', corejs: 3}]],
   plugins
 }
 ```
 
 [▲ 回顶部](#top)
 
-#### 总结
+### <span id="pettier">✅ Eslint+Pettier 统一开发规范  </span>
 
-因为项目刚刚构建起来，后面还会持续更新，实际使用过程中一定还有很多问题，如果文章中有错误希望能够被指正，一起成长
+在文件 `.prettierrc` 里写 属于你的 pettier 规则
+
+ ```bash
+ {
+    "printWidth": 120,
+    "tabWidth": 2,
+    "singleQuote": true,
+    "trailingComma": "none",
+    "semi": false,
+    "wrap_line_length": 120,
+    "wrap_attributes": "auto",
+    "proseWrap": "always",
+    "arrowParens": "avoid",
+    "bracketSpacing": false,
+    "jsxBracketSameLine": true,
+    "useTabs": false,
+    "overrides": [{
+        "files": ".prettierrc",
+        "options": {
+            "parser": "json"
+        }
+    }]
+}
+ ```
+
+[▲ 回顶部](#top)
+
 
 # 关于我
 
@@ -870,6 +905,7 @@ module.exports = {
  <p>
   <img src="./static/gognzhonghao.jpg" width="256" style="display:inline;">
 </p>
+
 扫描添加下方的微信并备注 Sol 加交流群，交流学习，及时获取代码最新动态。
 
 <p>
