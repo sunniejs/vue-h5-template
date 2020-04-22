@@ -11,12 +11,21 @@ export function login(params) {
     data: qs.stringify(params)
   })
 }
-// 用户信息
+// 用户信息 post 方法
 export function getUserInfo(params) {
   return request({
     url: '/user/userinfo',
-    method: 'get',
+    method: 'post',
     data: qs.stringify(params),
+    hideloading: true
+  })
+}
+
+// 用户名称 get 方法
+export function getUserName(params) {
+  return request({
+    url: '/user/name?' + qs.stringify(params),
+    method: 'get',
     hideloading: true
   })
 }

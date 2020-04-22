@@ -5,7 +5,7 @@
       <div class="list">
         <div class="logo"></div>
         <div class="demo-home__title"> VUE H5开发模板</div>
-        <div class="item">项目地址: <a href="https://github.com/sunniejs">https://github.com/sunniejs</a></div>
+        <div class="item">项目地址: <a href="https://github.com/sunniejs/vue-h5-template">https://github.com/sunniejs/vue-h5-template</a></div>
         <div class="item">项目作者: sunnie</div>
 
         <div class="item"></div>

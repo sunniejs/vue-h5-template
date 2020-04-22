@@ -522,7 +522,7 @@ import request from '@/utils/request'
 export function getUserInfo(params) {
   return request({
     url: '/user/userinfo',
-    method: 'get',
+    method: 'post',
     data: qs.stringify(params),
     hideloading: true // 隐藏 loading 组件
   })
