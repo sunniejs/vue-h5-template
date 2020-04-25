@@ -13,7 +13,7 @@
           <img :src="this.wechat" alt="">
         </div>
         <div class="item">关注公众号：回复“加群”即可加 前端仙女群</div>
-        <div class="item">{{userName}} <van-button v-if="userName==''" type="warning" size="small" @click="doDispatch">快点我~</van-button>
+        <div class="item">{{ userName }} <van-button v-if="userName==''" type="warning" size="small" @click="doDispatch">快点我~</van-button>
         </div>
       </div>
     </div>
