@@ -608,7 +608,7 @@ module.exports = {
 
 如果你的项目需要跨域设置，你需要打来 `vue.config.js` `proxy` 注释 并且配置相应参数
 
-**注意**：你还需要将 `src/config/env.development.js` 里的 `baseApi` 设置成 '/'
+**!!!注意：你还需要将 `src/config/env.development.js` 里的 `baseApi` 设置成 '/'**
 
 ```javascript
 module.exports = {
