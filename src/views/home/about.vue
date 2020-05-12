@@ -60,6 +60,7 @@ export default {
   }
 }
 </script>
+
 <style lang="scss" scoped>
 .app-container {
   background: #fff;
