@@ -5,7 +5,7 @@
   "author": "Sunnie <sunniejs@163.com>",
   "private": true,
   "scripts": {
-    "serve": "vue-cli-service serve --open",
+    "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "stage": "vue-cli-service build --mode staging",
     "lint": "vue-cli-service lint"
