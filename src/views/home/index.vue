@@ -33,16 +33,13 @@ export default {
         'splitChunks 单独打包第三方模块',
         '添加 IE 兼容',
         'Eslint+Pettier 统一开发规范'
-
       ]
     }
   },
 
-  computed: {
-  },
+  computed: {},
 
-  mounted() {
-  },
+  mounted() {},
 
   methods: {}
 }

@@ -565,7 +565,7 @@ module.exports = {
   //  publicPath: '/app/', // 署应用包时的基本 URL。  vue-router history模式使用
   outputDir: 'dist', //  生产环境构建文件的目录
   assetsDir: 'static', //  outputDir的静态资源(js、css、img、fonts)目录
-  lintOnSave: false,
+  lintOnSave: process.env.NODE_ENV !== IS_PROD,
   productionSourceMap: false, // 如果你不需要生产环境的 source map，可以将其设置为 false 以加速生产环境构建。
   devServer: {
     port: 9020, // 端口号
@@ -874,7 +874,9 @@ module.exports = {
 
 [▲ 回顶部](#top)
 
-### <span id="pettier">✅ Eslint+Pettier 统一开发规范  </span>
+### <span id="pettier">✅ Eslint + Pettier 统一开发规范  </span>
+
+VScode 安装 `eslint` `prettier` `vetur` 插件
 
 在文件 `.prettierrc` 里写 属于你的 pettier 规则
 
@@ -900,7 +902,27 @@ module.exports = {
     }]
 }
  ```
+ Vscode setting.json 设置
 
+```bash
+    "[vue]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "[javascript]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+     // 保存时用eslint格式化
+    "editor.codeActionsOnSave": {
+        "source.fixAll.eslint": true
+    },
+    // 两者会在格式化js时冲突，所以需要关闭默认js格式化程序
+    "javascript.format.enable": false,
+    "typescript.format.enable": false,
+    "vetur.format.defaultFormatter.html": "none",
+    // js/ts程序用eslint，防止vetur中的prettier与eslint格式化冲突
+    "vetur.format.defaultFormatter.js": "none",
+    "vetur.format.defaultFormatter.ts": "none",
+```
 [▲ 回顶部](#top)
 
 # 鸣谢​
