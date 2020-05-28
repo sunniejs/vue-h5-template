@@ -1,0 +1,25 @@
+ section.cover.has-mask .mask {
+  background-image: linear-gradient(hsla(0, 0%, 100%, 0.25),hsla(0, 0%, 100%, 0.25));
+  background-color: transparent;
+  opacity: 1;
+}  
+ 
+section.cover h1 .anchor span{
+  font-family: 'Lobster', cursive;
+  color: var(--theme-color);
+
+}
+
+section.cover h2 .anchor span{
+  font-family: 'Lobster', cursive;
+  font-size:24px;
+  color: var(--theme-color);
+}
+
+section.cover .cover-main>p:last-child a .iconfont {
+  font-size: 1em;
+}
+
+.sidebar>h1 a {
+  font-family: 'Lobster', cursive;
+}
