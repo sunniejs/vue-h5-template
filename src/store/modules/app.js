@@ -8,7 +8,7 @@ const mutations = {
 }
 const actions = {
   // 设置name
-  setUserName({commit}, name) {
+  setUserName({ commit }, name) {
     commit('SET_USER_NAME', name)
   }
 }

@@ -1,7 +1,7 @@
 import qs from 'qs'
 // axios
 import request from '@/utils/request'
-//user api
+// user api
 
 // 登录
 export function login(params) {
