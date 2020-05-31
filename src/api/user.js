@@ -1,22 +1,23 @@
-import qs from 'qs'
+import api from './index'
+
 // axios
 import request from '@/utils/request'
-// user api
 
 // 登录
-export function login(params) {
+export function login(data) {
   return request({
-    url: '/user/login',
+    url: api.Login,
     method: 'post',
-    data: qs.stringify(params)
+    data
   })
 }
+
 // 用户信息 post 方法
-export function getUserInfo(params) {
+export function getUserInfo(data) {
   return request({
-    url: '/user/userinfo',
+    url: api.UserInfo,
     method: 'post',
-    data: qs.stringify(params),
+    data,
     hideloading: true
   })
 }
@@ -24,8 +25,9 @@ export function getUserInfo(params) {
 // 用户名称 get 方法
 export function getUserName(params) {
   return request({
-    url: '/user/name?' + qs.stringify(params),
+    url: api.UserName,
     method: 'get',
+    params,
     hideloading: true
   })
 }
