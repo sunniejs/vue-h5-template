@@ -1,6 +1,6 @@
 <!-- home -->
 <template>
-  <div class="app-container">
+  <div class="index-container">
     <div class="warpper">
       <h1 class="demo-home__title"><img src="https://imgs.solui.cn/weapp/logo.png" /><span> VUE H5开发模板</span></h1>
       <h2 class="demo-home__desc">
@@ -39,13 +39,13 @@ export default {
 
   computed: {},
 
-  mounted() {},
+  mounted() { },
 
   methods: {}
 }
 </script>
 <style lang="scss" scoped>
-.app-container {
+.index-container {
   .warpper {
     padding: 12px;
     background: #fff;

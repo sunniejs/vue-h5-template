@@ -1,6 +1,6 @@
 <!-- home -->
 <template>
-  <div class="app-container">
+  <div class="about-container">
     <div class="warpper">
       <div class="list">
         <div class="logo"></div>
@@ -46,8 +46,8 @@ export default {
       // 请求接口数据，仅作为展示，需要配置src->config下环境文件
       const params = { user: 'sunnie' }
       getUserInfo(params)
-        .then(() => {})
-        .catch(() => {})
+        .then(() => { })
+        .catch(() => { })
     },
     // Action 通过 store.dispatch 方法触发
     doDispatch() {
@@ -60,7 +60,7 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
-.app-container {
+.about-container {
   background: #fff;
   height: 100vh;
   box-sizing: border-box;

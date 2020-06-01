@@ -1,12 +1,12 @@
 <template>
-  <div class="tabbar-layout-containter">
-    <div class="tabbar-layout-content">
+  <div class="app-container">
+    <div class="layout-content">
       <keep-alive v-if="$route.meta.keepAlive">
         <router-view></router-view>
       </keep-alive>
       <router-view v-else></router-view>
     </div>
-    <div class="tabbar-layout-footer">
+    <div class="layout-footer">
       <TabBar :data="tabbars" @change="handleChange" />
     </div>
   </div>
@@ -15,7 +15,7 @@
 <script>
 import TabBar from '@/components/TabBar'
 export default {
-  name: 'TabBarLayout',
+  name: 'AppLayout',
   data() {
     return {
       tabbars: [
