@@ -7,16 +7,22 @@ assignees: ''
 
 ---
 
-设备 / 浏览器
+你好，请使用下面的模板创建 issue 以帮助我们更快的排查问题，不规范的 issue 会被关闭，感谢配合。
+
+Browser version [浏览器类型和版本]
  
 
-版本
+vue-h5-template version [vue-h5-template 版本]
  
 
-Vue 版本
+Vue version [Vue  版本]
  
 
-重现链接
+reappear link [重现链接]
  
 
-描述问题
+One-line summary  [描述问题]
+
+
+
+Other comments [其他信息]
