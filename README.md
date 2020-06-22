@@ -1,6 +1,6 @@
 # Vue H5 Template 🎉
 
-> [Vue H5 Template](https://github.com/sunnie1992/sol-weapp) 是基于 vue-cli4.0+webpack 4+vant ui + sass+ rem 适配方案+axios 封装，构建手机端模板脚手架。
+> [Vue H5 Template](https://github.com/sunniejs/vue-h5-template) 是基于 vue-cli4.0+webpack 4+vant ui + sass+ rem 适配方案+axios 封装，构建手机端模板脚手架。
 
 #### 预览
 
