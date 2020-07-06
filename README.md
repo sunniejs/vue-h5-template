@@ -102,9 +102,8 @@ VUE_APP_ENV = 'production'
 这里我们并没有定义很多变量，只定义了基础的 VUE_APP_ENV `development` `staging` `production`  
 变量我们统一在 `src/config/env.*.js` 里进行管理。
 
-这里有个问题，既然这里有了根据不同环境设置变量的文件，为什么还要去 config 下新建三个对应的文件呢？   
-**修改起来方便，不需
-要重启项目，符合开发习惯。**
+这里有个问题，既然这里有了根据不同环境设置变量的文件，为什么还要去 config 下新建三个对应的文件呢？  
+**修改起来方便，不需要重启项目，符合开发习惯。**
 
 config/index.js
 
@@ -131,7 +130,7 @@ module.exports = {
 
 ```javascript
 // 根据环境不同引入不同baseApi地址
-import {baseApi} from '@/config'
+import { baseApi } from '@/config'
 console.log(baseApi)
 ```
 
@@ -226,10 +225,9 @@ module.exports = {
 npm i babel-plugin-import -D
 ```
 
-在` babel.config.js` 设置
+在`babel.config.js` 设置
 
 ```javascript
-
 // 对于使用 babel7 的用户，可以在 babel.config.js 中配置
 const plugins = [
   [
@@ -243,10 +241,9 @@ const plugins = [
   ]
 ]
 module.exports = {
-  presets: [['@vue/cli-plugin-babel/preset', {useBuiltIns: 'usage', corejs: 3}]],
+  presets: [['@vue/cli-plugin-babel/preset', { useBuiltIns: 'usage', corejs: 3 }]],
   plugins
 }
-
 ```
 
 #### 使用组件
@@ -256,7 +253,7 @@ module.exports = {
 ```javascript
 // 按需全局引入 vant组件
 import Vue from 'vue'
-import {Button, List, Cell, Tabbar, TabbarItem} from 'vant'
+import { Button, List, Cell, Tabbar, TabbarItem } from 'vant'
 Vue.use(Button)
 Vue.use(Cell)
 Vue.use(List)
@@ -273,11 +270,11 @@ Vue.use(Tabbar).use(TabbarItem)
 
 ```html
 <style lang="scss">
-    /* global styles */
+  /* global styles */
 </style>
 
 <style lang="scss" scoped>
-    /* local styles */
+  /* local styles */
 </style>
 ```
 
@@ -295,15 +292,16 @@ vue-h5-template 所有全局样式都在 `@/src/assets/css` 目录下设置
 
 #### 自定义 vant-ui 样式
 
-现在我们来说说怎么重写 `vant-ui` 样式。由于 `vant-ui` 的样式我们是在全局引入的，所以你想在某个页面里面覆盖它的样式就不能加 `scoped`，但你又想只覆盖这个页面的 `vant` 样式，你就可在它的父级加一个 `class`，用命名空间来解决问题。
+现在我们来说说怎么重写 `vant-ui` 样式。由于 `vant-ui` 的样式我们是在全局引入的，所以你想在某个页面里面覆盖它的样式就不能
+加 `scoped`，但你又想只覆盖这个页面的 `vant` 样式，你就可在它的父级加一个 `class`，用命名空间来解决问题。
 
 ```css
 .about-container {
-    /* 你的命名空间 */
-    .van-button {
-        /* vant-ui 元素*/
-        margin-right: 0px;
-    }
+  /* 你的命名空间 */
+  .van-button {
+    /* vant-ui 元素*/
+    margin-right: 0px;
+  }
 }
 ```
 
@@ -316,30 +314,32 @@ vue-h5-template 所有全局样式都在 `@/src/assets/css` 目录下设置
 .a >>> .b { /* ... */ }
 </style>
 ```
+
 #### 全局变量
 
-`vue.config.js` 配置使用 `css.loaderOptions` 选项,注入 `sass` 的 `mixin` `variables` 到全局，不需要手动引入 ,配置`$cdn`通过变量形式引入 cdn 地址,这样向所有 Sass/Less 样式传入共享的全局变量：
+`vue.config.js` 配置使用 `css.loaderOptions` 选项,注入 `sass` 的 `mixin` `variables` 到全局，不需要手动引入 ,配
+置`$cdn`通过变量形式引入 cdn 地址,这样向所有 Sass/Less 样式传入共享的全局变量：
 
 ```javascript
 const IS_PROD = ['production', 'prod'].includes(process.env.NODE_ENV)
 const defaultSettings = require('./src/config/index.js')
 module.exports = {
-    css: {
-        extract: IS_PROD,
-        sourceMap: false,
-        loaderOptions: {
-            // 给 scss-loader 传递选项
-            scss: {
-                // 注入 `sass` 的 `mixin` `variables` 到全局, $cdn可以配置图片cdn
-                // 详情: https://cli.vuejs.org/guide/css.html#passing-options-to-pre-processor-loaders
-                prependData: `
+  css: {
+    extract: IS_PROD,
+    sourceMap: false,
+    loaderOptions: {
+      // 给 scss-loader 传递选项
+      scss: {
+        // 注入 `sass` 的 `mixin` `variables` 到全局, $cdn可以配置图片cdn
+        // 详情: https://cli.vuejs.org/guide/css.html#passing-options-to-pre-processor-loaders
+        prependData: `
                 @import "assets/css/mixin.scss";
                 @import "assets/css/variables.scss";
                 $cdn: "${defaultSettings.$cdn}";
-                 `,
-            },
-        },
-    },
+                 `
+      }
+    }
+  }
 }
 ```
 
@@ -359,14 +359,14 @@ Vue.prototype.$cdn = $cdn
 
 ```html
 <script>
-    console.log(this.$cdn)
+  console.log(this.$cdn)
 </script>
 <style lang="scss" scoped>
-    .logo {
-        width: 120px;
-        height: 120px;
-        background: url($cdn+'/weapp/logo.png') center / contain no-repeat;
-    }
+  .logo {
+    width: 120px;
+    height: 120px;
+    background: url($cdn+'/weapp/logo.png') center / contain no-repeat;
+  }
 </style>
 ```
 
@@ -402,7 +402,7 @@ new Vue({
 
 ```html
 <script>
-  import {mapGetters} from 'vuex'
+  import { mapGetters } from 'vuex'
   export default {
     computed: {
       ...mapGetters(['userName'])
@@ -448,7 +448,7 @@ const createRouter = () =>
   new Router({
     // mode: 'history', // 如果你是 history模式 需要配置 vue.config.js publicPath
     // base: '/app/',
-    scrollBehavior: () => ({y: 0}),
+    scrollBehavior: () => ({ y: 0 }),
     routes: router
   })
 
@@ -470,9 +470,9 @@ export default createRouter()
 ```javascript
 import axios from 'axios'
 import store from '@/store'
-import {Toast} from 'vant'
+import { Toast } from 'vant'
 // 根据环境不同引入不同api地址
-import {baseApi} from '@/config'
+import { baseApi } from '@/config'
 // create an axios instance
 const service = axios.create({
   baseURL: baseApi, // url = base api url + request url
@@ -558,9 +558,9 @@ export function getUserInfo(params) {
 
 ```javascript
 // 请求接口
-import {getUserInfo} from '@/api/user.js'
+import { getUserInfo } from '@/api/user.js'
 
-const params = {user: 'sunnie'}
+const params = { user: 'sunnie' }
 getUserInfo(params)
   .then(() => {})
   .catch(() => {})
@@ -590,7 +590,7 @@ module.exports = {
   //  publicPath: '/app/', // 署应用包时的基本 URL。  vue-router history模式使用
   outputDir: 'dist', //  生产环境构建文件的目录
   assetsDir: 'static', //  outputDir的静态资源(js、css、img、fonts)目录
-  lintOnSave: process.env.NODE_ENV !== IS_PROD,
+  lintOnSave: !IS_PROD,
   productionSourceMap: false, // 如果你不需要生产环境的 source map，可以将其设置为 false 以加速生产环境构建。
   devServer: {
     port: 9020, // 端口号
@@ -634,6 +634,7 @@ module.exports = {
 如果你的项目需要跨域设置，你需要打来 `vue.config.js` `proxy` 注释 并且配置相应参数
 
 <u>**!!!注意：你还需要将 `src/config/env.development.js` 里的 `baseApi` 设置成 '/'**</u>
+
 ```javascript
 module.exports = {
   devServer: {
@@ -666,7 +667,6 @@ export function getUserInfo(params) {
 ```
 
 [▲ 回顶部](#top)
-
 
 ### <span id="bundle">✅ 配置 打包分析 </span>
 
@@ -810,7 +810,7 @@ if (IS_PROD) {
 }
 
 module.exports = {
-  presets: [['@vue/cli-plugin-babel/preset', {useBuiltIns: 'entry'}]],
+  presets: [['@vue/cli-plugin-babel/preset', { useBuiltIns: 'entry' }]],
   plugins
 }
 ```
@@ -883,7 +883,6 @@ npm i --save core-js regenerator-runtime
 // https://github.com/zloirock/core-js/blob/master/docs/2019-03-19-core-js-3-babel-and-a-look-into-the-future.md#babelpolyfill
 import 'core-js/stable'
 import 'regenerator-runtime/runtime'
-
 ```
 
 配置 `babel.config.js`
@@ -892,42 +891,43 @@ import 'regenerator-runtime/runtime'
 const plugins = []
 
 module.exports = {
-  presets: [['@vue/cli-plugin-babel/preset', {useBuiltIns: 'usage', corejs: 3}]],
+  presets: [['@vue/cli-plugin-babel/preset', { useBuiltIns: 'usage', corejs: 3 }]],
   plugins
 }
 ```
 
 [▲ 回顶部](#top)
 
-### <span id="pettier">✅ Eslint + Pettier 统一开发规范  </span>
+### <span id="pettier">✅ Eslint + Pettier 统一开发规范 </span>
 
 VScode 安装 `eslint` `prettier` `vetur` 插件
 
 在文件 `.prettierrc` 里写 属于你的 pettier 规则
 
- ```bash
- {
-    "printWidth": 120,
-    "tabWidth": 2,
-    "singleQuote": true,
-    "trailingComma": "none",
-    "semi": false,
-    "wrap_line_length": 120,
-    "wrap_attributes": "auto",
-    "proseWrap": "always",
-    "arrowParens": "avoid",
-    "bracketSpacing": false,
-    "jsxBracketSameLine": true,
-    "useTabs": false,
-    "overrides": [{
-        "files": ".prettierrc",
-        "options": {
-            "parser": "json"
-        }
-    }]
+```bash
+{
+   "printWidth": 120,
+   "tabWidth": 2,
+   "singleQuote": true,
+   "trailingComma": "none",
+   "semi": false,
+   "wrap_line_length": 120,
+   "wrap_attributes": "auto",
+   "proseWrap": "always",
+   "arrowParens": "avoid",
+   "bracketSpacing": false,
+   "jsxBracketSameLine": true,
+   "useTabs": false,
+   "overrides": [{
+       "files": ".prettierrc",
+       "options": {
+           "parser": "json"
+       }
+   }]
 }
- ```
- Vscode setting.json 设置
+```
+
+Vscode setting.json 设置
 
 ```bash
     "[vue]": {
@@ -948,9 +948,10 @@ VScode 安装 `eslint` `prettier` `vetur` 插件
     "vetur.format.defaultFormatter.js": "none",
     "vetur.format.defaultFormatter.ts": "none",
 ```
+
 [▲ 回顶部](#top)
 
-# 鸣谢​
+# 鸣谢 ​
 
 [vue-cli4-config](https://github.com/staven630/vue-cli4-config)
 [vue-element-admin](https://github.com/PanJiaChen/vue-element-admin)
