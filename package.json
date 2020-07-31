@@ -13,7 +13,6 @@
   "dependencies": {
     "axios": "^0.19.2",
     "core-js": "^3.6.4",
-    "lib-flexible": "^0.3.2",
     "lodash": "^4.17.15",
     "regenerator-runtime": "^0.13.5",
     "vant": "^2.4.7",
@@ -33,7 +32,7 @@
     "eslint-plugin-prettier": "^3.1.1",
     "eslint-plugin-vue": "^6.2.2",
     "node-sass": "^4.13.1",
-    "postcss-pxtorem": "^4.0.1",
+    "postcss-px-to-viewport": "^1.1.1",
     "prettier": "^1.19.1",
     "sass-loader": "^8.0.2",
     "script-ext-html-webpack-plugin": "^2.1.4",
