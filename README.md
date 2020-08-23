@@ -35,6 +35,7 @@ npm run serve
 - √ Vue-cli4
 - [√ 配置多环境变量](#env)
 - [√ rem 适配方案](#rem)
+- [√ vm 适配方案](#vm)
 - [√ VantUI 组件按需加载](#vant)
 - [√ Sass 全局样式](#sass)
 - [√ Vuex 状态管理](#vuex)
