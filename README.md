@@ -168,7 +168,8 @@ module.exports = {
 
 **新手必看，老鸟跳过**
 
-很多小伙伴会问我，适配的问题。
+很多小伙伴会问我，适配的问题,因为我们使用的是 Vant UI，所以必须根据 Vant UI 375 的设计规范走，一般我们的设计会将 UI 图上
+传到蓝湖，我们就可以需要的尺寸了。下面就大搞普及一下 rem。
 
 我们知道 `1rem` 等于`html` 根元素设定的 `font-size` 的 `px` 值。Vant UI 设置 `rootValue: 37.5`,你可以看到在 iPhone 6 下
 看到 （`1rem 等于 37.5px`）：
@@ -207,6 +208,62 @@ module.exports = {
   }
 </style>
 ```
+
+[▲ 回顶部](#top)
+
+### <span id="vw">✅ vm 适配方案 </span>
+
+本项目使用的是 rem 的 适配方案，其实无论你使用哪种方案，都不需要你去计算 12px 是多少 rem 或者 vw, 会有专门的工具去帮你做
+。如果你想用 vw，你可以按照下面的方式切换。
+
+#### 1.安装依赖
+
+```bash
+
+npm install postcss-px-to-viewport -D
+
+```
+
+#### 2.修改 .postcssrc.js
+
+将根目录下 .postcssrc.js 文件修改如下
+
+```javascript
+// https://github.com/michael-ciniawsky/postcss-load-config
+module.exports = {
+  plugins: {
+    autoprefixer: {
+      overrideBrowserslist: ['Android 4.1', 'iOS 7.1', 'Chrome > 31', 'ff > 31', 'ie >= 8']
+    },
+    'postcss-px-to-viewport': {
+      viewportWidth: 375, // 视窗的宽度，对应的是我们设计稿的宽度，一般是750
+      unitPrecision: 3, // 指定`px`转换为视窗单位值的小数位数（很多时候无法整除）
+      viewportUnit: 'vw', // 指定需要转换成的视窗单位，建议使用vw
+      selectorBlackList: ['.ignore', '.hairlines'], // 指定不转换为视窗单位的类，可以自定义，可以无限添加,建议定义一至两个通用的类名
+      minPixelValue: 1, // 小于或等于`1px`不转换为视窗单位，你也可以设置为你想要的值
+      mediaQuery: false // 允许在媒体查询中转换`px`
+    }
+  }
+}
+```
+
+#### 3.删除原来的 rem 相关代码
+
+src/main.js 删除如下代码
+
+```javascript
+// 移动端适配
+import 'lib-flexible/flexible.js'
+```
+
+package.json 删除如下代码
+
+```javascript
+"lib-flexible": "^0.3.2",
+"postcss-pxtorem": "^5.1.1",
+```
+
+运行起来，F12 元素 css 就是 vw 单位了
 
 [▲ 回顶部](#top)
 
@@ -365,7 +422,7 @@ Vue.prototype.$cdn = $cdn
   .logo {
     width: 120px;
     height: 120px;
-    background: url($cdn+'/weapp/logo.png') center / contain no-repeat;
+    background: url($cdn + '/weapp/logo.png') center / contain no-repeat;
   }
 </style>
 ```
@@ -900,7 +957,8 @@ module.exports = {
 
 ### <span id="pettier">✅ Eslint + Pettier 统一开发规范 </span>
 
-VScode 安装 `eslint` `prettier` `vetur` 插件
+VScode （版本 1.47.3）安装 `eslint` `prettier` `vetur` 插件 `.vue` 文件使用 vetur 进行格式化，其他使用`prettier`,后面会
+专门写个如何使用配合使用这三个玩意
 
 在文件 `.prettierrc` 里写 属于你的 pettier 规则
 
@@ -930,30 +988,144 @@ VScode 安装 `eslint` `prettier` `vetur` 插件
 Vscode setting.json 设置
 
 ```bash
-    "[vue]": {
-        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    {
+  // 将设置放入此文件中以覆盖默认设置
+  "files.autoSave": "off",
+  // 控制字体系列。
+  "editor.fontFamily": "Consolas, 'Courier New', monospace,'宋体'",
+  "terminal.integrated.shell.windows": "C:\\Program Files\\Git\\bin\\bash.exe",
+  // 以像素为单位控制字号。
+  "editor.fontSize": 16,
+  // 控制选取范围是否有圆角
+  "editor.roundedSelection": false,
+  // 建议小组件的字号
+  "editor.suggestFontSize": 16,
+  // 在“打开的编辑器”窗格中显示的编辑器数量。将其设置为 0 可隐藏窗格。
+  "explorer.openEditors.visible": 0,
+  // 是否已启用自动刷新
+  "git.autorefresh": true,
+  // 以像素为单位控制终端的字号，这是 editor.fontSize 的默认值。
+  "terminal.integrated.fontSize": 14,
+  // 控制终端游标是否闪烁。
+  "terminal.integrated.cursorBlinking": true,
+  // 一个制表符等于的空格数。该设置在 `editor.detectIndentation` 启用时根据文件内容进行重写。
+  // Tab Size
+  "editor.tabSize": 2,
+  // By default, common template. Do not modify it!!!!!
+  "editor.formatOnType": true,
+  "window.zoomLevel": 0,
+  "editor.detectIndentation": false,
+  "css.fileExtensions": ["css", "scss"],
+  "files.associations": {
+    "*.string": "html",
+    "*.vue": "vue",
+    "*.wxss": "css",
+    "*.wxml": "wxml",
+    "*.wxs": "javascript",
+    "*.cjson": "jsonc",
+    "*.js": "javascript"
+  },
+  // 为指定的语法定义配置文件或使用带有特定规则的配置文件。
+  "emmet.syntaxProfiles": {
+    "vue-html": "html",
+    "vue": "html"
+  },
+  "search.exclude": {
+    "**/node_modules": true,
+    "**/bower_components": true
+  },
+  //保存时eslint自动修复错误
+  "editor.formatOnSave": true,
+  // Enable per-language
+  //配置 ESLint 检查的文件类型
+  "editor.quickSuggestions": {
+    "strings": true
+  },
+  // 添加 vue 支持
+  // 这里是针对vue文件的格式化设置，vue的规则在这里生效
+  "vetur.format.options.tabSize": 2,
+  "vetur.format.options.useTabs": false,
+  "vetur.format.defaultFormatter.html": "js-beautify-html",
+  "vetur.format.defaultFormatter.css": "prettier",
+  "vetur.format.defaultFormatter.scss": "prettier",
+  "vetur.format.defaultFormatter.postcss": "prettier",
+  "vetur.format.defaultFormatter.less": "prettier",
+  "vetur.format.defaultFormatter.js": "vscode-typescript",
+  "vetur.format.defaultFormatter.sass": "sass-formatter",
+  "vetur.format.defaultFormatter.ts": "prettier",
+  "vetur.format.defaultFormatterOptions": {
+    "js-beautify-html": {
+      "wrap_attributes": "aligned-multiple", // 超过150折行
+      "wrap-line-length": 150
     },
-    "[javascript]": {
-        "editor.defaultFormatter": "esbenp.prettier-vscode"
-    },
-     // 保存时用eslint格式化
-    "editor.codeActionsOnSave": {
-        "source.fixAll.eslint": true
-    },
-    // 两者会在格式化js时冲突，所以需要关闭默认js格式化程序
-    "javascript.format.enable": false,
-    "typescript.format.enable": false,
-    "vetur.format.defaultFormatter.html": "none",
-    // js/ts程序用eslint，防止vetur中的prettier与eslint格式化冲突
-    "vetur.format.defaultFormatter.js": "none",
-    "vetur.format.defaultFormatter.ts": "none",
+    // #vue组件中html代码格式化样式
+    "prettier": {
+      "printWidth": 120,
+      "tabWidth": 2,
+      "singleQuote": false,
+      "trailingComma": "none",
+      "semi": false,
+      "wrap_line_length": 120,
+      "wrap_attributes": "aligned-multiple", // 超过150折行
+      "proseWrap": "always",
+      "arrowParens": "avoid",
+      "bracketSpacing": true,
+      "jsxBracketSameLine": true,
+      "useTabs": false,
+      "overrides": [
+        {
+          "files": ".prettierrc",
+          "options": {
+            "parser": "json"
+          }
+        }
+      ]
+    }
+  },
+  // Enable per-language
+  "[json]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "vetur.validation.template": false,
+  "html.format.enable": false,
+  "json.format.enable": false,
+  "javascript.format.enable": false,
+  "typescript.format.enable": false,
+  "javascript.format.insertSpaceAfterFunctionKeywordForAnonymousFunctions": false,
+  "[html]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[jsonc]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[vue]": {
+    "editor.defaultFormatter": "octref.vetur"
+  },
+  "emmet.includeLanguages": {
+    "wxml": "html"
+  },
+  "[typescriptreact]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  // 开启eslint自动修复js/ts功能
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true
+  },
+  "minapp-vscode.disableAutoConfig": true,
+  "javascript.implicitProjectConfig.experimentalDecorators": true,
+  "editor.maxTokenizationLineLength": 200000
+}
+
 ```
 
 [▲ 回顶部](#top)
 
 # 鸣谢 ​
 
-[vue-cli4-config](https://github.com/staven630/vue-cli4-config)
+[vue-cli4-config](https://github.com/staven630/vue-cli4-config)  
 [vue-element-admin](https://github.com/PanJiaChen/vue-element-admin)
 
 # 关于我

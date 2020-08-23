@@ -6,6 +6,7 @@ const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPl
 const resolve = dir => path.join(__dirname, dir)
 // page title
 const name = defaultSettings.title || 'vue mobile template'
+// 生产环境，测试和正式
 const IS_PROD = ['production', 'prod'].includes(process.env.NODE_ENV)
 
 // externals
@@ -64,7 +65,7 @@ module.exports = {
     // }
   },
   css: {
-    extract: IS_PROD, //是否将组件中的 CSS 提取至一个独立的 CSS 文件中 (而不是动态注入到 JavaScript 中的 inline 代码)。
+    extract: IS_PROD, // 是否将组件中的 CSS 提取至一个独立的 CSS 文件中 (而不是动态注入到 JavaScript 中的 inline 代码)。
     sourceMap: false,
     loaderOptions: {
       scss: {
