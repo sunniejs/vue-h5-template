@@ -21,6 +21,15 @@ const createRouter = () =>
 
 const router = createRouter()
 
+  // 当路由切换的时候，打断 from 路由还未完成的请求
+import request from '@/utils/request'
+router.beforeEach((to, from, next) => {
+  var requestSource = request.requestSource
+  requestSource.cancel && requestSource.cancel()
+  requestSource = request.CancelToken.source()
+  next()
+})
+
 // Detail see: https://github.com/vuejs/vue-router/issues/1234#issuecomment-357941465
 export function resetRouter() {
   const newRouter = createRouter()

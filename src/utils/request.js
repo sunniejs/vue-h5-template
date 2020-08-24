@@ -11,8 +11,12 @@ const service = axios.create({
 })
 
 // request拦截器 request interceptor
+// 定义 cancelToken
+var requestSource = { token: null, cancel: null }
 service.interceptors.request.use(
   config => {
+    // 插入 cancelToken 到配置
+    config.cancelToken = requestSource.token
     // 不传递默认开启loading
     if (!config.hideloading) {
       // loading
