@@ -375,8 +375,8 @@ vue-h5-template 所有全局样式都在 `@/src/assets/css` 目录下设置
 
 #### 全局变量
 
-`vue.config.js` 配置使用 `css.loaderOptions` 选项,注入 `sass` 的 `mixin` `variables` 到全局，不需要手动引入 ,配
-置`$cdn`通过变量形式引入 cdn 地址,这样向所有 Sass/Less 样式传入共享的全局变量：
+`vue.config.js` 配置使用 `css.loaderOptions` 选项，注入 `sass` 的 `mixin` `variables` 到全局，不需要手动引入，配
+置`$cdn`通过变量形式引入 cdn 地址，这样向所有 Sass/Less 样式传入共享的全局变量：
 
 ```javascript
 const IS_PROD = ['production', 'prod'].includes(process.env.NODE_ENV)
@@ -401,7 +401,7 @@ module.exports = {
 }
 ```
 
-设置 js 中可以访问 `$cdn`,`.vue` 文件中使用`this.$cdn`访问
+设置 js 中可以访问 `$cdn`，`.vue` 文件中使用`this.$cdn`访问
 
 ```javascript
 // 引入全局样式
@@ -519,7 +519,7 @@ export default createRouter()
 
 ### <span id="axios">✅ Axios 封装及接口管理</span>
 
-`utils/request.js` 封装 axios ,开发者需要根据后台接口做修改。
+`utils/request.js` 封装 axios，开发者需要根据后台接口做修改。
 
 - `service.interceptors.request.use` 里可以设置请求头，比如设置 `token`
 - `config.hideloading` 是在 api 文件夹下的接口参数里设置，下文会讲
@@ -593,7 +593,7 @@ export default service
 - `url` 接口地址，请求的时候会拼接上 `config` 下的 `baseApi`
 - `method` 请求方法
 - `data` 请求参数 `qs.stringify(params)` 是对数据系列化操作
-- `hideloading` 默认 `false`,设置为 `true` 后，不显示 loading ui 交互中有些接口不需要让用户感知
+- `hideloading` 默认 `false`，设置为 `true` 后，不显示 loading ui 交互中有些接口不需要让用户感知
 
 ```javascript
 import qs from 'qs'
@@ -689,7 +689,7 @@ module.exports = {
 
 ### <span id="proxy">✅ 配置 proxy 跨域 </span>
 
-如果你的项目需要跨域设置，你需要打来 `vue.config.js` `proxy` 注释 并且配置相应参数
+如果你的项目需要跨域设置，你需要打来 `vue.config.js` `proxy` 注释，并且配置相应参数
 
 <u>**!!!注意：你还需要将 `src/config/env.development.js` 里的 `baseApi` 设置成 '/'**</u>
 
