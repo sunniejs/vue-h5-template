@@ -14,7 +14,7 @@
     "axios": "^0.19.2",
     "core-js": "^3.6.4",
     "lib-flexible": "^0.3.2",
-    "lodash": "^4.17.15",
+    "lodash": "^4.17.19",
     "regenerator-runtime": "^0.13.5",
     "vant": "^2.10.2",
     "vue": "^2.6.11",
