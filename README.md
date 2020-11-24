@@ -4,7 +4,7 @@
 
 #### 预览
 
-[查看 demo](https://solui.cn/vue-h5-template/#/) 建议手机端查看
+[查看 demo](https://sunniejs.cn/vue-h5-template/#/) 建议手机端查看
 
 手机扫码查看
 
@@ -22,12 +22,11 @@
 
 #### 贡献代码
 
-使用过程中发现任何问题都可以提[Issue](https://github.com/sunniejs/vue-h5-template/issues) 给我，也非常欢迎 PR
-或 [Pull Request ](https://github.com/sunniejs/vue-h5-template/pulls)
+使用过程中发现任何问题都可以提[Issue](https://github.com/sunniejs/vue-h5-template/issues) 给我，也非常欢迎 PR 或 [Pull Request ](https://github.com/sunniejs/vue-h5-template/pulls)
 
 #### 如何找到失散已久的组织？
 
 &nbsp;&nbsp;&nbsp;&nbsp;扫描下方二维码:point_down::point_down:关注“前端女塾”
 
-![logo](https://imgs.solui.cn/wx/640.gif ':size=262x224')  
+![logo](https://www.sunniejs.cn/static/wx/640.gif ':size=262x224')  
 关注公众号：回复“加群”即可加 前端仙女群
