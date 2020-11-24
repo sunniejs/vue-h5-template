@@ -4,7 +4,7 @@
 
 #### 预览
 
-[查看 demo](https://sunniejs.cn/vue-h5-template/#/) 建议手机端查看
+[查看 demo](https://www.sunniejs.cn/vue-h5-template/#/) 建议手机端查看
 
 手机扫码查看
 
