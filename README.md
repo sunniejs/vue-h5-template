@@ -4,7 +4,7 @@
 
 掘金: [vue-cli4 vant rem 移动端框架方案](https://juejin.im/post/5cfefc73f265da1bba58f9f7)
 
-[查看 demo](https://solui.cn/vue-h5-template/#/) 建议手机端查看
+[查看 demo](https://sunniejs.cn/vue-h5-template/#/) 建议手机端查看
 
 <p>
   <img src="./static/demo.png" width="320" style="display:inline;">
@@ -194,7 +194,7 @@ module.exports = {
 当然，想要撑满屏幕你可以使用 100%，这里只是举例说明。
 
 ```html
-<img class="image" src="https://imgs.solui.cn/weapp/logo.png" />
+<img class="image" src="https://www.sunniejs.cn/static/weapp/logo.png" />
 
 <style>
   /* rootValue: 75 */
