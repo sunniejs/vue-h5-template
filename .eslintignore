@@ -1,4 +1,5 @@
 build/*.js
 src/assets
+src/config
 public
 dist

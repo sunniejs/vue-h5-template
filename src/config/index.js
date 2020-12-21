@@ -1,3 +1,4 @@
-// 根据环境引入不同配置 process.env.NODE_ENV
-const config = require('./env.' + process.env.VUE_APP_ENV)
+//根据环境引入不同配置 process.env.NODE_ENV
+const environment = process.env.NODE_ENV || 'development'
+const config = require('./env.' + environment)
 module.exports = config

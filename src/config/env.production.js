@@ -5,5 +5,5 @@ module.exports = {
   baseApi: 'https://www.xxx.com/api', // 正式api请求地址
   APPID: 'xxx',
   APPSECRET: 'xxx',
-  $cdn:'https://imgs.solui.cn'
+  $cdn: 'https://www.sunniejs.cn/static'
 }
