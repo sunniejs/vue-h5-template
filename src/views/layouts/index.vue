@@ -6,14 +6,14 @@
       </keep-alive>
       <router-view v-else></router-view>
     </div>
-    <div class="layout-footer">
+    <!-- <div class="layout-footer">
       <TabBar :data="tabbars" @change="handleChange" />
-    </div>
+    </div> -->
   </div>
 </template>
 
 <script>
-import TabBar from '@/components/TabBar'
+// import TabBar from '@/components/TabBar'
 export default {
   name: 'AppLayout',
   data() {
@@ -37,7 +37,7 @@ export default {
     }
   },
   components: {
-    TabBar
+    // TabBar
   },
   methods: {
     handleChange(v) {

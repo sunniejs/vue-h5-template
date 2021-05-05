@@ -8,6 +8,13 @@ body .app {
   background-color: $background-color;
 }
 
-.app-container {
-  padding-bottom: 50px;
+// .app-container {
+//   padding-bottom: 50px;
+// }
+
+img {
+  max-width: 100%;
+}
+* {
+  box-sizing: border-box;
 }
