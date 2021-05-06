@@ -6,6 +6,11 @@ const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPl
 const resolve = dir => path.join(__dirname, dir)
 // page title
 const name = defaultSettings.title || 'vue mobile template'
+
+// 引入gzip压缩
+// const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
+// const CompressionWebpackPlugin = require('compression-webpack-plugin')
+
 // 生产环境，测试和正式
 const IS_PROD = ['production', 'prod'].includes(process.env.NODE_ENV)
 // externals
@@ -82,10 +87,34 @@ module.exports = {
     config.name = name
 
     // 为生产环境修改配置...
-    // if (IS_PROD) {
-    //   // externals
-    //   config.externals = externals
-    // }
+    if (IS_PROD) {
+      // gzip压缩(需要服务器支持)
+      // const productionGzipExtensions = ['html', 'js', 'css']
+      // config.plugins.push(
+      //   new CompressionWebpackPlugin({
+      //     filename: '[path].gz[query]',
+      //     algorithm: 'gzip',
+      //     test: new RegExp('\\.(' + productionGzipExtensions.join('|') + ')$'),
+      //     threshold: 10240, // 只有大小大于该值的资源会被处理 10240
+      //     minRatio: 0.8, // 只有压缩率小于这个值的资源才会被处理
+      //     deleteOriginalAssets: false // 删除原文件
+      //   }),
+      //   new UglifyJsPlugin({
+      //     uglifyOptions: {
+      //       // 生产环境自动删除console
+      //       compress: {
+      //         drop_debugger: true,
+      //         drop_console: true,
+      //         pure_funcs: ['console.log']
+      //       }
+      //     },
+      //     sourceMap: false,
+      //     parallel: true
+      //   })
+      // )
+      // externals
+      // config.externals = externals
+    }
   },
 
   chainWebpack: config => {

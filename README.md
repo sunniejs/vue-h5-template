@@ -1122,6 +1122,18 @@ Vscode setting.json 设置
 
 ```
 
+### <span id="pettier">✅ 常见问题 </span>
+
+#### 1.node-sass 安装报错
+
+由于不同机器上的node版本不完全相同，会导致node-sass在安装依赖的过程中报错，这时候运行
+
+```bash
+npm rebuild node-sass
+```
+即可顺利安装依赖
+
+
 [▲ 回顶部](#top)
 
 # 鸣谢 ​
