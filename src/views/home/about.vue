@@ -1,4 +1,3 @@
-<!-- home -->
 <template>
   <div class="about-container">
     <div class="warpper">
@@ -46,14 +45,14 @@ export default {
       // 请求接口数据，仅作为展示，需要配置src->config下环境文件
       const params = { user: 'sunnie' }
       getUserInfo(params)
-        .then(() => { })
-        .catch(() => { })
+        .then(() => {})
+        .catch(() => {})
     },
     // Action 通过 store.dispatch 方法触发
     doDispatch() {
       this.$store.dispatch('setUserName', '真乖，赶紧关注公众号，组织都在等你~')
     },
-    goGithub(index) {
+    goGithub() {
       window.location.href = 'https://github.com/sunniejs/vue-h5-template'
     }
   }
@@ -97,7 +96,7 @@ export default {
       .logo {
         width: 120px;
         height: 120px;
-        background: url($cdn+'/weapp/logo.png') center / contain no-repeat;
+        background: url($cdn + '/weapp/logo.png') center / contain no-repeat;
       }
       .wechat {
         width: 200px;
