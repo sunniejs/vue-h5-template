@@ -1,12 +1,9 @@
 <template>
   <nut-navbar :left-show="false" :title="$t('tabbar.home')" />
-  <header class="header">
-    <img width="30" src="https://v3.cn.vuejs.org/logo.png" />
-    <h4 class="intro-title"> Fast-Vue3 </h4>
-  </header>
+  <header class="header"> <img src="https://www.sunniejs.cn/static/weapp/logo.png" /><span> VUE H5开发模板</span> </header>
   <p class="intro-header">
     {{ $t('introduction') }}
-    <a href="https://github.com/study-vue3/fast-vue3">
+    <a href="https://github.com/sunniejs/vue-h5-template.git">
       <nut-icon class="github-icon" name="github" />
     </a>
   </p>
