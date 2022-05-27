@@ -5,7 +5,7 @@
 掘金: [移动端适配方案](https://juejin.cn/post/7018433228591595550)
 
 <p>
-  <img src="./public/screen.png" width="320" style="display:inline;">
+  <img src="./public/screen.png" width="320" style="display:inline; ">
 </p>
 
 ### Node 版本要求
@@ -24,12 +24,12 @@ cd vue-h5-template
 
 npm install
 
-npm run serve
+npm run dev
 ```
 
 <span id="top">目录</span>
 
-- √ Vue-cli4
+- √ vite
 - [√ 配置多环境变量](#env)
 - [√ viewport 适配方案](#viewport)
 - [√ nutUI 组件按需加载](#nutUI)
@@ -37,12 +37,13 @@ npm run serve
 - [√ Vue-router4](#router)
 - [√ Axios 封装及接口管理](#axios)
 - [√ vite.config.ts 基础配置](#base)
-- [√ ts 支持](#alias)
-- [√ Eslint+Pettier+stylelint 统一开发规范 ](#pettier)
+- [√ alias](#alias)
+- [√ proxy 跨域](#proxy)
+- [√ Eslint+Pettier+stylelint 统一开发规范 ](#lint)
 
 ### <span id="env">✅ 配置多环境变量 </span>
 
-`package.json` 里的 `scripts` 配置 `dev` `dev:test` `dev:prod`，通过 `--mode xxx` 来执行不同环境
+`package.json` 里的 `scripts` 配置 `dev` `dev:test` `dev:prod` ，通过 `--mode xxx` 来执行不同环境
 
 - 通过 `npm run dev` 启动本地环境参数 , 执行 `development`
 - 通过 `npm run dev:test` 启动测试环境参数 , 执行 `test`
@@ -50,9 +51,9 @@ npm run serve
 
 ```javascript
 "scripts": {
-   "dev": "vite",
-   "dev:test": "vite --mode test",
-   "dev:prod": "vite --mode production",
+    "dev": "vite",
+    "dev:test": "vite --mode test",
+    "dev:prod": "vite --mode production",
 }
 ```
 
@@ -62,9 +63,7 @@ npm run serve
 
 不用担心，项目已经配置好了 `viewport` 适配, 下面仅做介绍：
 
-Vant 中的样式默认使用`px`作为单位，如果需要使用`rem`单位，推荐使用以下两个工具:
-
-- [postcss-px-to-viewport-8-plugin](https://github.com/xian88888888/postcss-px-to-viewport-8-plugin) 是一款 `postcss` 插件，用于将单位转化为 `vw`
+- [postcss-px-to-viewport-8-plugin](https://github.com/xian88888888/postcss-px-to-viewport-8-plugin) 是一款 `postcss` 插件，用于将单位转化为 `vw`, 现在很多浏览器对`vw`的支持都很好。
 
 ##### PostCSS 配置
 
@@ -74,9 +73,6 @@ Vant 中的样式默认使用`px`作为单位，如果需要使用`rem`单位，
 // https://github.com/michael-ciniawsky/postcss-load-config
 module.exports = {
   plugins: {
-    autoprefixer: {
-      overrideBrowserslist: ['Android 4.1', 'iOS 7.1', 'Chrome > 31', 'ff > 31', 'ie >= 8'],
-    },
     'postcss-px-to-viewport-8-plugin': {
       unitToConvert: 'px', // 要转化的单位
       viewportWidth: 375, // UI设计稿的宽度
@@ -97,19 +93,19 @@ module.exports = {
 
 **新手必看，老鸟跳过**
 
-很多小伙伴会问我，适配的问题,因为我们使用的是 Vant UI，所以必须根据 Vant UI 375 的设计规范走，一般我们的设计会将 UI 图上传到蓝湖，我们就可以需要的尺寸了。下面就大搞普及一下 rem。
+很多小伙伴会问我，适配的问题, 因为我们使用的是 Vant UI，所以必须根据 Vant UI 375 的设计规范走，一般我们的设计会将 UI 图上传到蓝湖，我们就可以需要的尺寸了。下面就大搞普及一下 rem。
 
-我们知道 `1rem` 等于`html` 根元素设定的 `font-size` 的 `px` 值。Vant UI 设置 `rootValue: 37.5`,你可以看到在 iPhone 6 下看到 （`1rem 等于 37.5px`）：
+我们知道 `1rem` 等于 `html` 根元素设定的 `font-size` 的 `px` 值。Vant UI 设置 `rootValue: 37.5` , 你可以看到在 iPhone 6 下看到 （ `1rem 等于 37.5px` ）：
 
 ```html
-<html data-dpr="1" style="font-size: 37.5px;"></html>
+<html data-dpr="1" style="font-size: 37.5px;"> </html>
 ```
 
-切换不同的机型，根元素可能会有不同的`font-size`。当你写 css px 样式时，会被程序换算成 `rem` 达到适配。
+切换不同的机型，根元素可能会有不同的 `font-size` 。当你写 css px 样式时，会被程序换算成 `rem` 达到适配。
 
 因为我们用了 Vant 的组件，需要按照 `rootValue: 37.5` 来写样式。
 
-举个例子：设计给了你一张 750px \* 1334px 图片，在 iPhone6 上铺满屏幕,其他机型适配。
+举个例子：设计给了你一张 750px \* 1334px 图片，在 iPhone6 上铺满屏幕, 其他机型适配。
 
 - 当`rootValue: 75` , 样式 `width: 750px;height: 1334px;` 图片会撑满 iPhone6 屏幕，这个时候切换其他机型，图片也会跟着撑满。
 - 当`rootValue: 37.5` 的时候，样式 `width: 375px;height: 667px;` 图片会撑满 iPhone6 屏幕。
@@ -127,6 +123,7 @@ module.exports = {
     width: 750px;
     height: 1334px;
   }
+
   /* rootValue: 37.5 */
   .image {
     width: 375px;
@@ -147,16 +144,16 @@ Vite 构建工具，使用 vite-plugin-style-import 实现按需引入。
 npm i vite-plugin-style-import -D
 ```
 
-在`vite.config.ts` 设置
+在 `vite.config.ts` 设置
 
 ```javascript
  plugins: [
-    ...
-    createStyleImportPlugin({
-      resolves: [NutuiResolve()],
-    }),
-    ...
-],
+     ...
+     createStyleImportPlugin({
+         resolves: [NutuiResolve()],
+     }),
+     ...
+ ],
 ```
 
 #### 使用组件
@@ -206,7 +203,7 @@ nutUiComponents.forEach((item) => {
 
 本案例采用 `hash` 模式，开发者根据需求修改 `mode` `base`
 
-**注意**：如果你使用了 `history` 模式，`vue.config.js` 中的 `publicPath` 要做对应的**修改**
+**注意**：如果你使用了 `history` 模式， `vue.config.js` 中的 `publicPath` 要做对应的**修改**
 
 前往:[vue.config.js 基础配置](#base)
 
@@ -238,7 +235,7 @@ export default router;
 
 ### <span id="axios">✅ Axios 封装及接口管理</span>
 
-`utils/request.js` 封装 axios ,开发者需要根据后台接口做修改。
+`utils/request.js` 封装 axios , 开发者需要根据后台接口做修改。
 
 - `service.interceptors.request.use` 里可以设置请求头，比如设置 `token`
 - `config.hideloading` 是在 api 文件夹下的接口参数里设置，下文会讲
@@ -306,13 +303,13 @@ export default service;
 
 #### 接口管理
 
-在`src/api` 文件夹下统一管理接口
+在 `src/api` 文件夹下统一管理接口
 
 - 你可以建立多个模块对接接口, 比如 `home.js` 里是首页的接口这里讲解 `user.js`
 - `url` 接口地址，请求的时候会拼接上 `config` 下的 `baseApi`
 - `method` 请求方法
 - `data` 请求参数 `qs.stringify(params)` 是对数据系列化操作
-- `hideloading` 默认 `false`,设置为 `true` 后，不显示 loading ui 交互中有些接口不需要让用户感知
+- `hideloading` 默认 `false`, 设置为 `true` 后，不显示 loading ui 交互中有些接口不需要让用户感知
 
 ```javascript
 import qs from 'qs';
@@ -337,7 +334,9 @@ export function getUserInfo(params) {
 // 请求接口
 import { getUserInfo } from '@/api/user.js';
 
-const params = { user: 'sunnie' };
+const params = {
+  user: 'sunnie',
+};
 getUserInfo(params)
   .then(() => {})
   .catch(() => {});
@@ -397,9 +396,21 @@ export default function ({ command }: ConfigEnv): UserConfigExport {
 
 ```javascript
 resolve: {
-    alias: {
-        '@': pathResolve('./src'),
-    },
+    alias: [{
+            find: 'vue-i18n',
+            replacement: 'vue-i18n/dist/vue-i18n.cjs.js',
+        },
+        // /@/xxxx => src/xxxx
+        {
+            find: /\/@\//,
+            replacement: pathResolve('src') + '/',
+        },
+        // /#/xxxx => types/xxxx
+        {
+            find: /\/#\//,
+            replacement: pathResolve('types') + '/',
+        },
+    ],
 },
 ```
 
@@ -410,29 +421,31 @@ resolve: {
 ```javascript
 server: {
     proxy: {
-      '/api': {
-        target: 'https://baidu.com',
-        changeOrigin: true,
-        rewrite: (path) => path.replace(/^\/api/, '')
-      }
+        '/api': {
+            target: 'https://baidu.com',
+            changeOrigin: true,
+            rewrite: (path) => path.replace(/^\/api/, '')
+        }
     }
 },
 ```
 
 [▲ 回顶部](#top)
 
-<h3>文档在拼命完善中。。。</h3>
+### <span id="lint">✅ Eslint+Pettier+stylelint 统一开发规范 </span>
+
+根目录下的`.eslintrc.js`、`.stylelint.config.js`、`.prettier.config.js`内置了 lint 规则，帮助你规范地开发代码，有助于提高团队的代码质量和协作性，可以根据团队的规则进行修改
 
 # 关于我
 
- <p>
-  <img src="./public/account.jpg" width="256" style="display:inline;">
-</p>
-
 扫描添加下方的微信并备注加交流群，交流学习，及时获取代码最新动态。
 
+ <p>
+  <img src="./public/account.jpg" width="256" style="display:inline; ">
+</p>
+
 <p>
-  <img src="./public/group.png" width="256" style="display:inline;">
+  <img src="./public/group.png" width="256" style="display:inline; ">
 </p>
  
 如果对你有帮助送我一颗珍贵的小星星（づ￣3￣）づ╭❤～

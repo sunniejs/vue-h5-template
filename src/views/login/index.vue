@@ -14,9 +14,9 @@
 </template>
 
 <script lang="ts" setup>
-  import router from '@/router';
-  import { ComponentInternalInstance, getCurrentInstance, reactive, ref } from 'vue';
-  import { useUserStore } from '@/store/modules/user';
+  import { router } from '/@/router';
+  import { reactive, ref } from 'vue';
+  import { useUserStore } from '/@/store/modules/user';
 
   const userStore = useUserStore();
   const formData = reactive({
@@ -24,7 +24,7 @@
     pwd: '',
   });
   const ruleForm = ref<any>(null);
-  const { proxy } = getCurrentInstance() as ComponentInternalInstance;
+  // const { proxy } = getCurrentInstance() as ComponentInternalInstance;
   const submit = () => {
     ruleForm.value.validate().then(async ({ valid, errors }: any) => {
       if (valid) {

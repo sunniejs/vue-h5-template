@@ -1,9 +1,9 @@
 import { createApp } from 'vue';
 import App from './App.vue';
 import { nutUiComponents } from './plugins/nutUI';
-import { i18n } from '@/i18n';
+import { i18n } from '/@/i18n';
 import router from './router';
-import { setupStore } from '@/store';
+import { setupStore } from '/@/store';
 import './assets/font/iconfont.css';
 import './assets/app.css';
 

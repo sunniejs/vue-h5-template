@@ -87,7 +87,7 @@ declare global {
   }
 }
 
-interface AnyObject {
+export interface AnyObject {
   [key: string]: any;
 }
 

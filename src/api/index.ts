@@ -1,4 +1,4 @@
-import useAxiosApi from '@/utils/useAxiosApi';
+import useAxiosApi from '/@/utils/useAxiosApi';
 
 /**
  * 账号密码登录

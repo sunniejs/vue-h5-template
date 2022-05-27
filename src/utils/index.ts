@@ -1,6 +1,4 @@
-/**
- * 类型检查
- */
+import { AnyObject } from '#/global';
 
 export function typeCheck(param: any) {
   return Object.prototype.toString.call(param);

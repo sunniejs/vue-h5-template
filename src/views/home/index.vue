@@ -30,8 +30,8 @@
 
 <script lang="ts" setup>
   import { computed } from 'vue';
-  import { useUserStore } from '@/store/modules/user';
-  import { setLang } from '@/i18n';
+  import { useUserStore } from '/@/store/modules/user';
+  import { setLang } from '/@/i18n';
 
   const userStore = useUserStore();
   const getUserInfo = computed(() => {
