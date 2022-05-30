@@ -14,7 +14,7 @@
 </template>
 
 <script lang="ts" setup>
-  import { router } from '/@/router';
+  import router from '/@/router';
   import { reactive, ref } from 'vue';
   import { useUserStore } from '/@/store/modules/user';
 
