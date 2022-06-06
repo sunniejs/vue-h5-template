@@ -24,7 +24,6 @@
     pwd: '',
   });
   const ruleForm = ref<any>(null);
-  // const { proxy } = getCurrentInstance() as ComponentInternalInstance;
   const submit = () => {
     ruleForm.value.validate().then(async ({ valid, errors }: any) => {
       if (valid) {

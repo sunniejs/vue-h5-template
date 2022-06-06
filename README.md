@@ -217,7 +217,7 @@ export const router = [
     name: 'root',
     path: '/',
     redirect: '/home',
-    component: () => import('@/components/Basic/index.vue'),
+    component: () => import('@/layout/basic/index.vue'),
   },
 ];
 

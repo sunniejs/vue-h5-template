@@ -25,7 +25,6 @@
     </nut-button>
   </div>
   {{ getUserInfo }}
-  <Tabbar />
 </template>
 
 <script lang="ts" setup>

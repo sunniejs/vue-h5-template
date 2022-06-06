@@ -18,8 +18,7 @@
 
   const router = useRouter();
 
-  const tabSwitch = (item, index) => {
-    console.log(item, index);
+  const tabSwitch = (_item, index) => {
     switch (index) {
       case 0:
         router.push('/home');
