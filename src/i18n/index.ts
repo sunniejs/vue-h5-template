@@ -1,4 +1,4 @@
-import { AnyObject } from '#/global';
+import { AnyObject } from '/#/global';
 import { createI18n } from 'vue-i18n';
 
 export function loadLang() {

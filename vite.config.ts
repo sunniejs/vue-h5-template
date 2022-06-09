@@ -1,10 +1,8 @@
-import vue from '@vitejs/plugin-vue';
-import vueJsx from '@vitejs/plugin-vue-jsx';
+import { createVitePlugins } from './config/vite/plugins';
 import { resolve } from 'path';
 import { ConfigEnv, UserConfigExport } from 'vite';
-import { createStyleImportPlugin, NutuiResolve } from 'vite-plugin-style-import';
-import { viteMockServe } from 'vite-plugin-mock';
-import eruda from 'vite-plugin-eruda';
+
+// import { viteMockServe } from 'vite-plugin-mock';
 
 const pathResolve = (dir: string) => {
   return resolve(process.cwd(), '.', dir);
@@ -14,7 +12,6 @@ const pathResolve = (dir: string) => {
 export default function ({ command }: ConfigEnv): UserConfigExport {
   const isProduction = command === 'build';
   const root = process.cwd();
-  console.log(isProduction);
   return {
     root,
     resolve: {
@@ -39,19 +36,7 @@ export default function ({ command }: ConfigEnv): UserConfigExport {
       host: '0.0.0.0',
       hmr: true,
     },
-    plugins: [
-      vue(),
-      vueJsx(),
-      createStyleImportPlugin({
-        resolves: [NutuiResolve()],
-      }),
-      eruda(),
-      viteMockServe({
-        mockPath: './src/mock',
-        localEnabled: command === 'serve',
-        logger: true,
-      }),
-    ],
+    plugins: createVitePlugins(isProduction),
     css: {
       preprocessorOptions: {
         scss: {

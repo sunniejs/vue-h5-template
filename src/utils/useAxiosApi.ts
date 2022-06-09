@@ -1,6 +1,6 @@
 import { useAxios } from '@vueuse/integrations/useAxios';
 import axios, { AxiosRequestConfig } from 'axios';
-import { Toast } from 'vant';
+import Toast from 'vant/lib/toast';
 
 // create an axios instance
 const instance = axios.create({
