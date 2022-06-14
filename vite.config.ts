@@ -33,7 +33,7 @@ export default function ({ command }: ConfigEnv): UserConfigExport {
       ],
     },
     server: {
-      host: '0.0.0.0',
+      host: true,
       hmr: true,
     },
     plugins: createVitePlugins(isProduction),

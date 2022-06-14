@@ -16,6 +16,8 @@ import { ConfigRestartPlugin } from './restart';
 import { ConfigProgressPlugin } from './progress';
 import { ConfigEruda } from './eruda';
 import { ConfigStyleImport } from './styleImport';
+import { ConfigImageminPlugin } from './imagemin';
+import { ConfigVisualizerConfig } from './visualizer';
 
 export function createVitePlugins(isBuild: boolean) {
   const vitePlugins: (Plugin | Plugin[])[] = [
@@ -25,19 +27,25 @@ export function createVitePlugins(isBuild: boolean) {
     vueJsx(),
     // setup语法糖组件名支持
     vueSetupExtend(),
-    // 自动按需引入组件
-    AutoRegistryComponents(),
-    // 自动按需引入依赖
-    AutoImportDeps(),
-    // 自动生成路由
-    ConfigPagesPlugin(),
-    // 开启.gz压缩  rollup-plugin-gzip
-    ConfigCompressPlugin(),
-    // 监听配置文件改动重启
-    ConfigRestartPlugin(),
-    // 构建时显示进度条
-    ConfigProgressPlugin(),
   ];
+
+  // 自动按需引入组件
+  vitePlugins.push(AutoRegistryComponents());
+
+  // 自动按需引入依赖
+  vitePlugins.push(AutoImportDeps());
+
+  // 自动生成路由
+  vitePlugins.push(ConfigPagesPlugin());
+
+  // 开启.gz压缩  rollup-plugin-gzip
+  vitePlugins.push(ConfigCompressPlugin());
+
+  // 监听配置文件改动重启
+  vitePlugins.push(ConfigRestartPlugin());
+
+  // 构建时显示进度条
+  vitePlugins.push(ConfigProgressPlugin());
 
   //styleImport
   vitePlugins.push(ConfigStyleImport());
@@ -45,11 +53,17 @@ export function createVitePlugins(isBuild: boolean) {
   // eruda
   vitePlugins.push(ConfigEruda());
 
-  // vite-plugin-svg-icons
-  vitePlugins.push(ConfigSvgIconsPlugin(isBuild));
+  // rollup-plugin-visualizer
+  vitePlugins.push(ConfigVisualizerConfig());
+  if (isBuild) {
+    // vite-plugin-imagemin
+    vitePlugins.push(ConfigImageminPlugin());
 
-  // vite-plugin-mock
-  vitePlugins.push(ConfigMockPlugin(isBuild));
+    // vite-plugin-svg-icons
+    vitePlugins.push(ConfigSvgIconsPlugin(isBuild));
 
+    // vite-plugin-mock
+    vitePlugins.push(ConfigMockPlugin(isBuild));
+  }
   return vitePlugins;
 }
