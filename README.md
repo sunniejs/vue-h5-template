@@ -12,7 +12,7 @@
 
 ### Node 版本要求
 
-推荐你使用 nodejs 14+版本，毕竟技术日新月异。你可以使用 [nvm](https://github.com/nvm-sh/nvm) 或 [nvm-windows](https://github.com/coreybutler/nvm-windows) 在同一台电脑中管理多个 Node 版本。
+推荐你使用 nodejs 14+的版本，毕竟技术日新月异。你可以使用 [nvm](https://github.com/nvm-sh/nvm) 或 [nvm-windows](https://github.com/coreybutler/nvm-windows) 在同一台电脑中管理多个 Node 版本。
 
 本示例 Node.js 14.19.0
 
@@ -447,7 +447,7 @@ server: {
 </p>
 
 <p>
-  <img src="./public/group.png" width="256" style="display:inline; ">
+  <img src="./public/group.jpg" width="256" style="display:inline; ">
 </p>
  
 如果对你有帮助送我一颗珍贵的小星星（づ￣3￣）づ╭❤～
