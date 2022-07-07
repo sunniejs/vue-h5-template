@@ -7,7 +7,7 @@
 掘金: [移动端适配方案](https://juejin.cn/post/7018433228591595550)
 
 <p>
-  <img src="./public/screen.png" width="320" style="display:inline; ">
+  <img src="https://cdn.jsdelivr.net/gh/fonghehe/picture/vue-h5-template/screen.png" width="320" style="display:inline; ">
 </p>
 
 ### Node 版本要求
@@ -16,7 +16,7 @@
 
 本示例 Node.js 14.19.0
 
-### 启动项目
+### 启动项目(强烈推荐使用 yarn)
 
 ```bash
 
@@ -24,14 +24,14 @@ git clone https://github.com/sunniejs/vue-h5-template.git
 
 cd vue-h5-template
 
-npm install
+yarn install
 
-npm run dev
+yarn dev
 ```
 
 <span id="top">目录</span>
 
-- √ vite
+- [√ vite](#vite)
 - [√ 配置多环境变量](#env)
 - [√ viewport 适配方案](#viewport)
 - [√ nutUI 组件按需加载](#nutUI)
@@ -43,13 +43,31 @@ npm run dev
 - [√ proxy 跨域](#proxy)
 - [√ Eslint+Pettier+stylelint 统一开发规范 ](#lint)
 
+### <span id="vite">✅ vite </span>
+
+基于原生 ES 模块提供了丰富的内建功能，如速度快到惊人的模块热更新（HMR），使用 Rollup 打包你的代码，并且它是预配置的，可输出用于生产环境的高度优化过的静态资源。更多关于[vite](https://cn.vitejs.dev/guide/)
+
+模版集成了如下的 vite 插件
+
+- unplugin-auto-import（按需加载，自动引入）
+- unplugin-vue-components（按需加载，自动引入组件）
+- vite-plugin-compression（开启.gz 压缩）
+- vite-plugin-eruda（控制台，方便移动端调试）
+- vite-plugin-imagemin（图片压缩）
+- vite-plugin-mock（引入 mockjs，本地模拟接口）
+- vite-plugin-pages（动态生成路由）
+- vite-plugin-progress（构建显示进度条）
+- vite-plugin-restart（监听配置文件修改自动重启 Vite）
+- vite-plugin-style-import（按需引入样式文件）
+- vite-plugin-svg-icons（加载 SVG 文件，自动引入）
+
 ### <span id="env">✅ 配置多环境变量 </span>
 
 `package.json` 里的 `scripts` 配置 `dev` `dev:test` `dev:prod` ，通过 `--mode xxx` 来执行不同环境
 
-- 通过 `npm run dev` 启动本地环境参数 , 执行 `development`
-- 通过 `npm run dev:test` 启动测试环境参数 , 执行 `test`
-- 通过 `npm run dev:prod` 启动正式环境参数 , 执行 `prod`
+- 通过 `yarn dev` 启动本地环境参数 , 执行 `development`
+- 通过 `yarn dev:test` 启动测试环境参数 , 执行 `test`
+- 通过 `yarn dev:prod` 启动正式环境参数 , 执行 `prod`
 
 ```javascript
 "scripts": {
@@ -143,7 +161,7 @@ Vite 构建工具，使用 vite-plugin-style-import 实现按需引入。
 #### 安装插件
 
 ```bash
-npm i vite-plugin-style-import -D
+yarn add vite-plugin-style-import -D
 ```
 
 在 `vite.config.ts` 设置
@@ -354,7 +372,7 @@ getUserInfo(params)
 publicPath: './',
 ```
 
-如果你的 `Vue Router` 模式是 history 这里的 publicPath 和你的 `Vue Router` `base` **保持一直**
+如果你的 `Vue Router` 模式是 history 这里的 publicPath 和你的 `Vue Router` `base` **保持一致**
 
 ```javascript
 publicPath: '/app/',
@@ -434,7 +452,7 @@ server: {
 
 [▲ 回顶部](#top)
 
-### <span id="lint">✅ Eslint+Pettier+stylelint 统一开发规范 </span>
+### <span id="lint">✅ Eslint+Pettier+stylelint 统 ˜ 开发规范 </span>
 
 根目录下的`.eslintrc.js`、`.stylelint.config.js`、`.prettier.config.js`内置了 lint 规则，帮助你规范地开发代码，有助于提高团队的代码质量和协作性，可以根据团队的规则进行修改
 
@@ -443,11 +461,11 @@ server: {
 扫描添加下方的微信并备注加交流群，交流学习，及时获取代码最新动态。
 
  <p>
-  <img src="./public/account.jpg" width="256" style="display:inline; ">
+  <img src="https://cdn.jsdelivr.net/gh/fonghehe/picture/personal/account.jpg" width="256" style="display:inline; ">
 </p>
 
 <p>
-  <img src="./public/group.jpg" width="256" style="display:inline; ">
+  <img src="https://cdn.jsdelivr.net/gh/fonghehe/picture/personal/group.jpg" width="256" style="display:inline; ">
 </p>
  
 如果对你有帮助送我一颗珍贵的小星星（づ￣3￣）づ╭❤～
