@@ -17,7 +17,7 @@ import '@/plugins/vant'
 // 引入全局样式
 import '@/assets/css/index.scss'
 // 移动端适配
-import 'lib-flexible/flexible.js'
+import 'amfe-flexible'
 
 // filters
 import './filters'

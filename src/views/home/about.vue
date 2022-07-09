@@ -58,6 +58,7 @@ export default {
   }
 }
 </script>
+
 <style lang="scss">
 .about-container {
   /* 你的命名空间 */
