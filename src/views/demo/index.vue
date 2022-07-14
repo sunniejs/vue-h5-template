@@ -20,7 +20,7 @@
     </div>
   </section>
   <section>
-    <span class="title">vnutUI</span>
+    <span class="title">nutUI</span>
     <div class="demo">
       <nut-button type="primary">主要按钮</nut-button>
       <nut-button type="info">信息按钮</nut-button>

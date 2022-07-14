@@ -1,8 +1,8 @@
 # vue-h5-template
 
-基于 vue3 + vite + nut ui + sass + viewport 适配方案 +axios 封装，构建手机端模板脚手架
+基于 vue3 + vite + （nutui or varlet or vant） + sass + viewport 适配方案 +axios 封装，构建手机端模板脚手架
 
-如果不熟悉 vue3，想继续使用 vue2 开发的，可以[点这里](https://github.com/sunniejs/vue-h5-template/tree/vue2-h5-template)来获取 vue2-h5-template
+如果你不熟悉 vue3，想继续使用 vue2 开发的，可以[点这里](https://github.com/sunniejs/vue-h5-template/tree/vue2-h5-template)来获取 vue2-h5-template
 
 掘金: [移动端适配方案](https://juejin.cn/post/7018433228591595550)
 
@@ -12,7 +12,7 @@
 
 ### Node 版本要求
 
-推荐你使用 nodejs 14+的版本，毕竟技术日新月异。你可以使用 [nvm](https://github.com/nvm-sh/nvm) 或 [nvm-windows](https://github.com/coreybutler/nvm-windows) 在同一台电脑中管理多个 Node 版本。
+推荐你使用 NodeJs 14+的版本，毕竟技术日新月异。你可以使用 [nvm](https://github.com/nvm-sh/nvm) 或 [nvm-windows](https://github.com/coreybutler/nvm-windows) 在同一台电脑中管理多个 Node 版本。
 
 本示例 Node.js 14.19.0
 
@@ -81,9 +81,9 @@ yarn dev
 
 ### <span id="viewport">✅ viewport 适配方案 </span>
 
-不用担心，项目已经配置好了 `viewport` 适配, 下面仅做介绍：
+不用担心，项目已经配置好了 `viewport` 适配，下面仅做介绍：
 
-- [postcss-px-to-viewport-8-plugin](https://github.com/xian88888888/postcss-px-to-viewport-8-plugin) 是一款 `postcss` 插件，用于将单位转化为 `vw`, 现在很多浏览器对`vw`的支持都很好。
+- [cnjm-postcss-px-to-viewport](https://github.com/cnjm/postcss-px-to-viewport) 是一款 `postcss` 插件，用于将单位转化为 `vw`， 现在很多浏览器对`vw`的支持都很好，适配首选方案。
 
 ##### PostCSS 配置
 
@@ -93,9 +93,10 @@ yarn dev
 // https://github.com/michael-ciniawsky/postcss-load-config
 module.exports = {
   plugins: {
-    'postcss-px-to-viewport-8-plugin': {
+    autoprefixer: { overrideBrowserslist: ['Android 4.1', 'iOS 7.1', 'Chrome > 31', 'ff > 31', 'ie >= 8'] },
+    'cnjm-postcss-px-to-viewport': {
       unitToConvert: 'px', // 要转化的单位
-      viewportWidth: 375, // UI设计稿的宽度
+      viewportWidth: 750, // UI设计稿的宽度
       unitPrecision: 6, // 转换后的精度，即小数点位数
       propList: ['*'], // 指定转换的css属性的单位，*代表全部css属性的单位都进行转换
       viewportUnit: 'vw', // 指定需要转换成的视窗单位，默认vw
@@ -103,13 +104,16 @@ module.exports = {
       minPixelValue: 1, // 默认值1，小于或等于1px则不进行转换
       mediaQuery: true, // 是否在媒体查询的css代码中也进行转换，默认false
       replace: true, // 是否转换后直接更换属性值
-      exclude: [/node_modules/], // 设置忽略文件，用正则做目录名匹配
-    },
+      include: [],
+      exclude: [], // 设置忽略文件，用正则做目录名匹配
+      customFun: ({ file }) => {
+        // 这个自定义的方法是针对处理vant组件下的设计稿为375问题
+        const designWidth = judgeComponent(file) ? 375 : 750;
+        return designWidth;
+      },
   },
 };
 ```
-
-更多详细信息： [vant](https://youzan.github.io/vant/#/zh-CN/quickstart#jin-jie-yong-fa)
 
 **新手必看，老鸟跳过**
 
@@ -211,7 +215,7 @@ nutUI 需删除`src/plugins/nutUI.ts`和`main.ts`文件下的引入
 
 vant 和 varlet 只需删除对应的 resolvers 即可
 
-删除后需全局搜索删除不需要的组件
+删除后需全局搜索删除不需要的组件，避免报错
 
 [▲ 回顶部](#top)
 
