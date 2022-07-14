@@ -1,15 +1,22 @@
 <template>
+  <nut-navbar :left-show="false" :title="$t($route.meta.title)" />
   <div class="main-page">
-    <router-view v-slot="{ Component }">
+    <keep-alive>
+      <router-view v-if="$route.meta.keepAlive" :key="$route.path" />
+    </keep-alive>
+    <router-view v-if="!$route.meta.keepAlive" :key="$route.path" />
+    <!-- <RouterView v-slot="{ Component }" v-if="$route.meta.keepAlive">
       <keep-alive>
-        <component :is="Component" />
+        <component :is="Component" :key="$route.path" />
       </keep-alive>
-    </router-view>
+    </RouterView>
+    <RouterView v-if="!$route.meta.keepAlive" :key="$route.path" /> -->
   </div>
   <nut-tabbar unactive-color="#364636" active-color="#1989fa" @tab-switch="tabSwitch" bottom>
-    <nut-tabbar-item :tab-title="$t('tabbar.home')" font-class-name="iconfont" class-prefix="icon" icon="home" />
-    <nut-tabbar-item :tab-title="$t('tabbar.list')" font-class-name="iconfont" class-prefix="icon" icon="list" />
-    <nut-tabbar-item :tab-title="$t('tabbar.member')" font-class-name="iconfont" class-prefix="icon" icon="member" />
+    <nut-tabbar-item :tab-title="$t('tabbar.home')" icon="home" />
+    <nut-tabbar-item :tab-title="$t('tabbar.list')" icon="horizontal" />
+    <nut-tabbar-item :tab-title="$t('tabbar.member')" icon="my" />
+    <nut-tabbar-item :tab-title="$t('tabbar.demo')" icon="location" />
   </nut-tabbar>
 </template>
 
@@ -29,13 +36,21 @@
       case 2:
         router.push('/member');
         break;
+      case 3:
+        router.push('/demo');
     }
   };
 </script>
 
 <style scoped lang="scss">
+  .nut-navbar {
+    margin-bottom: 0;
+  }
+
   .main-page {
-    height: calc(100vh - 50px);
+    box-sizing: border-box;
+    padding: 40px;
+    height: calc(100vh - 88px);
     overflow-y: scroll;
     overflow-x: hidden;
   }

@@ -1,20 +1,15 @@
 <template>
-  <nut-navbar :left-show="false" :title="$t('tabbar.home')" />
-  <header class="header"> <img src="https://www.sunniejs.cn/static/weapp/logo.png" /><span> VUE H5开发模板</span> </header>
-  <p class="intro-header">
-    {{ $t('introduction') }}
+  <header class="header">
+    <img src="https://www.sunniejs.cn/static/weapp/logo.png" /><span> {{ $t('title') }}</span>
+  </header>
+  <div class="intro-header">
+    <div>{{ $t('introduction') }}</div>
     <a href="https://github.com/sunniejs/vue-h5-template.git">
-      <nut-icon class="github-icon" name="github" />
+      <nut-icon name="github" />
     </a>
-  </p>
+  </div>
   <nut-cell-group :title="$t('home.support')" class="supportList">
-    <nut-cell title="Vue3" icon="Check" />
-    <nut-cell title="Vue-router" icon="Check" />
-    <nut-cell title="Axios" icon="Check" />
-    <nut-cell title="Pinia" icon="Check" />
-    <nut-cell title="NutUI" icon="Check" />
-    <nut-cell title="Vue-i18n" icon="Check" />
-    <nut-cell title="Jsx" icon="Check" />
+    <nut-cell v-for="(item, index) in cellList" :key="index" :title="item" icon="Check" />
   </nut-cell-group>
   <div class="btn-wrap">
     <nut-button shape="square" size="small" type="default" @click="changeLang('zh-cn')">
@@ -32,11 +27,13 @@
   import { useUserStore } from '/@/store/modules/user';
   import { setLang } from '/@/i18n';
 
+  let cellList = ['vue3', 'vite', 'vue-router', 'axios', 'Pinia', 'vue-i18n', 'vue-jsx', 'vatlet/vant/nutUI'];
   const userStore = useUserStore();
   const getUserInfo = computed(() => {
     const { name = '' } = userStore.getUserInfo || {};
     return name;
   });
+
   const changeLang = (type) => {
     setLang(type);
   };
@@ -45,34 +42,32 @@
   .header {
     display: flex;
     justify-content: center;
-    margin: 26px 0 10px;
+    align-items: center;
     padding: 0 20px;
-    height: 50px;
-    height: 30px;
-    font-size: 20px;
-  }
-
-  .intro-title {
-    text-align: center;
+    font-size: 40px;
+    img {
+      width: 90px;
+      height: 90px;
+    }
   }
 
   .intro-header {
-    height: 30px;
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     font-size: 16px;
-    text-align: center;
   }
 
   .supportList {
     margin: 0 16px;
 
+    .nut-cell-group__title {
+      margin-top: 30px;
+    }
     .nut-icon {
       color: green;
     }
-  }
-
-  .github-icon {
-    margin-top: 4px;
-    font-size: 24px;
   }
 
   .btn-wrap {

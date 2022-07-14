@@ -1,5 +1,4 @@
 <template>
-  <nut-navbar :left-show="false" :title="$t('tabbar.member')" />
   <div class="avatar-wrap">
     <nut-avatar
       class="avatar"
@@ -41,16 +40,20 @@
 <style lang="scss">
   .avatar-wrap {
     display: flex;
-    margin: 30px;
-    height: 50px;
+    margin: 0 10px 40px;
     align-items: center;
     .member-detail {
       margin-left: 20px;
       .nickname {
         font-size: 16px;
         font-weight: bold;
+        .nut-button {
+          margin-left: 10px;
+        }
       }
       .info {
+        margin-top: 10px;
+        font-size: 16px;
       }
     }
   }

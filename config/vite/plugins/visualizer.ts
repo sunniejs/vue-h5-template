@@ -1,3 +1,8 @@
+/**
+ * @name ConfigVisualizerConfig
+ * @description 打包体积分析
+ */
+
 import visualizer from 'rollup-plugin-visualizer';
 import { IsReport } from '../../constant';
 

@@ -2,6 +2,7 @@
  * @name createVitePlugins
  * @description 封装plugins数组统一调用
  */
+
 import type { Plugin } from 'vite';
 import vue from '@vitejs/plugin-vue';
 import vueJsx from '@vitejs/plugin-vue-jsx';

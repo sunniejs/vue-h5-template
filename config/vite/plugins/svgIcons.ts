@@ -2,6 +2,7 @@
  * @name SvgIconsPlugin
  * @description 加载SVG文件，自动引入
  */
+
 import { createSvgIconsPlugin } from 'vite-plugin-svg-icons';
 import path from 'path';
 

@@ -1,5 +1,4 @@
 <template>
-  <nut-navbar :left-show="false" :title="$t('tabbar.list')" />
   <nut-card :img-url="state.imgUrl" :title="state.title" :price="state.price" :vip-price="state.vipPrice" :shop-name="state.shopName" />
 </template>
 

@@ -1,8 +1,10 @@
 export const lang = {
+  title: 'VUE H5开发模板',
   tabbar: {
     home: '首页',
     list: '列表',
     member: '我的',
+    demo: '示例',
   },
   language: {
     en: '英文',

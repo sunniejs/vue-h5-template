@@ -34,10 +34,10 @@ yarn dev
 - [√ vite](#vite)
 - [√ 配置多环境变量](#env)
 - [√ viewport 适配方案](#viewport)
-- [√ nutUI 组件按需加载](#nutUI)
+- [√ 多 UI 组件库供选择](#ui)
 - [√ Pinia 状态管理](#Pinia)
-- [√ Vue-router4](#router)
-- [√ Axios 封装及接口管理](#axios)
+- [√ vue-router 4](#router)
+- [√ axios 封装及接口管理](#axios)
 - [√ vite.config.ts 基础配置](#base)
 - [√ alias](#alias)
 - [√ proxy 跨域](#proxy)
@@ -154,31 +154,33 @@ module.exports = {
 
 [▲ 回顶部](#top)
 
-### <span id="nutUI">✅ nutUI 组件按需加载 </span>
+### <span id="ui">✅ 多 UI 组件库供选择 </span>
 
-Vite 构建工具，使用 vite-plugin-style-import 实现按需引入。
+Vite 构建工具，使用 vite-plugin-style-import 和 unplugin-vue-components/vite 实现按需引入。
 
 #### 安装插件
 
 ```bash
 yarn add vite-plugin-style-import -D
+yarn add unplugin-vue-components/vite -D
 ```
 
-在 `vite.config.ts` 设置
+#### 使用组件库
+
+nutUI 没有按需加载的 resolvers，style 需要自己配置按需加载
+
+在 `config/vite/plugins/styleImport.ts` 设置
 
 ```javascript
- plugins: [
-     ...
-     createStyleImportPlugin({
-         resolves: [NutuiResolve()],
-     }),
-     ...
- ],
+  // 按需加载样式文件
+  ...
+    createStyleImportPlugin({
+      resolves: [NutuiResolve()],
+    }),
+  ...
 ```
 
-#### 使用组件
-
-项目在 `plugins/nutUI.ts` 下统一管理组件，用哪个引入哪个，无需在页面里重复引用
+项目在 `src/plugins/nutUI.ts` 下统一管理组件，用哪个引入哪个，无需在页面里重复引用
 
 ```javascript
 // 按需全局引入nutUI组件
@@ -191,6 +193,25 @@ nutUiComponents.forEach((item) => {
   app.use(item);
 });
 ```
+
+vant 和 varlet 可以使用组件按需加载
+
+在`config/vite/plugins/component.ts`下
+
+```javascript
+import { VueUseComponentsResolver, VantResolver, VarletUIResolver } from 'unplugin-vue-components/resolvers';
+...
+resolvers: [VantResolver(), VarletUIResolver()],
+...
+```
+
+#### 不需要某个组件库
+
+nutUI 需删除`src/plugins/nutUI.ts`和`main.ts`文件下的引入
+
+vant 和 varlet 只需删除对应的 resolvers 即可
+
+删除后需全局搜索删除不需要的组件
 
 [▲ 回顶部](#top)
 
