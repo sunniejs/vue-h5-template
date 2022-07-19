@@ -18,8 +18,8 @@
   "dependencies": {
     "@nutui/nutui": "^3.1.22",
     "@varlet/ui": "^1.27.17",
-    "@vueuse/core": "8.9.2",
-    "@vueuse/integrations": "8.9.2",
+    "@vueuse/core": "8.9.4",
+    "@vueuse/integrations": "8.9.4",
     "axios": "0.27.2",
     "pinia": "^2.0.16",
     "universal-cookie": "^4.0.4",
@@ -30,10 +30,10 @@
   },
   "devDependencies": {
     "@types/node": "^17.0.42",
-    "@typescript-eslint/eslint-plugin": "^5.30.6",
-    "@typescript-eslint/parser": "^5.30.6",
+    "@typescript-eslint/eslint-plugin": "^5.30.7",
+    "@typescript-eslint/parser": "^5.30.7",
     "@vitejs/plugin-legacy": "^2.0.0",
-    "@vitejs/plugin-vue": "^3.0.0",
+    "@vitejs/plugin-vue": "^3.0.1",
     "@vitejs/plugin-vue-jsx": "^2.0.0",
     "amfe-flexible": "^2.2.1",
     "autoprefixer": "^10.4.7",
@@ -41,7 +41,7 @@
     "consola": "^2.15.3",
     "cross-env": "^7.0.3",
     "eruda": "^2.5.0",
-    "eslint": "^8.19.0",
+    "eslint": "^8.20.0",
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-prettier": "^4.2.1",
     "eslint-plugin-vue": "^9.2.0",
@@ -52,7 +52,7 @@
     "postcss-html": "1.5.0",
     "postcss-less": "^6.0.0",
     "prettier": "^2.7.1",
-    "rollup-plugin-visualizer": "^5.6.0",
+    "rollup-plugin-visualizer": "^5.7.1",
     "stylelint": "^14.9.1",
     "stylelint-config-prettier": "^9.0.3",
     "stylelint-config-recommended": "^8.0.0",
@@ -62,7 +62,7 @@
     "typescript": "^4.6.3",
     "unplugin-auto-import": "^0.9.3",
     "unplugin-vue-components": "^0.21.1",
-    "vite": "^3.0.0",
+    "vite": "^3.0.2",
     "vite-plugin-compression": "^0.5.1",
     "vite-plugin-eruda": "^1.0.1",
     "vite-plugin-imagemin": "^0.6.1",
@@ -74,7 +74,7 @@
     "vite-plugin-svg-icons": "^2.0.1",
     "vite-plugin-vue-setup-extend": "^0.4.0",
     "vue-eslint-parser": "^9.0.3",
-    "vue-tsc": "^0.38.5"
+    "vue-tsc": "^0.38.8"
   },
   "husky": {
     "hooks": {
