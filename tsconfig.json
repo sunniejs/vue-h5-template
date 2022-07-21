@@ -35,8 +35,8 @@
     "src/**/*.vue",
     "types/**/*.d.ts",
     "types/**/*.ts",
-    "build/**/*.ts",
-    "build/**/*.d.ts",
+    "config/**/*.ts",
+    "config/**/*.d.ts",
     "mock/**/*.ts",
     "vite.config.ts"
   ],

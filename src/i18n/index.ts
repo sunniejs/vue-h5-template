@@ -1,9 +1,8 @@
-import { AnyObject } from '/#/global';
 import { createI18n } from 'vue-i18n';
 
 export function loadLang() {
   const modules: Record<string, any> = import.meta.glob('./lang/*.ts', { eager: true });
-  const langs: AnyObject = {};
+  const langs: Record<string, any> = {};
 
   for (const path in modules) {
     const name = path.replace(/(\.\/lang\/|\.ts)/g, '');

@@ -2,14 +2,13 @@ import { loginPassword } from '/@/api';
 import { useCookies } from '@vueuse/integrations/useCookies';
 import { defineStore } from 'pinia';
 import { watch } from 'vue';
-import { AnyObject } from '/#/global';
 
 const { VITE_TOKEN_KEY } = import.meta.env;
 const token = useCookies().get(VITE_TOKEN_KEY as string);
 
 interface StoreUser {
   token: string;
-  info: AnyObject;
+  info: Record<any, any>;
 }
 
 export const useUserStore = defineStore({
