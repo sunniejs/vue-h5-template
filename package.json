@@ -17,7 +17,7 @@
   },
   "dependencies": {
     "@nutui/nutui": "^3.1.22",
-    "@varlet/ui": "^1.27.17",
+    "@varlet/ui": "^1.27.18",
     "@vueuse/core": "8.9.4",
     "@vueuse/integrations": "8.9.4",
     "axios": "0.27.2",
@@ -60,7 +60,7 @@
     "stylelint-config-standard": "^26.0.0",
     "stylelint-order": "^5.0.0",
     "typescript": "^4.6.3",
-    "unplugin-auto-import": "^0.9.3",
+    "unplugin-auto-import": "^0.10.0",
     "unplugin-vue-components": "^0.21.1",
     "vite": "^3.0.2",
     "vite-plugin-compression": "^0.5.1",
