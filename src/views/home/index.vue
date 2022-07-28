@@ -37,18 +37,21 @@ let list = ref([
 <style lang="scss" scoped>
 .index-container {
   .warpper {
-    padding: 12px;
+    padding: 24px;
     background: #fff;
     .demo-home__title {
+      display: flex;
+      align-items: center;
+      justify-content: center;
       margin: 0 0 6px;
-      font-size: 64px;
+      font-size: 56px;
       .demo-home__title img,
       .demo-home__title span {
         display: inline-block;
         vertical-align: middle;
       }
       img {
-        width: 32px;
+        width: 64px;
       }
       span {
         margin-left: 16px;
@@ -56,9 +59,10 @@ let list = ref([
       }
     }
     .demo-home__desc {
+      text-align: center;
       margin: 0 0 20px;
       color: rgba(69, 90, 100, 0.6);
-      font-size: 14px;
+      font-size: 28px;
     }
   }
 }
