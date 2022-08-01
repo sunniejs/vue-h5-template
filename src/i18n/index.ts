@@ -21,6 +21,11 @@ export const i18n = createI18n({
 
 export const i18nt = i18n.global.t;
 
-export function setLang(locale: string) {
-  i18n.global.locale = locale;
+export function setLang(locale?: string) {
+  if (locale) {
+    localStorage.setItem('lang', locale);
+  }
+  i18n.global.locale = locale || localStorage.getItem('lang') || '';
 }
+
+setLang();
