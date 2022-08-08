@@ -41,7 +41,6 @@
 <style scoped lang="scss">
   .login {
     padding: 20px;
-
     h2 {
       text-align: center;
       letter-spacing: 10px;
