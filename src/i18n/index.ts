@@ -19,8 +19,6 @@ export const i18n = createI18n({
   messages: loadLang(),
 });
 
-export const i18nt = i18n.global.t;
-
 export function setLang(locale?: string) {
   if (locale) {
     localStorage.setItem('lang', locale);

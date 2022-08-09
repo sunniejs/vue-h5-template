@@ -13,7 +13,7 @@
     <RouterView v-if="!$route.meta.keepAlive" :key="$route.path" /> -->
   </div>
   <nut-tabbar unactive-color="#364636" active-color="#1989fa" @tab-switch="tabSwitch" bottom v-model:visible="activeTab">
-    <nut-tabbar-item v-for="item in tabItem" :key="item" :tab-title="$t(`tabbar.${item.key}`)" :icon="item.icon" />
+    <nut-tabbar-item v-for="item in tabItem" :key="item.key" :tab-title="$t(`tabbar.${item.key}`)" :icon="item.icon" />
   </nut-tabbar>
 </template>
 
