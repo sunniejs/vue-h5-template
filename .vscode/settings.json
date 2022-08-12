@@ -1,4 +1,17 @@
 {
   "i18n-ally.localesPaths": ["src/i18n", "src/i18n/lang"],
-  "cSpell.words": ["browserslist", "consola", "eruda", "mockjs", "nutui", "pinia", "stylelint", "vant", "vite", "vitejs", "vueuse"]
+  "cSpell.words": [
+    "browserslist",
+    "consola",
+    "eruda",
+    "mockjs",
+    "nutui",
+    "pinia",
+    "stylelint",
+    "unplugin",
+    "vant",
+    "vite",
+    "vitejs",
+    "vueuse"
+  ]
 }
