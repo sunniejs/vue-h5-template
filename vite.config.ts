@@ -1,8 +1,7 @@
 import { createVitePlugins } from './config/vite/plugins';
 import { resolve } from 'path';
 import { ConfigEnv, UserConfigExport } from 'vite';
-
-// import { viteMockServe } from 'vite-plugin-mock';
+import proxy from './config/vite/proxy';
 
 const pathResolve = (dir: string) => {
   return resolve(process.cwd(), '.', dir);
@@ -35,6 +34,7 @@ export default function ({ command }: ConfigEnv): UserConfigExport {
     server: {
       host: true,
       hmr: true,
+      proxy: proxy,
     },
     plugins: createVitePlugins(isProduction),
     css: {
