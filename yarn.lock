@@ -7777,7 +7777,7 @@ vite-plugin-vue-setup-extend@^0.4.0:
     "@vue/compiler-sfc" "^3.2.29"
     magic-string "^0.25.7"
 
-vite@^3.0.8:
+vite@^3.0.7:
   version "3.0.8"
   resolved "https://registry.yarnpkg.com/vite/-/vite-3.0.8.tgz#aa095ad8e3e5da46d9ec7e878f262678965d6531"
   integrity sha512-AOZ4eN7mrkJiOLuw8IA7piS4IdOQyQCA81GxGsAQvAZzMRi9ZwGB3TOaYsj4uLAWK46T5L4AfQ6InNGlxX30IQ==
