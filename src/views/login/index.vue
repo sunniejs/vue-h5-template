@@ -13,7 +13,7 @@
   </div>
 </template>
 
-<script lang="ts" setup>
+<script lang="ts" setup name="LoginPage">
   import router from '/@/router';
   import { reactive, ref } from 'vue';
   import { useUserStore } from '/@/store/modules/user';

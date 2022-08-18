@@ -30,11 +30,19 @@
       <nut-button type="success">成功按钮</nut-button>
     </div>
   </section>
+  <section>
+    <div :class="['btn-add', i18n.global.locale]"></div>
+  </section>
 </template>
 
-<script setup></script>
+<script setup name="DemoPage">
+  import { i18n } from '/@/i18n';
+  // import { useI18n } from 'vue-i18n';
+  // const { locale } = useI18n();
+</script>
 
 <style lang="scss" scoped>
+  @import '../../styles/mixin.scss';
   section {
     .title {
       margin-bottom: 40px;

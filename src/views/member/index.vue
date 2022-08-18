@@ -22,7 +22,7 @@
   </nut-grid>
 </template>
 
-<script lang="ts" setup>
+<script lang="ts" setup name="MemberPage">
   // import { useUserStore } from '@/store/modules/user';
   import { useRouter } from 'vue-router';
 

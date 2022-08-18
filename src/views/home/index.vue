@@ -18,14 +18,15 @@
     <nut-button shape="square" size="small" type="default" @click="changeLang('en-us')">
       {{ $t('language.en') }}
     </nut-button>
+    <div :class="['btn-add', i18n.global.locale]"></div>
   </div>
   {{ getUserInfo }}
 </template>
 
-<script lang="ts" setup>
+<script lang="ts" setup name="HomePage">
   import { computed } from 'vue';
   import { useUserStore } from '/@/store/modules/user';
-  import { setLang } from '/@/i18n';
+  import { setLang, i18n } from '/@/i18n';
 
   let cellList = ['vue3', 'vite', 'vue-router', 'axios', 'Pinia', 'vue-i18n', 'vue-jsx', 'vatlet/vant/nutUI'];
   const userStore = useUserStore();
@@ -39,6 +40,7 @@
   };
 </script>
 <style lang="scss">
+  @import '../../styles/mixin.scss';
   .header {
     display: flex;
     justify-content: center;
@@ -72,5 +74,9 @@
 
   .btn-wrap {
     margin: 20px;
+    display: flex;
+  }
+  .btn-add {
+    @include main-lang-bg(302px, 82px, '/@/assets/button', 'add.png');
   }
 </style>
