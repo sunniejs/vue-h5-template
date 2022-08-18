@@ -2,7 +2,7 @@
   <nut-card :img-url="state.imgUrl" :title="state.title" :price="state.price" :vip-price="state.vipPrice" :shop-name="state.shopName" />
 </template>
 
-<script lang="ts" setup>
+<script lang="ts" setup name="ListPage">
   import { reactive } from 'vue';
 
   let state = reactive({

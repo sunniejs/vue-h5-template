@@ -17,7 +17,7 @@
   </nut-tabbar>
 </template>
 
-<script lang="ts" setup>
+<script lang="ts" setup name="BasicLayoutPage">
   import { useRouter } from 'vue-router';
 
   const tabItem = [

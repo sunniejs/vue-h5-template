@@ -13,7 +13,8 @@
     "lint:stylelint": "stylelint --cache --fix \"**/*.{vue,less,postcss,css,scss}\" --cache --cache-location node_modules/.cache/stylelint/",
     "lint:lint-staged": "lint-staged",
     "prepare": "husky install",
-    "deps": "yarn upgrade-interactive --latest"
+    "deps": "yarn upgrade-interactive --latest",
+    "commit": "git add . && git-cz"
   },
   "dependencies": {
     "@nutui/nutui": "^3.2.0",
@@ -45,6 +46,7 @@
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-prettier": "^4.2.1",
     "eslint-plugin-vue": "^9.3.0",
+    "git-cz": "^4.9.0",
     "husky": "8.0.1",
     "lint-staged": "13.0.3",
     "mockjs": "^1.1.0",
