@@ -13,7 +13,7 @@
   </nut-cell-group>
   <nut-cell-group :title="$t('home.cssMultiLanguage')" class="supportList">
     <nut-cell>
-      <div :class="['btn-add', i18n.global.locale]"></div>
+      <div :class="['btn-confirm', i18n.global.locale]"></div>
     </nut-cell>
   </nut-cell-group>
   <div class="btn-wrap">
@@ -43,7 +43,6 @@
   };
 </script>
 <style lang="scss">
-  @import '../../styles/mixin.scss';
   .header {
     display: flex;
     justify-content: center;
@@ -78,7 +77,7 @@
   .btn-wrap {
     margin: 20px;
   }
-  .btn-add {
-    @include main-lang-bg(302px, 82px, '/@/assets/button', 'add.png');
+  .btn-confirm {
+    @include main-lang-bg(302px, 82px, '/@/assets/button', 'confirm.png');
   }
 </style>
