@@ -1,0 +1,1 @@
+import{_ as e,c as i,o as t,a as l}from"./app.614cd5ee.js";const g=JSON.parse('{"title":"vite","description":"","frontmatter":{},"headers":[],"relativePath":"guide/vue3/vite.md","lastUpdated":1660905312000}'),a={name:"guide/vue3/vite.md"},n=l("",4),r=[n];function s(o,p,u,_,c,v){return t(),i("div",null,r)}const m=e(a,[["render",s]]);export{g as __pageData,m as default};
