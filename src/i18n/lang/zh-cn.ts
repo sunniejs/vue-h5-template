@@ -13,5 +13,6 @@ export const lang = {
   introduction: '一个快速开发vue3的移动端模板',
   home: {
     support: '支持',
+    cssMultiLanguage: 'css图片多语言',
   },
 };

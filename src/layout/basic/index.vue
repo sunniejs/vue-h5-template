@@ -62,7 +62,7 @@
   .main-page {
     box-sizing: border-box;
     padding: 40px;
-    height: calc(100vh - 88px);
+    height: calc(100vh - 200px);
     overflow-y: scroll;
     overflow-x: hidden;
   }
