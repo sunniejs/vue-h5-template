@@ -35,8 +35,7 @@ module.exports = {
 function nav() {
   return [
     { text: "介绍", link: "/guide/" },
-    { text: "掘金", link: "https://juejin.cn/user/3016715636842622" },
-    { text: "加入我们", link: "https://github.com/tobe-fe-dalao/fastool" },
+    { text: "加入我们", link: "https://github.com/sunniejs/vue-h5-template" },
   ];
 }
 
