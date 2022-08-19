@@ -1,7 +1,7 @@
 module.exports = {
   lang: "zh-CN",
   title: "Vue-H5-Template",
-  base: "/fastool/",
+  base: "/vue-h5-template/",
   description: "一个开箱即用的vue h5脚手架",
   lastUpdated: true,
   head: [
