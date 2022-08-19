@@ -11,6 +11,11 @@
   <nut-cell-group :title="$t('home.support')" class="supportList">
     <nut-cell v-for="(item, index) in cellList" :key="index" :title="item" icon="Check" />
   </nut-cell-group>
+  <nut-cell-group :title="$t('home.cssMultiLanguage')" class="supportList">
+    <nut-cell>
+      <div :class="['btn-add', i18n.global.locale]"></div>
+    </nut-cell>
+  </nut-cell-group>
   <div class="btn-wrap">
     <nut-button shape="square" size="small" type="default" @click="changeLang('zh-cn')">
       {{ $t('language.zh') }}
@@ -18,7 +23,6 @@
     <nut-button shape="square" size="small" type="default" @click="changeLang('en-us')">
       {{ $t('language.en') }}
     </nut-button>
-    <div :class="['btn-add', i18n.global.locale]"></div>
   </div>
   {{ getUserInfo }}
 </template>
@@ -27,7 +31,6 @@
   import { computed } from 'vue';
   import { useUserStore } from '/@/store/modules/user';
   import { setLang, i18n } from '/@/i18n';
-
   let cellList = ['vue3', 'vite', 'vue-router', 'axios', 'Pinia', 'vue-i18n', 'vue-jsx', 'vatlet/vant/nutUI'];
   const userStore = useUserStore();
   const getUserInfo = computed(() => {
@@ -74,7 +77,6 @@
 
   .btn-wrap {
     margin: 20px;
-    display: flex;
   }
   .btn-add {
     @include main-lang-bg(302px, 82px, '/@/assets/button', 'add.png');

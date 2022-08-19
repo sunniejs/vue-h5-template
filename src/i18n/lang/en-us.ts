@@ -13,5 +13,6 @@ export const lang = {
   introduction: 'A rapid development vue3 of mobile terminal template',
   home: {
     support: 'support',
+    cssMultiLanguage: 'CSS picture multi-language',
   },
 };
