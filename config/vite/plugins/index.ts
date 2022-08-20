@@ -56,15 +56,14 @@ export function createVitePlugins(isBuild: boolean) {
 
   // rollup-plugin-visualizer
   vitePlugins.push(ConfigVisualizerConfig());
+  // vite-plugin-mock
+  vitePlugins.push(ConfigMockPlugin(isBuild));
   if (isBuild) {
     // vite-plugin-imagemin
     vitePlugins.push(ConfigImageminPlugin());
 
     // vite-plugin-svg-icons
     vitePlugins.push(ConfigSvgIconsPlugin(isBuild));
-
-    // vite-plugin-mock
-    vitePlugins.push(ConfigMockPlugin(isBuild));
   }
   return vitePlugins;
 }
