@@ -77,8 +77,6 @@ yarn dev
 }
 ```
 
-[▲ 回顶部](#top)
-
 ### <span id="viewport">✅ viewport 适配方案 </span>
 
 不用担心，项目已经配置好了 `viewport` 适配，下面仅做介绍：
@@ -122,7 +120,7 @@ module.exports = {
 我们知道 `1rem` 等于 `html` 根元素设定的 `font-size` 的 `px` 值。Vant UI 设置 `rootValue: 37.5` , 你可以看到在 iPhone 6 下看到 （ `1rem 等于 37.5px` ）：
 
 ```html
-<html data-dpr="1" style="font-size: 37.5px;"> </html>
+<html data-dpr="1" style="font-size: 37.5px;"></html>
 ```
 
 切换不同的机型，根元素可能会有不同的 `font-size` 。当你写 css px 样式时，会被程序换算成 `rem` 达到适配。
@@ -156,8 +154,6 @@ module.exports = {
 </style>
 ```
 
-[▲ 回顶部](#top)
-
 ### <span id="ui">✅ 多 UI 组件库供选择 </span>
 
 Vite 构建工具，使用 vite-plugin-style-import 和 unplugin-vue-components/vite 实现按需引入。
@@ -188,8 +184,8 @@ nutUI 没有按需加载的 resolvers，style 需要自己配置按需加载
 
 ```javascript
 // 按需全局引入nutUI组件
-import Vue from 'vue';
-import { Button, Cell, CellGroup } from '@nutui/nutui';
+import Vue from "vue";
+import { Button, Cell, CellGroup } from "@nutui/nutui";
 export const nutUiComponents = [Button, Cell, CellGroup];
 
 // 在main.ts文件中引入
@@ -217,8 +213,6 @@ vant 和 varlet 只需删除对应的 resolvers 即可
 
 删除后需全局搜索删除不需要的组件，避免报错
 
-[▲ 回顶部](#top)
-
 ### <span id="Pinia">✅ Pinia 状态管理</span>
 
 下一代 vuex，使用极其方便，ts 兼容好
@@ -236,13 +230,11 @@ vant 和 varlet 只需删除对应的 resolvers 即可
 
 ```html
 <script lang="ts" setup>
-  import { useUserStore } from '@/store/modules/user';
+  import { useUserStore } from "@/store/modules/user";
   const userStore = useUserStore();
   userStore.login();
 </script>
 ```
-
-[▲ 回顶部](#top)
 
 ### <span id="router">✅ Vue-router </span>
 
@@ -253,16 +245,16 @@ vant 和 varlet 只需删除对应的 resolvers 即可
 前往:[vue.config.js 基础配置](#base)
 
 ```javascript
-import Vue from 'vue';
-import { createRouter, createWebHistory, Router } from 'vue-router';
+import Vue from "vue";
+import { createRouter, createWebHistory, Router } from "vue-router";
 
 Vue.use(Router);
 export const router = [
   {
-    name: 'root',
-    path: '/',
-    redirect: '/home',
-    component: () => import('@/layout/basic/index.vue'),
+    name: "root",
+    path: "/",
+    redirect: "/home",
+    component: () => import("@/layout/basic/index.vue"),
   },
 ];
 
@@ -276,8 +268,6 @@ export default router;
 
 更多:[Vue Router](https://router.vuejs.org/zh/introduction.html)
 
-[▲ 回顶部](#top)
-
 ### <span id="axios">✅ Axios 封装及接口管理</span>
 
 `utils/request.js` 封装 axios , 开发者需要根据后台接口做修改。
@@ -287,11 +277,11 @@ export default router;
 - `service.interceptors.response.use` 里可以对接口返回数据处理，比如 401 删除本地信息，重新登录
 
 ```javascript
-import axios from 'axios';
-import store from '@/store';
-import { Toast } from 'vant';
+import axios from "axios";
+import store from "@/store";
+import { Toast } from "vant";
 // 根据环境不同引入不同api地址
-import { baseApi } from '@/config';
+import { baseApi } from "@/config";
 // create an axios instance
 const service = axios.create({
   baseURL: baseApi, // url = base api url + request url
@@ -310,7 +300,7 @@ service.interceptors.request.use(
       });
     }
     if (store.getters.token) {
-      config.headers['X-Token'] = '';
+      config.headers["X-Token"] = "";
     }
     return config;
   },
@@ -318,7 +308,7 @@ service.interceptors.request.use(
     // do something with request error
     console.log(error); // for debug
     return Promise.reject(error);
-  },
+  }
 );
 // respone拦截器
 service.interceptors.response.use(
@@ -328,20 +318,20 @@ service.interceptors.response.use(
     if (res.status && res.status !== 200) {
       // 登录超时,重新登录
       if (res.status === 401) {
-        store.dispatch('FedLogOut').then(() => {
+        store.dispatch("FedLogOut").then(() => {
           location.reload();
         });
       }
-      return Promise.reject(res || 'error');
+      return Promise.reject(res || "error");
     } else {
       return Promise.resolve(res);
     }
   },
   (error) => {
     Toast.clear();
-    console.log('err' + error); // for debug
+    console.log("err" + error); // for debug
     return Promise.reject(error);
-  },
+  }
 );
 export default service;
 ```
@@ -357,16 +347,16 @@ export default service;
 - `hideloading` 默认 `false`, 设置为 `true` 后，不显示 loading ui 交互中有些接口不需要让用户感知
 
 ```javascript
-import qs from 'qs';
+import qs from "qs";
 // axios
-import request from '@/utils/request';
+import request from "@/utils/request";
 //user api
 
 // 用户信息
 export function getUserInfo(params) {
   return request({
-    url: '/user/userinfo',
-    method: 'post',
+    url: "/user/userinfo",
+    method: "post",
     data: qs.stringify(params),
     hideloading: true, // 隐藏 loading 组件
   });
@@ -377,17 +367,15 @@ export function getUserInfo(params) {
 
 ```javascript
 // 请求接口
-import { getUserInfo } from '@/api/user.js';
+import { getUserInfo } from "@/api/user.js";
 
 const params = {
-  user: 'sunnie',
+  user: "sunnie",
 };
 getUserInfo(params)
   .then(() => {})
   .catch(() => {});
 ```
-
-[▲ 回顶部](#top)
 
 ### <span id="base">✅ vite.config.ts 基础配置 </span>
 
@@ -405,10 +393,10 @@ publicPath: '/app/',
 
 ```javascript
 export default function ({ command }: ConfigEnv): UserConfigExport {
-  const isProduction = command === 'build';
+  const isProduction = command === "build";
   return {
     server: {
-      host: '0.0.0.0',
+      host: "0.0.0.0",
     },
     plugins: [
       vue(),
@@ -418,8 +406,8 @@ export default function ({ command }: ConfigEnv): UserConfigExport {
       }),
       eruda(),
       viteMockServe({
-        mockPath: './src/mock',
-        localEnabled: command === 'serve',
+        mockPath: "./src/mock",
+        localEnabled: command === "serve",
         logger: true,
       }),
     ],
@@ -434,8 +422,6 @@ export default function ({ command }: ConfigEnv): UserConfigExport {
   };
 }
 ```
-
-[▲ 回顶部](#top)
 
 ### <span id="alias">✅ 配置 alias 别名 </span>
 
@@ -459,8 +445,6 @@ resolve: {
 },
 ```
 
-[▲ 回顶部](#top)
-
 ### <span id="proxy">✅ 配置 proxy 跨域 </span>
 
 ```javascript
@@ -474,8 +458,6 @@ server: {
     }
 },
 ```
-
-[▲ 回顶部](#top)
 
 ### <span id="lint">✅ Eslint+Pettier+stylelint 统 ˜ 开发规范 </span>
 

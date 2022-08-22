@@ -1,4 +1,4 @@
-### <span id="ie">✅ 添加 IE 兼容 </span>
+# 添加 IE 兼容
 
 之前的方式 会报 `@babel/polyfill` is deprecated. Please, use required parts of `core-js` and
 `regenerator-runtime/runtime` separately
@@ -14,17 +14,19 @@ npm i --save core-js regenerator-runtime
 ```javascript
 // 兼容 IE
 // https://github.com/zloirock/core-js/blob/master/docs/2019-03-19-core-js-3-babel-and-a-look-into-the-future.md#babelpolyfill
-import 'core-js/stable'
-import 'regenerator-runtime/runtime'
+import "core-js/stable";
+import "regenerator-runtime/runtime";
 ```
 
 配置 `babel.config.js`
 
 ```javascript
-const plugins = []
+const plugins = [];
 
 module.exports = {
-    presets: [['@vue/cli-plugin-babel/preset', { useBuiltIns: 'usage', corejs: 3 }]],
-    plugins,
-}
+  presets: [
+    ["@vue/cli-plugin-babel/preset", { useBuiltIns: "usage", corejs: 3 }],
+  ],
+  plugins,
+};
 ```

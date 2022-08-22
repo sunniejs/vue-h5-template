@@ -1,10 +1,10 @@
-### <span id="env">✅ 配置多环境变量 </span>
+# 配置多环境变量
 
 `package.json` 里的 `scripts` 配置 `serve` `stage` `build`，通过 `--mode xxx` 来执行不同环境
 
--   通过 `npm run serve` 启动本地 , 执行 `development`
--   通过 `npm run stage` 打包测试 , 执行 `staging`
--   通过 `npm run build` 打包正式 , 执行 `production`
+- 通过 `npm run serve` 启动本地 , 执行 `development`
+- 通过 `npm run stage` 打包测试 , 执行 `staging`
+- 通过 `npm run build` 打包正式 , 执行 `production`
 
 ```javascript
 "scripts": {
@@ -22,7 +22,7 @@
 
 在项目根目录中新建`.env.*`
 
--   .env.development 本地开发环境配置
+- .env.development 本地开发环境配置
 
 ```bash
 NODE_ENV='development'
@@ -31,7 +31,7 @@ VUE_APP_ENV = 'development'
 
 ```
 
--   .env.staging 测试环境配置
+- .env.staging 测试环境配置
 
 ```bash
 NODE_ENV='production'
@@ -39,7 +39,7 @@ NODE_ENV='production'
 VUE_APP_ENV = 'staging'
 ```
 
--   .env.production 正式环境配置
+- .env.production 正式环境配置
 
 ```bash
  NODE_ENV='production'
@@ -58,8 +58,8 @@ config/index.js
 
 ```javascript
 // 根据环境引入不同配置 process.env.NODE_ENV
-const config = require('./env.' + process.env.VUE_APP_ENV)
-module.exports = config
+const config = require("./env." + process.env.VUE_APP_ENV);
+module.exports = config;
 ```
 
 配置对应环境的变量，拿本地环境文件 `env.development.js` 举例，用户可以根据需求修改
@@ -67,18 +67,18 @@ module.exports = config
 ```javascript
 // 本地环境配置
 module.exports = {
-    title: 'vue-h5-template',
-    baseUrl: 'http://localhost:9018', // 项目地址
-    baseApi: 'https://test.xxx.com/api', // 本地api请求地址
-    APPID: 'xxx',
-    APPSECRET: 'xxx',
-}
+  title: "vue-h5-template",
+  baseUrl: "http://localhost:9018", // 项目地址
+  baseApi: "https://test.xxx.com/api", // 本地api请求地址
+  APPID: "xxx",
+  APPSECRET: "xxx",
+};
 ```
 
 根据环境不同，变量就会不同了
 
 ```javascript
 // 根据环境不同引入不同baseApi地址
-import { baseApi } from '@/config'
-console.log(baseApi)
+import { baseApi } from "@/config";
+console.log(baseApi);
 ```

@@ -56,3 +56,11 @@ nutUI 需删除`src/plugins/nutUI.ts`和`main.ts`文件下的引入
 vant 和 varlet 只需删除对应的 resolvers 即可
 
 删除后需全局搜索删除不需要的组件，避免报错
+
+## 参考文档
+
+- [nutUI](https://nutui.jd.com/#/zh-CN/component/button)
+
+- [vant](https://vant-contrib.gitee.io/vant/#/zh-CN)
+
+- [varlet](https://varlet-varletjs.vercel.app/#/zh-CN/button)

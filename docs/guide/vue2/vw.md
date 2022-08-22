@@ -1,9 +1,9 @@
-### <span id="vw">✅ vm 适配方案 </span>
+# vm 适配方案
 
 本项目使用的是 `rem` 的 适配方案，其实无论你使用哪种方案，都不需要你去计算 12px 是多少 `rem` 或者 `vw`, 会有专门的工具去帮你做
 。如果你想用 `vw`,你可以按照下面的方式切换。
 
-#### 1.安装依赖
+## 1.安装依赖
 
 ```bash
 
@@ -11,7 +11,7 @@ npm install postcss-px-to-viewport -D
 
 ```
 
-#### 2.修改 .postcssrc.js
+## 2.修改 .postcssrc.js
 
 将根目录下 .postcssrc.js 文件修改如下
 
@@ -40,7 +40,7 @@ module.exports = {
 };
 ```
 
-#### 3.删除原来的 rem 相关代码
+## 3.删除原来的 rem 相关代码
 
 src/main.js 删除如下代码
 
@@ -57,5 +57,3 @@ package.json 删除如下代码
 ```
 
 运行起来，F12 元素 css style 就是 vw 单位了
-
-[▲ 回顶部](#top)
