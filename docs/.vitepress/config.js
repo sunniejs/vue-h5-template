@@ -64,6 +64,7 @@ function sidebarGuide() {
         { text: "vite.config.ts 基础配置", link: "/guide/vue3/base" },
         { text: "alias", link: "/guide/vue3/base" },
         { text: "proxy 跨域", link: "/guide/vue3/base" },
+        { text: "多语言解决方案", link: "/guide/vue3/i18n" },
         {
           text: "Eslint+Pettier+stylelint 统一开发规范",
           link: "/guide/vue3/lint",
