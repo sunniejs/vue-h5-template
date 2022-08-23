@@ -43,7 +43,7 @@ function nav() {
 function sidebarGuide() {
   return [
     {
-      text: "介绍",
+      text: "前言",
       collapsible: true,
       items: [
         { text: "介绍", link: "/guide/" },
