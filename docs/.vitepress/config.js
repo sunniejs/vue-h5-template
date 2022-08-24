@@ -26,8 +26,8 @@ module.exports = {
       copyright: "Copyright © 2022-present Fonghehe",
     },
     algolia: {
-      appId: "5ZHOMUV2DI",
-      apiKey: "d1de686f0fd4404abc0897093c246ffb",
+      appId: "CV2I8NGBKZ",
+      apiKey: "63c37a467485b00383daacf7340b4ca0",
       indexName: "vue-h5-template",
     },
   },
