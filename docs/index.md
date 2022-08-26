@@ -8,7 +8,7 @@ hero:
   name: Vue-H5-Template
   text: 一个快速开发的Vue H5移动端脚手架
   image:
-    src: http://www.sunniejs.cn/static/weapp/logo.png
+    src: https://cdn.jsdelivr.net/gh/fonghehe/picture/vue-h5-template/logo.png
     alt: sunnie
   actions:
     - theme: brand

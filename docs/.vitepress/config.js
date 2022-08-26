@@ -36,7 +36,8 @@ module.exports = {
 function nav() {
   return [
     { text: "介绍", link: "/guide/" },
-    { text: "加入我们", link: "https://github.com/sunniejs/vue-h5-template" },
+    { text: "加入我们", link: "/guide/about/" },
+    { text: "github仓库", link: "https://github.com/sunniejs/vue-h5-template" },
   ];
 }
 
