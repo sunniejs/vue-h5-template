@@ -13,7 +13,7 @@
   </nut-cell-group>
   <nut-cell-group :title="$t('home.cssMultiLanguage')" class="supportList">
     <nut-cell>
-      <div :class="['btn-confirm', i18n.global.locale]"></div>
+      <div :class="['btn-confirm', locale]"></div>
     </nut-cell>
   </nut-cell-group>
   <div class="btn-wrap">
@@ -30,14 +30,16 @@
 <script lang="ts" setup name="HomePage">
   import { computed } from 'vue';
   import { useUserStore } from '/@/store/modules/user';
-  import { setLang, i18n } from '/@/i18n';
+  import { setLang } from '/@/i18n';
+  import { useI18n } from 'vue-i18n';
+  const { locale } = useI18n();
   let cellList = ['vue3', 'vite', 'vue-router', 'axios', 'Pinia', 'vue-i18n', 'vue-jsx', 'vatlet/vant/nutUI'];
   const userStore = useUserStore();
   const getUserInfo = computed(() => {
     const { name = '' } = userStore.getUserInfo || {};
     return name;
   });
-
+  console.log('生产环境需移除', locale.value);
   const changeLang = (type) => {
     setLang(type);
   };
