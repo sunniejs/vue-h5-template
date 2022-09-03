@@ -31,11 +31,11 @@
     "vue-router": "^4.1.5"
   },
   "devDependencies": {
-    "@typescript-eslint/eslint-plugin": "^5.36.0",
-    "@typescript-eslint/parser": "^5.36.0",
+    "@typescript-eslint/eslint-plugin": "^5.36.1",
+    "@typescript-eslint/parser": "^5.36.1",
     "@vitejs/plugin-legacy": "^2.0.1",
     "@vitejs/plugin-vue": "^3.0.3",
-    "@vitejs/plugin-vue-jsx": "^2.0.0",
+    "@vitejs/plugin-vue-jsx": "^2.0.1",
     "amfe-flexible": "^2.2.1",
     "autoprefixer": "^10.4.8",
     "cnjm-postcss-px-to-viewport": "^1.0.0",
@@ -70,14 +70,14 @@
     "vite-plugin-eruda": "^1.0.1",
     "vite-plugin-imagemin": "^0.6.1",
     "vite-plugin-mock": "^2.9.6",
-    "vite-plugin-pages": "^0.25.0",
+    "vite-plugin-pages": "^0.26.0",
     "vite-plugin-progress": "^0.0.3",
     "vite-plugin-restart": "^0.2.0",
     "vite-plugin-style-import": "^2.0.0",
     "vite-plugin-svg-icons": "^2.0.1",
     "vite-plugin-vue-setup-extend": "^0.4.0",
     "vue-eslint-parser": "^9.0.3",
-    "vue-tsc": "^0.40.4"
+    "vue-tsc": "^0.40.5"
   },
   "husky": {
     "hooks": {
