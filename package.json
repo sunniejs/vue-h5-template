@@ -1,0 +1,39 @@
+{
+  "name": "vue-h5-template",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "serve": "vue-cli-service serve",
+    "build": "vue-cli-service build",
+    "lint": "vue-cli-service lint",
+    "deps": "yarn upgrade-interactive --latest"
+  },
+  "dependencies": {
+    "@nutui/nutui": "^3.2.2",
+    "@varlet/ui": "^1.27.20",
+    "axios": "^0.27.2",
+    "core-js": "^3.25.1",
+    "mitt": "^3.0.0",
+    "unplugin-vue-components": "^0.22.7",
+    "vant": "^3.6.2",
+    "vue": "^3.2.39",
+    "vue-router": "^4.0.3",
+    "vuex": "^4.0.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.19.1",
+    "@babel/eslint-parser": "^7.19.1",
+    "@vue/cli-plugin-babel": "~5.0.8",
+    "@vue/cli-plugin-eslint": "~5.0.8",
+    "@vue/cli-plugin-router": "~5.0.8",
+    "@vue/cli-plugin-vuex": "~5.0.8",
+    "@vue/cli-service": "~5.0.8",
+    "eslint": "^8.23.1",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-prettier": "^4.0.0",
+    "eslint-plugin-vue": "^9.5.1",
+    "less": "^4.0.0",
+    "less-loader": "^11.0.0",
+    "prettier": "^2.4.1"
+  }
+}
