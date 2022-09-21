@@ -6,8 +6,6 @@ import router from '/@/router';
 import store from '/@/store';
 import './assets/font/iconfont.css';
 import './assets/app.css';
-// import 'amfe-flexible';
-import 'vue-global-api';
 
 const app = createApp(App);
 
