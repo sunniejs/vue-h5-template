@@ -1,6 +1,6 @@
 <template>
   <header class="header">
-    <img src="https://www.sunniejs.cn/static/weapp/logo.png" /><span> {{ $t('title') }}</span>
+    <img src="https://cdn.jsdelivr.net/gh/fonghehe/picture/vue-h5-template/logo.png" /><span> {{ $t('title') }}</span>
   </header>
   <div class="intro-header">
     <div>{{ $t('introduction') }}</div>
