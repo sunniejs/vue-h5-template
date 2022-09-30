@@ -17,7 +17,7 @@
     "commit": "git add . && git-cz"
   },
   "dependencies": {
-    "@nutui/nutui": "^3.2.2",
+    "@nutui/nutui": "^3.2.3",
     "@varlet/ui": "^1.27.20",
     "@vueuse/core": "9.3.0",
     "@vueuse/integrations": "9.3.0",
@@ -52,7 +52,7 @@
     "husky": "8.0.1",
     "lint-staged": "13.0.3",
     "mockjs": "^1.1.0",
-    "postcss": "^8.4.16",
+    "postcss": "^8.4.17",
     "postcss-html": "1.5.0",
     "postcss-less": "^6.0.0",
     "prettier": "^2.7.1",
@@ -73,7 +73,7 @@
     "vite-plugin-imagemin": "^0.6.1",
     "vite-plugin-mock": "^2.9.6",
     "vite-plugin-pages": "^0.26.0",
-    "vite-plugin-progress": "^0.0.4",
+    "vite-plugin-progress": "^0.0.5",
     "vite-plugin-restart": "^0.2.0",
     "vite-plugin-style-import": "^2.0.0",
     "vite-plugin-svg-icons": "^2.0.1",

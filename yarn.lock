@@ -601,10 +601,10 @@
     "@nodelib/fs.scandir" "2.1.5"
     fastq "^1.6.0"
 
-"@nutui/nutui@^3.2.2":
-  version "3.2.2"
-  resolved "https://registry.yarnpkg.com/@nutui/nutui/-/nutui-3.2.2.tgz#f0903d563182d8dfb67217431b5997671b8417c8"
-  integrity sha512-5flWohg17UkAEGNq7I5R+yURHCPqZP/0ORVFe+lVFAQ87hz60qfyTdLgeasTng7IbKfTkXv1qTa7SmN/VBMk5A==
+"@nutui/nutui@^3.2.3":
+  version "3.2.3"
+  resolved "https://registry.yarnpkg.com/@nutui/nutui/-/nutui-3.2.3.tgz#9e24cf1f28be0ba45b08ac6b29f1c95b5fd2856e"
+  integrity sha512-0uNVN0NP+8UedyH8nl7aaubflsOcHoX/ts/gBdjUy9LmCBiUDyiUGxpSh7vhXsrXWEbFw6qCNsXpkmvlPUBLkg==
   dependencies:
     sass "^1.50.0"
     vscode "^1.1.37"
@@ -6274,6 +6274,15 @@ postcss@^8.4.16:
     picocolors "^1.0.0"
     source-map-js "^1.0.2"
 
+postcss@^8.4.17:
+  version "8.4.17"
+  resolved "https://registry.yarnpkg.com/postcss/-/postcss-8.4.17.tgz#f87863ec7cd353f81f7ab2dec5d67d861bbb1be5"
+  integrity sha512-UNxNOLQydcOFi41yHNMcKRZ39NeXlr8AxGuZJsdub8vIb12fHzcq37DTU/QtbI6WLxNg2gF9Z+8qtRwTj1UI1Q==
+  dependencies:
+    nanoid "^3.3.4"
+    picocolors "^1.0.0"
+    source-map-js "^1.0.2"
+
 posthtml-parser@^0.2.0, posthtml-parser@^0.2.1:
   version "0.2.1"
   resolved "https://registry.yarnpkg.com/posthtml-parser/-/posthtml-parser-0.2.1.tgz#35d530de386740c2ba24ff2eb2faf39ccdf271dd"
@@ -7955,10 +7964,10 @@ vite-plugin-pages@^0.26.0:
     picocolors "^1.0.0"
     yaml "^2.1.1"
 
-vite-plugin-progress@^0.0.4:
-  version "0.0.4"
-  resolved "https://registry.yarnpkg.com/vite-plugin-progress/-/vite-plugin-progress-0.0.4.tgz#aae132d4975c023a929b6959d8231f7bbe7b519f"
-  integrity sha512-y9W2IHHzwnYL1G4vZi3P0VESWH/xvoUjarPu22it/eTp3NvxiZddMUC6dEpyHMViIMmUaPpqyJUOrZNwTN0cew==
+vite-plugin-progress@^0.0.5:
+  version "0.0.5"
+  resolved "https://registry.yarnpkg.com/vite-plugin-progress/-/vite-plugin-progress-0.0.5.tgz#6c580405acf5e2d47cce24ec61e471a1aeeec820"
+  integrity sha512-lbIXhMZJlvvynA1LHx08gcxNQjM2CjTXSvisoTZc7ynXHZ87ULbMM756M9163dQmDnn18fiwnL3t/BQQhGsVEg==
   dependencies:
     picocolors "^1.0.0"
     progress "^2.0.3"
