@@ -33,13 +33,14 @@
   import { setLang } from '/@/i18n';
   import { useI18n } from 'vue-i18n';
   const { locale } = useI18n();
+
   let cellList = ['vue3', 'vite', 'vue-router', 'axios', 'Pinia', 'vue-i18n', 'vue-jsx', 'vatlet/vant/nutUI'];
   const userStore = useUserStore();
   const getUserInfo = computed(() => {
     const { name = '' } = userStore.getUserInfo || {};
     return name;
   });
-  console.log('生产环境需移除', locale.value);
+
   const changeLang = (type) => {
     setLang(type);
   };

@@ -1,14 +1,14 @@
 <template>
-  <Suspense>
-    <template #default>
-      <router-view v-slot="{ Component, route }">
-        <keep-alive>
-          <component :is="Component" v-if="route.meta && route.meta.keepAlive" :key="route.meta.usePathKey ? route.fullPath : undefined" />
-        </keep-alive>
-        <component :is="Component" v-if="!(route.meta && route.meta.keepAlive)" :key="route.meta.usePathKey ? route.fullPath : undefined" />
-      </router-view>
-    </template>
-    <template #fallback> Loading... </template>
-  </Suspense>
+  <router-view />
 </template>
-<script setup></script>
+<script setup lang="ts"></script>
+
+<style>
+  #app {
+    font-family: Avenir, Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    color: #2c3e50;
+    background-color: var(--color-bg-1);
+  }
+</style>

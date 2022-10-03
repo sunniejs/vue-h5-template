@@ -25,5 +25,3 @@ export function setLang(locale?: string) {
   }
   i18n.global.locale.value = locale || localStorage.getItem('lang') || '';
 }
-
-setLang();
