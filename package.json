@@ -21,13 +21,13 @@
     "@varlet/ui": "^1.27.20",
     "@vueuse/core": "9.3.0",
     "@vueuse/integrations": "9.3.0",
-    "axios": "0.27.2",
+    "axios": "1.1.2",
     "dayjs": "^1.11.5",
     "mitt": "^3.0.0",
     "pinia": "^2.0.22",
     "pinia-plugin-persistedstate": "^2.2.0",
     "universal-cookie": "^4.0.4",
-    "vant": "^3.6.3",
+    "vant": "^3.6.4",
     "vue": "^3.2.40",
     "vue-i18n": "^9.2.2",
     "vue-router": "^4.1.5"
@@ -44,7 +44,7 @@
     "consola": "^2.15.3",
     "cross-env": "^7.0.3",
     "eruda": "^2.5.0",
-    "eslint": "^8.24.0",
+    "eslint": "^8.25.0",
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-prettier": "^4.2.1",
     "eslint-plugin-vue": "^9.6.0",
@@ -63,11 +63,11 @@
     "stylelint-config-recommended-vue": "^1.4.0",
     "stylelint-config-standard": "^28.0.0",
     "stylelint-order": "^5.0.0",
-    "terser": "^5.15.0",
+    "terser": "^5.15.1",
     "typescript": "^4.8.4",
     "unplugin-auto-import": "^0.11.2",
-    "unplugin-vue-components": "^0.22.7",
-    "vite": "^3.1.4",
+    "unplugin-vue-components": "^0.22.8",
+    "vite": "^3.1.6",
     "vite-plugin-compression": "^0.5.1",
     "vite-plugin-eruda": "^1.0.1",
     "vite-plugin-imagemin": "^0.6.1",
@@ -79,7 +79,7 @@
     "vite-plugin-svg-icons": "^2.0.1",
     "vite-plugin-vue-setup-extend": "^0.4.0",
     "vue-eslint-parser": "^9.1.0",
-    "vue-tsc": "^0.40.13"
+    "vue-tsc": "^1.0.0"
   },
   "husky": {
     "hooks": {
