@@ -1,4 +1,4 @@
-import type { ComponentRenderProxy, VNode, VNodeChild, ComponentPublicInstance, FunctionalComponent, PropType as VuePropType } from 'vue';
+import type { ComponentRenderProxy, VNode, VNodeChild, PropType as VuePropType } from 'vue';
 
 declare global {
   const __APP_INFO__: {
@@ -85,13 +85,4 @@ declare global {
       [elem: string]: any;
     }
   }
-}
-
-declare module 'vue' {
-  export type JSXComponent<Props = any> = { new (): ComponentPublicInstance<Props> } | FunctionalComponent<Props>;
-}
-
-declare module 'virtual:*' {
-  const result: any;
-  export default result;
 }
