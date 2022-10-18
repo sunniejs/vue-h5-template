@@ -18,7 +18,7 @@
   },
   "dependencies": {
     "@nutui/nutui": "^3.2.3",
-    "@varlet/ui": "^2.0.3",
+    "@varlet/ui": "^2.0.5",
     "@vueuse/core": "9.3.1",
     "@vueuse/integrations": "9.3.1",
     "axios": "1.1.3",
@@ -33,8 +33,8 @@
     "vue-router": "^4.1.5"
   },
   "devDependencies": {
-    "@typescript-eslint/eslint-plugin": "^5.40.0",
-    "@typescript-eslint/parser": "^5.40.0",
+    "@typescript-eslint/eslint-plugin": "^5.40.1",
+    "@typescript-eslint/parser": "^5.40.1",
     "@vitejs/plugin-legacy": "^2.2.0",
     "@vitejs/plugin-vue": "^3.1.2",
     "@vitejs/plugin-vue-jsx": "^2.0.1",
@@ -73,7 +73,7 @@
     "vite-plugin-eruda": "^1.0.1",
     "vite-plugin-imagemin": "^0.6.1",
     "vite-plugin-mock": "^2.9.6",
-    "vite-plugin-pages": "^0.26.0",
+    "vite-plugin-pages": "^0.27.0",
     "vite-plugin-progress": "^0.0.5",
     "vite-plugin-restart": "^0.2.0",
     "vite-plugin-style-import": "^2.0.0",

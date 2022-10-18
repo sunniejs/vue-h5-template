@@ -4,7 +4,7 @@
  */
 
 import AutoImport from 'unplugin-auto-import/vite';
-import { ElementPlusResolver } from 'unplugin-vue-components/resolvers';
+import { ElementPlusResolver, VarletUIResolver } from 'unplugin-vue-components/resolvers';
 
 export const AutoImportDeps = () => {
   return AutoImport({
@@ -17,6 +17,6 @@ export const AutoImportDeps = () => {
         '@vueuse/core': [],
       },
     ],
-    resolvers: [ElementPlusResolver()],
+    resolvers: [ElementPlusResolver(), VarletUIResolver()],
   });
 };
