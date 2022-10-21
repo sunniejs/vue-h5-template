@@ -17,12 +17,12 @@
     "commit": "git add . && git-cz"
   },
   "dependencies": {
-    "@nutui/nutui": "^3.2.3",
-    "@varlet/ui": "^2.0.5",
+    "@nutui/nutui": "^3.2.4",
+    "@varlet/ui": "^2.0.6",
     "@vueuse/core": "9.3.1",
     "@vueuse/integrations": "9.3.1",
     "axios": "1.1.3",
-    "dayjs": "^1.11.5",
+    "dayjs": "^1.11.6",
     "mitt": "^3.0.0",
     "pinia": "^2.0.23",
     "pinia-plugin-persistedstate": "^2.3.0",

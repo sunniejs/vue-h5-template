@@ -601,10 +601,10 @@
     "@nodelib/fs.scandir" "2.1.5"
     fastq "^1.6.0"
 
-"@nutui/nutui@^3.2.3":
-  version "3.2.3"
-  resolved "https://registry.yarnpkg.com/@nutui/nutui/-/nutui-3.2.3.tgz#9e24cf1f28be0ba45b08ac6b29f1c95b5fd2856e"
-  integrity sha512-0uNVN0NP+8UedyH8nl7aaubflsOcHoX/ts/gBdjUy9LmCBiUDyiUGxpSh7vhXsrXWEbFw6qCNsXpkmvlPUBLkg==
+"@nutui/nutui@^3.2.4":
+  version "3.2.4"
+  resolved "https://registry.yarnpkg.com/@nutui/nutui/-/nutui-3.2.4.tgz#7c5d86f2d53eaea575e7ff5b482ff8685cbcc740"
+  integrity sha512-98Y8Z+wmfcHRTgAKZXyUom3xDksMoUSTmoduPTIrk9dK2SupJsiskjJbHdlC8YViby1hQDhssF9iJKR86cu3MA==
   dependencies:
     sass "^1.50.0"
     vscode "^1.1.37"
@@ -914,28 +914,28 @@
   resolved "https://registry.yarnpkg.com/@vant/use/-/use-1.4.2.tgz#57e29f57b408b573a784793430891012a9e12d21"
   integrity sha512-+30mOa/FY26qk8Ag/Cmqb51JaOgE9rS1xDS24yDx4aHixMhTZH2QsuFGrQVPEazkeK8R+p14oW28kK3146Gtbg==
 
-"@varlet/icons@2.0.5":
-  version "2.0.5"
-  resolved "https://registry.yarnpkg.com/@varlet/icons/-/icons-2.0.5.tgz#ec92e7f679996943f92c4e4605b564462d3bdd84"
-  integrity sha512-vhkKsxnk5wj8X9HVRz2AdgNBTplnWxswyfLgeLiL2tBdh0TGN0JQyfDAVGNY8AVEG0pOcgY35d7oaPHa7aRF5w==
+"@varlet/icons@2.0.6":
+  version "2.0.6"
+  resolved "https://registry.yarnpkg.com/@varlet/icons/-/icons-2.0.6.tgz#ca4f3d65d283b9533e7739e855a5f518900fef91"
+  integrity sha512-OkRyz8zQ+EuQf04FjbIEhusl0bavHGIoSjNgCy6xZNdFvdLrRZNNzZumWtstgNaK+knMOldlDDqoyVlsFYpsig==
   dependencies:
     commander "^6.2.1"
     fs-extra "^9.0.1"
     webfont "^9.0.0"
 
-"@varlet/shared@2.0.5":
-  version "2.0.5"
-  resolved "https://registry.yarnpkg.com/@varlet/shared/-/shared-2.0.5.tgz#aab764491f2e1c68c0769ca4db601b79b2293ae2"
-  integrity sha512-+nk8xRX8P+VpWBDf0x/DzLfqVkWfDFe4YHyNJkJKCBc/A+QydxjyiRXb/u/3YcnDH2uWof92Z/f6IBVCb+1+HA==
+"@varlet/shared@2.0.6":
+  version "2.0.6"
+  resolved "https://registry.yarnpkg.com/@varlet/shared/-/shared-2.0.6.tgz#c5a0df7ee76c689b191834fa4e56baf7af1905b2"
+  integrity sha512-g1Wv6zTWiRVgo2wpznPU+ODdddpga/nC1fYU/2Sl0ZEYBAs9JoGEg7sP+DKRgILQT7UNj7oUip/lXTNmmJuRtQ==
 
-"@varlet/ui@^2.0.5":
-  version "2.0.5"
-  resolved "https://registry.yarnpkg.com/@varlet/ui/-/ui-2.0.5.tgz#92b04bcd81b1f10b2e1138ab77810ddad07e789e"
-  integrity sha512-3HcYraJl6oVMVbhSsSCYvXPd/lcdFROeG7S2k62DdMGhflOyYk0bPXwBmRlpgzLoFyb+kgxquQBeeRFGrER00A==
+"@varlet/ui@^2.0.6":
+  version "2.0.6"
+  resolved "https://registry.yarnpkg.com/@varlet/ui/-/ui-2.0.6.tgz#2898d5d9f27568feded2e49254350bf5b88c9ef0"
+  integrity sha512-QFBhZJEunFQLFGdKu6mfCKHSk2ibocm1iRsOpa4mPHMBVIUbwAuMCU3YfIGITzY74EDNDmzE5bpwDvqviQQbRQ==
   dependencies:
     "@popperjs/core" "^2.11.6"
-    "@varlet/icons" "2.0.5"
-    "@varlet/shared" "2.0.5"
+    "@varlet/icons" "2.0.6"
+    "@varlet/shared" "2.0.6"
     dayjs "^1.10.4"
     decimal.js "^10.2.1"
 
@@ -2344,10 +2344,10 @@ dayjs@^1.10.4:
   resolved "https://registry.yarnpkg.com/dayjs/-/dayjs-1.11.3.tgz#4754eb694a624057b9ad2224b67b15d552589258"
   integrity sha512-xxwlswWOlGhzgQ4TKzASQkUhqERI3egRNqgV4ScR8wlANA/A9tZ7miXa44vTTKEq5l7vWoL5G57bG3zA+Kow0A==
 
-dayjs@^1.11.5:
-  version "1.11.5"
-  resolved "https://registry.yarnpkg.com/dayjs/-/dayjs-1.11.5.tgz#00e8cc627f231f9499c19b38af49f56dc0ac5e93"
-  integrity sha512-CAdX5Q3YW3Gclyo5Vpqkgpj8fSdLQcRuzfX6mC6Phy0nfJ0eGYOeS7m4mt2plDWLAtA4TqTakvbboHvUxfe4iA==
+dayjs@^1.11.6:
+  version "1.11.6"
+  resolved "https://registry.yarnpkg.com/dayjs/-/dayjs-1.11.6.tgz#2e79a226314ec3ec904e3ee1dd5a4f5e5b1c7afb"
+  integrity sha512-zZbY5giJAinCG+7AGaw0wIhNZ6J8AhWuSXKvuc1KAyMiRsvGQWqh4L+MomvhdAYjN+lqvVCMq1I41e3YHvXkyQ==
 
 de-indent@^1.0.2:
   version "1.0.2"
