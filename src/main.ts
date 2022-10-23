@@ -20,7 +20,7 @@ app.use(store);
 
 // nutUi按需加载
 nutUiComponents.forEach((item) => {
-  app.use(item);
+  app.use(item as any);
 });
 
 app.mount('#app');
