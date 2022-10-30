@@ -3,7 +3,7 @@
  * @description 按需引入样式文件
  */
 
-import { createStyleImportPlugin, Lib } from 'vite-plugin-style-import';
+import { createStyleImportPlugin, Lib, VantResolve } from 'vite-plugin-style-import';
 
 function NutuiResolve(): Lib {
   return {
@@ -17,6 +17,6 @@ function NutuiResolve(): Lib {
 
 export const ConfigStyleImport = () => {
   return createStyleImportPlugin({
-    resolves: [NutuiResolve()],
+    resolves: [NutuiResolve(), VantResolve()],
   });
 };

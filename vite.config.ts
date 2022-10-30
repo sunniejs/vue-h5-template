@@ -1,15 +1,19 @@
 import { createVitePlugins } from './build/vite/plugins';
 import { resolve } from 'path';
-import { ConfigEnv, UserConfigExport } from 'vite';
+import { ConfigEnv, loadEnv, UserConfigExport } from 'vite';
+import { wrapperEnv } from './build/utils';
 
 const pathResolve = (dir: string) => {
   return resolve(process.cwd(), '.', dir);
 };
 
 // https://vitejs.dev/config/
-export default function ({ command }: ConfigEnv): UserConfigExport {
+export default function ({ command, mode }: ConfigEnv): UserConfigExport {
   const isProduction = command === 'build';
   const root = process.cwd();
+  const env = loadEnv(mode, root);
+  const viteEnv = wrapperEnv(env);
+
   return {
     root,
     resolve: {
@@ -34,7 +38,7 @@ export default function ({ command }: ConfigEnv): UserConfigExport {
       host: true,
       hmr: true,
     },
-    plugins: createVitePlugins(isProduction),
+    plugins: createVitePlugins(viteEnv, isProduction),
     build: {
       minify: 'terser',
       terserOptions: {

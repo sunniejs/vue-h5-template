@@ -5,6 +5,7 @@
 
 import Components from 'unplugin-vue-components/vite';
 import { VueUseComponentsResolver, VantResolver, VarletUIResolver } from 'unplugin-vue-components/resolvers';
+
 export const AutoRegistryComponents = () => {
   return Components({
     // dirs: ['src/components'],

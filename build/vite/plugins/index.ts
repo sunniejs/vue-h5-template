@@ -20,7 +20,9 @@ import { ConfigStyleImport } from './styleImport';
 import { ConfigImageminPlugin } from './imagemin';
 import { ConfigVisualizerConfig } from './visualizer';
 
-export function createVitePlugins(isBuild: boolean) {
+export function createVitePlugins(env: ViteEnv, isBuild: boolean) {
+  const { VITE_USE_MOCK, VITE_USE_ERUDA } = env;
+
   const vitePlugins: (Plugin | Plugin[])[] = [
     // vue支持
     vue(),
@@ -52,12 +54,14 @@ export function createVitePlugins(isBuild: boolean) {
   vitePlugins.push(ConfigStyleImport());
 
   // eruda
-  vitePlugins.push(ConfigEruda());
+  VITE_USE_ERUDA && vitePlugins.push(ConfigEruda());
 
   // rollup-plugin-visualizer
   vitePlugins.push(ConfigVisualizerConfig());
+
   // vite-plugin-mock
-  vitePlugins.push(ConfigMockPlugin(isBuild));
+  VITE_USE_MOCK && vitePlugins.push(ConfigMockPlugin(isBuild));
+
   if (isBuild) {
     // vite-plugin-imagemin
     vitePlugins.push(ConfigImageminPlugin());
@@ -65,5 +69,6 @@ export function createVitePlugins(isBuild: boolean) {
     // vite-plugin-svg-icons
     vitePlugins.push(ConfigSvgIconsPlugin(isBuild));
   }
+
   return vitePlugins;
 }
