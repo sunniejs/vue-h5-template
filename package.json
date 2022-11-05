@@ -17,7 +17,7 @@
     "commit": "git add . && git-cz"
   },
   "dependencies": {
-    "@nutui/nutui": "^3.2.5",
+    "@nutui/nutui": "^3.2.6",
     "@varlet/ui": "^2.1.0",
     "@vueuse/core": "9.4.0",
     "@vueuse/integrations": "9.4.0",
@@ -33,11 +33,11 @@
     "vue-router": "^4.1.6"
   },
   "devDependencies": {
-    "@typescript-eslint/eslint-plugin": "^5.42.0",
-    "@typescript-eslint/parser": "^5.42.0",
-    "@vitejs/plugin-legacy": "^2.3.0",
+    "@typescript-eslint/eslint-plugin": "^5.42.1",
+    "@typescript-eslint/parser": "^5.42.1",
+    "@vitejs/plugin-legacy": "^2.3.1",
     "@vitejs/plugin-vue": "^3.2.0",
-    "@vitejs/plugin-vue-jsx": "^2.1.0",
+    "@vitejs/plugin-vue-jsx": "^2.1.1",
     "amfe-flexible": "^2.2.1",
     "autoprefixer": "^10.4.13",
     "cnjm-postcss-px-to-viewport": "^1.0.0",
