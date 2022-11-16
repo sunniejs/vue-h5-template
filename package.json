@@ -33,8 +33,8 @@
     "vue-router": "^4.1.6"
   },
   "devDependencies": {
-    "@typescript-eslint/eslint-plugin": "^5.42.1",
-    "@typescript-eslint/parser": "^5.42.1",
+    "@typescript-eslint/eslint-plugin": "^5.43.0",
+    "@typescript-eslint/parser": "^5.43.0",
     "@vitejs/plugin-legacy": "^2.3.1",
     "@vitejs/plugin-vue": "^3.2.0",
     "@vitejs/plugin-vue-jsx": "^2.1.1",
@@ -44,7 +44,7 @@
     "consola": "^2.15.3",
     "cross-env": "^7.0.3",
     "eruda": "^2.5.0",
-    "eslint": "^8.27.0",
+    "eslint": "^8.28.0",
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-prettier": "^4.2.1",
     "eslint-plugin-vue": "^9.7.0",
@@ -65,7 +65,7 @@
     "stylelint-config-standard": "^29.0.0",
     "stylelint-order": "^5.0.0",
     "terser": "^5.15.1",
-    "typescript": "^4.8.4",
+    "typescript": "^4.9.3",
     "unplugin-auto-import": "^0.11.4",
     "unplugin-vue-components": "^0.22.9",
     "vite": "^3.2.3",
