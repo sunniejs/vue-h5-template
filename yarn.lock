@@ -650,12 +650,13 @@
     "@nodelib/fs.scandir" "2.1.5"
     fastq "^1.6.0"
 
-"@nutui/nutui@^3.2.6":
-  version "3.2.6"
-  resolved "https://registry.yarnpkg.com/@nutui/nutui/-/nutui-3.2.6.tgz#ec4fb2feef9e254858f3b834aadb8e0c0668a5d3"
-  integrity sha512-yZAayf1k/v6gDEB8JKVRuzD49OlqAboVU2BTMX3gey7rt9gruH1QmL4wL9C5Fw/PI6PKeJCOccVWlqfReqoaPg==
+"@nutui/nutui@^3.2.7":
+  version "3.2.7"
+  resolved "https://registry.yarnpkg.com/@nutui/nutui/-/nutui-3.2.7.tgz#3fb139a578f968221a25e07acbab38188aaadae1"
+  integrity sha512-QTAzWyNpeZTSHxl/YD/ps9cZXW+bQrqLR2a57AP3VNHrl+nMOV/XaF/3ANmVWttEUKKU7KqAMpwbY1jNEta+uA==
   dependencies:
     "@tarojs/components" "3.5.6"
+    consola "2.15.3"
     sass "^1.50.0"
     vscode "^1.1.37"
     vue-router "^4.0.12"
@@ -1048,28 +1049,28 @@
   resolved "https://registry.yarnpkg.com/@vant/use/-/use-1.4.2.tgz#57e29f57b408b573a784793430891012a9e12d21"
   integrity sha512-+30mOa/FY26qk8Ag/Cmqb51JaOgE9rS1xDS24yDx4aHixMhTZH2QsuFGrQVPEazkeK8R+p14oW28kK3146Gtbg==
 
-"@varlet/icons@2.2.0":
-  version "2.2.0"
-  resolved "https://registry.yarnpkg.com/@varlet/icons/-/icons-2.2.0.tgz#66367edbf31a86997589430acb67fa444b645237"
-  integrity sha512-+V5hTw6jaByqul02e+YEsm6TxgHf/HMxtjcUFhx0QYLZPHKlBIG3i6aFebblhvgBdwXktV+mJHpq3t/SI5WirQ==
+"@varlet/icons@2.2.1":
+  version "2.2.1"
+  resolved "https://registry.yarnpkg.com/@varlet/icons/-/icons-2.2.1.tgz#291f3c9d3f01ea6c99151b226948e7eb387e3676"
+  integrity sha512-IPiHoIzPr5ZQzg1cFcIfoPCfTPpEe4rxYjUPWIhHZJiAhrY37QN4aNz+w5pOGEl36KL9XHGWk/jePPgvqCmvNw==
   dependencies:
     commander "^6.2.1"
     fs-extra "^9.0.1"
     webfont "^9.0.0"
 
-"@varlet/shared@2.2.0":
-  version "2.2.0"
-  resolved "https://registry.yarnpkg.com/@varlet/shared/-/shared-2.2.0.tgz#b408d6b15641ff711529ba15726c652025d69543"
-  integrity sha512-310JfYwuKOnTGNZ9ojRMX5KcJ/naVGFoeO9v/kW8+/caPwRhqWGptgmDJQWFQkSp86hLnV6yc0YlJ2HhtmyYVw==
+"@varlet/shared@2.2.1":
+  version "2.2.1"
+  resolved "https://registry.yarnpkg.com/@varlet/shared/-/shared-2.2.1.tgz#6bab9d3ce308d7f5ca10b082e4b43973c346697b"
+  integrity sha512-tGBwn0Mw88kK9eQ674l/WpIw/ycFpQitYvww7mK1KMpU+yAy3d+d+RqTImCCxJ0meifsmCi1AnfgIFoWKuFgwg==
 
-"@varlet/ui@^2.2.0":
-  version "2.2.0"
-  resolved "https://registry.yarnpkg.com/@varlet/ui/-/ui-2.2.0.tgz#4faa843571e40db846944745e9678c16a04efb2c"
-  integrity sha512-MeGfbupDZPnDRBh1+rI65HXf9xlX64awxXXNm1y4/RxbtdQJPiQOH484pi6I74M8pw4k5RkAN6b52fxEOJaZEQ==
+"@varlet/ui@^2.2.1":
+  version "2.2.1"
+  resolved "https://registry.yarnpkg.com/@varlet/ui/-/ui-2.2.1.tgz#49ae5eef2ebb3359f4857851eb9bdfff9ad061ff"
+  integrity sha512-9/R8f+9wny8q+BTeXCjgIjhdXmg7Nd76P2mIa/L2VH2sRM3hRy5wUy4YJlROFJ37bYr1mekieguwbp6ehrISAw==
   dependencies:
     "@popperjs/core" "^2.11.6"
-    "@varlet/icons" "2.2.0"
-    "@varlet/shared" "2.2.0"
+    "@varlet/icons" "2.2.1"
+    "@varlet/shared" "2.2.1"
     dayjs "^1.10.4"
     decimal.js "^10.2.1"
 
@@ -1298,11 +1299,6 @@
   version "6.2.1"
   resolved "https://registry.yarnpkg.com/@vue/devtools-api/-/devtools-api-6.2.1.tgz#6f2948ff002ec46df01420dfeff91de16c5b4092"
   integrity sha512-OEgAMeQXvCoJ+1x8WyQuVZzFo0wcyCmUR3baRVLmKBo1LmYZWMlRiXlux5jd0fqVJu6PfDbOrZItVqUEzLobeQ==
-
-"@vue/devtools-api@^6.4.4":
-  version "6.4.4"
-  resolved "https://registry.yarnpkg.com/@vue/devtools-api/-/devtools-api-6.4.4.tgz#0b024fc8ca91bb4b6035abaf53c5aecc17119b3b"
-  integrity sha512-Ku31WzpOV/8cruFaXaEZKF81WkNnvCSlBY4eOGtz5WMSdJvX1v1WWlSMGZeqUwPtQ27ZZz7B62erEMq8JDjcXw==
 
 "@vue/devtools-api@^6.4.5":
   version "6.4.5"
@@ -2296,7 +2292,7 @@ connect@^3.7.0:
     parseurl "~1.3.3"
     utils-merge "1.0.1"
 
-consola@^2.15.3:
+consola@2.15.3, consola@^2.15.3:
   version "2.15.3"
   resolved "https://registry.yarnpkg.com/consola/-/consola-2.15.3.tgz#2e11f98d6a4be71ff72e0bdf07bd23e12cb61550"
   integrity sha512-9vAdYbHj6x2fLKC4+oPH0kFzY/orMZyG2Aj+kNylHxKGJ/Ed4dpNyAQYwJOdqO4zdM7XpVHmyejQDcQHrnuXbw==
@@ -6361,12 +6357,12 @@ pinia-plugin-persistedstate@^2.4.0:
   resolved "https://registry.yarnpkg.com/pinia-plugin-persistedstate/-/pinia-plugin-persistedstate-2.4.0.tgz#fda569b3c397517a0cf8aba83a628283767da620"
   integrity sha512-bQcpv47jk3ISl+InuJWsFaS/K7pRZ97kfoD2WCf/suhnlLy48k3BnFM2tI6YZ1xMsDaPv4yOsaPuPAUuSmEO2Q==
 
-pinia@^2.0.23:
-  version "2.0.23"
-  resolved "https://registry.yarnpkg.com/pinia/-/pinia-2.0.23.tgz#570f5f82160b656b412602789683faa95502d227"
-  integrity sha512-N15hFf4o5STrxpNrib1IEb1GOArvPYf1zPvQVRGOO1G1d74Ak0J0lVyalX/SmrzdT4Q0nlEFjbURsmBmIGUR5Q==
+pinia@^2.0.24:
+  version "2.0.24"
+  resolved "https://registry.yarnpkg.com/pinia/-/pinia-2.0.24.tgz#babf12207931f85b31d7451b55c0d76785b91b51"
+  integrity sha512-DDLd4Iphyc+6PYYYbx7jkb6WP9gecgu9bz9huyB5rb7CdJI3DhzYiZI+/Ih8MLewRrP9DSpslF/BgSNrJtZU7A==
   dependencies:
-    "@vue/devtools-api" "^6.4.4"
+    "@vue/devtools-api" "^6.4.5"
     vue-demi "*"
 
 pinkie-promise@^2.0.0:
@@ -8272,10 +8268,10 @@ vite-plugin-vue-setup-extend@^0.4.0:
     "@vue/compiler-sfc" "^3.2.29"
     magic-string "^0.25.7"
 
-vite@^3.2.3:
-  version "3.2.3"
-  resolved "https://registry.yarnpkg.com/vite/-/vite-3.2.3.tgz#7a68d9ef73eff7ee6dc0718ad3507adfc86944a7"
-  integrity sha512-h8jl1TZ76eGs3o2dIBSsvXDLb1m/Ec1iej8ZMdz+PsaFUsftZeWe2CZOI3qogEsMNaywc17gu0q6cQDzh/weCQ==
+vite@^3.2.4:
+  version "3.2.4"
+  resolved "https://registry.yarnpkg.com/vite/-/vite-3.2.4.tgz#d8c7892dd4268064e04fffbe7d866207dd24166e"
+  integrity sha512-Z2X6SRAffOUYTa+sLy3NQ7nlHFU100xwanq1WDwqaiFiCe+25zdxP1TfCS5ojPV2oDDcXudHIoPnI1Z/66B7Yw==
   dependencies:
     esbuild "^0.15.9"
     postcss "^8.4.18"
