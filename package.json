@@ -1,7 +1,7 @@
 {
   "devDependencies": {
-    "vitepress": "^1.0.0-alpha.13",
-    "vue": "^3.2.38"
+    "vitepress": "^1.0.0-alpha.29",
+    "vue": "^3.2.45"
   },
   "scripts": {
     "start": "vitepress dev docs --host 0.0.0.0",
