@@ -1,0 +1,1 @@
+import{_ as e,o as t,c as a}from"./app.9df4ae05.js";const m=JSON.parse('{"title":"","description":"","frontmatter":{},"headers":[],"relativePath":"guide/question/index.md","lastUpdated":1669356998000}'),n={name:"guide/question/index.md"};function o(s,r,d,i,c,p){return t(),a("div")}const u=e(n,[["render",o]]);export{m as __pageData,u as default};

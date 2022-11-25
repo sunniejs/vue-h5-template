@@ -1,1 +1,0 @@
-import{_ as s,o as a,c as n,d as o}from"./app.b03f2eea.js";const u=JSON.parse('{"title":"vue-router","description":"","frontmatter":{},"headers":[],"relativePath":"guide/vue3/router.md","lastUpdated":1665744343000}'),p={name:"guide/vue3/router.md"},l=o("",5),e=[l];function t(r,c,D,y,F,A){return a(),n("div",null,e)}const i=s(p,[["render",t]]);export{u as __pageData,i as default};
