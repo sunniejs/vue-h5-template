@@ -1,4 +1,6 @@
-export const lang = {
+import { langType } from './lang-base';
+
+export const lang: langType = {
   title: 'VUE H5开发模板',
   tabbar: {
     home: '首页',
