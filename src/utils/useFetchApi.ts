@@ -1,5 +1,5 @@
 import { createFetch } from '@vueuse/core';
-import { Notify } from 'vant';
+import { showNotify } from 'vant';
 
 const useFetchApi = createFetch({
   baseUrl: '',
@@ -20,7 +20,7 @@ const useFetchApi = createFetch({
           console.log(response);
           const jsonObj = data;
           if (jsonObj.code != 200) {
-            Notify({ type: 'danger', message: jsonObj.message || 'Error' });
+            showNotify({ type: 'danger', message: jsonObj.message || 'Error' });
           }
 
           ctx.data = jsonObj.data;
@@ -29,7 +29,7 @@ const useFetchApi = createFetch({
           ctx.data = null;
         }
       } else {
-        Notify({ type: 'danger', message: response.statusText || 'Error' });
+        showNotify({ type: 'danger', message: response.statusText || 'Error' });
         ctx.data = null;
       }
 

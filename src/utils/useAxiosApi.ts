@@ -1,6 +1,6 @@
 import { useAxios } from '@vueuse/integrations/useAxios';
 import axios, { AxiosRequestConfig } from 'axios';
-import { Toast } from 'vant/lib/toast';
+import { showToast } from 'vant/lib/toast';
 
 // create an axios instance
 const instance = axios.create({
@@ -46,7 +46,7 @@ instance.interceptors.response.use(
     const res = response.data;
     // if the custom code is not 200, it is judged as an error.
     if (res.code !== 200) {
-      Toast(res.msg);
+      showToast(res.msg);
       // 412: Token expired;
       if (res.code === 412) {
         // store.dispatch('user/userLogout');
@@ -58,7 +58,7 @@ instance.interceptors.response.use(
   },
   (error) => {
     console.log('err' + error);
-    Toast(error.message);
+    showToast(error.message);
     return Promise.reject(error.message);
   },
 );
