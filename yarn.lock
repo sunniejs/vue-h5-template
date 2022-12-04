@@ -650,10 +650,10 @@
     "@nodelib/fs.scandir" "2.1.5"
     fastq "^1.6.0"
 
-"@nutui/nutui@^3.2.7":
-  version "3.2.7"
-  resolved "https://registry.yarnpkg.com/@nutui/nutui/-/nutui-3.2.7.tgz#3fb139a578f968221a25e07acbab38188aaadae1"
-  integrity sha512-QTAzWyNpeZTSHxl/YD/ps9cZXW+bQrqLR2a57AP3VNHrl+nMOV/XaF/3ANmVWttEUKKU7KqAMpwbY1jNEta+uA==
+"@nutui/nutui@^3.3.0":
+  version "3.3.0"
+  resolved "https://registry.yarnpkg.com/@nutui/nutui/-/nutui-3.3.0.tgz#f083f10aacc99bfdd5ba629a99ed59c5690a270d"
+  integrity sha512-C73ZG2Km1ktlByuNq6AkEcUw6UY308DB7OlBqCFUnWYSdEVVxRs7EC2ialsPoUyl6Egu/RThydghVjAE4nB1sw==
   dependencies:
     "@tarojs/components" "3.5.6"
     consola "2.15.3"
@@ -1600,10 +1600,10 @@ available-typed-arrays@^1.0.5:
   resolved "https://registry.yarnpkg.com/available-typed-arrays/-/available-typed-arrays-1.0.5.tgz#92f95616501069d07d10edb2fc37d3e1c65123b7"
   integrity sha512-DMD0KiN46eipeziST1LPP/STfDU0sufISXmjSgvVsoU2tqxctQeASejWcfNtxYKqETM1UxQ8sp2OrSBWpHY6sw==
 
-axios@1.2.0:
-  version "1.2.0"
-  resolved "https://registry.yarnpkg.com/axios/-/axios-1.2.0.tgz#1cb65bd75162c70e9f8d118a905126c4a201d383"
-  integrity sha512-zT7wZyNYu3N5Bu0wuZ6QccIf93Qk1eV8LOewxgjOZFd2DenOs98cJ7+Y6703d0wkaXGY6/nZd4EweJaHz9uzQw==
+axios@1.2.1:
+  version "1.2.1"
+  resolved "https://registry.yarnpkg.com/axios/-/axios-1.2.1.tgz#44cf04a3c9f0c2252ebd85975361c026cb9f864a"
+  integrity sha512-I88cFiGu9ryt/tfVEi4kX2SITsvDddTajXTOFmt2uK1ZVA8LytjtdeyefdQWEf5PU8w+4SSJDoYnggflB5tW4A==
   dependencies:
     follow-redirects "^1.15.0"
     form-data "^4.0.0"
@@ -2425,10 +2425,10 @@ dayjs@^1.10.4:
   resolved "https://registry.yarnpkg.com/dayjs/-/dayjs-1.11.3.tgz#4754eb694a624057b9ad2224b67b15d552589258"
   integrity sha512-xxwlswWOlGhzgQ4TKzASQkUhqERI3egRNqgV4ScR8wlANA/A9tZ7miXa44vTTKEq5l7vWoL5G57bG3zA+Kow0A==
 
-dayjs@^1.11.6:
-  version "1.11.6"
-  resolved "https://registry.yarnpkg.com/dayjs/-/dayjs-1.11.6.tgz#2e79a226314ec3ec904e3ee1dd5a4f5e5b1c7afb"
-  integrity sha512-zZbY5giJAinCG+7AGaw0wIhNZ6J8AhWuSXKvuc1KAyMiRsvGQWqh4L+MomvhdAYjN+lqvVCMq1I41e3YHvXkyQ==
+dayjs@^1.11.7:
+  version "1.11.7"
+  resolved "https://registry.yarnpkg.com/dayjs/-/dayjs-1.11.7.tgz#4b296922642f70999544d1144a2c25730fce63e2"
+  integrity sha512-+Yw9U6YO5TQohxLcIkrXBeY73WP3ejHWVvx8XCk3gxvQDCTEmS48ZrSZCKciI7Bhl/uCMyxYtE9UqRILmFphkQ==
 
 de-indent@^1.0.2:
   version "1.0.2"
@@ -8069,10 +8069,10 @@ validate-npm-package-license@^3.0.1:
     spdx-correct "^3.0.0"
     spdx-expression-parse "^3.0.0"
 
-vant@^4.0.1:
-  version "4.0.1"
-  resolved "https://registry.yarnpkg.com/vant/-/vant-4.0.1.tgz#0abfe1ceac3c512c2d376578ac50046dddf446a6"
-  integrity sha512-HfYwP0A2lLbJrXlojzVF/asugpQ24nfQYgTBsXTai+weOoJCubT+GJ0owVDMVn7CVlZbcKknQpscU9dGJuqvXQ==
+vant@^4.0.2:
+  version "4.0.2"
+  resolved "https://registry.yarnpkg.com/vant/-/vant-4.0.2.tgz#629c9b4f5ac020f8b0c74cade4aa8ffef3bfe3b5"
+  integrity sha512-qv3YaysqDbDI4N1peuck0v2g/Zz2rH2ao2qLNn166ZsuPadCmwsuwaypT+eFWElAzj0P1f9aUEmFmdJJwGuRfw==
   dependencies:
     "@vant/popperjs" "^1.3.0"
     "@vant/use" "^1.4.3"
