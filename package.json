@@ -33,11 +33,11 @@
     "vue-router": "^4.1.6"
   },
   "devDependencies": {
-    "@typescript-eslint/eslint-plugin": "^5.45.1",
-    "@typescript-eslint/parser": "^5.45.1",
-    "@vitejs/plugin-legacy": "^2.3.1",
-    "@vitejs/plugin-vue": "^3.2.0",
-    "@vitejs/plugin-vue-jsx": "^2.1.1",
+    "@typescript-eslint/eslint-plugin": "^5.46.1",
+    "@typescript-eslint/parser": "^5.46.1",
+    "@vitejs/plugin-legacy": "^3.0.1",
+    "@vitejs/plugin-vue": "^4.0.0",
+    "@vitejs/plugin-vue-jsx": "^3.0.0",
     "amfe-flexible": "^2.2.1",
     "autoprefixer": "^10.4.13",
     "cnjm-postcss-px-to-viewport": "^1.0.0",
@@ -89,7 +89,6 @@
   },
   "resolutions": {
     "bin-wrapper": "npm:bin-wrapper-china",
-    "rollup": "^2.56.3",
     "gifsicle": "5.2.0"
   },
   "lint-staged": {
