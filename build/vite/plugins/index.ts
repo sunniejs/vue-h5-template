@@ -3,7 +3,7 @@
  * @description 封装plugins数组统一调用
  */
 
-import type { Plugin } from 'vite';
+import type { PluginOption } from 'vite';
 import vue from '@vitejs/plugin-vue';
 import vueJsx from '@vitejs/plugin-vue-jsx';
 import vueSetupExtend from 'vite-plugin-vue-setup-extend';
@@ -23,7 +23,7 @@ import { ConfigVisualizerConfig } from './visualizer';
 export function createVitePlugins(env: ViteEnv, isBuild: boolean) {
   const { VITE_USE_MOCK, VITE_USE_ERUDA } = env;
 
-  const vitePlugins: (Plugin | Plugin[])[] = [
+  const vitePlugins: (PluginOption | PluginOption[])[] = [
     // vue支持
     vue(),
     // JSX支持

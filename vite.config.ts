@@ -1,6 +1,6 @@
 import { createVitePlugins } from './build/vite/plugins';
 import { resolve } from 'path';
-import { ConfigEnv, loadEnv, UserConfigExport } from 'vite';
+import { ConfigEnv, loadEnv, UserConfig } from 'vite';
 import { wrapperEnv } from './build/utils';
 
 const pathResolve = (dir: string) => {
@@ -8,7 +8,7 @@ const pathResolve = (dir: string) => {
 };
 
 // https://vitejs.dev/config/
-export default function ({ command, mode }: ConfigEnv): UserConfigExport {
+export default function ({ command, mode }: ConfigEnv): UserConfig {
   const isProduction = command === 'build';
   const root = process.cwd();
   const env = loadEnv(mode, root);
