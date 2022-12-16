@@ -62,12 +62,12 @@ export function createVitePlugins(env: ViteEnv, isBuild: boolean) {
   // vite-plugin-mock
   VITE_USE_MOCK && vitePlugins.push(ConfigMockPlugin(isBuild));
 
+  // vite-plugin-svg-icons
+  vitePlugins.push(ConfigSvgIconsPlugin(isBuild));
+
   if (isBuild) {
     // vite-plugin-imagemin
     vitePlugins.push(ConfigImageminPlugin());
-
-    // vite-plugin-svg-icons
-    vitePlugins.push(ConfigSvgIconsPlugin(isBuild));
   }
 
   return vitePlugins;
