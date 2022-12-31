@@ -17,8 +17,8 @@
     "commit": "git add . && git-cz"
   },
   "dependencies": {
-    "@nutui/nutui": "^3.3.1",
-    "@varlet/ui": "^2.5.1",
+    "@nutui/nutui": "^3.3.2",
+    "@varlet/ui": "^2.6.0",
     "@vueuse/core": "9.10.0",
     "@vueuse/integrations": "9.10.0",
     "axios": "1.2.2",
