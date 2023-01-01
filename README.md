@@ -4,18 +4,28 @@
 
 如果你不熟悉 vue3，想继续使用 vue2 开发的，可以[点这里](https://github.com/sunniejs/vue-h5-template/tree/vue2-h5-template)来获取 vue2-h5-template
 
-详细的文档请[点击](https://sunniejs.github.io/vue-h5-template/)查看
+详细的说明文档请[点击](https://sunniejs.github.io/vue-h5-template/)查看
+
+如果对你有帮助送我一颗珍贵的小星星（づ￣ 3 ￣）づ ╭❤ ～
 
 # 关于我
 
-扫描添加下方的微信并备注加交流群，交流学习，及时获取代码最新动态。
+扫描添加下方的微信并备注加交流群(已超过 200 人，只能邀请)，交流学习，及时获取代码最新动态。
 
  <p>
-  <img src="https://cdn.jsdelivr.net/gh/fonghehe/picture/personal/account.jpg" width="256" style="display:inline; ">
+  <img src="https://cdn.jsdelivr.net/gh/fonghehe/picture/personal/account.jpg" width="256">
 </p>
 
-<p>
-  <img src="https://cdn.jsdelivr.net/gh/fonghehe/picture/personal/group.jpg" width="256" style="display:inline; ">
-</p>
- 
-如果对你有帮助送我一颗珍贵的小星星（づ￣3￣）づ╭❤～
+如果你觉得该项目有给你带来帮助，方便了你的日常开发，可以请作者喝一杯 ☕ 支持持续的迭代
+
+ <div style="display:flex;justify-content:left">
+  <p style="text-align:center">
+    <span>wechatPay</span>
+    <img src="https://cdn.jsdelivr.net/gh/fonghehe/picture/contribute/wechatPay.jpeg" width="256" />
+  </p>
+  <p style="text-align:center">
+    <span>aliPay</span>
+    <img src="https://cdn.jsdelivr.net/gh/fonghehe/picture/contribute/aliPay.jpeg" width="256" />
+  </p>
+
+</div>
