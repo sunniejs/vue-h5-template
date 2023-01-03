@@ -7,6 +7,13 @@ export {};
 
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
+    NutButton: typeof import('@nutui/nutui')['Button'];
+    NutCell: typeof import('@nutui/nutui')['Cell'];
+    NutCellGroup: typeof import('@nutui/nutui')['CellGroup'];
+    NutIcon: typeof import('@nutui/nutui')['Icon'];
+    NutNavbar: typeof import('@nutui/nutui')['Navbar'];
+    NutTabbar: typeof import('@nutui/nutui')['Tabbar'];
+    NutTabbarItem: typeof import('@nutui/nutui')['TabbarItem'];
     RouterLink: typeof import('vue-router')['RouterLink'];
     RouterView: typeof import('vue-router')['RouterView'];
     TitleBar: typeof import('./../src/components/TitleBar/index.vue')['default'];

@@ -1,7 +1,7 @@
 <template>
   <section>
     <span class="title">varlet</span>
-    <var-space :size="[10, 10]">
+    <var-space :size="[10, 10]" class="space">
       <var-button>demo</var-button><var-button type="primary">主要按钮</var-button>
       <var-button type="info">信息按钮</var-button>
       <var-button type="success">成功按钮</var-button>
@@ -48,10 +48,19 @@
       margin-bottom: 40px;
       display: inline-block;
     }
-    &:nth-child(2) {
+    &:nth-child(n) {
       .title {
         margin-top: 20px;
       }
+    }
+    &:first-child {
+      .title {
+        margin-top: 0;
+      }
+    }
+
+    ::v-deep(.var-space) {
+      margin-bottom: 10px !important;
     }
   }
   .demo {

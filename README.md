@@ -19,11 +19,9 @@
 如果你觉得该项目有给你带来帮助，方便了你的日常开发，可以请作者喝一杯 ☕ 支持持续的迭代
 
  <table >
-  <tr style="text-align:center">
+  <tr align="center">
   <td>WechatPay</td>
-  <td>
-   AliPay
-    </td>
+  <td>AliPay</td>
   </tr>
   <tr style="text-align:center">
     <td> <img src="https://cdn.jsdelivr.net/gh/fonghehe/picture/contribute/wechatPay.jpeg" width="256" /></td>
