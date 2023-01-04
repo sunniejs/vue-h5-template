@@ -18,6 +18,9 @@ module.exports = {
       minPixelValue: 1, // 默认值1，小于或等于1px则不进行转换
       mediaQuery: true, // 是否在媒体查询的css代码中也进行转换，默认false
       replace: true, // 是否转换后直接更换属性值
+      landscape: false, //是否添加根据 landscapeWidth 生成的媒体查询条件 @media (orientation: landscape)
+      landscapeUnit: 'rem', //横屏时使用的单位
+      landscapeWidth: 1134, //横屏时使用的视口宽度
       include: [],
       exclude: [], // 设置忽略文件，用正则做目录名匹配
       customFun: ({ file }) => {
