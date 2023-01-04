@@ -12,9 +12,8 @@ module.exports = {
   ],
   themeConfig: {
     nav: nav(),
-    sidebar: {
-      "/guide/": menu,
-    },
+    sidebar: menu,
+
     socialLinks: [
       { icon: "github", link: "https://github.com/sunniejs/vue-h5-template" },
     ],
