@@ -17,4 +17,7 @@ export const lang: langType = {
     support: '支持',
     cssMultiLanguage: 'css图片多语言',
   },
+  list: {
+    details: '列表详情',
+  },
 };

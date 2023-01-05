@@ -1,10 +1,6 @@
 <template>
-  <nut-navbar :left-show="false" :title="$t($route.meta.title)" />
-  <div class="main-page">
-    <!-- <keep-alive>
-      <router-view v-if="$route.meta.keepAlive" :key="$route.path" />
-    </keep-alive>
-    <router-view v-if="!$route.meta.keepAlive" :key="$route.path" /> -->
+  <van-nav-bar :title="$t($route.meta.title)" :left-arrow="!tabbarVisible" @click-left="goBack" />
+  <div class="main-page" :class="{ tabbar: tabbarVisible, border: showBorder }">
     <RouterView v-slot="{ Component }" v-if="$route.meta.keepAlive">
       <keep-alive>
         <component :is="Component" :key="$route.path" />
@@ -12,7 +8,14 @@
     </RouterView>
     <RouterView v-if="!$route.meta.keepAlive" :key="$route.path" />
   </div>
-  <nut-tabbar unactive-color="#364636" active-color="#1989fa" @tab-switch="tabSwitch" bottom v-model:visible="activeTab">
+  <nut-tabbar
+    unactive-color="#364636"
+    active-color="#1989fa"
+    @tab-switch="tabSwitch"
+    bottom
+    v-model:visible="activeTab"
+    v-show="tabbarVisible"
+  >
     <nut-tabbar-item v-for="item in tabItem" :key="item.key" :tab-title="$t(`tabbar.${item.key}`)" :icon="item.icon" />
   </nut-tabbar>
 </template>
@@ -31,15 +34,25 @@
 
   const activeTab = ref(0);
 
-  onMounted(() => {
-    activeTab.value = tabItem.findIndex((item) => item.key === router.currentRoute.value.path.replace('/', ''));
-  });
+  const tabbarVisible = ref(true);
+
+  const showBorder = ref(true);
+
+  watch(
+    () => router,
+    () => {
+      const judgeRoute = tabItem.some((item) => item.key === router.currentRoute.value.path.replace('/', ''));
+      activeTab.value = tabItem.findIndex((item) => item.key === router.currentRoute.value.path.replace('/', ''));
+      tabbarVisible.value = judgeRoute;
+      showBorder.value = judgeRoute;
+    },
+    { deep: true, immediate: true },
+  );
 
   const tabSwitch = (_item, index) => {
     switch (index) {
       case 0:
         router.push('/home');
-
         break;
       case 1:
         router.push('/list');
@@ -49,21 +62,33 @@
         break;
       case 3:
         router.push('/demo');
+        break;
     }
     activeTab.value = index;
+  };
+
+  const goBack = () => {
+    router.go(-1);
   };
 </script>
 
 <style scoped lang="scss">
   .nut-navbar {
     margin-bottom: 0;
+    // padding: 0;
   }
 
   .main-page {
     box-sizing: border-box;
-    padding: 40px;
-    height: calc(100vh - 200px);
+    height: 100vh;
     overflow-y: scroll;
     overflow-x: hidden;
+  }
+
+  .tabbar {
+    height: calc(100vh - 200px);
+  }
+  .border {
+    padding: 30px;
   }
 </style>

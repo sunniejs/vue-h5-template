@@ -1,4 +1,4 @@
-const routes = [
+export const routes = [
   {
     path: '/',
     redirect: '/home',
@@ -34,6 +34,15 @@ const routes = [
         meta: {
           title: 'tabbar.demo',
           keepAlive: true,
+        },
+      },
+      {
+        name: 'listDetails',
+        path: '/details',
+        component: () => import('/@/views/list/details/index.vue'),
+        meta: {
+          title: 'list.details',
+          border: false,
         },
       },
     ],

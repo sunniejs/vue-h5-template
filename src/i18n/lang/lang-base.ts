@@ -15,4 +15,7 @@ export type langType = {
     support: string;
     cssMultiLanguage: string;
   };
+  list: {
+    details: string;
+  };
 };
