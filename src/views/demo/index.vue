@@ -46,7 +46,9 @@
   @import '../../styles/mixin.scss';
   section {
     .title {
+      font-size: 40px;
       margin-bottom: 40px;
+      font-weight: 500;
       display: inline-block;
     }
     &:nth-child(n) {

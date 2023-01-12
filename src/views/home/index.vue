@@ -34,7 +34,7 @@
   import { useI18n } from 'vue-i18n';
   const { locale } = useI18n();
 
-  let cellList = ['vue3', 'vite', 'vue-router', 'axios', 'Pinia', 'vue-i18n', 'vue-jsx', 'vatlet/vant/nutUI'];
+  let cellList = ['vue3', 'vite', 'vue-router', 'axios', 'Pinia', 'vue-i18n', 'postcss-px-to-viewport', 'vatlet/vant/nutUI', 'eruda'];
   const userStore = useUserStore();
   const getUserInfo = computed(() => {
     const { name = '' } = userStore.getUserInfo || {};
