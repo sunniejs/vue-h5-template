@@ -8,26 +8,20 @@
     </RouterView>
     <RouterView v-if="!$route.meta.keepAlive" :key="$route.path" />
   </div>
-  <nut-tabbar
-    unactive-color="#364636"
-    active-color="#1989fa"
-    @tab-switch="tabSwitch"
-    bottom
-    v-model:visible="activeTab"
-    v-show="tabbarVisible"
-  >
+  <nut-tabbar unactive-color="#364636" active-color="#1989fa" bottom v-model="activeTab" v-show="tabbarVisible" @tab-switch="tabSwitch">
     <nut-tabbar-item v-for="item in tabItem" :key="item.key" :tab-title="$t(`tabbar.${item.key}`)" :icon="item.icon" />
   </nut-tabbar>
 </template>
 
 <script lang="ts" setup name="BasicLayoutPage">
   import { useRouter } from 'vue-router';
+  import { Home, Horizontal, My, Location } from '@nutui/icons-vue';
 
   const tabItem = [
-    { key: 'home', icon: 'home' },
-    { key: 'list', icon: 'horizontal' },
-    { key: 'member', icon: 'my' },
-    { key: 'demo', icon: 'location' },
+    { key: 'home', icon: Home },
+    { key: 'list', icon: Horizontal },
+    { key: 'member', icon: My },
+    { key: 'demo', icon: Location },
   ];
 
   const router = useRouter();
@@ -41,6 +35,7 @@
   watch(
     () => router,
     () => {
+      console.log(tabItem.findIndex((item) => item.key === router.currentRoute.value.path.replace('/', '')));
       const judgeRoute = tabItem.some((item) => item.key === router.currentRoute.value.path.replace('/', ''));
       activeTab.value = tabItem.findIndex((item) => item.key === router.currentRoute.value.path.replace('/', ''));
       tabbarVisible.value = judgeRoute;

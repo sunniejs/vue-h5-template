@@ -1,5 +1,5 @@
 import { useAxios } from '@vueuse/integrations/useAxios';
-import axios, { AxiosRequestConfig } from 'axios';
+import axios from 'axios';
 import { showToast } from 'vant/lib/toast';
 
 // create an axios instance
@@ -67,6 +67,6 @@ instance.interceptors.response.use(
  * reactive useFetchApi
  */
 
-export default function useAxiosApi(url: string, config: AxiosRequestConfig) {
-  return useAxios(url, config, instance);
+export default function useAxiosApi(url: string, config: any) {
+  return useAxios(url, config);
 }

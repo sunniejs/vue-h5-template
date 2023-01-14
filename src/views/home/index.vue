@@ -5,11 +5,15 @@
   <div class="intro-header">
     <div>{{ $t('introduction') }}</div>
     <a href="https://github.com/sunniejs/vue-h5-template.git">
-      <nut-icon name="github" />
+      <Github />
     </a>
   </div>
   <nut-cell-group :title="$t('home.support')" class="supportList">
-    <nut-cell v-for="(item, index) in cellList" :key="index" :title="item" icon="Check" />
+    <nut-cell v-for="(item, index) in cellList" :key="index" :title="item">
+      <template #icon>
+        <Check />
+      </template>
+    </nut-cell>
   </nut-cell-group>
   <nut-cell-group :title="$t('home.cssMultiLanguage')" class="supportList">
     <nut-cell>
@@ -32,6 +36,8 @@
   import { useUserStore } from '/@/store/modules/user';
   import { setLang } from '/@/i18n';
   import { useI18n } from 'vue-i18n';
+  import { Github, Check } from '@nutui/icons-vue';
+
   const { locale } = useI18n();
 
   let cellList = ['vue3', 'vite', 'vue-router', 'axios', 'Pinia', 'vue-i18n', 'postcss-px-to-viewport', 'vatlet/vant/nutUI', 'eruda'];
@@ -71,9 +77,6 @@
 
     .nut-cell-group__title {
       margin-top: 30px;
-    }
-    .nut-icon {
-      color: green;
     }
   }
 

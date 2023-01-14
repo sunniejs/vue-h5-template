@@ -17,11 +17,11 @@
     "commit": "git add . && git-cz"
   },
   "dependencies": {
-    "@nutui/nutui": "^3.3.2",
-    "@varlet/ui": "^2.6.0",
+    "@nutui/nutui": "^4.0.0",
+    "@varlet/ui": "^2.6.3",
     "@vueuse/core": "9.11.0",
     "@vueuse/integrations": "9.11.0",
-    "axios": "1.2.2",
+    "axios": "1.2.3",
     "dayjs": "^1.11.7",
     "mitt": "^3.0.0",
     "pinia": "^2.0.28",
@@ -79,7 +79,7 @@
     "vite-plugin-svg-icons": "^2.0.1",
     "vite-plugin-vue-setup-extend": "^0.4.0",
     "vue-eslint-parser": "^9.1.0",
-    "vue-tsc": "^1.0.18"
+    "vue-tsc": "^1.0.24"
   },
   "husky": {
     "hooks": {
