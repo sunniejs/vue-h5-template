@@ -20,7 +20,6 @@
   let list = ref(listData);
 
   const toDetails = (index) => {
-    console.log(index);
     router.push({ path: '/details', query: { id: index } });
   };
 </script>
