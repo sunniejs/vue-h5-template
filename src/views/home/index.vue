@@ -40,7 +40,7 @@
 
   const { locale } = useI18n();
 
-  let cellList = ['vue3', 'vite', 'vue-router', 'axios', 'Pinia', 'vue-i18n', 'postcss-px-to-viewport', 'vatlet/vant/nutUI', 'eruda'];
+  let cellList = ['vue3', 'vite', 'vue-router', 'axios', 'Pinia', 'vue-i18n', 'postcss-px-to-viewport', 'varlet / vant / nutUI', 'eruda'];
   const userStore = useUserStore();
   const getUserInfo = computed(() => {
     const { name = '' } = userStore.getUserInfo || {};
