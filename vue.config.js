@@ -1,7 +1,7 @@
 const { defineConfig } = require("@vue/cli-service");
 const Component = require("unplugin-vue-components/webpack");
 const {
-  varletUIResolver,
+  VarletUIResolver,
   VantResolver,
 } = require("unplugin-vue-components/resolvers");
 
@@ -10,7 +10,7 @@ module.exports = defineConfig({
   configureWebpack: {
     plugins: [
       Component({
-        resolvers: [varletUIResolver(), VantResolver()],
+        resolvers: [VarletUIResolver(), VantResolver()],
       }),
     ],
   },
