@@ -16,7 +16,6 @@ import { ConfigPagesPlugin } from './pages';
 import { ConfigRestartPlugin } from './restart';
 import { ConfigProgressPlugin } from './progress';
 import { ConfigEruda } from './eruda';
-import { ConfigStyleImport } from './styleImport';
 import { ConfigImageminPlugin } from './imagemin';
 import { ConfigVisualizerConfig } from './visualizer';
 
@@ -49,9 +48,6 @@ export function createVitePlugins(env: ViteEnv, isBuild: boolean) {
 
   // 构建时显示进度条
   vitePlugins.push(ConfigProgressPlugin());
-
-  //styleImport
-  vitePlugins.push(ConfigStyleImport());
 
   // eruda
   VITE_USE_ERUDA && vitePlugins.push(ConfigEruda());

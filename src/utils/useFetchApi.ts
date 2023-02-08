@@ -13,11 +13,9 @@ const useFetchApi = createFetch({
       return { options };
     },
     afterFetch(ctx) {
-      console.log(ctx);
       const { data, response } = ctx;
       if (response.status >= 200 && response.status < 300) {
         try {
-          console.log(response);
           const jsonObj = data;
           if (jsonObj.code != 200) {
             showNotify({ type: 'danger', message: jsonObj.message || 'Error' });

@@ -8,7 +8,7 @@
       <p class="info"> 个人其他信息，后续补充.... </p>
     </div>
   </div>
-  <nut-grid>
+  <nut-grid direction="vertical">
     <nut-grid-item v-for="item in 10" :key="item" text="文字"><Dongdong /></nut-grid-item>
   </nut-grid>
 </template>

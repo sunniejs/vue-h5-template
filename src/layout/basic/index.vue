@@ -35,7 +35,6 @@
   watch(
     () => router,
     () => {
-      console.log(tabItem.findIndex((item) => item.key === router.currentRoute.value.path.replace('/', '')));
       const judgeRoute = tabItem.some((item) => item.key === router.currentRoute.value.path.replace('/', ''));
       activeTab.value = tabItem.findIndex((item) => item.key === router.currentRoute.value.path.replace('/', ''));
       tabbarVisible.value = judgeRoute;
