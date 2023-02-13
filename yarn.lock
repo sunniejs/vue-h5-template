@@ -1356,17 +1356,17 @@
     "@nodelib/fs.scandir" "2.1.5"
     fastq "^1.6.0"
 
-"@nutui/icons-vue@^0.0.24":
-  version "0.0.24"
-  resolved "https://registry.yarnpkg.com/@nutui/icons-vue/-/icons-vue-0.0.24.tgz#60e0e1f0c02422829bd91fbc8cd89d8e661d0373"
-  integrity sha512-ek7JK0IBwARxd7V399WW/Gb6qPi3vfo2+kgTcVZP/rGjK/CCcvsK8HfswJ73yWTEDT9wINlrOQLLyqaPD1l0YQ==
+"@nutui/icons-vue@^0.0.25":
+  version "0.0.25"
+  resolved "https://registry.yarnpkg.com/@nutui/icons-vue/-/icons-vue-0.0.25.tgz#6e8042786cfbf4c5a41a4c15b30ec00e2b6a8ab1"
+  integrity sha512-rJ9ke347snjSklMpYkPx8ZizRAbI71XMoal0QMEIrrFN+P/2x++zPGfzLxaTz1ZG9R2VHIkoIC+M7ZzmSUcgug==
 
-"@nutui/nutui@^4.0.0":
-  version "4.0.0"
-  resolved "https://registry.yarnpkg.com/@nutui/nutui/-/nutui-4.0.0.tgz#d63cf5d2415ce8a8857dab094eef492e30c5650a"
-  integrity sha512-GnDPA/q/N0NXYpknzhllLKXUElxavRTID81oMVRkAfYPanAKUXtCG1pt9uFex8cBcw8XHx08zsNlJXsuhr1QwQ==
+"@nutui/nutui@^4.0.1":
+  version "4.0.1"
+  resolved "https://registry.yarnpkg.com/@nutui/nutui/-/nutui-4.0.1.tgz#e271f24b9454f3e7f58ca452aebf5fcdf899ec22"
+  integrity sha512-489GkeFaUvCvy4GcrqlKqE/zFFbnQCeRbAnqtQ3kQixNWwAqyxPJH2t8MXDsiu7In4jwe+hXI47UXo6uR6EJiw==
   dependencies:
-    "@nutui/icons-vue" "^0.0.24"
+    "@nutui/icons-vue" "^0.0.25"
     sass "^1.50.0"
 
 "@nuxt/kit@^3.1.1", "@nuxt/kit@^3.1.2":
@@ -1702,24 +1702,24 @@
   resolved "https://registry.yarnpkg.com/@vant/use/-/use-1.4.4.tgz#9a5b19ba824d880a0d79a3634a860871dba581f4"
   integrity sha512-VFAU7oO3mAN/mA+xB0bRt36Ve2EVUyywmwH149qlRRrTBu1XwxoA8J7Kwpr1CoX9GTaoMsZle/+j3e2UtvsP3g==
 
-"@varlet/icons@2.7.4":
-  version "2.7.4"
-  resolved "https://registry.yarnpkg.com/@varlet/icons/-/icons-2.7.4.tgz#9dea3e60e79a9f46f0a5fae760a8dc91bd2fce00"
-  integrity sha512-6o4lJrfFKCzWF+fzQvRxnOPU/Rcvh1e2B9PgSkd4qTMDqq/Hv4BbxqYf/JSgsTk0/fkyTro/QrBGGDT8WWbjCg==
+"@varlet/icons@2.7.5":
+  version "2.7.5"
+  resolved "https://registry.yarnpkg.com/@varlet/icons/-/icons-2.7.5.tgz#7905e59bc9c351c3f0562f145dcf903dbb956776"
+  integrity sha512-9cRkVq16+xpdqlm+kMKANesNPs3rlXtFKuO1RZY8UHDHMXIeS0Q5GbjAGaQNbEV/hMG7/qeknlngWZVUms++sg==
 
-"@varlet/shared@2.7.4":
-  version "2.7.4"
-  resolved "https://registry.yarnpkg.com/@varlet/shared/-/shared-2.7.4.tgz#83fcb244e1c31515f7c49ea87ada7435fb3d0157"
-  integrity sha512-Kz4W7/gxt+63h3SarQEQCFj/8v3yguvWAYrx/ujp4HcvC4GTp2Lx1DaxmhpotdHe4HsCIeKPTshbdZL0Myq29Q==
+"@varlet/shared@2.7.5":
+  version "2.7.5"
+  resolved "https://registry.yarnpkg.com/@varlet/shared/-/shared-2.7.5.tgz#b3906477d9ca04e739c15818c3753bb2d09e0f87"
+  integrity sha512-acdVZURa4ZWiFOcSq8qDr12FEyrNjUKh+G1nP0rQioUFh/rTmEodILKPqav8YTn4CyT5jTOJR4qVe5JJ1btquw==
 
-"@varlet/ui@^2.7.4":
-  version "2.7.4"
-  resolved "https://registry.yarnpkg.com/@varlet/ui/-/ui-2.7.4.tgz#3a447d340b074cf79a4b110b1e625123b6a65309"
-  integrity sha512-/EIiu45TZokDyr9QrUYSloI9CE3YkwssidbJ0ZGj/xEf+TXwuE1njQvHo+wh88lpu1nvrKPvD7y6ZBNFXxCKpQ==
+"@varlet/ui@^2.7.5":
+  version "2.7.5"
+  resolved "https://registry.yarnpkg.com/@varlet/ui/-/ui-2.7.5.tgz#815f513467e3f6230de400d4a782c9e55f8f2042"
+  integrity sha512-mu/EtrJYNrDlsQHsyZWNed4iSAptFnK5ItzKNKgE1f/vGzYvBl33FuhZnY56l+IZFb8dcTsksDkIfHQ5vtElkA==
   dependencies:
     "@popperjs/core" "^2.11.6"
-    "@varlet/icons" "2.7.4"
-    "@varlet/shared" "2.7.4"
+    "@varlet/icons" "2.7.5"
+    "@varlet/shared" "2.7.5"
     dayjs "^1.10.4"
     decimal.js "^10.2.1"
 
@@ -2198,10 +2198,10 @@ available-typed-arrays@^1.0.5:
   resolved "https://registry.yarnpkg.com/available-typed-arrays/-/available-typed-arrays-1.0.5.tgz#92f95616501069d07d10edb2fc37d3e1c65123b7"
   integrity sha512-DMD0KiN46eipeziST1LPP/STfDU0sufISXmjSgvVsoU2tqxctQeASejWcfNtxYKqETM1UxQ8sp2OrSBWpHY6sw==
 
-axios@1.3.2:
-  version "1.3.2"
-  resolved "https://registry.yarnpkg.com/axios/-/axios-1.3.2.tgz#7ac517f0fa3ec46e0e636223fd973713a09c72b3"
-  integrity sha512-1M3O703bYqYuPhbHeya5bnhpYVsDDRyQSabNja04mZtboLNSuZ4YrltestrLXfHgmzua4TpUqRiVKbiQuo2epw==
+axios@1.3.3:
+  version "1.3.3"
+  resolved "https://registry.yarnpkg.com/axios/-/axios-1.3.3.tgz#e7011384ba839b885007c9c9fae1ff23dceb295b"
+  integrity sha512-eYq77dYIFS77AQlhzEL937yUBSepBfPIe8FcgEDN35vMNZKMrs81pgnyrQpwfy4NF4b4XWX1Zgx7yX+25w8QJA==
   dependencies:
     follow-redirects "^1.15.0"
     form-data "^4.0.0"
