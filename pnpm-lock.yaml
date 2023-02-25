@@ -17,7 +17,6 @@ specifiers:
   amfe-flexible: ^2.2.1
   autoprefixer: ^10.4.13
   axios: 1.3.4
-  cnjm-postcss-px-to-viewport: ^1.0.0
   consola: ^2.15.3
   cross-env: ^7.0.3
   dayjs: ^1.11.7
@@ -36,6 +35,7 @@ specifiers:
   postcss: ^8.4.20
   postcss-html: 1.5.0
   postcss-less: ^6.0.0
+  postcss-mobile-forever: ^2.1.2
   prettier: ^2.8.4
   rollup-plugin-visualizer: ^5.9.0
   stylelint: ^15.2.0
@@ -90,7 +90,6 @@ devDependencies:
   '@vitejs/plugin-vue-jsx': 3.0.0_vite@4.1.4+vue@3.2.47
   amfe-flexible: 2.2.1
   autoprefixer: 10.4.13_postcss@8.4.20
-  cnjm-postcss-px-to-viewport: 1.0.0_postcss@8.4.20
   consola: 2.15.3
   cross-env: 7.0.3
   eruda: 2.11.2
@@ -105,6 +104,7 @@ devDependencies:
   postcss: 8.4.20
   postcss-html: 1.5.0
   postcss-less: 6.0.0_postcss@8.4.20
+  postcss-mobile-forever: 2.1.2_postcss@8.4.20
   prettier: 2.8.4
   rollup-plugin-visualizer: 5.9.0
   stylelint: 15.2.0
@@ -3204,15 +3204,6 @@ packages:
   /clone/2.1.2:
     resolution: {integrity: sha512-3Pe/CF1Nn94hyhIYpjtiLhdCoEoz0DqQ+988E9gmeEdQZlojxnOb74wctFyuwWQHzqyf9X7C7MG8juUpqBJT8w==}
     engines: {node: '>=0.8'}
-    dev: true
-
-  /cnjm-postcss-px-to-viewport/1.0.0_postcss@8.4.20:
-    resolution: {integrity: sha512-vokFS5qvl7JG/W79JYGZgA19LiVvDzQ5aSIQvnZiZAK2lumP+MP8WCs2AU/fK1aSIBpVmqgRpU4m27RBJ2F7rw==}
-    peerDependencies:
-      postcss: ^8.4.14
-    dependencies:
-      object-assign: 4.1.1
-      postcss: 8.4.20
     dev: true
 
   /collection-visit/1.0.0:
@@ -7013,6 +7004,14 @@ packages:
 
   /postcss-media-query-parser/0.2.3:
     resolution: {integrity: sha512-3sOlxmbKcSHMjlUXQZKQ06jOswE7oVkXPxmZdoB1r5l0q6gTFTQSHxNxOrCccElbW7dxNytifNEo8qidX2Vsig==}
+    dev: true
+
+  /postcss-mobile-forever/2.1.2_postcss@8.4.20:
+    resolution: {integrity: sha512-tiQa6rIgeTdhhQF+pXsgFbUcIPEaPKdvobOBK4hGHrqu5M0z2n+dlvipZI1dAQntMCKLDV5c0eu62nXo1E3iiw==}
+    peerDependencies:
+      postcss: ^8.0.0
+    dependencies:
+      postcss: 8.4.20
     dev: true
 
   /postcss-prefix-selector/1.16.0_postcss@5.2.18:

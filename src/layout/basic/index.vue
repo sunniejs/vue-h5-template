@@ -8,7 +8,15 @@
     </RouterView>
     <RouterView v-if="!$route.meta.keepAlive" :key="$route.path" />
   </div>
-  <nut-tabbar unactive-color="#364636" active-color="#1989fa" bottom v-model="activeTab" v-show="tabbarVisible" @tab-switch="tabSwitch">
+  <nut-tabbar
+    class="tabbar-wrapper"
+    unactive-color="#364636"
+    active-color="#1989fa"
+    bottom
+    v-model="activeTab"
+    v-show="tabbarVisible"
+    @tab-switch="tabSwitch"
+  >
     <nut-tabbar-item v-for="item in tabItem" :key="item.key" :tab-title="$t(`tabbar.${item.key}`)" :icon="item.icon" />
   </nut-tabbar>
 </template>
@@ -86,5 +94,13 @@
   .border {
     padding-left: 30px;
     padding-right: 30px;
+  }
+
+  .tabbar-wrapper {
+    position: fixed;
+    bottom: 0px;
+    left: 0px;
+    width: 100%; // 用于子元素 tabbar 的宽度
+    transform: translate(0); // 令该元素形成 tabbar 的包含块，使得 tabbar 的 fixed 定位宽度基于该元素
   }
 </style>
