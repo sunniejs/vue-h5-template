@@ -17,17 +17,17 @@
     "commit": "git add . && git-cz"
   },
   "dependencies": {
-    "@nutui/nutui": "^4.0.2",
-    "@varlet/ui": "^2.8.5",
+    "@nutui/nutui": "^4.0.3",
+    "@varlet/ui": "^2.8.6",
     "@vueuse/core": "9.13.0",
     "@vueuse/integrations": "9.13.0",
     "axios": "1.3.4",
     "dayjs": "^1.11.7",
     "mitt": "^3.0.0",
-    "pinia": "^2.0.32",
+    "pinia": "^2.0.33",
     "pinia-plugin-persistedstate": "^3.1.0",
     "universal-cookie": "^4.0.4",
-    "vant": "^4.0.11",
+    "vant": "^4.1.0",
     "vue": "^3.2.47",
     "vue-i18n": "^9.2.2",
     "vue-router": "^4.1.6"
