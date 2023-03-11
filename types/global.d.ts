@@ -10,10 +10,6 @@ declare global {
     };
     lastBuildTime: string;
   };
-  // declare interface Window {
-  //   // Global vue app instance
-  //   __APP__: App<Element>;
-  // }
 
   // vue
   declare type PropType<T> = VuePropType<T>;
@@ -52,6 +48,7 @@ declare global {
   declare interface ViteEnv {
     VITE_USE_MOCK: Boolean;
     VITE_USE_ERUDA: Boolean;
+    VITE_USE_COMPRESS: Boolean;
   }
 
   declare function parseInt(s: string | number, radix?: number): number;

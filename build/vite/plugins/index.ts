@@ -20,7 +20,7 @@ import { ConfigImageminPlugin } from './imagemin';
 import { ConfigVisualizerConfig } from './visualizer';
 
 export function createVitePlugins(env: ViteEnv, isBuild: boolean) {
-  const { VITE_USE_MOCK, VITE_USE_ERUDA } = env;
+  const { VITE_USE_MOCK, VITE_USE_ERUDA, VITE_USE_COMPRESS } = env;
 
   const vitePlugins: (PluginOption | PluginOption[])[] = [
     // vue支持
@@ -39,9 +39,6 @@ export function createVitePlugins(env: ViteEnv, isBuild: boolean) {
 
   // 自动生成路由
   vitePlugins.push(ConfigPagesPlugin());
-
-  // 开启.gz压缩  rollup-plugin-gzip
-  vitePlugins.push(ConfigCompressPlugin());
 
   // 监听配置文件改动重启
   vitePlugins.push(ConfigRestartPlugin());
@@ -64,6 +61,9 @@ export function createVitePlugins(env: ViteEnv, isBuild: boolean) {
   if (isBuild) {
     // vite-plugin-imagemin
     vitePlugins.push(ConfigImageminPlugin());
+
+    // 开启.gz压缩  rollup-plugin-gzip
+    VITE_USE_COMPRESS && vitePlugins.push(ConfigCompressPlugin());
   }
 
   return vitePlugins;
