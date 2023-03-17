@@ -1675,39 +1675,39 @@
   resolved "https://registry.yarnpkg.com/@vant/popperjs/-/popperjs-1.3.0.tgz#e0eff017124b5b2352ef3b36a6df06277f4400f2"
   integrity sha512-hB+czUG+aHtjhaEmCJDuXOep0YTZjdlRR+4MSmIFnkCQIxJaXLQdSsR90XWvAI2yvKUI7TCGqR8pQg2RtvkMHw==
 
-"@vant/use@^1.5.0":
-  version "1.5.0"
-  resolved "https://registry.yarnpkg.com/@vant/use/-/use-1.5.0.tgz#ea1d6ab866ac54cfe410667fce96293c44fbcc7d"
-  integrity sha512-Dk7aMn7gLpoDew2tix/mjXpP0PoERWcxWh+pRY4xxl0MG4eeByAAyZSE6PgMpof4Yorqn7yq8KmeQcaVnxq2cg==
+"@vant/use@^1.5.1":
+  version "1.5.1"
+  resolved "https://registry.yarnpkg.com/@vant/use/-/use-1.5.1.tgz#bc5eb46d92d64e4261f0a9e31a040bdb3d8282b3"
+  integrity sha512-Zxd7lDz/LliVYEQi3PR9a8CQa/kGCVzF0u9hqDMaTlgXlbG0wHMFPllrcG0ThR6bfs8xrYVuSFM9pJn6HSoUGQ==
 
-"@varlet/icons@2.8.6":
-  version "2.8.6"
-  resolved "https://registry.yarnpkg.com/@varlet/icons/-/icons-2.8.6.tgz#a1a818f40e97b03742097b4f121c6d04bc738d79"
-  integrity sha512-wD9Dref6i/2iPMZ3De81sWXEiW7znC2pXhrgyqMWm2ZEU3CEcsguaso27ry5KxHbTVLIHfDbEQdeurOSUTnPSw==
+"@varlet/icons@2.9.2":
+  version "2.9.2"
+  resolved "https://registry.yarnpkg.com/@varlet/icons/-/icons-2.9.2.tgz#6bf6d54b65f50cd30e084784c8cc6b37d7168508"
+  integrity sha512-rixttfhTd3lJ793oXD1S86GU6YVsBNUVLXjoNPWZ5SWlulbOWCNa5kj7FyiwiXH+7gwoLFc9983nkwcj8FeB+g==
 
-"@varlet/shared@2.8.6":
-  version "2.8.6"
-  resolved "https://registry.yarnpkg.com/@varlet/shared/-/shared-2.8.6.tgz#0f1790b303d08c3a0176e270ea006a3c20f67dea"
-  integrity sha512-/u+owSXtioJnNdxbQY3WdV5JoCJS5vEK2IsFNeYgjhxCvnYHd3ki2z9cjQEwTzjGpNeNPt9A4zqQaeI32F47Tg==
+"@varlet/shared@2.9.2":
+  version "2.9.2"
+  resolved "https://registry.yarnpkg.com/@varlet/shared/-/shared-2.9.2.tgz#e90cf5ba4d83453dfb0067f8cdd5bc19858cd092"
+  integrity sha512-ci6iEHpK9ez4OCON8Cv+jBP2rkMn2gczFM3qPw1/LPjw+X/AqZM8uVm/pPQlVepvR12v8LSTJNOI8eLl0RZnWA==
 
-"@varlet/ui@^2.8.6":
-  version "2.8.6"
-  resolved "https://registry.yarnpkg.com/@varlet/ui/-/ui-2.8.6.tgz#574ed7ab59f7b26ab8294d880356fc0b5e13f58c"
-  integrity sha512-MfbqmQcsFkoGJ5ta9G1/azIB9gFc0TmifbBoU0lQ5Br9Vo0tCe5VB9AJ/f27/gjvIzo1Soj55MV27vw+ZtQl6Q==
+"@varlet/ui@^2.9.2":
+  version "2.9.2"
+  resolved "https://registry.yarnpkg.com/@varlet/ui/-/ui-2.9.2.tgz#13c06dc5cecc90b85b0175bddba9cc702ee8b2e7"
+  integrity sha512-/b+5Ia4h794yyYA6L7+xY2zLtPS+hm2h/aAzpPRdg3/W0sXYgodoYZ99LOAg06kDZCzmBRxRFkh8izuRE58OWA==
   dependencies:
     "@popperjs/core" "^2.11.6"
-    "@varlet/icons" "2.8.6"
-    "@varlet/shared" "2.8.6"
-    "@varlet/use" "2.8.6"
+    "@varlet/icons" "2.9.2"
+    "@varlet/shared" "2.9.2"
+    "@varlet/use" "2.9.2"
     dayjs "^1.10.4"
     decimal.js "^10.2.1"
 
-"@varlet/use@2.8.6":
-  version "2.8.6"
-  resolved "https://registry.yarnpkg.com/@varlet/use/-/use-2.8.6.tgz#46549ef720712c25307b0c539cad695c1d34455a"
-  integrity sha512-EZgEBpm5zylsczCXQwHerJ7oI0/Z+Ktpvhid0G/z5v0Q+BgVsy5oRB/yyNArpyh2hvkCpxka5+wwn47Lw7hcWQ==
+"@varlet/use@2.9.2":
+  version "2.9.2"
+  resolved "https://registry.yarnpkg.com/@varlet/use/-/use-2.9.2.tgz#0c3b455e9deb0d7d740c547fb7c3946bd58616e4"
+  integrity sha512-0bpkgOHN6EfEEe84qNJ1tQUEJ3yww9egSxzM+F8Yirsvu7i+OTjT39zLHPwwpcWmeCZ6YOLN5a5FJCp+CyZOeA==
   dependencies:
-    "@varlet/shared" "2.8.6"
+    "@varlet/shared" "2.9.2"
 
 "@vitejs/plugin-legacy@^4.0.2":
   version "4.0.2"
@@ -7714,13 +7714,13 @@ validate-npm-package-license@^3.0.1:
     spdx-correct "^3.0.0"
     spdx-expression-parse "^3.0.0"
 
-vant@^4.1.0:
-  version "4.1.0"
-  resolved "https://registry.yarnpkg.com/vant/-/vant-4.1.0.tgz#58348e2576c09c4848a95be543bc2edb8ffc3c05"
-  integrity sha512-wAcKaWjvWrmM4bSvyYxhh0LDe9KYFOKzNAgZBpJzokAuldnaUXQF8Dco7B30U2BglErxQC1NhqLCgnZoybOnqg==
+vant@^4.1.1:
+  version "4.1.1"
+  resolved "https://registry.yarnpkg.com/vant/-/vant-4.1.1.tgz#29a23b1c4aa4c03907e741f722082028bfa8742c"
+  integrity sha512-xCQ/ERLak8+z1avIEZZzIoyvOVs+3JTWH2VjIZ9K8+LFJMghHRnYwkjS4G0qjb6QXwM5CyudjjwG48reNMXxEQ==
   dependencies:
     "@vant/popperjs" "^1.3.0"
-    "@vant/use" "^1.5.0"
+    "@vant/use" "^1.5.1"
 
 vary@^1:
   version "1.1.2"
