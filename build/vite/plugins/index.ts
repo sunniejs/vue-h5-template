@@ -20,7 +20,7 @@ import { ConfigImageminPlugin } from './imagemin';
 import { ConfigVisualizerConfig } from './visualizer';
 
 export function createVitePlugins(env: ViteEnv, isBuild: boolean) {
-  const { VITE_USE_MOCK, VITE_USE_ERUDA, VITE_USE_COMPRESS } = env;
+  const { VITE_USE_MOCK, VITE_USE_ERUDA, VITE_USE_COMPRESS, VITE_USE_REPORT } = env;
 
   const vitePlugins: (PluginOption | PluginOption[])[] = [
     // vue支持
@@ -50,7 +50,7 @@ export function createVitePlugins(env: ViteEnv, isBuild: boolean) {
   VITE_USE_ERUDA && vitePlugins.push(ConfigEruda());
 
   // rollup-plugin-visualizer
-  vitePlugins.push(ConfigVisualizerConfig());
+  VITE_USE_REPORT && vitePlugins.push(ConfigVisualizerConfig());
 
   // vite-plugin-mock
   VITE_USE_MOCK && vitePlugins.push(ConfigMockPlugin(isBuild));

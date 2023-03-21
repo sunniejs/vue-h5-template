@@ -49,6 +49,7 @@ declare global {
     VITE_USE_MOCK: Boolean;
     VITE_USE_ERUDA: Boolean;
     VITE_USE_COMPRESS: Boolean;
+    VITE_USE_REPORT: Boolean;
   }
 
   declare function parseInt(s: string | number, radix?: number): number;
