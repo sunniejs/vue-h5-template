@@ -44,7 +44,7 @@
     "consola": "^2.15.3",
     "cross-env": "^7.0.3",
     "eruda": "^2.11.3",
-    "eslint": "^8.36.0",
+    "eslint": "^8.37.0",
     "eslint-config-prettier": "^8.8.0",
     "eslint-plugin-prettier": "^4.2.1",
     "eslint-plugin-vue": "^9.10.0",
