@@ -1389,10 +1389,10 @@
   resolved "https://registry.yarnpkg.com/@nutui/icons-vue/-/icons-vue-0.0.26.tgz#ebec9f75c596c9fb80d1580fac4c66ecd05122cb"
   integrity sha512-BbTjfTshqszF7MpLarDldLLRs8f3xH6f/s+JB0METi09G78jJuQnZzGI7iEklWy7BS/ZFXud8S3a/1RAUbiKCA==
 
-"@nutui/nutui@^4.0.4":
-  version "4.0.4"
-  resolved "https://registry.yarnpkg.com/@nutui/nutui/-/nutui-4.0.4.tgz#5d159433c2a0bfeed680dfe2418db1eddc6adf97"
-  integrity sha512-6dHpHAOZem+oF2Y2CB2FKj7TgQu7nYnX1NfA82i/rsjK7KHFqzmSUiodANFSvglxAvCShAFXcgSOYUkmRK94bg==
+"@nutui/nutui@^4.0.5":
+  version "4.0.5"
+  resolved "https://registry.yarnpkg.com/@nutui/nutui/-/nutui-4.0.5.tgz#e6ca3c8498631697bddbedf0ce3937f412d50af6"
+  integrity sha512-idGYmuqLRj3pxHAQn6j0OIbnw93U3MdTWKj9vHcj+GqjT89Is7l4+nNU+U/zVLYXOOBGEgVadUHltqcJHKQP3g==
   dependencies:
     "@nutui/icons-vue" "^0.0.26"
     sass "^1.50.0"
@@ -1704,34 +1704,34 @@
   resolved "https://registry.yarnpkg.com/@vant/use/-/use-1.5.1.tgz#bc5eb46d92d64e4261f0a9e31a040bdb3d8282b3"
   integrity sha512-Zxd7lDz/LliVYEQi3PR9a8CQa/kGCVzF0u9hqDMaTlgXlbG0wHMFPllrcG0ThR6bfs8xrYVuSFM9pJn6HSoUGQ==
 
-"@varlet/icons@2.9.4":
-  version "2.9.4"
-  resolved "https://registry.yarnpkg.com/@varlet/icons/-/icons-2.9.4.tgz#122a471ed86fd033c5fe74ef6a05f0726c6869ae"
-  integrity sha512-Dp4Y1gSnCcB9S7PgYjWsRoGEB8yrIwe/INlPIIZzYndOSkN1uC0HjUvBiJjMGd2WOFp/tseLTcSxKUUTKJjEnQ==
+"@varlet/icons@2.9.6":
+  version "2.9.6"
+  resolved "https://registry.yarnpkg.com/@varlet/icons/-/icons-2.9.6.tgz#eff93ff20a2085793969eef702f7c557602be80f"
+  integrity sha512-+fiA1FgQ543+QsuoAKSDsoViBzR/iGDm3ziDy9nFRzotEseZkJioktV5rimVRb4vxUmNcqX3xzLvBY3HfzuHXg==
 
-"@varlet/shared@2.9.4":
-  version "2.9.4"
-  resolved "https://registry.yarnpkg.com/@varlet/shared/-/shared-2.9.4.tgz#89428a18b498fab3e8f6c4870d73361cb8b9d5b1"
-  integrity sha512-ARuj7WZkf7q8OrUAiqCg+qhRSl+U8hALcEGreyyb2XKMkF70ieiZUYTFWzXltozQ/yM0cvkRGNiANRntxRx6NA==
+"@varlet/shared@2.9.6":
+  version "2.9.6"
+  resolved "https://registry.yarnpkg.com/@varlet/shared/-/shared-2.9.6.tgz#60d5e8e78cddbbd920ef296ce27150f8be7a4637"
+  integrity sha512-guaLFzsXj7gtyPHfDBQBjmDffXrut+cb5ZgCwGAvb2WVPcdBfwU6kChydYFBMM+yfVX38fQQY6cNrcRz0cLalw==
 
-"@varlet/ui@^2.9.4":
-  version "2.9.4"
-  resolved "https://registry.yarnpkg.com/@varlet/ui/-/ui-2.9.4.tgz#4c1f59c15cfecda03e36ba0989f7a6b152c38ec5"
-  integrity sha512-MlG+PmLiksn1cSTpgu3qePYVed/p7S32sWjpJaBVt/dqtogKcd2kP58LWcOe6cAIfvUzFMgF4KViYsXbCGX8UQ==
+"@varlet/ui@^2.9.6":
+  version "2.9.6"
+  resolved "https://registry.yarnpkg.com/@varlet/ui/-/ui-2.9.6.tgz#c14354a00889168fe582abcb807e9a62c6db914c"
+  integrity sha512-LuLpVDSED4DY3hd5crMJnjNoYmj7+HL+e53Ddf770Be08LUn+XQZ/Qch4LHZX2WBrxuSv5lYHIZG/7AtUeQS7g==
   dependencies:
     "@popperjs/core" "^2.11.6"
-    "@varlet/icons" "2.9.4"
-    "@varlet/shared" "2.9.4"
-    "@varlet/use" "2.9.4"
+    "@varlet/icons" "2.9.6"
+    "@varlet/shared" "2.9.6"
+    "@varlet/use" "2.9.6"
     dayjs "^1.10.4"
     decimal.js "^10.2.1"
 
-"@varlet/use@2.9.4":
-  version "2.9.4"
-  resolved "https://registry.yarnpkg.com/@varlet/use/-/use-2.9.4.tgz#1bcb7a6a993aa1579ae44018a491904b2b33afff"
-  integrity sha512-IFL84WFbAkXWetrUsoPrM1GVyzgl44bLmnaz2FlQCO1gWgM2BI07Vvf4FjgtlkEjv51ySdXxUl/nX0qp6EOcPA==
+"@varlet/use@2.9.6":
+  version "2.9.6"
+  resolved "https://registry.yarnpkg.com/@varlet/use/-/use-2.9.6.tgz#cd4374c1979bff026786d80ff2007257bb8dc8bf"
+  integrity sha512-04ZFCobGKa/9CuiGvmwImkpzXPpwM7Zi81JNFF954u2BpflIkv0544+ZRTm/gcc+Rkj97o/Yh7b9u7BXT9YX8w==
   dependencies:
-    "@varlet/shared" "2.9.4"
+    "@varlet/shared" "2.9.6"
 
 "@vitejs/plugin-legacy@^4.0.2":
   version "4.0.2"
@@ -6755,10 +6755,10 @@ pinia-plugin-persistedstate@^3.1.0:
   resolved "https://registry.yarnpkg.com/pinia-plugin-persistedstate/-/pinia-plugin-persistedstate-3.1.0.tgz#eada2b61ecd478fce88e490a685210415cd7a1b4"
   integrity sha512-8UN+vYMEPBdgNLwceY08mi5olI0wkYaEb8b6hD6xW7SnBRuPydWHlEhZvUWgNb/ibuf4PvufpvtS+dmhYjJQOw==
 
-pinia@^2.0.33:
-  version "2.0.33"
-  resolved "https://registry.yarnpkg.com/pinia/-/pinia-2.0.33.tgz#b70065be697874d5824e9792f59bd5d87ddb5e7d"
-  integrity sha512-HOj1yVV2itw6rNIrR2f7+MirGNxhORjrULL8GWgRwXsGSvEqIQ+SE0MYt6cwtpegzCda3i+rVTZM+AM7CG+kRg==
+pinia@^2.0.34:
+  version "2.0.34"
+  resolved "https://registry.yarnpkg.com/pinia/-/pinia-2.0.34.tgz#6c0c84f06b631c30c030633fa64e525c609105a9"
+  integrity sha512-cgOoGUiyqX0SSgX8XelK9+Ri4XA2/YyNtgjogwfzIx1g7iZTaZPxm7/bZYMCLU2qHRiHhxG7SuQO0eBacFNc2Q==
   dependencies:
     "@vue/devtools-api" "^6.5.0"
     vue-demi "*"

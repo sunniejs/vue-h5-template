@@ -14,14 +14,14 @@
     "commit": "git add . && git-cz"
   },
   "dependencies": {
-    "@nutui/nutui": "^4.0.4",
-    "@varlet/ui": "^2.9.4",
+    "@nutui/nutui": "^4.0.5",
+    "@varlet/ui": "^2.9.6",
     "@vueuse/core": "9.13.0",
     "@vueuse/integrations": "9.13.0",
     "axios": "1.3.4",
     "dayjs": "^1.11.7",
     "mitt": "^3.0.0",
-    "pinia": "^2.0.33",
+    "pinia": "^2.0.34",
     "pinia-plugin-persistedstate": "^3.1.0",
     "universal-cookie": "^4.0.4",
     "vant": "^4.1.2",
