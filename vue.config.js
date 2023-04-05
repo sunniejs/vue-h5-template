@@ -142,16 +142,6 @@ module.exports = defineConfig({
       .when(!IS_PROD, config => config.devtool('cheap-source-map'))
 
     config.when(IS_PROD, config => {
-      config
-        .plugin('ScriptExtHtmlWebpackPlugin')
-        .after('html')
-        .use('script-ext-html-webpack-plugin', [
-          {
-            // 将 runtime 作为内联引入不单独存在
-            inline: /runtime\..*\.js$/
-          }
-        ])
-        .end()
       config.optimization.splitChunks({
         chunks: 'all',
         cacheGroups: {
