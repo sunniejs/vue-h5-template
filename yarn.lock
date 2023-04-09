@@ -2025,34 +2025,34 @@
   resolved "https://registry.yarnpkg.com/@vue/tsconfig/-/tsconfig-0.1.3.tgz#4a61dbd29783d01ddab504276dcf0c2b6988654f"
   integrity sha512-kQVsh8yyWPvHpb8gIc9l/HIDiiVUy1amynLNpCy8p+FoCiZXCo6fQos5/097MmnNZc9AtseDsCrfkhqCrJ8Olg==
 
-"@vueuse/core@10.0.0":
-  version "10.0.0"
-  resolved "https://registry.yarnpkg.com/@vueuse/core/-/core-10.0.0.tgz#b2ad4d110994c878e01857e77ef8b038a2b46aea"
-  integrity sha512-Q/p2xaGVFVrJ0E4ID1SM35WIa0Eo4AeKPSLKuLpYG09zgUWuwEaY4lBoNzLzkdLjzq5goIJ3DfYFI0wt8W4MkA==
+"@vueuse/core@10.0.2":
+  version "10.0.2"
+  resolved "https://registry.yarnpkg.com/@vueuse/core/-/core-10.0.2.tgz#d2cd237e19bda278ae8d4f2e4a9e2e8c273bdcef"
+  integrity sha512-/UGc2cXbxbeIFLDSJyHUjI9QZ4CJJkhiJe9TbKNPSofcWmYhhUgJ+7iw9njXTKu/Xc3Z6UeXVR9fosW1+cyrnQ==
   dependencies:
     "@types/web-bluetooth" "^0.0.16"
-    "@vueuse/metadata" "10.0.0"
-    "@vueuse/shared" "10.0.0"
+    "@vueuse/metadata" "10.0.2"
+    "@vueuse/shared" "10.0.2"
     vue-demi ">=0.14.0"
 
-"@vueuse/integrations@10.0.0":
-  version "10.0.0"
-  resolved "https://registry.yarnpkg.com/@vueuse/integrations/-/integrations-10.0.0.tgz#732b5bd63c463e96fd0de2a6b881bdd2bcbe6de5"
-  integrity sha512-6APufQ5S/NDYit2khPTtZe+qUYeATsEvBKBoL/MhBnVituenNoRglCybl2dCOZlpeYiJ3PEcmhL4m6OWZQr26w==
+"@vueuse/integrations@10.0.2":
+  version "10.0.2"
+  resolved "https://registry.yarnpkg.com/@vueuse/integrations/-/integrations-10.0.2.tgz#9cc1978394b89b1c1c26dd88fa932031cde2865e"
+  integrity sha512-HgyNe46D0fOhKe2PZsNDwHt6/0S+J5lJCwZbw4kPahH2T1oBqZIJppoSvE6b3aTWu0OXOJi1WISZoVfe5kn/TQ==
   dependencies:
-    "@vueuse/core" "10.0.0"
-    "@vueuse/shared" "10.0.0"
+    "@vueuse/core" "10.0.2"
+    "@vueuse/shared" "10.0.2"
     vue-demi ">=0.14.0"
 
-"@vueuse/metadata@10.0.0":
-  version "10.0.0"
-  resolved "https://registry.yarnpkg.com/@vueuse/metadata/-/metadata-10.0.0.tgz#272b92bb1eb171882cb89bcb5d05daf2db702374"
-  integrity sha512-7Rh6tcs6aYLRLSdDHF+74wWP0Y1zLwpNJszKAIqlNBrmqdbkz8yh6NtjCYvXrrW6g+FU3ZWvR7F5ASNls+bHmw==
+"@vueuse/metadata@10.0.2":
+  version "10.0.2"
+  resolved "https://registry.yarnpkg.com/@vueuse/metadata/-/metadata-10.0.2.tgz#538bfe28d60335456084e783508361e07ef1e613"
+  integrity sha512-APSjlABrV+Q74c+FR0kFETvcN9W2pAaT3XF3WwqWUuk4srmVxv7DY4WshZxK2KYk1+MVY0Fus6J1Hk/JXVm6Aw==
 
-"@vueuse/shared@10.0.0":
-  version "10.0.0"
-  resolved "https://registry.yarnpkg.com/@vueuse/shared/-/shared-10.0.0.tgz#fe3ba8930a1a9de7cb4fd8dbc97de80da5782069"
-  integrity sha512-Zh3LgJqvUBWVY3SiMvXanTcfAneGbt63QPczBRDNgQ6jd/ehodO9a1lCFzaA6SWJJoI+ugVTjHFYJdoR656DVQ==
+"@vueuse/shared@10.0.2":
+  version "10.0.2"
+  resolved "https://registry.yarnpkg.com/@vueuse/shared/-/shared-10.0.2.tgz#82a90e22a0809428e0710206bb7761acaa057ddf"
+  integrity sha512-7W2l6qZaFvla3zAeEVo8hNHkNRKCezJa3JjZAKv3K4KsevXobHhVNr+RHaOVNK/6ETpFmtqiK+0pMIADbHjjag==
   dependencies:
     vue-demi ">=0.14.0"
 
@@ -8522,10 +8522,10 @@ validate-npm-package-license@^3.0.1:
     spdx-correct "^3.0.0"
     spdx-expression-parse "^3.0.0"
 
-vant@^4.1.2:
-  version "4.1.2"
-  resolved "https://registry.yarnpkg.com/vant/-/vant-4.1.2.tgz#080fd7cdd2e0af80bcd105949b0b4c390083cac0"
-  integrity sha512-iRUYBR5zDbs7O0UTxauyW/0XbJoE0g/eHipn0y3QxXeazdmNiaV0kGbBKRJ8vE/7p74zila/O5LzDiYbPDDN7Q==
+vant@^4.2.0:
+  version "4.2.0"
+  resolved "https://registry.yarnpkg.com/vant/-/vant-4.2.0.tgz#b843ff27aa96350966cc7ca17b20c1a9b4b56aec"
+  integrity sha512-x8kYAxoXjlXZnilBx/0Np3XhcOLdPzqerZWwOl7DsqgLu17OCYFzkoLuFDbxXM8fciX15xFITqdmtBcgqaWQWg==
   dependencies:
     "@vant/popperjs" "^1.3.0"
     "@vant/use" "^1.5.1"
