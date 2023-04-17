@@ -6,7 +6,7 @@
 import type { PluginOption } from 'vite';
 import vue from '@vitejs/plugin-vue';
 import vueJsx from '@vitejs/plugin-vue-jsx';
-import vueSetupExtend from 'vite-plugin-vue-setup-extend';
+// import vueSetupExtend from 'vite-plugin-vue-setup-extend';
 import { ConfigSvgIconsPlugin } from './svgIcons';
 import { AutoRegistryComponents } from './component';
 import { AutoImportDeps } from './autoImport';
@@ -28,7 +28,7 @@ export function createVitePlugins(env: ViteEnv, isBuild: boolean) {
     // JSX支持
     vueJsx(),
     // setup语法糖组件名支持
-    vueSetupExtend(),
+    // vueSetupExtend(),
   ];
 
   // 自动按需引入组件
