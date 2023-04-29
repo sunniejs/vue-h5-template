@@ -13,6 +13,7 @@ module.exports = {
     'eslint:recommended',
     '@vue/eslint-config-typescript',
     '@vue/eslint-config-prettier/skip-formatting',
+    './.eslintrc-auto-import.json',
   ],
   rules: {
     'vue/script-setup-uses-vars': 'error',
