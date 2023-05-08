@@ -6,7 +6,8 @@
 import type { PluginOption } from 'vite';
 import vue from '@vitejs/plugin-vue';
 import vueJsx from '@vitejs/plugin-vue-jsx';
-// import vueSetupExtend from 'vite-plugin-vue-setup-extend';
+import vueSetupExtend from 'vite-plugin-vue-setup-extend-plus';
+
 import { ConfigSvgIconsPlugin } from './svgIcons';
 import { AutoRegistryComponents } from './component';
 import { AutoImportDeps } from './autoImport';

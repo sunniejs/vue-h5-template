@@ -17,6 +17,9 @@ export const AutoImportDeps = () => {
         '@vueuse/core': [],
       },
     ],
+    eslintrc: {
+      enabled: true,
+    },
     resolvers: [VarletUIResolver(), VantResolver()],
   });
 };
