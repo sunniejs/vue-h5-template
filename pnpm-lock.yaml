@@ -168,7 +168,7 @@ devDependencies:
     version: 0.24.1(vue@3.2.47)
   vite:
     specifier: ^4.3.5
-    version: 4.3.5(@types/node@17.0.40)(terser@5.17.1)
+    version: 4.3.5(terser@5.17.1)
   vite-plugin-compression:
     specifier: ^0.5.1
     version: 0.5.1(vite@4.3.5)
@@ -180,7 +180,7 @@ devDependencies:
     version: 0.6.1(vite@4.3.5)
   vite-plugin-mock:
     specifier: ^3.0.0
-    version: 3.0.0(esbuild@0.17.12)(mockjs@1.1.0)(vite@4.3.5)
+    version: 3.0.0(mockjs@1.1.0)(vite@4.3.5)
   vite-plugin-pages:
     specifier: ^0.29.0
     version: 0.29.0(vite@4.3.5)
@@ -193,9 +193,9 @@ devDependencies:
   vite-plugin-svg-icons:
     specifier: ^2.0.1
     version: 2.0.1(vite@4.3.5)
-  vite-plugin-vue-setup-extend:
-    specifier: ^0.4.0
-    version: 0.4.0(vite@4.3.5)
+  vite-plugin-vue-setup-extend-plus:
+    specifier: ^0.1.0
+    version: 0.1.0
   vitest:
     specifier: ^0.31.0
     version: 0.31.0(jsdom@22.0.0)(terser@5.17.1)
@@ -608,14 +608,6 @@ packages:
       '@babel/helper-validator-identifier': 7.19.1
       chalk: 2.4.2
       js-tokens: 4.0.0
-    dev: true
-
-  /@babel/parser@7.19.4:
-    resolution: {integrity: sha512-qpVT7gtuOLjWeDTKLkJ6sryqLliBaFpAtGeqw5cs5giLldvh+Ch0plqnUMKoVAUS6ZEueQQiZV+p5pxtPitEsA==}
-    engines: {node: '>=6.0.0'}
-    hasBin: true
-    dependencies:
-      '@babel/types': 7.19.4
     dev: true
 
   /@babel/parser@7.20.15:
@@ -1537,15 +1529,6 @@ packages:
       - supports-color
     dev: true
 
-  /@babel/types@7.19.4:
-    resolution: {integrity: sha512-M5LK7nAeS6+9j7hAq+b3fQs+pNfUtTGq+yFFfHnauFA8zQtLRfmuipmsKDKKLuyG+wC8ABW43A153YNawNTEtw==}
-    engines: {node: '>=6.9.0'}
-    dependencies:
-      '@babel/helper-string-parser': 7.19.4
-      '@babel/helper-validator-identifier': 7.19.1
-      to-fast-properties: 2.0.0
-    dev: true
-
   /@babel/types@7.20.5:
     resolution: {integrity: sha512-c9fst/h2/dcF7H+MJKZ2T0KjEQ8hY/BNnDk/H3XY8C4Aw/eWQXWn/lWntHF9ooUBnGmEvbfGrTgLWc+um0YDUg==}
     engines: {node: '>=6.9.0'}
@@ -2328,7 +2311,7 @@ packages:
       regenerator-runtime: 0.13.11
       systemjs: 6.14.1
       terser: 5.17.1
-      vite: 4.3.5(@types/node@17.0.40)(terser@5.17.1)
+      vite: 4.3.5(terser@5.17.1)
     transitivePeerDependencies:
       - supports-color
     dev: true
@@ -2343,7 +2326,7 @@ packages:
       '@babel/core': 7.20.12
       '@babel/plugin-transform-typescript': 7.21.3(@babel/core@7.20.12)
       '@vue/babel-plugin-jsx': 1.1.1(@babel/core@7.20.12)
-      vite: 4.3.5(@types/node@17.0.40)(terser@5.17.1)
+      vite: 4.3.5(terser@5.17.1)
       vue: 3.2.47
     transitivePeerDependencies:
       - supports-color
@@ -2356,7 +2339,7 @@ packages:
       vite: ^4.0.0
       vue: ^3.2.25
     dependencies:
-      vite: 4.3.5(@types/node@17.0.40)(terser@5.17.1)
+      vite: 4.3.5(terser@5.17.1)
       vue: 3.2.47
     dev: true
 
@@ -2465,15 +2448,6 @@ packages:
       - supports-color
     dev: true
 
-  /@vue/compiler-core@3.2.36:
-    resolution: {integrity: sha512-bbyZM5hvBicv0PW3KUfVi+x3ylHnfKG7DOn5wM+f2OztTzTjLEyBb/5yrarIYpmnGitVGbjZqDbODyW4iK8hqw==}
-    dependencies:
-      '@babel/parser': 7.19.4
-      '@vue/shared': 3.2.36
-      estree-walker: 2.0.2
-      source-map: 0.6.1
-    dev: true
-
   /@vue/compiler-core@3.2.47:
     resolution: {integrity: sha512-p4D7FDnQb7+YJmO2iPEv0SQNeNzcbHdGByJDsT4lynf63AFkOTFN07HsiRSvjGo0QrxR/o3d0hUyNCUnBU2Tig==}
     dependencies:
@@ -2482,33 +2456,11 @@ packages:
       estree-walker: 2.0.2
       source-map: 0.6.1
 
-  /@vue/compiler-dom@3.2.36:
-    resolution: {integrity: sha512-tcOTAOiW4s24QLnq+ON6J+GRONXJ+A/mqKCORi0LSlIh8XQlNnlm24y8xIL8la+ZDgkdbjarQ9ZqYSvEja6gVA==}
-    dependencies:
-      '@vue/compiler-core': 3.2.36
-      '@vue/shared': 3.2.36
-    dev: true
-
   /@vue/compiler-dom@3.2.47:
     resolution: {integrity: sha512-dBBnEHEPoftUiS03a4ggEig74J2YBZ2UIeyfpcRM2tavgMWo4bsEfgCGsu+uJIL/vax9S+JztH8NmQerUo7shQ==}
     dependencies:
       '@vue/compiler-core': 3.2.47
       '@vue/shared': 3.2.47
-
-  /@vue/compiler-sfc@3.2.36:
-    resolution: {integrity: sha512-AvGb4bTj4W8uQ4BqaSxo7UwTEqX5utdRSMyHy58OragWlt8nEACQ9mIeQh3K4di4/SX+41+pJrLIY01lHAOFOA==}
-    dependencies:
-      '@babel/parser': 7.19.4
-      '@vue/compiler-core': 3.2.36
-      '@vue/compiler-dom': 3.2.36
-      '@vue/compiler-ssr': 3.2.36
-      '@vue/reactivity-transform': 3.2.36
-      '@vue/shared': 3.2.36
-      estree-walker: 2.0.2
-      magic-string: 0.25.9
-      postcss: 8.4.23
-      source-map: 0.6.1
-    dev: true
 
   /@vue/compiler-sfc@3.2.47:
     resolution: {integrity: sha512-rog05W+2IFfxjMcFw10tM9+f7i/+FFpZJJ5XHX72NP9eC2uRD+42M3pYcQqDXVYoj74kHMSEdQ/WmCjt8JFksQ==}
@@ -2523,13 +2475,6 @@ packages:
       magic-string: 0.25.9
       postcss: 8.4.23
       source-map: 0.6.1
-
-  /@vue/compiler-ssr@3.2.36:
-    resolution: {integrity: sha512-+KugInUFRvOxEdLkZwE+W43BqHyhBh0jpYXhmqw1xGq2dmE6J9eZ8UUSOKNhdHtQ/iNLWWeK/wPZkVLUf3YGaw==}
-    dependencies:
-      '@vue/compiler-dom': 3.2.36
-      '@vue/shared': 3.2.36
-    dev: true
 
   /@vue/compiler-ssr@3.2.47:
     resolution: {integrity: sha512-wVXC+gszhulcMD8wpxMsqSOpvDZ6xKXSVWkf50Guf/S+28hTAXPDYRTbLQ3EDkOP5Xz/+SY37YiwDquKbJOgZw==}
@@ -2582,16 +2527,6 @@ packages:
       - supports-color
     dev: true
 
-  /@vue/reactivity-transform@3.2.36:
-    resolution: {integrity: sha512-Jk5o2BhpODC9XTA7o4EL8hSJ4JyrFWErLtClG3NH8wDS7ri9jBDWxI7/549T7JY9uilKsaNM+4pJASLj5dtRwA==}
-    dependencies:
-      '@babel/parser': 7.19.4
-      '@vue/compiler-core': 3.2.36
-      '@vue/shared': 3.2.36
-      estree-walker: 2.0.2
-      magic-string: 0.25.9
-    dev: true
-
   /@vue/reactivity-transform@3.2.47:
     resolution: {integrity: sha512-m8lGXw8rdnPVVIdIFhf0LeQ/ixyHkH5plYuS83yop5n7ggVJU+z5v0zecwEnX7fa7HNLBhh2qngJJkxpwEEmYA==}
     dependencies:
@@ -2627,10 +2562,6 @@ packages:
       '@vue/compiler-ssr': 3.2.47
       '@vue/shared': 3.2.47
       vue: 3.2.47
-
-  /@vue/shared@3.2.36:
-    resolution: {integrity: sha512-JtB41wXl7Au3+Nl3gD16Cfpj7k/6aCroZ6BbOiCMFCMvrOpkg/qQUXTso2XowaNqBbnkuGHurLAqkLBxNGc1hQ==}
-    dev: true
 
   /@vue/shared@3.2.47:
     resolution: {integrity: sha512-BHGyyGN3Q97EZx0taMQ+OLNuZcW3d37ZEVmEAyeoA9ERdGvm9Irc/0Fua8SNyOtV1w6BS4q25wbMzJujO9HIfQ==}
@@ -3176,13 +3107,12 @@ packages:
       ieee754: 1.2.1
     dev: true
 
-  /bundle-require@4.0.1(esbuild@0.17.12):
+  /bundle-require@4.0.1:
     resolution: {integrity: sha512-9NQkRHlNdNpDBGmLpngF3EFDcwodhMUuLz9PaWYciVcQF9SE4LFjM2DB/xV1Li5JiuDMv7ZUWuC3rGbqR0MAXQ==}
     engines: {node: ^12.20.0 || ^14.13.1 || >=16.0.0}
     peerDependencies:
       esbuild: '>=0.17'
     dependencies:
-      esbuild: 0.17.12
       load-tsconfig: 0.2.5
     dev: true
 
@@ -9069,7 +8999,7 @@ packages:
       chalk: 4.1.2
       debug: 4.3.4
       fs-extra: 10.1.0
-      vite: 4.3.5(@types/node@17.0.40)(terser@5.17.1)
+      vite: 4.3.5(terser@5.17.1)
     transitivePeerDependencies:
       - supports-color
     dev: true
@@ -9106,12 +9036,12 @@ packages:
       imagemin-webp: 6.0.0
       jpegtran-bin: 6.0.1
       pathe: 0.2.0
-      vite: 4.3.5(@types/node@17.0.40)(terser@5.17.1)
+      vite: 4.3.5(terser@5.17.1)
     transitivePeerDependencies:
       - supports-color
     dev: true
 
-  /vite-plugin-mock@3.0.0(esbuild@0.17.12)(mockjs@1.1.0)(vite@4.3.5):
+  /vite-plugin-mock@3.0.0(mockjs@1.1.0)(vite@4.3.5):
     resolution: {integrity: sha512-Ibwlga2CSgkoFHFtPW3T/l0fwsGVz9Ss5i7HauBQDyDFfMKgbQXh9wKDLksLZHyai9rkDanxJtIcxbD0bUHCfw==}
     engines: {node: '>=16.0.0'}
     peerDependencies:
@@ -9119,7 +9049,7 @@ packages:
       vite: '>=4.0.0'
     dependencies:
       '@types/mockjs': 1.0.7
-      bundle-require: 4.0.1(esbuild@0.17.12)
+      bundle-require: 4.0.1
       chokidar: 3.5.3
       connect: 3.7.0
       debug: 4.3.4
@@ -9127,7 +9057,7 @@ packages:
       mockjs: 1.1.0
       path-to-regexp: 6.2.1
       picocolors: 1.0.0
-      vite: 4.3.5(@types/node@17.0.40)(terser@5.17.1)
+      vite: 4.3.5(terser@5.17.1)
     transitivePeerDependencies:
       - esbuild
       - supports-color
@@ -9150,7 +9080,7 @@ packages:
       json5: 2.2.3
       local-pkg: 0.4.3
       picocolors: 1.0.0
-      vite: 4.3.5(@types/node@17.0.40)(terser@5.17.1)
+      vite: 4.3.5(terser@5.17.1)
       yaml: 2.2.1
     transitivePeerDependencies:
       - supports-color
@@ -9165,7 +9095,7 @@ packages:
       picocolors: 1.0.0
       progress: 2.0.3
       rd: 2.0.1
-      vite: 4.3.5(@types/node@17.0.40)(terser@5.17.1)
+      vite: 4.3.5(terser@5.17.1)
     dev: true
 
   /vite-plugin-restart@0.3.1(vite@4.3.5):
@@ -9174,7 +9104,7 @@ packages:
       vite: ^2.9.0 || ^3.0.0 || ^4.0.0
     dependencies:
       micromatch: 4.0.5
-      vite: 4.3.5(@types/node@17.0.40)(terser@5.17.1)
+      vite: 4.3.5(terser@5.17.1)
     dev: true
 
   /vite-plugin-svg-icons@2.0.1(vite@4.3.5):
@@ -9190,19 +9120,13 @@ packages:
       pathe: 0.2.0
       svg-baker: 1.7.0
       svgo: 2.8.0
-      vite: 4.3.5(@types/node@17.0.40)(terser@5.17.1)
+      vite: 4.3.5(terser@5.17.1)
     transitivePeerDependencies:
       - supports-color
     dev: true
 
-  /vite-plugin-vue-setup-extend@0.4.0(vite@4.3.5):
-    resolution: {integrity: sha512-WMbjPCui75fboFoUTHhdbXzu4Y/bJMv5N9QT9a7do3wNMNHHqrk+Tn2jrSJU0LS5fGl/EG+FEDBYVUeWIkDqXQ==}
-    peerDependencies:
-      vite: '>=2.0.0'
-    dependencies:
-      '@vue/compiler-sfc': 3.2.36
-      magic-string: 0.25.9
-      vite: 4.3.5(@types/node@17.0.40)(terser@5.17.1)
+  /vite-plugin-vue-setup-extend-plus@0.1.0:
+    resolution: {integrity: sha512-pa27KIsHIBvBMv4xz9uB3UCfAuP2tr7PLlFhCS9vw+aXd326LEHsvhqd3hCQDOR5MjlQVyQH6vwuGr3u+KRiiw==}
     dev: true
 
   /vite@4.3.5(@types/node@17.0.40)(terser@5.17.1):
@@ -9231,6 +9155,39 @@ packages:
         optional: true
     dependencies:
       '@types/node': 17.0.40
+      esbuild: 0.17.12
+      postcss: 8.4.23
+      rollup: 3.21.5
+      terser: 5.17.1
+    optionalDependencies:
+      fsevents: 2.3.2
+    dev: true
+
+  /vite@4.3.5(terser@5.17.1):
+    resolution: {integrity: sha512-0gEnL9wiRFxgz40o/i/eTBwm+NEbpUeTWhzKrZDSdKm6nplj+z4lKz8ANDgildxHm47Vg8EUia0aicKbawUVVA==}
+    engines: {node: ^14.18.0 || >=16.0.0}
+    hasBin: true
+    peerDependencies:
+      '@types/node': '>= 14'
+      less: '*'
+      sass: '*'
+      stylus: '*'
+      sugarss: '*'
+      terser: ^5.4.0
+    peerDependenciesMeta:
+      '@types/node':
+        optional: true
+      less:
+        optional: true
+      sass:
+        optional: true
+      stylus:
+        optional: true
+      sugarss:
+        optional: true
+      terser:
+        optional: true
+    dependencies:
       esbuild: 0.17.12
       postcss: 8.4.23
       rollup: 3.21.5

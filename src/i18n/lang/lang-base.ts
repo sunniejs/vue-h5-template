@@ -18,4 +18,8 @@ export type langType = {
   list: {
     details: string;
   };
+  btn: {
+    confirm: string;
+    cancel: string;
+  };
 };
