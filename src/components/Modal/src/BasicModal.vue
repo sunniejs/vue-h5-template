@@ -1,8 +1,3 @@
-<!--
- * @Author: Vinton
- * @Date: 2023-05-10 11:46:33
- * @Description: file content
--->
 <template>
   <Popup
     :show="props.show"
