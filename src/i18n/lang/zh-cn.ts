@@ -20,4 +20,8 @@ export const lang: langType = {
   list: {
     details: '列表详情',
   },
+  btn: {
+    confirm: '确认',
+    cancel: '取消',
+  },
 };

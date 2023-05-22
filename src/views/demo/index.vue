@@ -32,18 +32,40 @@
     </div>
   </section>
   <section>
-    <div :class="['btn-add', i18n.global.locale]"></div>
+    <span class="title">Modal</span>
+    <div class="demo">
+      <var-button type="primary" @click="openLargeModal">Open large Modal</var-button>
+      <var-button type="info" @click="openSmallModal">Open Normal Modal</var-button>
+    </div>
   </section>
 </template>
 
-<script setup name="DemoPage">
-  import { i18n } from '/@/i18n';
-  // import { useI18n } from 'vue-i18n';
-  // const { locale } = useI18n();
+<script setup name="DemoPage" lang="tsx">
+  import { openFactoryModal } from '/@/components/Modal/index';
+  const openLargeModal = () => {
+    openFactoryModal({
+      renderComp: function () {
+        return <div>自定义内容</div>;
+      },
+    }).then((res) => {
+      console.log('确认成功', res);
+    });
+  };
+  const openSmallModal = () => {
+    openFactoryModal({
+      size: 'normal',
+      renderComp: function () {
+        return <div>自定义内容</div>;
+      },
+    }).then((res) => {
+      console.log('确认成功', res);
+    });
+  };
 </script>
 
 <style lang="scss" scoped>
   @import '../../styles/mixin.scss';
+
   section {
     .title {
       font-size: 40px;
@@ -51,11 +73,13 @@
       font-weight: 500;
       display: inline-block;
     }
+
     &:nth-child(n) {
       .title {
         margin-top: 20px;
       }
     }
+
     &:first-child {
       .title {
         margin-top: 0;
@@ -66,6 +90,7 @@
       margin-bottom: 10px !important;
     }
   }
+
   .demo {
     > :nth-child(n) {
       margin-right: 20px;

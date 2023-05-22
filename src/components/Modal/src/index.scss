@@ -1,0 +1,41 @@
+.modal-content {
+  width: 650px;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: relative;
+  @include center();
+  &.normal {
+    height: 604px;
+    background-image: url(@/assets/BaseModal/modal-bg-normal.png);
+  }
+  &.large {
+    height: 754px;
+    background-image: url(@/assets/BaseModal/modal-bg-large.png);
+  }
+  .content {
+    width: 100%;
+    @include center();
+  }
+  .btn {
+    display: flex;
+    width: 100%;
+    justify-content: space-around;
+    position: absolute;
+    bottom: 10px;
+    &-cancel {
+      @extend .btn-common;
+      background-color: coral;
+    }
+    &-confirm {
+      @extend .btn-common;
+      background-color: skyblue;
+    }
+  }
+}
+
+.btn-common {
+  width: 250px;
+  height: 100px;
+  border-radius: 10px;
+  @include center();
+}

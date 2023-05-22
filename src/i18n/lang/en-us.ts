@@ -20,4 +20,8 @@ export const lang: langType = {
   list: {
     details: 'list details',
   },
+  btn: {
+    confirm: 'confirm',
+    cancel: 'cancel',
+  },
 };
