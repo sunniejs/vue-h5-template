@@ -1665,7 +1665,7 @@
   resolved "https://registry.yarnpkg.com/@nutui/icons-vue/-/icons-vue-0.0.26.tgz#ebec9f75c596c9fb80d1580fac4c66ecd05122cb"
   integrity sha512-BbTjfTshqszF7MpLarDldLLRs8f3xH6f/s+JB0METi09G78jJuQnZzGI7iEklWy7BS/ZFXud8S3a/1RAUbiKCA==
 
-"@nutui/nutui@^4.0.7":
+"@nutui/nutui@^4.0.8":
   version "4.0.8"
   resolved "https://registry.yarnpkg.com/@nutui/nutui/-/nutui-4.0.8.tgz#50389879ae8fd023e707721bf0ef1c1288fe1ff1"
   integrity sha512-XJ5QLBvlq5o7Kom7KhNkpzhJ7UVScjLVuKU7EHmOfIaexT+0zJX+ePMu1+gqBbNJdIfJ0zRqmSq5TQrgFjcTnA==
@@ -1962,7 +1962,7 @@
   resolved "https://registry.yarnpkg.com/@varlet/shared/-/shared-2.11.2.tgz#3050a6a41ecb4e9da8febe58efefb45bdf8742ec"
   integrity sha512-BYqr+s+BWcO7bY1F7CQ54hLXJpS6P2/McqzQ2WSVC2+a8ikp2ILFyqaHgrHsdeGPKw37KrB6hAi0ByeR9ertZg==
 
-"@varlet/ui@^2.10.2":
+"@varlet/ui@^2.11.0":
   version "2.11.2"
   resolved "https://registry.yarnpkg.com/@varlet/ui/-/ui-2.11.2.tgz#31e6372bf3f119953442b18faebed145a370a81f"
   integrity sha512-fMHM7vt8gePq/7o28K9Q/Kaochf93G9vdRHpUFXQJerMWtwdLN1Lzl5us/nspSvldScGD9EFt4m8SViFSfoTcw==
@@ -4084,7 +4084,7 @@ eslint-plugin-prettier@^4.0.0, eslint-plugin-prettier@^4.2.1:
   dependencies:
     prettier-linter-helpers "^1.0.0"
 
-eslint-plugin-vue@^9.12.0:
+eslint-plugin-vue@^9.13.0:
   version "9.14.1"
   resolved "https://registry.yarnpkg.com/eslint-plugin-vue/-/eslint-plugin-vue-9.14.1.tgz#3b0c9857642dac547c7564031cfb09d283eafdd4"
   integrity sha512-LQazDB1qkNEKejLe/b5a9VfEbtbczcOaui5lQ4Qw0tbRBbQYREyxxOV5BQgNDTqGPs9pxqiEpbMi9ywuIaF7vw==
@@ -4131,7 +4131,7 @@ eslint-visitor-keys@^3.4.1:
   resolved "https://registry.yarnpkg.com/eslint-visitor-keys/-/eslint-visitor-keys-3.4.1.tgz#c22c48f48942d08ca824cc526211ae400478a994"
   integrity sha512-pZnmmLwYzf+kWaM/Qgrvpen51upAktaaiI01nsJD/Yr3lMOdNtq0cxkrrg16w64VtisN6okbs7Q8AfGqj4c9fA==
 
-eslint@^8.40.0:
+eslint@^8.41.0:
   version "8.41.0"
   resolved "https://registry.yarnpkg.com/eslint/-/eslint-8.41.0.tgz#3062ca73363b4714b16dbc1e60f035e6134b6f1c"
   integrity sha512-WQDQpzGBOP5IrXPo4Hc0814r4/v2rrIsB0rhT7jtunIalgg6gYXWhRMOejVO8yH21T/FGaxjmFjBMNqcIlmH1Q==
@@ -7007,13 +7007,13 @@ pinia-plugin-persistedstate@^3.1.0:
   resolved "https://registry.yarnpkg.com/pinia-plugin-persistedstate/-/pinia-plugin-persistedstate-3.1.0.tgz#eada2b61ecd478fce88e490a685210415cd7a1b4"
   integrity sha512-8UN+vYMEPBdgNLwceY08mi5olI0wkYaEb8b6hD6xW7SnBRuPydWHlEhZvUWgNb/ibuf4PvufpvtS+dmhYjJQOw==
 
-pinia@^2.0.35:
-  version "2.0.35"
-  resolved "https://registry.yarnpkg.com/pinia/-/pinia-2.0.35.tgz#aa2597038bb55ea14ad689f83065d2814ebb8c10"
-  integrity sha512-P1IKKQWhxGXiiZ3atOaNI75bYlFUbRxtJdhPLX059Z7+b9Z04rnTZdSY8Aph1LA+/4QEMAYHsTQ638Wfe+6K5g==
+pinia@^2.1.0:
+  version "2.1.3"
+  resolved "https://registry.yarnpkg.com/pinia/-/pinia-2.1.3.tgz#50c70c7b4c94c109fade0ed4122231cbba72f8c5"
+  integrity sha512-XNA/z/ye4P5rU1pieVmh0g/hSuDO98/a5UC8oSP0DNdvt6YtetJNHTrXwpwsQuflkGT34qKxAEcp7lSxXNjf/A==
   dependencies:
     "@vue/devtools-api" "^6.5.0"
-    vue-demi "*"
+    vue-demi ">=0.14.5"
 
 pinkie-promise@^2.0.0:
   version "2.0.1"
@@ -9060,15 +9060,15 @@ vitest@^0.31.1:
     vite-node "0.31.1"
     why-is-node-running "^2.2.2"
 
-vue-demi@*:
-  version "0.13.11"
-  resolved "https://registry.yarnpkg.com/vue-demi/-/vue-demi-0.13.11.tgz#7d90369bdae8974d87b1973564ad390182410d99"
-  integrity sha512-IR8HoEEGM65YY3ZJYAjMlKygDQn25D5ajNFNoKh9RSDMQtlzCxtfQjdQgv9jjK+m3377SsJXY8ysq8kLCZL25A==
-
 vue-demi@>=0.14.0:
   version "0.14.0"
   resolved "https://registry.yarnpkg.com/vue-demi/-/vue-demi-0.14.0.tgz#dcfd9a9cf9bb62ada1582ec9042372cf67ca6190"
   integrity sha512-gt58r2ogsNQeVoQ3EhoUAvUsH9xviydl0dWJj7dabBC/2L4uBId7ujtCwDRD0JhkGsV1i0CtfLAeyYKBht9oWg==
+
+vue-demi@>=0.14.5:
+  version "0.14.5"
+  resolved "https://registry.yarnpkg.com/vue-demi/-/vue-demi-0.14.5.tgz#676d0463d1a1266d5ab5cba932e043d8f5f2fbd9"
+  integrity sha512-o9NUVpl/YlsGJ7t+xuqJKx8EBGf1quRhCiT6D/J0pfwmk9zUwYkC7yrF4SZCe6fETvSM3UNL2edcbYrSyc4QHA==
 
 vue-eslint-parser@^9.1.1:
   version "9.1.1"
@@ -9106,7 +9106,7 @@ vue-i18n@^9.2.2:
     "@intlify/vue-devtools" "9.2.2"
     "@vue/devtools-api" "^6.2.1"
 
-vue-router@^4.2.0:
+vue-router@^4.2.1:
   version "4.2.2"
   resolved "https://registry.yarnpkg.com/vue-router/-/vue-router-4.2.2.tgz#b0097b66d89ca81c0986be03da244c7b32a4fd81"
   integrity sha512-cChBPPmAflgBGmy3tBsjeoe3f3VOSG6naKyY5pjtrqLGbNEXdzCigFUHgBvp9e3ysAtFtEx7OLqcSDh/1Cq2TQ==
@@ -9130,7 +9130,7 @@ vue-tsc@^1.5.0:
     "@volar/vue-typescript" "1.6.4"
     semver "^7.3.8"
 
-vue@^3.3.0:
+vue@^3.3.1:
   version "3.3.4"
   resolved "https://registry.yarnpkg.com/vue/-/vue-3.3.4.tgz#8ed945d3873667df1d0fcf3b2463ada028f88bd6"
   integrity sha512-VTyEYn3yvIeY1Py0WaYGZsXnz3y5UnGi62GjVEqvEGPl6nxbOrCXbVOTQWBEJUqAyTUk2uJ5JLVnYJ6ZzGbrSw==
