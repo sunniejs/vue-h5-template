@@ -4019,7 +4019,7 @@ eslint-plugin-prettier@^4.0.0, eslint-plugin-prettier@^4.2.1:
   dependencies:
     prettier-linter-helpers "^1.0.0"
 
-eslint-plugin-vue@^9.14.0:
+eslint-plugin-vue@^9.14.1:
   version "9.14.1"
   resolved "https://registry.yarnpkg.com/eslint-plugin-vue/-/eslint-plugin-vue-9.14.1.tgz#3b0c9857642dac547c7564031cfb09d283eafdd4"
   integrity sha512-LQazDB1qkNEKejLe/b5a9VfEbtbczcOaui5lQ4Qw0tbRBbQYREyxxOV5BQgNDTqGPs9pxqiEpbMi9ywuIaF7vw==
@@ -8359,7 +8359,7 @@ tempfile@^2.0.0:
     temp-dir "^1.0.0"
     uuid "^3.0.1"
 
-terser@^5.17.5:
+terser@^5.17.6:
   version "5.17.6"
   resolved "https://registry.yarnpkg.com/terser/-/terser-5.17.6.tgz#d810e75e1bb3350c799cd90ebefe19c9412c12de"
   integrity sha512-V8QHcs8YuyLkLHsJO5ucyff1ykrLVsR4dNnS//L5Y3NiSXpbK1J+WMVUs67eI0KTxs9JtHhgEQpXQVHlHI92DQ==
@@ -8676,7 +8676,7 @@ unpipe@~1.0.0:
   resolved "https://registry.yarnpkg.com/unpipe/-/unpipe-1.0.0.tgz#b2bf4ee8514aae6165b4817829d21b2ef49904ec"
   integrity sha512-pjy2bYhSsufwWlKwPc+l3cN7+wuJlK6uz0YdJEOlQDbl6jo/YlPi4mb8agUkVC8BF7V8NuzeyPNqRksA3hztKQ==
 
-unplugin-auto-import@^0.16.1:
+unplugin-auto-import@^0.16.3:
   version "0.16.4"
   resolved "https://registry.yarnpkg.com/unplugin-auto-import/-/unplugin-auto-import-0.16.4.tgz#7b78de0c1ec92cc1a753a89d718ed23828576db9"
   integrity sha512-xdgBa9NAS3JG8HjkAZHSbGSMlrjKpaWKXGUzaF6RzEtr980RCl1t0Zsu0skUInNYrEQfqaHc7aGWPv41DLTK/w==
@@ -8940,6 +8940,11 @@ vite-plugin-svg-icons@^2.0.1:
     pathe "^0.2.0"
     svg-baker "1.7.0"
     svgo "^2.8.0"
+
+vite-plugin-vue-setup-extend-plus@^0.1.0:
+  version "0.1.0"
+  resolved "https://registry.yarnpkg.com/vite-plugin-vue-setup-extend-plus/-/vite-plugin-vue-setup-extend-plus-0.1.0.tgz#3a7c53208c88736734a39bbe17d7ee36e226ab74"
+  integrity sha512-pa27KIsHIBvBMv4xz9uB3UCfAuP2tr7PLlFhCS9vw+aXd326LEHsvhqd3hCQDOR5MjlQVyQH6vwuGr3u+KRiiw==
 
 "vite@^3.0.0 || ^4.0.0":
   version "4.2.1"
