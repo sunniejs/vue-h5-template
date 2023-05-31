@@ -30,3 +30,7 @@
     </td>
   </tr>
 </table>
+
+# Star History
+
+[![Star History Chart](https://api.star-history.com/svg?repos=sunniejs/vue-h5-template&type=Timeline)](https://star-history.com/#tobe-fe-dalao/fast-vue3&Timeline)
