@@ -2,7 +2,7 @@
 
 ## node 版本要求
 
-推荐 14.19.0+以上的版本，毕竟 2022 年了，别掐着 12+的版本了，你也可以使用[nvm](https://github.com/nvm-sh/nvm)或[nvm-windows](https://github.com/coreybutler/nvm-windows)在同一台电脑上管理多个 node 版本。
+推荐 16.17.0+以上的版本，毕竟 2022 年了，别掐着 12+的版本了，你也可以使用[nvm](https://github.com/nvm-sh/nvm)或[nvm-windows](https://github.com/coreybutler/nvm-windows)在同一台电脑上管理多个 node 版本。
 
 ## 包管理器
 
