@@ -1670,12 +1670,17 @@
   resolved "https://registry.yarnpkg.com/@nutui/icons-vue/-/icons-vue-0.0.26.tgz#ebec9f75c596c9fb80d1580fac4c66ecd05122cb"
   integrity sha512-BbTjfTshqszF7MpLarDldLLRs8f3xH6f/s+JB0METi09G78jJuQnZzGI7iEklWy7BS/ZFXud8S3a/1RAUbiKCA==
 
-"@nutui/nutui@^4.0.8":
-  version "4.0.8"
-  resolved "https://registry.yarnpkg.com/@nutui/nutui/-/nutui-4.0.8.tgz#50389879ae8fd023e707721bf0ef1c1288fe1ff1"
-  integrity sha512-XJ5QLBvlq5o7Kom7KhNkpzhJ7UVScjLVuKU7EHmOfIaexT+0zJX+ePMu1+gqBbNJdIfJ0zRqmSq5TQrgFjcTnA==
+"@nutui/icons-vue@^0.1.1":
+  version "0.1.1"
+  resolved "https://registry.yarnpkg.com/@nutui/icons-vue/-/icons-vue-0.1.1.tgz#d90b3e5d5e109aebb775e4dd5167d702f3adcec1"
+  integrity sha512-ekn6R9GNHWNUcV4pxdhQzrI1g1VhZ5zknklXoUJrCzt0RkRRLU0bUXX3ouWT0sl0U3MNJClnXAzZe7iPAvgPtw==
+
+"@nutui/nutui@^4.0.9":
+  version "4.0.11"
+  resolved "https://registry.yarnpkg.com/@nutui/nutui/-/nutui-4.0.11.tgz#c2686646c227d84d9816d971836906b76a4f82b6"
+  integrity sha512-F2aa9p9brGFVLxlXahErCh4PYEWFRmM+DUPCZhYkEA9jqN3vMEEmq5mGNcfsT3hQ/XF047jxCFPAN7xWIX+uzA==
   dependencies:
-    "@nutui/icons-vue" "^0.0.26"
+    "@nutui/icons-vue" "^0.1.1"
     sass "^1.50.0"
 
 "@popperjs/core@^2.11.6":
@@ -1957,34 +1962,34 @@
   resolved "https://registry.yarnpkg.com/@vant/use/-/use-1.5.1.tgz#bc5eb46d92d64e4261f0a9e31a040bdb3d8282b3"
   integrity sha512-Zxd7lDz/LliVYEQi3PR9a8CQa/kGCVzF0u9hqDMaTlgXlbG0wHMFPllrcG0ThR6bfs8xrYVuSFM9pJn6HSoUGQ==
 
-"@varlet/icons@2.11.4":
-  version "2.11.4"
-  resolved "https://registry.yarnpkg.com/@varlet/icons/-/icons-2.11.4.tgz#23b57703be953b4554fc93a28887b4b7f90a2b8f"
-  integrity sha512-XsARbN7oUuUd/lcKazX0w/ZkCTIXLSVwwkOPVZhwhVH4YidzR57I10ErYNXURmfUV33Jtc7y29yL1FU0dKn19w==
+"@varlet/icons@2.11.5":
+  version "2.11.5"
+  resolved "https://registry.yarnpkg.com/@varlet/icons/-/icons-2.11.5.tgz#ba83d5c973b9d0a47e3939c37f958bd828c5556f"
+  integrity sha512-62HW2QbVT+V+T2wjG3TKI5jMChMf+IAjhU6NsERxkvt3i7Cm2ziZLh3BeFzuf5cuM00qBSF/iRzWgpyadLYqUg==
 
-"@varlet/shared@2.11.4":
-  version "2.11.4"
-  resolved "https://registry.yarnpkg.com/@varlet/shared/-/shared-2.11.4.tgz#ac8feeb35fe96c830bde81fcb328ca8618a63a35"
-  integrity sha512-8Lnkq8JiXRKTiy7ZpGfy2j+conpPzJSbrY/DxhKf+5Od3GtBvXWbTqj92YfvD0vDgeEzGrjMHfUq8p5HKbDZ+A==
+"@varlet/shared@2.11.5":
+  version "2.11.5"
+  resolved "https://registry.yarnpkg.com/@varlet/shared/-/shared-2.11.5.tgz#27fa30b5fd5783906925d625f4142e7bbc063b0c"
+  integrity sha512-kET1tG3JCIXAYjXmxQ8N1MArMNdLCqtsX2xbz1e7a3A0vIkX22TI4qUZ+XXwO32L1ogsyWflc+O4BTft8ZLv3Q==
 
-"@varlet/ui@^2.11.4":
-  version "2.11.4"
-  resolved "https://registry.yarnpkg.com/@varlet/ui/-/ui-2.11.4.tgz#f7cdb60a4b5c05fdbf9db4c0f36ff549423b9a73"
-  integrity sha512-TCngaL5OonR9iKn6aa77Up8HPdfcmraPprrcS2/bD+M5ko95yoODLjR6zVL6IvdnzvxQRvzGSNHsPxN95pyq+A==
+"@varlet/ui@^2.11.5":
+  version "2.11.5"
+  resolved "https://registry.yarnpkg.com/@varlet/ui/-/ui-2.11.5.tgz#f447d84839c865fea2dfeb4215f3ff0de244d210"
+  integrity sha512-7FPe+xW7q3F71f6JAZWdCY4ZM2Vxe86caGqlCKsZ5BEfvJSPEVEvrr5jRyK4x82/C+fWH3WKNvGyq4oJMbuQyg==
   dependencies:
     "@popperjs/core" "^2.11.6"
-    "@varlet/icons" "2.11.4"
-    "@varlet/shared" "2.11.4"
-    "@varlet/use" "2.11.4"
+    "@varlet/icons" "2.11.5"
+    "@varlet/shared" "2.11.5"
+    "@varlet/use" "2.11.5"
     dayjs "^1.10.4"
     decimal.js "^10.2.1"
 
-"@varlet/use@2.11.4":
-  version "2.11.4"
-  resolved "https://registry.yarnpkg.com/@varlet/use/-/use-2.11.4.tgz#74b0b4dbb250aab5f5355800070ab54eb4f009e7"
-  integrity sha512-y1/SFyRSOLGvgTMwniYXAKxmAiWiEhbONj+Nqfd95odW/swZxWwauV9WxPUYYE3axjw2Xh/ruLHFp6/6pm1/Rw==
+"@varlet/use@2.11.5":
+  version "2.11.5"
+  resolved "https://registry.yarnpkg.com/@varlet/use/-/use-2.11.5.tgz#c192141d575e362b65b0fd97148ef778e4daf1eb"
+  integrity sha512-YQyuWnMvHyNx3sOlgnqBAMqtWAjn/mIB7yt8Zz59tiVaHieiA+POqSvJ7gHahziq/AdvzVsvz4XSj7TKGacv0w==
   dependencies:
-    "@varlet/shared" "2.11.4"
+    "@varlet/shared" "2.11.5"
 
 "@vitejs/plugin-legacy@^4.0.4":
   version "4.0.4"
@@ -8822,10 +8827,10 @@ validate-npm-package-license@^3.0.1:
     spdx-correct "^3.0.0"
     spdx-expression-parse "^3.0.0"
 
-vant@^4.4.0:
-  version "4.4.1"
-  resolved "https://registry.yarnpkg.com/vant/-/vant-4.4.1.tgz#ba7499b681d940f6b521a3aec1a3929776c90de2"
-  integrity sha512-sHCyuXo6djVcR8H14tF/kF8FWAdk/ynrMGQt3F3adgNZ5vQR4MZrGJHKzfrY8y4EXU+vPbNTCPyaV5EBm67JAQ==
+vant@^4.4.1:
+  version "4.6.0"
+  resolved "https://registry.yarnpkg.com/vant/-/vant-4.6.0.tgz#5c0279fd34271f2cf8eaf8cb45cad6094c4d7b81"
+  integrity sha512-MUwf/SLhI9FPRM12snI9CAUlowlS0LK3SquBZpEKbsIYijAZg0DfH1rAOnLfuQ3kgXCM8HnlCmeELaezT7X7nA==
   dependencies:
     "@vant/popperjs" "^1.3.0"
     "@vant/use" "^1.5.1"

@@ -15,8 +15,8 @@
   },
   "dependencies": {
     "@nutui/icons-vue": "^0.0.26",
-    "@nutui/nutui": "^4.0.8",
-    "@varlet/ui": "^2.11.4",
+    "@nutui/nutui": "^4.0.9",
+    "@varlet/ui": "^2.11.5",
     "@vueuse/core": "10.1.2",
     "@vueuse/integrations": "10.1.2",
     "axios": "1.4.0",
@@ -25,7 +25,7 @@
     "pinia": "^2.1.0",
     "pinia-plugin-persistedstate": "^3.1.0",
     "universal-cookie": "^4.0.4",
-    "vant": "^4.4.0",
+    "vant": "^4.4.1",
     "vue": "^3.3.1",
     "vue-i18n": "^9.2.2",
     "vue-router": "^4.2.1"
