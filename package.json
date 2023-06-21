@@ -14,7 +14,7 @@
     "commit": "git add . && git-cz"
   },
   "dependencies": {
-    "@nutui/icons-vue": "^0.0.26",
+    "@nutui/icons-vue": "^0.1.1",
     "@nutui/nutui": "^4.0.9",
     "@varlet/ui": "^2.11.6",
     "@vueuse/core": "10.2.0",
@@ -24,6 +24,7 @@
     "mitt": "^3.0.0",
     "pinia": "^2.1.3",
     "pinia-plugin-persistedstate": "^3.1.0",
+    "quarkd": "^1.0.68",
     "universal-cookie": "^4.0.4",
     "vant": "^4.5.0",
     "vue": "^3.3.1",
@@ -36,7 +37,7 @@
     "@vitejs/plugin-vue-jsx": "^3.0.1",
     "@vue/eslint-config-prettier": "^7.1.0",
     "@vue/eslint-config-typescript": "^11.0.3",
-    "@vue/test-utils": "^2.3.8",
+    "@vue/test-utils": "^2.4.0",
     "@vue/tsconfig": "^0.4.0",
     "amfe-flexible": "^2.2.1",
     "autoprefixer": "^10.4.14",
