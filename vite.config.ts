@@ -37,6 +37,7 @@ export default function ({ command, mode }: ConfigEnv): UserConfig {
     server: {
       host: true,
       hmr: true,
+      https: true,
     },
     plugins: createVitePlugins(viteEnv, isProduction),
     build: {

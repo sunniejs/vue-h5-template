@@ -16,7 +16,7 @@
   "dependencies": {
     "@nutui/icons-vue": "^0.1.1",
     "@nutui/nutui": "^4.1.0",
-    "@varlet/ui": "^2.12.2",
+    "@varlet/ui": "^2.13.0",
     "@vueuse/core": "10.2.1",
     "@vueuse/integrations": "10.2.1",
     "axios": "1.4.0",
@@ -29,11 +29,12 @@
     "vant": "^4.6.2",
     "vue": "^3.3.1",
     "vue-i18n": "^9.2.2",
-    "vue-router": "^4.2.3"
+    "vue-router": "^4.2.4"
   },
   "devDependencies": {
     "@commitlint/cli": "^17.6.6",
     "@commitlint/config-conventional": "^17.6.6",
+    "@vitejs/plugin-basic-ssl": "^1.0.1",
     "@vitejs/plugin-legacy": "^4.1.0",
     "@vitejs/plugin-vue": "^4.2.3",
     "@vitejs/plugin-vue-jsx": "^3.0.1",

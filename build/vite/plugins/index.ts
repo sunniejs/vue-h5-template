@@ -18,6 +18,7 @@ import { ConfigProgressPlugin } from './progress';
 import { ConfigEruda } from './eruda';
 import { ConfigImageminPlugin } from './imagemin';
 import { ConfigVisualizerConfig } from './visualizer';
+import basicSsl from '@vitejs/plugin-basic-ssl';
 
 export function createVitePlugins(env: ViteEnv, isBuild: boolean) {
   const { VITE_USE_MOCK, VITE_USE_ERUDA, VITE_USE_COMPRESS, VITE_USE_REPORT } = env;
@@ -57,6 +58,8 @@ export function createVitePlugins(env: ViteEnv, isBuild: boolean) {
 
   // vite-plugin-svg-icons
   vitePlugins.push(ConfigSvgIconsPlugin(isBuild));
+
+  vitePlugins.push(basicSsl());
 
   if (isBuild) {
     // vite-plugin-imagemin
