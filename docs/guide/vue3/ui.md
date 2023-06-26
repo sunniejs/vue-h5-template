@@ -64,3 +64,5 @@ vant 和 varlet 只需删除对应的 resolvers 即可
 - [vant](https://vant-contrib.gitee.io/vant/#/zh-CN)
 
 - [varlet](https://varlet-varletjs.vercel.app/#/zh-CN/button)
+
+- [quark-design](https://vue-quarkdesign.hellobike.com/#/)
