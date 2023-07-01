@@ -15,10 +15,10 @@
   },
   "dependencies": {
     "@nutui/icons-vue": "^0.1.1",
-    "@nutui/nutui": "^4.0.9",
-    "@varlet/ui": "^2.11.6",
-    "@vueuse/core": "10.2.0",
-    "@vueuse/integrations": "10.2.0",
+    "@nutui/nutui": "^4.0.12",
+    "@varlet/ui": "^2.12.2",
+    "@vueuse/core": "10.2.1",
+    "@vueuse/integrations": "10.2.1",
     "axios": "1.4.0",
     "dayjs": "^1.11.8",
     "mitt": "^3.0.0",
@@ -26,7 +26,7 @@
     "pinia-plugin-persistedstate": "^3.1.0",
     "quarkd": "^1.0.68",
     "universal-cookie": "^4.0.4",
-    "vant": "^4.5.0",
+    "vant": "^4.6.1",
     "vue": "^3.3.1",
     "vue-i18n": "^9.2.2",
     "vue-router": "^4.2.1"
