@@ -2,11 +2,11 @@ export const routes = [
   {
     path: '/',
     redirect: '/home',
-    component: () => import('/@/layout/basic/index.vue'),
+    component: () => import('@/layout/basic/index.vue'),
     children: [
       {
         path: 'home',
-        component: () => import('/@/views/home/index.vue'),
+        component: () => import('@/views/home/index.vue'),
         meta: {
           title: 'tabbar.home',
           keepAlive: true,
@@ -14,7 +14,7 @@ export const routes = [
       },
       {
         path: 'list',
-        component: () => import('/@/views/list/index.vue'),
+        component: () => import('@/views/list/index.vue'),
         meta: {
           title: 'tabbar.list',
           keepAlive: true,
@@ -22,7 +22,7 @@ export const routes = [
       },
       {
         path: 'member',
-        component: () => import('/@/views/member/index.vue'),
+        component: () => import('@/views/member/index.vue'),
         meta: {
           title: 'tabbar.member',
           keepAlive: true,
@@ -30,7 +30,7 @@ export const routes = [
       },
       {
         path: 'demo',
-        component: () => import('/@/views/demo/index.vue'),
+        component: () => import('@/views/demo/index.vue'),
         meta: {
           title: 'tabbar.demo',
           keepAlive: true,
@@ -39,7 +39,7 @@ export const routes = [
       {
         name: 'listDetails',
         path: '/details',
-        component: () => import('/@/views/list/details/index.vue'),
+        component: () => import('@/views/list/details/index.vue'),
         meta: {
           title: 'list.details',
           border: false,
@@ -50,7 +50,7 @@ export const routes = [
   {
     name: 'login',
     path: '/login',
-    component: () => import('/@/views/login/index.vue'),
+    component: () => import('@/views/login/index.vue'),
     meta: {
       title: '',
       keepAlive: true,

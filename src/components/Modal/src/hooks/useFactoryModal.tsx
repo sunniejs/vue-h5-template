@@ -3,7 +3,8 @@
  * @Date: 2023-05-10 11:46:19
  * @Description: file content
  */
-import { i18n } from '/@/i18n';
+
+import { i18n } from '@/i18n';
 import { Component } from 'vue';
 import BaseModal from '../BasicModal.vue';
 import { createApp, ref, defineComponent } from 'vue';

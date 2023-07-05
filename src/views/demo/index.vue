@@ -51,7 +51,7 @@
 </template>
 
 <script setup name="DemoPage" lang="tsx">
-  import { openFactoryModal } from '/@/components/Modal/index';
+  import { openFactoryModal } from '@/components/Modal/index';
   import 'quarkd/lib/button';
 
   const openLargeModal = () => {
@@ -80,10 +80,10 @@
 
   section {
     .title {
-      font-size: 40px;
-      margin-bottom: 40px;
-      font-weight: 500;
       display: inline-block;
+      margin-bottom: 40px;
+      font-size: 40px;
+      font-weight: 500;
     }
 
     &:nth-child(n) {

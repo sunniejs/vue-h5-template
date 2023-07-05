@@ -14,9 +14,9 @@
 </template>
 
 <script lang="ts" setup name="LoginPage">
-  import router from '/@/router';
+  import router from '@/router';
   import { reactive, ref } from 'vue';
-  import { useUserStore } from '/@/store/modules/user';
+  import { useUserStore } from '@/store/modules/user';
 
   const userStore = useUserStore();
   const formData = reactive({
@@ -41,15 +41,16 @@
 <style scoped lang="scss">
   .login {
     padding: 20px;
+
     h2 {
-      text-align: center;
       letter-spacing: 10px;
+      text-align: center;
     }
 
     .nut-form-item {
-      background: #f2f3f5;
-      border-radius: 20px;
       margin-bottom: 20px;
+      border-radius: 20px;
+      background: #f2f3f5;
 
       input {
         background: transparent;

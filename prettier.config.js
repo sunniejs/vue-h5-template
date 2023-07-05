@@ -7,4 +7,12 @@ module.exports = {
   proseWrap: 'never',
   htmlWhitespaceSensitivity: 'strict',
   endOfLine: 'auto',
+  overrides: [
+    {
+      files: '.*rc',
+      options: {
+        parser: 'json',
+      },
+    },
+  ],
 };

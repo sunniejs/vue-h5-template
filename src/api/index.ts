@@ -1,12 +1,11 @@
-import useAxiosApi from '/@/utils/useAxiosApi';
+import { http } from '@/utils/request';
 
 /**
  * 账号密码登录
  * @returns UseAxiosReturn
  */
 export function loginPassword() {
-  return useAxiosApi(`/api/login`, {
-    method: 'POST',
+  return http.post(`/api/login`, {
     data: { name: '123' },
   });
 }

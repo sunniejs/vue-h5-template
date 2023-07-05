@@ -33,8 +33,8 @@
 
 <script lang="ts" setup name="HomePage">
   import { computed } from 'vue';
-  import { useUserStore } from '/@/store/modules/user';
-  import { setLang } from '/@/i18n';
+  import { useUserStore } from '@/store/modules/user';
+  import { setLang } from '@/i18n';
   import { useI18n } from 'vue-i18n';
   import { Github, Check } from '@nutui/icons-vue';
 
@@ -54,10 +54,11 @@
 <style lang="scss">
   .header {
     display: flex;
-    justify-content: center;
     align-items: center;
+    justify-content: center;
     padding: 0 20px;
     font-size: 40px;
+
     img {
       width: 90px;
       height: 90px;
@@ -65,10 +66,10 @@
   }
 
   .intro-header {
-    margin-top: 20px;
     display: flex;
     align-items: center;
     justify-content: center;
+    margin-top: 20px;
     font-size: 16px;
   }
 
@@ -83,6 +84,7 @@
   .btn-wrap {
     margin: 20px;
   }
+
   .btn-confirm {
     @include main-lang-bg(302px, 82px, '/@/assets/button', 'confirm.png');
   }
