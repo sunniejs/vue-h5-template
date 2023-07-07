@@ -3,7 +3,7 @@ import { showToast } from 'vant';
 
 const service: AxiosInstance = axios.create({
   withCredentials: false,
-  timeout: 5000,
+  timeout: 10000,
 });
 
 service.interceptors.request.use(
