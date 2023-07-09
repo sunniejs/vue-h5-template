@@ -32,6 +32,8 @@
     "vue-router": "^4.2.3"
   },
   "devDependencies": {
+    "@commitlint/cli": "^17.6.6",
+    "@commitlint/config-conventional": "^17.6.6",
     "@vitejs/plugin-legacy": "^4.1.0",
     "@vitejs/plugin-vue": "^4.2.3",
     "@vitejs/plugin-vue-jsx": "^3.0.1",
@@ -44,6 +46,7 @@
     "cnjm-postcss-px-to-viewport": "^1.0.0",
     "consola": "^3.2.3",
     "cross-env": "^7.0.3",
+    "cz-git": "^1.7.0",
     "eruda": "^3.0.0",
     "eslint": "^8.44.0",
     "eslint-config-prettier": "^8.8.0",
@@ -118,5 +121,10 @@
     "*.md": [
       "prettier --write"
     ]
+  },
+  "config": {
+    "commitizen": {
+      "path": "node_modules/cz-git"
+    }
   }
 }
