@@ -5636,8 +5636,8 @@ packages:
     resolution: {integrity: sha512-DCXu6Ifhqcks7TZKY3Hxp3y6qphY5SJZmrWMDrKcERSOXWQdMhU9Ig/PYrzyw/ul9jOIyh0N4M0tbC5hodg8dw==}
     dev: true
 
-  /fast-xml-parser@3.21.1:
-    resolution: {integrity: sha512-FTFVjYoBOZTJekiUsawGsSYV9QL0A+zDYCRj7y34IO6Jg+2IMYEtQa+bbictpdpV8dHxXywqU7C0gRDEOFtBFg==}
+  /fast-xml-parser@4.2.6:
+    resolution: {integrity: sha512-Xo1qV++h/Y3Ng8dphjahnYe+rGHaaNdsYOBWL9Y9GCPKpNKilJtilvWkLcI9f9X2DoKTLsZsGYAls5+JL5jfLA==}
     hasBin: true
     dependencies:
       strnum: 1.0.5
@@ -6460,7 +6460,7 @@ packages:
     resolution: {integrity: sha512-uNgXpKHd99C0WODkrJ8OO/3zW3qjgS4pW7hcuII0RcHN3tnKxDjJWcitdVC/TZyfIqSricU8WfrHn26bdSW62g==}
     engines: {node: '>=10'}
     dependencies:
-      is-svg: 4.3.2
+      is-svg: 4.4.0
       svgo: 2.8.0
     dev: true
 
@@ -6861,11 +6861,11 @@ packages:
       has-tostringtag: 1.0.0
     dev: true
 
-  /is-svg@4.3.2:
-    resolution: {integrity: sha512-mM90duy00JGMyjqIVHu9gNTjywdZV+8qNasX8cm/EEYZ53PHDgajvbBwNVvty5dwSAxLUD3p3bdo+7sR/UMrpw==}
+  /is-svg@4.4.0:
+    resolution: {integrity: sha512-v+AgVwiK5DsGtT9ng+m4mClp6zDAmwrW8nZi6Gg15qzvBnRWWdfWA1TGaXyCDnWq5g5asofIgMVl3PjKxvk1ug==}
     engines: {node: '>=6'}
     dependencies:
-      fast-xml-parser: 3.21.1
+      fast-xml-parser: 4.2.6
     dev: true
 
   /is-symbol@1.0.4:
@@ -7753,7 +7753,7 @@ packages:
     dependencies:
       hosted-git-info: 4.1.0
       is-core-module: 2.12.1
-      semver: 7.3.8
+      semver: 7.5.2
       validate-npm-package-license: 3.0.4
     dev: true
 
