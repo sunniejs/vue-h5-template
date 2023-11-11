@@ -16,17 +16,17 @@ dependencies:
     specifier: ^4.1.0
     version: 4.1.0(unplugin-vue-components@0.25.1)
   '@varlet/ui':
-    specifier: ^2.12.2
-    version: 2.12.2(vue@3.3.1)
+    specifier: ^2.13.0
+    version: 2.18.4(vue@3.3.1)
   '@vueuse/core':
     specifier: 10.2.1
     version: 10.2.1(vue@3.3.1)
   '@vueuse/integrations':
     specifier: 10.2.1
-    version: 10.2.1(axios@1.4.0)(universal-cookie@4.0.4)(vue@3.3.1)
+    version: 10.2.1(axios@1.6.0)(universal-cookie@4.0.4)(vue@3.3.1)
   axios:
-    specifier: 1.4.0
-    version: 1.4.0
+    specifier: 1.6.0
+    version: 1.6.0
   dayjs:
     specifier: ^1.11.9
     version: 1.11.9
@@ -55,8 +55,8 @@ dependencies:
     specifier: ^9.2.2
     version: 9.2.2(vue@3.3.1)
   vue-router:
-    specifier: ^4.2.3
-    version: 4.2.3(vue@3.3.1)
+    specifier: ^4.2.4
+    version: 4.2.5(vue@3.3.1)
 
 devDependencies:
   '@commitlint/cli':
@@ -65,6 +65,9 @@ devDependencies:
   '@commitlint/config-conventional':
     specifier: ^17.6.6
     version: 17.6.6
+  '@vitejs/plugin-basic-ssl':
+    specifier: ^1.0.1
+    version: 1.0.1(vite@4.4.4)
   '@vitejs/plugin-legacy':
     specifier: ^4.1.0
     version: 4.1.0(terser@5.19.0)(vite@4.4.4)
@@ -2818,36 +2821,45 @@ packages:
       vue: 3.3.1
     dev: false
 
-  /@varlet/icons@2.12.2:
-    resolution: {integrity: sha512-j8qvwDRYQ6xojbG2ZdAjd9msJLff9A0GOKoZhT2wOtBQngooBCJQCyLajLceLVBpuEdLnFizXIa7o4Jc4W66Dw==}
+  /@varlet/icons@2.18.4:
+    resolution: {integrity: sha512-dHI0rKvB9xuV9SglvV5vq+VNaMstnmhOzM9/vtZMRL32ntJD8wYKQb5sZq5O0SkhwJtl9YHk9E7b66k7hHzeGg==}
     dev: false
 
-  /@varlet/shared@2.12.2:
-    resolution: {integrity: sha512-LSABYZJCZLQHGuC7RmhK7WaChpcWI9HIriQTLLshbflNYB/I+YxAFA7a2MrJndnaN90iCFFIYITwtY3nnDkyBg==}
+  /@varlet/shared@2.18.4:
+    resolution: {integrity: sha512-mtSItz+mrZcWEQ9uGpDEBRLip43CTpiaXx4E8LNu/L6WnRuKdBJBsl0KBF6bCV4KYNtfF7B2SQPR74r1276b0w==}
     dev: false
 
-  /@varlet/ui@2.12.2(vue@3.3.1):
-    resolution: {integrity: sha512-opraI4MFRtlK29q/jMCiuKYEEPnpxTH2wmAh0NXTv2+qTCedz8tdb/dK7xITmCd0HyRXr/LWknuiupBMw6wwUA==}
+  /@varlet/ui@2.18.4(vue@3.3.1):
+    resolution: {integrity: sha512-INzN16IfkC3HJOxZfnpyPGlMALTu0zitOv0RbPrC16A5i+QlemTYXE0FUNgTjIberx3aDfFRB0JMb7vHirFjAg==}
     peerDependencies:
       vue: ^3.2.0
     dependencies:
       '@popperjs/core': 2.11.6
-      '@varlet/icons': 2.12.2
-      '@varlet/shared': 2.12.2
-      '@varlet/use': 2.12.2(vue@3.3.1)
+      '@varlet/icons': 2.18.4
+      '@varlet/shared': 2.18.4
+      '@varlet/use': 2.18.4(vue@3.3.1)
       dayjs: 1.11.9
       decimal.js: 10.4.3
       vue: 3.3.1
     dev: false
 
-  /@varlet/use@2.12.2(vue@3.3.1):
-    resolution: {integrity: sha512-wDRZ/8UpTscWY/5cJ+2o6qSvl4FiECJoaLpHTK8WZC92j/zUwPJYY6vDIbImsROJW0SN9Ob4zVKJTjTqXC9Rrw==}
+  /@varlet/use@2.18.4(vue@3.3.1):
+    resolution: {integrity: sha512-K+CgBW68WI1ulRCLIXN9XZO5oObJwpaoqBdALu/0o++03OIWipXJMTnAIhsrLcDdxW/FQ0ZnXMayp1n/3ZqpYg==}
     peerDependencies:
       vue: ^3.2.0
     dependencies:
-      '@varlet/shared': 2.12.2
+      '@varlet/shared': 2.18.4
       vue: 3.3.1
     dev: false
+
+  /@vitejs/plugin-basic-ssl@1.0.1(vite@4.4.4):
+    resolution: {integrity: sha512-pcub+YbFtFhaGRTo1832FQHQSHvMrlb43974e2eS8EKleR3p1cDdkJFPci1UhwkEf1J9Bz+wKBSzqpKp7nNj2A==}
+    engines: {node: '>=14.6.0'}
+    peerDependencies:
+      vite: ^3.0.0 || ^4.0.0
+    dependencies:
+      vite: 4.4.4(@types/node@17.0.40)(terser@5.19.0)
+    dev: true
 
   /@vitejs/plugin-legacy@4.1.0(terser@5.19.0)(vite@4.4.4):
     resolution: {integrity: sha512-bLPHaKAKtPq40Cx2Hauz/VE39kStx7gUC21RM+0/OvBgiOlqrK3b1mIMUc4Cak1xLOrK99j174/7xczfu4OLHA==}
@@ -3147,7 +3159,7 @@ packages:
       - '@vue/composition-api'
       - vue
 
-  /@vueuse/integrations@10.2.1(axios@1.4.0)(universal-cookie@4.0.4)(vue@3.3.1):
+  /@vueuse/integrations@10.2.1(axios@1.6.0)(universal-cookie@4.0.4)(vue@3.3.1):
     resolution: {integrity: sha512-FDP5lni+z9FjHE9H3xuvwSjoRV9U8jmDvJpmHPCBjUgPGYRynwb60eHWXCFJXLUtb4gSIHy0e+iaEbrKdalCkQ==}
     peerDependencies:
       async-validator: '*'
@@ -3190,7 +3202,7 @@ packages:
     dependencies:
       '@vueuse/core': 10.2.1(vue@3.3.1)
       '@vueuse/shared': 10.2.1(vue@3.3.1)
-      axios: 1.4.0
+      axios: 1.6.0
       universal-cookie: 4.0.4
       vue-demi: 0.14.5(vue@3.3.1)
     transitivePeerDependencies:
@@ -3494,8 +3506,8 @@ packages:
     engines: {node: '>= 0.4'}
     dev: true
 
-  /axios@1.4.0:
-    resolution: {integrity: sha512-S4XCWMEmzvo64T9GfvQDOXgYRDJ/wsSZc7Jvdgx5u1sd0JwsuPLqb3SYmusag+edF6ziyMensPVqLTSc1PiSEA==}
+  /axios@1.6.0:
+    resolution: {integrity: sha512-EZ1DYihju9pwVB+jg67ogm+Tmqc6JmhamRN6I4Zt8DfZu5lbcQGw3ozH9lFejSJgs/ibaef3A9PMXPLeefFGJg==}
     dependencies:
       follow-redirects: 1.15.2
       form-data: 4.0.0
@@ -7753,7 +7765,7 @@ packages:
     dependencies:
       hosted-git-info: 4.1.0
       is-core-module: 2.12.1
-      semver: 7.3.8
+      semver: 7.5.2
       validate-npm-package-license: 3.0.4
     dev: true
 
@@ -10627,8 +10639,8 @@ packages:
       vue: 3.3.1
     dev: false
 
-  /vue-router@4.2.3(vue@3.3.1):
-    resolution: {integrity: sha512-ynQ/edCZNUC/9koONOSgxGJbEBXZ1nUA0lKI3xTiOd3Ywe4QRCf2q8pGCG1v5ovdzPggoq3M09FxNCZTM9pZfw==}
+  /vue-router@4.2.5(vue@3.3.1):
+    resolution: {integrity: sha512-DIUpKcyg4+PTQKfFPX88UWhlagBEBEfJ5A8XDXRJLUnZOvcpMF8o/dnL90vpVkGaPbjvXazV/rC1qBKrZlFugw==}
     peerDependencies:
       vue: ^3.2.0
     dependencies:
