@@ -16,8 +16,8 @@ dependencies:
     specifier: ^4.1.0
     version: 4.1.0(unplugin-vue-components@0.25.1)
   '@varlet/ui':
-    specifier: ^2.12.2
-    version: 2.12.2(vue@3.3.1)
+    specifier: ^2.13.0
+    version: 2.22.8(vue@3.3.1)
   '@vueuse/core':
     specifier: 10.2.1
     version: 10.2.1(vue@3.3.1)
@@ -55,8 +55,8 @@ dependencies:
     specifier: ^9.2.2
     version: 9.2.2(vue@3.3.1)
   vue-router:
-    specifier: ^4.2.3
-    version: 4.2.3(vue@3.3.1)
+    specifier: ^4.2.4
+    version: 4.3.0(vue@3.3.1)
 
 devDependencies:
   '@commitlint/cli':
@@ -65,6 +65,9 @@ devDependencies:
   '@commitlint/config-conventional':
     specifier: ^17.6.6
     version: 17.6.6
+  '@vitejs/plugin-basic-ssl':
+    specifier: ^1.0.1
+    version: 1.1.0(vite@4.4.4)
   '@vitejs/plugin-legacy':
     specifier: ^4.1.0
     version: 4.1.0(terser@5.19.0)(vite@4.4.4)
@@ -2818,36 +2821,45 @@ packages:
       vue: 3.3.1
     dev: false
 
-  /@varlet/icons@2.12.2:
-    resolution: {integrity: sha512-j8qvwDRYQ6xojbG2ZdAjd9msJLff9A0GOKoZhT2wOtBQngooBCJQCyLajLceLVBpuEdLnFizXIa7o4Jc4W66Dw==}
+  /@varlet/icons@2.22.8:
+    resolution: {integrity: sha512-pVWcCP8QpR9UiYUdUx2IBV4OwbvkldzJaZnqlCQjbkT5CCouH9C2ZF/I22wDJuJfFdZKTv4L1vliisA76duk6Q==}
     dev: false
 
-  /@varlet/shared@2.12.2:
-    resolution: {integrity: sha512-LSABYZJCZLQHGuC7RmhK7WaChpcWI9HIriQTLLshbflNYB/I+YxAFA7a2MrJndnaN90iCFFIYITwtY3nnDkyBg==}
+  /@varlet/shared@2.22.8:
+    resolution: {integrity: sha512-8bBh2D37wPW9uKB5sxBquulklNnfjG7GCVtL4nYA9wOPfla6cSIhJDGdZLsxwY5ScXfjtikLUYrzwbhnsK1A9A==}
     dev: false
 
-  /@varlet/ui@2.12.2(vue@3.3.1):
-    resolution: {integrity: sha512-opraI4MFRtlK29q/jMCiuKYEEPnpxTH2wmAh0NXTv2+qTCedz8tdb/dK7xITmCd0HyRXr/LWknuiupBMw6wwUA==}
+  /@varlet/ui@2.22.8(vue@3.3.1):
+    resolution: {integrity: sha512-nwk0XsuoMszyKJQH6BJ6wSeFuKlIfkwngp0AFCLcFTNc0L4hekZ+eDDqo6bNs1x0lgOMUikUAphCwMXDlZiOGQ==}
     peerDependencies:
       vue: ^3.2.0
     dependencies:
       '@popperjs/core': 2.11.6
-      '@varlet/icons': 2.12.2
-      '@varlet/shared': 2.12.2
-      '@varlet/use': 2.12.2(vue@3.3.1)
+      '@varlet/icons': 2.22.8
+      '@varlet/shared': 2.22.8
+      '@varlet/use': 2.22.8(vue@3.3.1)
       dayjs: 1.11.9
       decimal.js: 10.4.3
       vue: 3.3.1
     dev: false
 
-  /@varlet/use@2.12.2(vue@3.3.1):
-    resolution: {integrity: sha512-wDRZ/8UpTscWY/5cJ+2o6qSvl4FiECJoaLpHTK8WZC92j/zUwPJYY6vDIbImsROJW0SN9Ob4zVKJTjTqXC9Rrw==}
+  /@varlet/use@2.22.8(vue@3.3.1):
+    resolution: {integrity: sha512-v7xpuVoBNdvrDP4k7JpV5XdYhOD+DS5f4zg+FYaV+UWv+y+XMkhlkzWWdwQiA6SCAMC08ADF8Y6YMMMlOhLH+Q==}
     peerDependencies:
       vue: ^3.2.0
     dependencies:
-      '@varlet/shared': 2.12.2
+      '@varlet/shared': 2.22.8
       vue: 3.3.1
     dev: false
+
+  /@vitejs/plugin-basic-ssl@1.1.0(vite@4.4.4):
+    resolution: {integrity: sha512-wO4Dk/rm8u7RNhOf95ZzcEmC9rYOncYgvq4z3duaJrCgjN8BxAnDVyndanfcJZ0O6XZzHz6Q0hTimxTg8Y9g/A==}
+    engines: {node: '>=14.6.0'}
+    peerDependencies:
+      vite: ^3.0.0 || ^4.0.0 || ^5.0.0
+    dependencies:
+      vite: 4.4.4(@types/node@17.0.40)(terser@5.19.0)
+    dev: true
 
   /@vitejs/plugin-legacy@4.1.0(terser@5.19.0)(vite@4.4.4):
     resolution: {integrity: sha512-bLPHaKAKtPq40Cx2Hauz/VE39kStx7gUC21RM+0/OvBgiOlqrK3b1mIMUc4Cak1xLOrK99j174/7xczfu4OLHA==}
@@ -3013,6 +3025,10 @@ packages:
 
   /@vue/devtools-api@6.5.0:
     resolution: {integrity: sha512-o9KfBeaBmCKl10usN4crU53fYtC1r7jJwdGKjPT24t348rHxgfpZ0xL3Xm/gLUYnc0oTp8LAmrxOeLyu6tbk2Q==}
+    dev: false
+
+  /@vue/devtools-api@6.6.1:
+    resolution: {integrity: sha512-LgPscpE3Vs0x96PzSSB4IGVSZXZBZHpfxs+ZA1d+VEPwHdOXowy/Y2CsvCAIFrf+ssVU1pD1jidj505EpUnfbA==}
     dev: false
 
   /@vue/eslint-config-prettier@7.1.0(eslint@8.45.0)(prettier@3.0.0):
@@ -3497,7 +3513,7 @@ packages:
   /axios@1.4.0:
     resolution: {integrity: sha512-S4XCWMEmzvo64T9GfvQDOXgYRDJ/wsSZc7Jvdgx5u1sd0JwsuPLqb3SYmusag+edF6ziyMensPVqLTSc1PiSEA==}
     dependencies:
-      follow-redirects: 1.15.2
+      follow-redirects: 1.15.6
       form-data: 4.0.0
       proxy-from-env: 1.1.0
     transitivePeerDependencies:
@@ -5797,8 +5813,8 @@ packages:
     resolution: {integrity: sha512-WIWGi2L3DyTUvUrwRKgGi9TwxQMUEqPOPQBVi71R96jZXJdFskXEmf54BoZaS1kknGODoIGASGEzBUYdyMCBJg==}
     dev: true
 
-  /follow-redirects@1.15.2:
-    resolution: {integrity: sha512-VQLG33o04KaQ8uYi2tVNbdrWp1QWxNNea+nmIB4EVM28v0hmP17z7aG1+wAkNzVq4KeXTq3221ye5qTJP91JwA==}
+  /follow-redirects@1.15.6:
+    resolution: {integrity: sha512-wWN62YITEaOpSK584EZXJafH1AGpO8RVgElfkuXbTOrPX4fIfOyEpW/CsiNd8JdYrAoOvafRTOEnvsO++qCqFA==}
     engines: {node: '>=4.0'}
     peerDependencies:
       debug: '*'
@@ -10627,12 +10643,12 @@ packages:
       vue: 3.3.1
     dev: false
 
-  /vue-router@4.2.3(vue@3.3.1):
-    resolution: {integrity: sha512-ynQ/edCZNUC/9koONOSgxGJbEBXZ1nUA0lKI3xTiOd3Ywe4QRCf2q8pGCG1v5ovdzPggoq3M09FxNCZTM9pZfw==}
+  /vue-router@4.3.0(vue@3.3.1):
+    resolution: {integrity: sha512-dqUcs8tUeG+ssgWhcPbjHvazML16Oga5w34uCUmsk7i0BcnskoLGwjpa15fqMr2Fa5JgVBrdL2MEgqz6XZ/6IQ==}
     peerDependencies:
       vue: ^3.2.0
     dependencies:
-      '@vue/devtools-api': 6.5.0
+      '@vue/devtools-api': 6.6.1
       vue: 3.3.1
     dev: false
 
