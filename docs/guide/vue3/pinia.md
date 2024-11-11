@@ -15,9 +15,9 @@
 │   │   └── user.js
 │   ├── index.js
 ```
-目前pinia分为两种编程模式,options API和 Composition API，我们这边都会列举出来实现的业务逻辑效果是一样的，提供大家思路
+目前pinia分为两种编程模式，Options API 和 Composition API，我们这边都会列举出来实现的业务逻辑效果是一样的，提供大家思路
 
-### options API: 
+### Options API:
 
 ```javascript
 interface StoreUser {

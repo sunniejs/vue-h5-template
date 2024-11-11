@@ -1,6 +1,6 @@
 # Axios 封装及接口管理
 
-`utils/request.js` 封装 axios ,开发者需要根据后台接口做修改。
+`utils/request.js` 封装 axios ，开发者需要根据后台接口做修改。
 
 - `service.interceptors.request.use` 里可以设置请求头，比如设置 `token`
 - `config.hideloading` 是在 api 文件夹下的接口参数里设置，下文会讲
@@ -74,7 +74,7 @@ export default service;
 - `url` 接口地址，请求的时候会拼接上 `config` 下的 `baseApi`
 - `method` 请求方法
 - `data` 请求参数 `qs.stringify(params)` 是对数据系列化操作
-- `hideloading` 默认 `false`,设置为 `true` 后，不显示 loading ui 交互中有些接口不需要让用户感知
+- `hideloading` 默认 `false`，设置为 `true` 后，不显示 loading ui 交互中有些接口不需要让用户感知
 
 ```javascript
 import qs from "qs";

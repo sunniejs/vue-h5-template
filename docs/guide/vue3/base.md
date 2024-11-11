@@ -3,13 +3,13 @@
 如果你的 `Vue Router` 模式是 hash
 
 ```javascript
-publicPath: './',
+base: './',
 ```
 
 如果你的 `Vue Router` 模式是 history 这里的 publicPath 和你的 `Vue Router` `base` **保持一致**
 
 ```javascript
-publicPath: '/app/',
+base: '/app/',
 ```
 
 ```javascript

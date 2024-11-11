@@ -1,6 +1,6 @@
 # 多 UI 组件库供选择
 
-Vite 构建工具，使用 vite-plugin-style-import 和 unplugin-vue-components/vite 实现按需引入。
+Vite 构建工具，`使用 vite-plugin-style-import` 和 `unplugin-vue-components/vite` 实现按需引入。
 
 ## 安装插件
 

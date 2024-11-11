@@ -115,7 +115,7 @@ module.exports = {
 
 **新手必看，老鸟跳过**
 
-很多小伙伴会问我，适配的问题, 因为我们使用的是 Vant UI，所以必须根据 Vant UI 375 的设计规范走，一般我们的设计会将 UI 图上传到蓝湖，我们就可以需要的尺寸了。下面就大概普及一下 rem。
+很多小伙伴会问我，适配的问题, 因为我们使用的是 Vant UI，所以必须根据 Vant UI 375 的设计规范走，一般我们的设计会将 UI 图上传到蓝湖，我们就可以得到需要的尺寸了。下面就简单普及一下 rem 适配的原理。
 
 我们知道 `1rem` 等于 `html` 根元素设定的 `font-size` 的 `px` 值。Vant UI 设置 `rootValue: 37.5` , 你可以看到在 iPhone 6 下看到 （ `1rem 等于 37.5px` ）：
 
@@ -156,7 +156,7 @@ module.exports = {
 
 ### <span id="ui">✅ 多 UI 组件库供选择 </span>
 
-Vite 构建工具，使用 vite-plugin-style-import 和 unplugin-vue-components/vite 实现按需引入。
+Vite 构建工具，使用 `vite-plugin-style-import` 和 `unplugin-vue-components/vite` 实现按需引入。
 
 #### 安装插件
 
@@ -242,7 +242,7 @@ vant 和 varlet 只需删除对应的 resolvers 即可
 
 **注意**：如果你使用了 `history` 模式， `vue.config.js` 中的 `publicPath` 要做对应的**修改**
 
-前往:[vue.config.js 基础配置](#base)
+前往: [vite.config.js 基础配置](#base)
 
 ```javascript
 import Vue from "vue";
@@ -474,5 +474,5 @@ server: {
 <p>
   <img src="https://cdn.jsdelivr.net/gh/fonghehe/picture/personal/group.jpg" width="256" style="display:inline; ">
 </p>
- 
+
 如果对你有帮助送我一颗珍贵的小星星（づ￣3￣）づ╭❤～

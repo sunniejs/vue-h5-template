@@ -16,9 +16,9 @@
 
 ##### 配置介绍
 
-&emsp;&emsp;以 `VUE_APP_` 开头的变量，在代码中可以通过 `process.env.VUE_APP_` 访问。  
-&emsp;&emsp;比如,`VUE_APP_ENV = 'development'` 通过`process.env.VUE_APP_ENV` 访问。  
-&emsp;&emsp;除了 `VUE_APP_*` 变量之外，在你的应用代码中始终可用的还有两个特殊的变量`NODE_ENV` 和`BASE_URL`
+&emsp;&emsp;以 `VUE_APP_` 开头的变量，在代码中可以通过 `process.env.VUE_APP_` 访问。
+&emsp;&emsp;比如：`VUE_APP_ENV = 'development'` 通过 `process.env.VUE_APP_ENV` 访问。
+&emsp;&emsp;当然，除了 `VUE_APP_*` 变量之外，在你的应用代码中始终可用的还有两个特殊的变量`NODE_ENV` 和`BASE_URL`
 
 在项目根目录中新建`.env.*`
 
@@ -47,10 +47,10 @@ VUE_APP_ENV = 'staging'
 VUE_APP_ENV = 'production'
 ```
 
-这里我们并没有定义很多变量，只定义了基础的 VUE_APP_ENV `development` `staging` `production`  
+这里我们并没有定义很多变量，只定义了基础的 VUE_APP_ENV `development` `staging` `production`
 变量我们统一在 `src/config/env.*.js` 里进行管理。
 
-这里有个问题，既然这里有了根据不同环境设置变量的文件，为什么还要去 config 下新建三个对应的文件呢？  
+这里有个问题，既然这里有了根据不同环境设置变量的文件，为什么还要去 config 下新建三个对应的文件呢？
 **修改起来方便，不需
 要重启项目，符合开发习惯。**
 

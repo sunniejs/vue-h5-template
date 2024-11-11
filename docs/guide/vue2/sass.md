@@ -52,7 +52,7 @@ vue-h5-template 所有全局样式都在 `@/src/assets/css` 目录下设置
 
 #### 全局变量
 
-`vue.config.js` 配置使用 `css.loaderOptions` 选项,注入 `sass` 的 `mixin` `variables` 到全局，不需要手动引入 ,配置`$cdn`通过变量形式引入 cdn 地址,这样向所有 Sass/Less 样式传入共享的全局变量：
+`vue.config.js` 配置使用 `css.loaderOptions` 选项，注入 `sass` 的 `mixin` `variables` 到全局，不需要手动引入，配置`$cdn`通过变量形式引入 cdn 地址，这样向所有 Sass/Less 样式传入共享的全局变量：
 
 ```javascript
 const IS_PROD = ["production", "prod"].includes(process.env.NODE_ENV);
@@ -77,7 +77,7 @@ module.exports = {
 };
 ```
 
-设置 js 中可以访问 `$cdn`,`.vue` 文件中使用`this.$cdn`访问
+设置 js 中可以访问 `$cdn`，`.vue` 文件中使用`this.$cdn`访问
 
 ```javascript
 // 引入全局样式

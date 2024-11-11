@@ -36,9 +36,9 @@ module.exports = {
 
 **新手必看，老鸟跳过**
 
-很多小伙伴会问我，适配的问题,因为我们使用的是 Vant UI，所以必须根据 Vant UI 375 的设计规范走，一般我们的设计会将 UI 图上传到蓝湖，我们就可以需要的尺寸了。下面就大概普及一下 rem。
+很多小伙伴会问我，适配的问题，因为我们使用的是 Vant UI，所以必须根据 Vant UI 375 的设计规范走，一般我们的设计会将 UI 图上传到蓝湖，我们就可以得到需要的尺寸了。下面就简单普及一下 rem 适配的原理。
 
-我们知道 `1rem` 等于`html` 根元素设定的 `font-size` 的 `px` 值。Vant UI 设置 `rootValue: 37.5`,你可以看到在 iPhone 6 下看到 （`1rem 等于 37.5px`）：
+我们知道 `1rem` 等于`html` 根元素设定的 `font-size` 的 `px` 值。Vant UI 设置 `rootValue: 37.5`，你可以看到在 iPhone 6 下看到 （`1rem 等于 37.5px`）：
 
 ```html
 <html data-dpr="1" style="font-size: 37.5px;"></html>
@@ -48,7 +48,7 @@ module.exports = {
 
 因为我们用了 Vant 的组件，需要按照 `rootValue: 37.5` 来写样式。
 
-举个例子：设计给了你一张 750px \* 1334px 图片，在 iPhone6 上铺满屏幕,其他机型适配。
+举个例子：设计给了你一张 750px \* 1334px 图片，在 iPhone6 上铺满屏幕，其他机型适配。
 
 - 当`rootValue: 70` , 样式 `width: 750px;height: 1334px;` 图片会撑满 iPhone6 屏幕，这个时候切换其他机型，图片也会跟着撑满。
 - 当`rootValue: 37.5` 的时候，样式 `width: 375px;height: 667px;` 图片会撑满 iPhone6 屏幕。
