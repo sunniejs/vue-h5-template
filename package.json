@@ -28,7 +28,7 @@
     "universal-cookie": "^7.2.2",
     "vant": "^4.9.17",
     "vue": "^3.5.13",
-    "vue-i18n": "^11.1.1",
+    "vue-i18n": "^11.1.2",
     "vue-router": "^4.5.0"
   },
   "devDependencies": {
