@@ -1,6 +1,6 @@
 # Eslint + Pettier 统一开发规范
 
-VScode （版本 1.47.3）安装 `eslint` `prettier` `vetur` 插件 `.vue` 文件使用 vetur 进行格式化，其他使用`prettier`，后面会专门写个如何使用配合使用这三个玩意儿
+VScode 安装 `eslint` `prettier` `vetur` 插件 `.vue` 文件使用 vue 插件进行格式化，其他使用`prettier`
 
 在文件 `.prettierrc` 里写 属于你的 pettier 规则
 
