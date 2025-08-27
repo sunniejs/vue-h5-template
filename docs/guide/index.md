@@ -1,12 +1,12 @@
 # Vue-H5-Template
 
-[Vue-H5-Template](https://github.com/sunniejs/vue-h5-template)，是基于 vite3 + vue3 + pinia + ( Vant or Varlet or NutUI ) + viewport 适配方案 ，构建移动端快速开发脚手架
+[Vue-H5-Template](https://github.com/sunniejs/vue-h5-template)，是基于 vite7 + vue3.5 + pinia + ( Vant or Varlet or NutUI ) + viewport(VW) 适配方案 ，构建移动端快速开发脚手架
 
 ## 特点
 
 ### 最新技术栈
 
-- 框架选型基于当下流行的 vue + vite + ts 模式，精选社区 star 和满意度均不错的 ui 框架和 vite 插件，并时常进行更新，确保与官方文档一致
+- 框架选型基于当下流行的 vue + vite + ts 模式，精选社区 star 数 和满意度均不错的 ui 框架和 vite 插件，并时常进行更新，确保与官方文档一致
 
 ### 基于 TypeScript
 

@@ -13,30 +13,43 @@ base: '/app/',
 ```
 
 ```javascript
-export default function ({ command }: ConfigEnv): UserConfigExport {
+export default function ({ command, mode }: ConfigEnv): UserConfig {
   const isProduction = command === "build";
+  const root = process.cwd();
+  const env = loadEnv(mode, root);
+  const viteEnv = wrapperEnv(env);
+
   return {
-    server: {
-      host: "0.0.0.0",
+    base: "/",
+    root,
+    resolve: {
+      alias: {
+        "@": fileURLToPath(new URL("./src", import.meta.url)),
+        "#": fileURLToPath(new URL("./types", import.meta.url)),
+      },
     },
-    plugins: [
-      vue(),
-      vueJsx(),
-      createStyleImportPlugin({
-        resolves: [NutuiResolve()],
-      }),
-      eruda(),
-      viteMockServe({
-        mockPath: "./src/mock",
-        localEnabled: command === "serve",
-        logger: true,
-      }),
-    ],
+    server: {
+      host: true,
+      hmr: true,
+    },
+    plugins: createVitePlugins(viteEnv, isProduction),
+    build: {
+      minify: "terser",
+      terserOptions: {
+        compress: {
+          //生产环境时移除console
+          drop_console: true,
+          drop_debugger: true,
+        },
+      },
+    },
     css: {
       preprocessorOptions: {
         scss: {
+          quietDeps: true,
+          silenceDeprecations: ["legacy-js-api"],
           // 配置 nutui 全局 scss 变量
-          additionalData: `@import "@nutui/nutui/dist/styles/variables.scss";`,
+          additionalData: `@use "@nutui/nutui/dist/styles/variables.scss" as *; @use '@/styles/vant.scss' as *;`,
         },
       },
     },
