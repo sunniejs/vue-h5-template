@@ -86,7 +86,7 @@
     "typescript": "5.8.3",
     "unplugin-auto-import": "^20.0.0",
     "unplugin-vue-components": "^29.0.0",
-    "vite": "^7.1.3",
+    "vite": "^7.1.5",
     "vite-plugin-compression": "^0.5.1",
     "vite-plugin-eruda": "^1.0.1",
     "vite-plugin-imagemin": "^0.6.1",
