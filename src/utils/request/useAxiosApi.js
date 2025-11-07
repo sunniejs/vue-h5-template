@@ -6,6 +6,6 @@ import 'vant/es/toast/style';
  * reactive useFetchApi
  */
 
-export default function useAxiosApi(url: string, config: any) {
+export default function useAxiosApi(url, config) {
   return useAxios(url, config);
 }

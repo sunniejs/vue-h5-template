@@ -16,7 +16,7 @@
   </nut-grid>
 </template>
 
-<script setup lang="ts">
+<script setup>
   import { useUserStore } from '@/store/modules/user';
   import { useRouter } from 'vue-router';
   import { Dongdong } from '@nutui/icons-vue';

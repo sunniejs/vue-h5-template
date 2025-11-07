@@ -1,11 +1,11 @@
 import { createI18n } from 'vue-i18n';
 
 export function loadLang() {
-  const modules: Record<string, any> = import.meta.glob('./lang/*.ts', { eager: true });
-  const langs: Record<string, any> = {};
+  const modules = import.meta.glob('./lang/*.js', { eager: true });
+  const langs = {};
 
   for (const path in modules) {
-    const name = path.replace(/(\.\/lang\/|\.ts)/g, '');
+    const name = path.replace(/(\.\/lang\/|\.js)/g, '');
     langs[name] = modules[path].lang;
   }
   return langs;
@@ -19,7 +19,7 @@ export const i18n = createI18n({
   messages: loadLang(),
 });
 
-export function setLang(locale?: string) {
+export function setLang(locale) {
   if (locale) {
     localStorage.setItem('lang', locale);
   }

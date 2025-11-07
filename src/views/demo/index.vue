@@ -33,7 +33,7 @@
   </section>
 </template>
 
-<script setup lang="ts"></script>
+<script setup></script>
 
 <style lang="scss" scoped>
   section {

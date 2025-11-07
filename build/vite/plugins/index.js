@@ -3,7 +3,6 @@
  * @description 封装plugins数组统一调用
  */
 
-import type { PluginOption } from 'vite';
 import vue from '@vitejs/plugin-vue';
 import vueJsx from '@vitejs/plugin-vue-jsx';
 import { ConfigSvgIconsPlugin } from './svgIcons';
@@ -21,10 +20,10 @@ import { ConfigSslPlugin } from './ssl';
 import { ConfigQrcodePlugin } from './qrcode';
 import { ConfigPwaPlugin } from './pwa';
 
-export function createVitePlugins(env: ViteEnv, isBuild: boolean) {
+export function createVitePlugins(env, isBuild) {
   const { VITE_USE_MOCK, VITE_USE_ERUDA, VITE_USE_COMPRESS, VITE_USE_REPORT, VITE_USE_HTTPS, VITE_USE_PWA } = env;
 
-  const vitePlugins: (PluginOption | PluginOption[])[] = [
+  const vitePlugins = [
     // vue支持
     vue(),
     // JSX支持

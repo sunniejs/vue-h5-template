@@ -13,7 +13,7 @@
   </div>
 </template>
 
-<script setup lang="ts">
+<script setup>
   import router from '@/router';
   import { reactive, ref } from 'vue';
   import { useUserStore } from '@/store/modules/user';
@@ -23,9 +23,9 @@
     name: '',
     pwd: '',
   });
-  const ruleForm = ref<any>(null);
+  const ruleForm = ref(null);
   const submit = () => {
-    ruleForm.value.validate().then(async ({ valid, errors }: any) => {
+    ruleForm.value.validate().then(async ({ valid, errors }) => {
       if (valid) {
         const userInfo = await userStore.login();
         console.log(userInfo);

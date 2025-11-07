@@ -4,7 +4,6 @@
  */
 
 import { visualizer } from 'rollup-plugin-visualizer';
-import type { PluginOption } from 'vite';
 
 export const ConfigVisualizerPlugin = () => {
   return visualizer({
@@ -12,5 +11,5 @@ export const ConfigVisualizerPlugin = () => {
     open: true,
     gzipSize: true,
     brotliSize: true,
-  }) as PluginOption;
+  });
 };

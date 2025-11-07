@@ -1,23 +1,22 @@
 import axios from 'axios';
-import type { AxiosError, AxiosInstance, AxiosRequestConfig, AxiosResponse, InternalAxiosRequestConfig } from 'axios';
 import { showToast } from 'vant';
 
-const service: AxiosInstance = axios.create({
+const service = axios.create({
   withCredentials: false,
   timeout: 10000,
 });
 
 service.interceptors.request.use(
-  (config: InternalAxiosRequestConfig) => {
+  (config) => {
     return config;
   },
-  (error: AxiosError) => {
+  (error) => {
     return Promise.reject(error);
   },
 );
 
 service.interceptors.response.use(
-  (response: AxiosResponse) => {
+  (response) => {
     const res = response.data;
     if (res.code !== 200) {
       showToast(res.msg);
@@ -26,7 +25,7 @@ service.interceptors.response.use(
       return res.data;
     }
   },
-  (error: AxiosError) => {
+  (error) => {
     console.log('err' + error);
     showToast(error.message);
     return Promise.reject(error.message);
@@ -34,19 +33,19 @@ service.interceptors.response.use(
 );
 
 export const http = {
-  get<T = any>(url: string, config?: AxiosRequestConfig): Promise<T> {
+  get(url, config) {
     return service.get(url, config);
   },
 
-  post<T = any>(url: string, data?: object, config?: AxiosRequestConfig): Promise<T> {
+  post(url, data, config) {
     return service.post(url, data, config);
   },
 
-  put<T = any>(url: string, data?: object, config?: AxiosRequestConfig): Promise<T> {
+  put(url, data, config) {
     return service.put(url, data, config);
   },
 
-  delete<T = any>(url: string, config?: AxiosRequestConfig): Promise<T> {
+  delete(url, config) {
     return service.delete(url, config);
   },
 };

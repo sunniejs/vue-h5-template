@@ -17,17 +17,17 @@
   </section>
 </template>
 
-<script setup lang="ts">
+<script setup>
   import { detailsData } from '../data';
   const router = useRouter();
   const page = ref(1);
 
-  const details = reactive<any>({ data: {} });
+  const details = reactive({ data: {} });
 
   watch(
     () => router,
     (val) => {
-      details.data = detailsData.find((_item, index) => index == parseInt(val.currentRoute.value.query.id as string));
+      details.data = detailsData.find((_item, index) => index == parseInt(val.currentRoute.value.query.id));
     },
     { deep: true, immediate: true },
   );

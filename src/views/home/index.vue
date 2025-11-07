@@ -30,7 +30,7 @@
   </div>
 </template>
 
-<script setup lang="ts">
+<script setup>
   import { setLang } from '@/i18n';
   import { useI18n } from 'vue-i18n';
   import { Github, Check } from '@nutui/icons-vue';
@@ -39,7 +39,7 @@
 
   const cellList = ['vue3', 'vite', 'vue-router', 'axios', 'Pinia', 'vue-i18n', 'postcss-px-to-viewport', 'varlet / vant / nutUI', 'eruda'];
 
-  const changeLang = (type: string) => {
+  const changeLang = (type) => {
     setLang(type);
   };
 </script>

@@ -8,7 +8,6 @@ import { VarletUIResolver, VantResolver } from 'unplugin-vue-components/resolver
 
 export const ConfigAutoImportPlugin = () => {
   return AutoImport({
-    dts: 'types/auto-imports.d.ts',
     imports: [
       'vue',
       'pinia',
@@ -17,8 +16,10 @@ export const ConfigAutoImportPlugin = () => {
         '@vueuse/core': [],
       },
     ],
+    dts: false,
     eslintrc: {
       enabled: true,
+      globalsPropValue: true,
     },
     resolvers: [VarletUIResolver(), VantResolver()],
   });

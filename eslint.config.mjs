@@ -1,22 +1,29 @@
-import { globalIgnores } from 'eslint/config';
-import { defineConfigWithVueTs, vueTsConfigs } from '@vue/eslint-config-typescript';
-import pluginVue from 'eslint-plugin-vue';
-import skipFormatting from '@vue/eslint-config-prettier/skip-formatting';
+import { defineConfig, globalIgnores } from 'eslint/config'
+import globals from 'globals'
+import js from '@eslint/js'
+import pluginVue from 'eslint-plugin-vue'
+import skipFormatting from '@vue/eslint-config-prettier/skip-formatting'
+import fs from 'fs'
 
-export default defineConfigWithVueTs(
-  pluginVue.configs['flat/essential'],
-  vueTsConfigs.recommended,
+const autoImport = JSON.parse(fs.readFileSync('./.eslintrc-auto-import.json', 'utf8'))
 
+export default defineConfig([
+   js.configs.recommended,
+  ...pluginVue.configs['flat/essential'],
   skipFormatting,
   {
     name: 'app/files-to-lint',
-    files: ['**/*.{ts,mts,tsx,vue}'],
-    rules: {
-      '@typescript-eslint/no-explicit-any': 'off',
-      '@typescript-eslint/consistent-type-imports': ['error', { prefer: 'type-imports' }],
-      'vue/multi-word-component-names': 'off',
+    files: ['**/*.{js,mjs,jsx,vue}'],
+    rules:{
+      "vue/multi-word-component-names": "off"
+    },
+    languageOptions: {
+      globals: {
+        ...globals.node,
+        ...globals.browser,
+        ...autoImport.globals,
+      },
     },
   },
-
   globalIgnores(['**/dist/**', '**/dist-ssr/**', '**/coverage/**']),
-);
+])

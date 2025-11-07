@@ -1,5 +1,5 @@
 <template>
-  <van-nav-bar :title="$t($route.meta.title as string)" :left-arrow="!tabbarVisible" @click-left="goBack" />
+  <van-nav-bar :title="$t($route.meta.title)" :left-arrow="!tabbarVisible" @click-left="goBack" />
   <div class="main-page" :class="{ tabbar: tabbarVisible, border: showBorder }">
     <RouterView v-slot="{ Component }" v-if="$route.meta.keepAlive">
       <keep-alive>
@@ -13,7 +13,7 @@
   </nut-tabbar>
 </template>
 
-<script lang="ts" setup name="BasicLayoutPage">
+<script setup name="BasicLayoutPage">
   import { useRouter } from 'vue-router';
   import { Home, Horizontal, My, Location } from '@nutui/icons-vue';
 

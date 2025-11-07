@@ -8,7 +8,7 @@ import Pages from 'vite-plugin-pages';
 export const ConfigPagesPlugin = () => {
   return Pages({
     dirs: 'src/pages',
-    extensions: ['vue', 'ts'],
+    extensions: ['vue'],
     importMode: 'async',
   });
 };

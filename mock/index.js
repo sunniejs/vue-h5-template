@@ -1,15 +1,8 @@
-import type { MockMethod, Recordable } from 'vite-plugin-mock';
-
-interface Response {
-  body: Recordable;
-  query: Recordable;
-}
-
 export default [
   {
     url: '/mock-api/login',
     method: 'post',
-    response: ({ body, query }: Response) => {
+    response: ({ body, query }) => {
       console.log('body>>>>>>>>', body);
       console.log('query>>>>>>>>', query);
       return {
@@ -19,4 +12,4 @@ export default [
       };
     },
   },
-] as MockMethod[];
+];

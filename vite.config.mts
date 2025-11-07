@@ -1,11 +1,10 @@
 import { createVitePlugins } from './build/vite/plugins';
-import type { ConfigEnv, UserConfig } from 'vite';
 import { loadEnv } from 'vite';
 import { wrapperEnv } from './build/utils';
 import { fileURLToPath, URL } from 'node:url';
 
 // https://vitejs.dev/config/
-export default function ({ command, mode }: ConfigEnv): UserConfig {
+export default function ({ command, mode }) {
   const isProduction = command === 'build';
   const root = process.cwd();
   const env = loadEnv(mode, root);
@@ -15,7 +14,7 @@ export default function ({ command, mode }: ConfigEnv): UserConfig {
     base: '/',
     root,
     resolve: {
-      alias: { '@': fileURLToPath(new URL('./src', import.meta.url)), '#': fileURLToPath(new URL('./types', import.meta.url)) },
+      alias: { '@': fileURLToPath(new URL('./src', import.meta.url)) },
     },
     server: {
       host: true,

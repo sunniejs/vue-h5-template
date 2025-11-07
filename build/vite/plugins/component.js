@@ -12,7 +12,6 @@ export const ConfigAutoComponentsPlugin = () => {
     // dirs: ['src/components'],
     extensions: ['vue', 'md'],
     deep: true,
-    dts: 'types/components.d.ts',
     directoryAsNamespace: false,
     globalNamespaces: [],
     directives: true,

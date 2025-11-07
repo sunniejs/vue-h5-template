@@ -1,6 +1,6 @@
 module.exports = {
   extends: ['stylelint-config-standard', 'stylelint-config-recess-order'],
-  ignoreFiles: ['**/*.js', '**/*.jsx', '**/*.tsx', '**/*.ts', '**/*.json', '**/*.md'],
+  ignoreFiles: ['**/*.js', '**/*.jsx', '**/*.json', '**/*.md'],
   overrides: [
     {
       customSyntax: 'postcss-html',

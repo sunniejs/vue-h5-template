@@ -3,26 +3,21 @@ import { useCookies } from '@vueuse/integrations/useCookies';
 import { defineStore } from 'pinia';
 
 const { VITE_TOKEN_KEY } = import.meta.env;
-const token = useCookies().get(VITE_TOKEN_KEY as string);
+const token = useCookies().get(VITE_TOKEN_KEY);
 console.log(token);
 
-interface StoreUser {
-  token: string;
-  info: Record<any, any>;
-}
-
 export const useUserStore = defineStore('user', {
-  state: (): StoreUser => ({
+  state: () => ({
     token: 'token',
     info: {},
   }),
   getters: {
-    getUserInfo(): any {
+    getUserInfo() {
       return this.info || {};
     },
   },
   actions: {
-    setInfo(info: any) {
+    setInfo(info) {
       this.info = info ?? '';
     },
     async login() {

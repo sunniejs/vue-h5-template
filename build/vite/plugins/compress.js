@@ -14,6 +14,4 @@ export const ConfigCompressPlugin = () => {
     algorithm: 'gzip', //压缩算法
     ext: '.gz', //文件类型
   });
-
-  return [];
 };
