@@ -1,12 +1,12 @@
 # 快速上手
 
-## node 版本要求
+## Node 版本要求
 
-推荐 20.19.0+以上的版本，毕竟 2025 年了，别掐着 16+的版本了，你也可以使用[nvm](https://github.com/nvm-sh/nvm)或[nvm-windows](https://github.com/coreybutler/nvm-windows)在同一台电脑上管理多个 node 版本。
+推荐 Node.js 20.10.0+ 以上的版本，你可以使用 [nvm](https://github.com/nvm-sh/nvm) 或 [nvm-windows](https://github.com/coreybutler/nvm-windows) 在同一台电脑上管理多个 Node 版本。
 
 ## 包管理器
 
-尽量使用 yarn 或者 pnpm，本项目仅保证在 yarn 或 pnpm 下正确运行，npm 涉及到网络环境等各种情况的限制不做过多考虑。
+推荐使用 pnpm（>= 9.12.0），本项目仅保证在 pnpm 下正确运行。
 
 ## 启动项目
 

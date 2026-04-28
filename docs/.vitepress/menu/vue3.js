@@ -3,8 +3,8 @@ export default {
   collapsible: true,
   items: [
     { text: "启动项目", link: "/guide/vue3/start" },
-    { text: "vite.config.ts 基础配置", link: "/guide/vue3/base" },
-    { text: "vite插件集成", link: "/guide/vue3/vite" },
+    { text: "vite.config.mts 基础配置", link: "/guide/vue3/base" },
+    { text: "Vite 插件集成", link: "/guide/vue3/vite" },
     { text: "多环境变量", link: "/guide/vue3/env" },
     { text: "viewport 适配方案", link: "/guide/vue3/viewport" },
     { text: "UI组件库", link: "/guide/vue3/ui" },

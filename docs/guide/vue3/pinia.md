@@ -1,34 +1,30 @@
-<!--
- * @Author: Vinton
- * @Date: 2022-08-22 10:39:13
- * @Description: file content
--->
 # Pinia 状态管理
 
-下一代 vuex，使用极其方便，ts 兼容好
+下一代 vuex，使用极其方便，ts 兼容好。项目使用 `pinia-plugin-persistedstate` 实现状态持久化。
 
 目录结构
 
 ```bash
 ├── store
 │   ├── modules
-│   │   └── user.js
-│   ├── index.js
+│   │   └── user.ts
+│   ├── index.ts
 ```
-目前pinia分为两种编程模式，Options API 和 Composition API，我们这边都会列举出来实现的业务逻辑效果是一样的，提供大家思路
 
-### Options API:
+### Options API（当前项目使用）:
 
-```javascript
+```typescript
+import { loginPassword } from "@/api";
+import { defineStore } from "pinia";
+
 interface StoreUser {
   token: string;
   info: Record<any, any>;
 }
 
-export const useUserStore = defineStore({
-  id: 'app-user',
+export const useUserStore = defineStore("user", {
   state: (): StoreUser => ({
-    token: token,
+    token: "",
     info: {},
   }),
   getters: {
@@ -38,51 +34,63 @@ export const useUserStore = defineStore({
   },
   actions: {
     setInfo(info: any) {
-      this.info = info ? info : '';
+      this.info = info ?? "";
     },
-    login() {
-      return new Promise((resolve) => {
-        const { data } = loginPassword();
-        watch(data, () => {
-          this.setInfo(data.value);
-          // useCookies().set(VITE_TOKEN_KEY as string, data.value.token);
-          resolve(data.value);
-        });
-      });
+    async login() {
+      try {
+        const res = await loginPassword();
+        this.setInfo(res);
+        this.token = res.token;
+        return res;
+      } catch (error) {
+        console.error("Login failed", error);
+        throw error;
+      }
     },
+  },
+  persist: {
+    pick: ["token"],
+    storage: localStorage,
   },
 });
 ```
 
 ### Composition API:
-```javascript
-export const useUserStore = defineStore('app-user', () => {
-  const Token = ref(token);
-  const info = ref<Record<any, any>>({});
-  const setInfo = (info: any) => {
-    info.value = info ? info : '';
-  };
-  const getUserInfo = () => {
-    return info || {};
-  };
-  const login = () => {
-    return new Promise((resolve) => {
-      const { data } = loginPassword();
-      watch(data, () => {
-        setInfo(data.value);
-        // useCookies().set(VITE_TOKEN_KEY as string, data.value.token);
-        resolve(data.value);
-      });
-    });
-  };
-  return {
-    Token,
-    info,
-    setInfo,
-    login,
-    getUserInfo,
-  };
-})
+
+```typescript
+export const useUserStore = defineStore(
+  "user",
+  () => {
+    const token = ref("");
+    const info = ref<Record<any, any>>({});
+
+    const getUserInfo = () => info.value || {};
+
+    const setInfo = (data: any) => {
+      info.value = data ?? "";
+    };
+
+    const login = async () => {
+      try {
+        const res = await loginPassword();
+        setInfo(res);
+        token.value = res.token;
+        return res;
+      } catch (error) {
+        console.error("Login failed", error);
+        throw error;
+      }
+    };
+
+    return { token, info, getUserInfo, setInfo, login };
+  },
+  {
+    persist: {
+      pick: ["token"],
+      storage: localStorage,
+    },
+  },
+);
 ```
 
 使用

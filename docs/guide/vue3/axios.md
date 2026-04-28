@@ -1,67 +1,123 @@
 # axios 封装及接口管理
 
-`utils/request.js` 封装 axios , 开发者需要根据后台接口做修改。
+`utils/request/index.ts` 封装 axios，开发者需要根据后台接口做修改。
 
 - `service.interceptors.request.use` 里可以设置请求头，比如设置 `token`
-- `config.hideloading` 是在 api 文件夹下的接口参数里设置，下文会讲
 - `service.interceptors.response.use` 里可以对接口返回数据处理，比如 401 删除本地信息，重新登录
 
-```javascript
+## Axios 封装
+
+```typescript
 import axios from "axios";
-import store from "@/store";
-import { Toast } from "vant";
-// 根据环境不同引入不同api地址
-import { baseApi } from "@/config";
-// create an axios instance
-const service = axios.create({
-  baseURL: baseApi, // url = base api url + request url
-  withCredentials: true, // send cookies when cross-domain requests
-  timeout: 5000, // request timeout
+import type {
+  AxiosError,
+  AxiosInstance,
+  AxiosRequestConfig,
+  AxiosResponse,
+  InternalAxiosRequestConfig,
+} from "axios";
+import { showToast } from "vant";
+
+const service: AxiosInstance = axios.create({
+  baseURL: import.meta.env.VITE_API_BASE_URL || "",
+  withCredentials: false,
+  timeout: 10000,
 });
 
-// request 拦截器 request interceptor
 service.interceptors.request.use(
-  (config) => {
-    // 不传递默认开启loading
-    if (!config.hideloading) {
-      // loading
-      Toast.loading({
-        forbidClick: true,
-      });
-    }
-    if (store.getters.token) {
-      config.headers["X-Token"] = "";
-    }
+  (config: InternalAxiosRequestConfig) => {
     return config;
   },
-  (error) => {
-    // do something with request error
-    console.log(error); // for debug
+  (error: AxiosError) => {
     return Promise.reject(error);
-  }
+  },
 );
-// respone拦截器
+
 service.interceptors.response.use(
-  (response) => {
-    Toast.clear();
+  (response: AxiosResponse) => {
     const res = response.data;
-    if (res.status && res.status !== 200) {
-      // 登录超时,重新登录
-      if (res.status === 401) {
-        store.dispatch("FedLogOut").then(() => {
-          location.reload();
-        });
-      }
-      return Promise.reject(res || "error");
+    if (res.code !== 200) {
+      showToast(res.msg);
+      return Promise.reject(res.msg || "Error");
     } else {
-      return Promise.resolve(res);
+      return res.data;
     }
   },
-  (error) => {
-    Toast.clear();
-    console.log("err" + error); // for debug
-    return Promise.reject(error);
-  }
+  (error: AxiosError) => {
+    showToast(error.message);
+    return Promise.reject(error.message);
+  },
 );
+
+export const http = {
+  get<T = any>(url: string, config?: AxiosRequestConfig): Promise<T> {
+    return service.get(url, config);
+  },
+  post<T = any>(
+    url: string,
+    data?: object,
+    config?: AxiosRequestConfig,
+  ): Promise<T> {
+    return service.post(url, data, config);
+  },
+  put<T = any>(
+    url: string,
+    data?: object,
+    config?: AxiosRequestConfig,
+  ): Promise<T> {
+    return service.put(url, data, config);
+  },
+  delete<T = any>(url: string, config?: AxiosRequestConfig): Promise<T> {
+    return service.delete(url, config);
+  },
+};
+
 export default service;
+```
+
+## useFetchApi 封装
+
+项目同时提供了基于 `@vueuse/core` 的 `createFetch` 封装，支持响应式的请求：
+
+```typescript
+import { createFetch } from "@vueuse/core";
+import { useCookies } from "@vueuse/integrations/useCookies";
+import { showNotify } from "vant";
+
+const useFetchApi = createFetch({
+  baseUrl: "",
+  options: {
+    async beforeFetch({ options }) {
+      const myToken =
+        useCookies().get(
+          (import.meta.env.VITE_TOKEN_KEY as string) || "Authorization",
+        ) || "";
+      options.headers = {
+        ...options.headers,
+        Authorization: `Bearer ${myToken}`,
+      };
+      return { options };
+    },
+    afterFetch(ctx) {
+      // 处理响应数据...
+      return ctx;
+    },
+  },
+});
+
+export default useFetchApi;
+```
+
+## 接口管理
+
+在 `src/api/index.ts` 中统一管理接口：
+
+```typescript
+import { http } from "@/utils/request";
+
+export function loginPassword() {
+  return http.post("/mock-api/login", {
+    data: { name: "123" },
+  });
+}
 ```
