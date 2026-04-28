@@ -6,6 +6,8 @@
 
 如果你不熟悉 vue3，想继续使用 vue2 开发的，可以[点这里](https://github.com/sunniejs/vue-h5-template/tree/vue2-h5-template)来获取 vue2-h5-template
 
+如果你想使用 monorepo 架构进行开发，可以[点这里](https://github.com/fonghehe/vue-h5-template)来获取 monorepo 版本
+
 详细的说明文档请[点击](https://sunniejs.github.io/vue-h5-template/)查看
 
 如果对你有帮助送我一颗珍贵的小星星（づ￣ 3 ￣）づ ╭❤ ～
