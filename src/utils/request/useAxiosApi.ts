@@ -1,7 +1,5 @@
 import { useAxios } from '@vueuse/integrations';
 
-import 'vant/es/toast/style';
-
 /**
  * reactive useFetchApi
  */

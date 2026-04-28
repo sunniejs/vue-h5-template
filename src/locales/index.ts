@@ -59,7 +59,6 @@ export async function setLang(locale?: string) {
     const loader = localeLoaders[target];
     if (loader) {
       const messages = await loader();
-      console.log(messages);
       i18n.global.setLocaleMessage(target, messages);
     }
   }
