@@ -120,10 +120,10 @@ importers:
         version: 2.2.1
       autoprefixer:
         specifier: ^10.5.0
-        version: 10.5.0(postcss@8.5.12)
+        version: 10.5.0(postcss@8.5.10)
       cnjm-postcss-px-to-viewport:
         specifier: ^1.0.1
-        version: 1.0.1(postcss@8.5.12)
+        version: 1.0.1(postcss@8.5.10)
       consola:
         specifier: ^3.4.2
         version: 3.4.2
@@ -179,14 +179,14 @@ importers:
         specifier: ^4.1.5
         version: 4.1.5
       postcss:
-        specifier: ^8.5.12
-        version: 8.5.12
+        specifier: ^8.5.10
+        version: 8.5.10
       postcss-html:
         specifier: 1.8.1
         version: 1.8.1
       postcss-scss:
         specifier: ^4.0.9
-        version: 4.0.9(postcss@8.5.12)
+        version: 4.0.9(postcss@8.5.10)
       prettier:
         specifier: ^3.8.3
         version: 3.8.3
@@ -204,7 +204,7 @@ importers:
         version: 17.0.0(stylelint@16.26.1(typescript@5.9.3))
       stylelint-config-recommended-scss:
         specifier: ^16.0.0
-        version: 16.0.2(postcss@8.5.12)(stylelint@16.26.1(typescript@5.9.3))
+        version: 16.0.2(postcss@8.5.10)(stylelint@16.26.1(typescript@5.9.3))
       stylelint-config-recommended-vue:
         specifier: ^1.5.0
         version: 1.6.1(postcss-html@1.8.1)(stylelint@16.26.1(typescript@5.9.3))
@@ -5868,8 +5868,8 @@ packages:
     resolution: {integrity: sha512-zrUjRRe1bpXKsX1qAJNJjqZViErVuyEkMTRrwu4ud4sbTtIBRmtaYDrHmcGgmrbsW3MHfmtIf+vJumgQn+PrXg==}
     engines: {node: '>=0.12'}
 
-  postcss@8.5.12:
-    resolution: {integrity: sha512-W62t/Se6rA0Az3DfCL0AqJwXuKwBeYg6nOaIgzP+xZ7N5BFCI7DYi1qs6ygUYT6rvfi6t9k65UMLJC+PHZpDAA==}
+  postcss@8.5.10:
+    resolution: {integrity: sha512-pMMHxBOZKFU6HgAZ4eyGnwXF/EvPGGqUr0MnZ5+99485wwW41kW91A4LOGxSHhgugZmSChL5AlElNdwlNgcnLQ==}
     engines: {node: ^10 || ^12 || >=14}
 
   posthtml-parser@0.2.1:
@@ -9674,7 +9674,7 @@ snapshots:
       '@csstools/css-parser-algorithms': 3.0.5(@csstools/css-tokenizer@3.0.4)
       '@csstools/css-tokenizer': 3.0.4
       '@csstools/media-query-list-parser': 4.0.3(@csstools/css-parser-algorithms@3.0.5(@csstools/css-tokenizer@3.0.4))(@csstools/css-tokenizer@3.0.4)
-      postcss: 8.5.12
+      postcss: 8.5.10
       postcss-selector-parser: 7.1.0
       postcss-value-parser: 4.2.0
       style-search: 0.1.0
@@ -10137,7 +10137,7 @@ snapshots:
       '@vue/shared': 3.5.22
       estree-walker: 2.0.2
       magic-string: 0.30.19
-      postcss: 8.5.12
+      postcss: 8.5.10
       source-map-js: 1.2.1
 
   '@vue/compiler-sfc@3.5.33':
@@ -10149,7 +10149,7 @@ snapshots:
       '@vue/shared': 3.5.33
       estree-walker: 2.0.2
       magic-string: 0.30.21
-      postcss: 8.5.12
+      postcss: 8.5.10
       source-map-js: 1.2.1
 
   '@vue/compiler-ssr@3.5.22':
@@ -10456,13 +10456,13 @@ snapshots:
 
   atob@2.1.2: {}
 
-  autoprefixer@10.5.0(postcss@8.5.12):
+  autoprefixer@10.5.0(postcss@8.5.10):
     dependencies:
       browserslist: 4.28.2
       caniuse-lite: 1.0.30001791
       fraction.js: 5.3.4
       picocolors: 1.1.1
-      postcss: 8.5.12
+      postcss: 8.5.10
       postcss-value-parser: 4.2.0
 
   available-typed-arrays@1.0.7:
@@ -10852,10 +10852,10 @@ snapshots:
 
   clone@2.1.2: {}
 
-  cnjm-postcss-px-to-viewport@1.0.1(postcss@8.5.12):
+  cnjm-postcss-px-to-viewport@1.0.1(postcss@8.5.10):
     dependencies:
       object-assign: 4.1.1
-      postcss: 8.5.12
+      postcss: 8.5.10
 
   collection-visit@1.0.0:
     dependencies:
@@ -13768,8 +13768,8 @@ snapshots:
     dependencies:
       htmlparser2: 8.0.2
       js-tokens: 9.0.1
-      postcss: 8.5.12
-      postcss-safe-parser: 6.0.0(postcss@8.5.12)
+      postcss: 8.5.10
+      postcss-safe-parser: 6.0.0(postcss@8.5.10)
 
   postcss-media-query-parser@0.2.3: {}
 
@@ -13779,17 +13779,17 @@ snapshots:
 
   postcss-resolve-nested-selector@0.1.6: {}
 
-  postcss-safe-parser@6.0.0(postcss@8.5.12):
+  postcss-safe-parser@6.0.0(postcss@8.5.10):
     dependencies:
-      postcss: 8.5.12
+      postcss: 8.5.10
 
-  postcss-safe-parser@7.0.1(postcss@8.5.12):
+  postcss-safe-parser@7.0.1(postcss@8.5.10):
     dependencies:
-      postcss: 8.5.12
+      postcss: 8.5.10
 
-  postcss-scss@4.0.9(postcss@8.5.12):
+  postcss-scss@4.0.9(postcss@8.5.10):
     dependencies:
-      postcss: 8.5.12
+      postcss: 8.5.10
 
   postcss-selector-parser@7.1.0:
     dependencies:
@@ -13801,9 +13801,9 @@ snapshots:
       cssesc: 3.0.0
       util-deprecate: 1.0.2
 
-  postcss-sorting@9.1.0(postcss@8.5.12):
+  postcss-sorting@9.1.0(postcss@8.5.10):
     dependencies:
-      postcss: 8.5.12
+      postcss: 8.5.10
 
   postcss-value-parser@4.2.0: {}
 
@@ -13814,7 +13814,7 @@ snapshots:
       source-map: 0.5.7
       supports-color: 3.2.3
 
-  postcss@8.5.12:
+  postcss@8.5.10:
     dependencies:
       nanoid: 3.3.11
       picocolors: 1.1.1
@@ -14614,14 +14614,14 @@ snapshots:
       stylelint: 16.26.1(typescript@5.9.3)
       stylelint-order: 7.0.1(stylelint@16.26.1(typescript@5.9.3))
 
-  stylelint-config-recommended-scss@16.0.2(postcss@8.5.12)(stylelint@16.26.1(typescript@5.9.3)):
+  stylelint-config-recommended-scss@16.0.2(postcss@8.5.10)(stylelint@16.26.1(typescript@5.9.3)):
     dependencies:
-      postcss-scss: 4.0.9(postcss@8.5.12)
+      postcss-scss: 4.0.9(postcss@8.5.10)
       stylelint: 16.26.1(typescript@5.9.3)
       stylelint-config-recommended: 17.0.0(stylelint@16.26.1(typescript@5.9.3))
       stylelint-scss: 6.14.0(stylelint@16.26.1(typescript@5.9.3))
     optionalDependencies:
-      postcss: 8.5.12
+      postcss: 8.5.10
 
   stylelint-config-recommended-vue@1.6.1(postcss-html@1.8.1)(stylelint@16.26.1(typescript@5.9.3)):
     dependencies:
@@ -14642,8 +14642,8 @@ snapshots:
 
   stylelint-order@7.0.1(stylelint@16.26.1(typescript@5.9.3)):
     dependencies:
-      postcss: 8.5.12
-      postcss-sorting: 9.1.0(postcss@8.5.12)
+      postcss: 8.5.10
+      postcss-sorting: 9.1.0(postcss@8.5.10)
       stylelint: 16.26.1(typescript@5.9.3)
 
   stylelint-prettier@5.0.3(prettier@3.8.3)(stylelint@16.26.1(typescript@5.9.3)):
@@ -14694,9 +14694,9 @@ snapshots:
       micromatch: 4.0.8
       normalize-path: 3.0.0
       picocolors: 1.1.1
-      postcss: 8.5.12
+      postcss: 8.5.10
       postcss-resolve-nested-selector: 0.1.6
-      postcss-safe-parser: 7.0.1(postcss@8.5.12)
+      postcss-safe-parser: 7.0.1(postcss@8.5.10)
       postcss-selector-parser: 7.1.0
       postcss-value-parser: 4.2.0
       resolve-from: 5.0.0
@@ -15313,7 +15313,7 @@ snapshots:
       esbuild: 0.27.2
       fdir: 6.5.0(picomatch@4.0.3)
       picomatch: 4.0.3
-      postcss: 8.5.12
+      postcss: 8.5.10
       rollup: 4.52.3
       tinyglobby: 0.2.15
     optionalDependencies:
