@@ -22,6 +22,7 @@ body {
     'Helvetica Neue',
     sans-serif;
   color: var(--color-text);
+  touch-action: manipulation;
   background: var(--color-background);
   text-rendering: optimizelegibility;
   transition:

@@ -53,19 +53,9 @@
   );
 
   const tabSwitch = (_item: any, index: number) => {
-    switch (index) {
-      case 0:
-        router.push('/home');
-        break;
-      case 1:
-        router.push('/list');
-        break;
-      case 2:
-        router.push('/member');
-        break;
-      case 3:
-        router.push('/demo');
-        break;
+    const tab = tabItem[index];
+    if (tab) {
+      router.push(`/${tab.key}`);
     }
     activeTab.value = index;
   };

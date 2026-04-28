@@ -43,7 +43,7 @@
   watch(
     () => router,
     (val) => {
-      details.data = detailsData.find((_item, index) => index == parseInt(val.currentRoute.value.query.id as string));
+      details.data = detailsData.find((_item, index) => index === parseInt(val.currentRoute.value.query.id as string));
     },
     { deep: true, immediate: true },
   );

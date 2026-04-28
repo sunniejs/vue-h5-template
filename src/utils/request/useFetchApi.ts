@@ -1,11 +1,12 @@
 import { createFetch } from '@vueuse/core';
+import { useCookies } from '@vueuse/integrations/useCookies';
 import { showNotify } from 'vant';
 
 const useFetchApi = createFetch({
   baseUrl: '',
   options: {
     async beforeFetch({ options }) {
-      const myToken = 'token';
+      const myToken = useCookies().get((import.meta.env.VITE_TOKEN_KEY as string) || 'Authorization') || '';
       options.headers = {
         ...options.headers,
         Authorization: `Bearer ${myToken}`,
@@ -17,7 +18,7 @@ const useFetchApi = createFetch({
       if (response.status >= 200 && response.status < 300) {
         try {
           const jsonObj = data;
-          if (jsonObj.code != 200) {
+          if (jsonObj.code !== 200) {
             showNotify({ type: 'danger', message: jsonObj.message || 'Error' });
           }
 

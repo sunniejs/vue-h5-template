@@ -1,10 +1,5 @@
 import { loginPassword } from '@/api';
-import { useCookies } from '@vueuse/integrations/useCookies';
 import { defineStore } from 'pinia';
-
-const { VITE_TOKEN_KEY } = import.meta.env;
-const token = useCookies().get(VITE_TOKEN_KEY as string);
-console.log(token);
 
 interface StoreUser {
   token: string;
@@ -13,7 +8,7 @@ interface StoreUser {
 
 export const useUserStore = defineStore('user', {
   state: (): StoreUser => ({
-    token: 'token',
+    token: '',
     info: {},
   }),
   getters: {

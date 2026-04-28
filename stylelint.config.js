@@ -62,6 +62,7 @@ module.exports = {
     'named-grid-areas-no-invalid': null,
     'no-descending-specificity': null,
     'no-empty-source': null,
+    'declaration-property-value-no-unknown': null,
     'order/order': [
       [
         'dollar-variables',

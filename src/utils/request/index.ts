@@ -3,6 +3,7 @@ import type { AxiosError, AxiosInstance, AxiosRequestConfig, AxiosResponse, Inte
 import { showToast } from 'vant';
 
 const service: AxiosInstance = axios.create({
+  baseURL: import.meta.env.VITE_API_BASE_URL || '',
   withCredentials: false,
   timeout: 10000,
 });
