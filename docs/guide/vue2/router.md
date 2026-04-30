@@ -6,28 +6,52 @@
 
 前往: [vue.config.js 基础配置](#base)
 
+### 路由配置 (router.config.js)
+
+```javascript
+export const constantRouterMap = [
+  {
+    path: "/",
+    component: () => import("@/views/layouts/index"),
+    redirect: "/home",
+    meta: { title: "首页", keepAlive: false },
+    children: [
+      {
+        path: "/home",
+        name: "Home",
+        component: () => import("@/views/home/index"),
+        meta: { title: "首页", keepAlive: false },
+      },
+      {
+        path: "/about",
+        name: "About",
+        component: () => import("@/views/home/about"),
+        meta: { title: "关于我", keepAlive: false },
+      },
+    ],
+  },
+  // 404 catch-all
+  {
+    path: "*",
+    redirect: "/home",
+  },
+];
+```
+
+### 路由实例 (router/index.js)
+
 ```javascript
 import Vue from "vue";
 import Router from "vue-router";
+import { constantRouterMap } from "./router.config.js";
 
 Vue.use(Router);
-export const router = [
-  {
-    path: "/",
-    name: "index",
-    component: () => import("@/views/home/index"), // 路由懒加载
-    meta: {
-      title: "首页", // 页面标题
-      keepAlive: false, // keep-alive 标识
-    },
-  },
-];
+
 const createRouter = () =>
   new Router({
     // mode: 'history', // 如果你是 history模式 需要配置 vue.config.js publicPath
-    // base: '/app/',
     scrollBehavior: () => ({ y: 0 }),
-    routes: router,
+    routes: constantRouterMap,
   });
 
 export default createRouter();

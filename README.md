@@ -308,7 +308,7 @@ service.interceptors.request.use(
     // do something with request error
     console.log(error); // for debug
     return Promise.reject(error);
-  }
+  },
 );
 // respone拦截器
 service.interceptors.response.use(
@@ -331,7 +331,7 @@ service.interceptors.response.use(
     Toast.clear();
     console.log("err" + error); // for debug
     return Promise.reject(error);
-  }
+  },
 );
 export default service;
 ```

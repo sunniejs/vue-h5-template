@@ -17,15 +17,20 @@ import type {
   InternalAxiosRequestConfig,
 } from "axios";
 import { showToast } from "vant";
+import { useUserStore } from "@/store/modules/user";
 
 const service: AxiosInstance = axios.create({
   baseURL: import.meta.env.VITE_API_BASE_URL || "",
   withCredentials: false,
-  timeout: 10000,
+  timeout: 15000,
 });
 
 service.interceptors.request.use(
   (config: InternalAxiosRequestConfig) => {
+    const userStore = useUserStore();
+    if (userStore.token) {
+      config.headers.Authorization = `Bearer ${userStore.token}`;
+    }
     return config;
   },
   (error: AxiosError) => {
@@ -37,15 +42,22 @@ service.interceptors.response.use(
   (response: AxiosResponse) => {
     const res = response.data;
     if (res.code !== 200) {
-      showToast(res.msg);
-      return Promise.reject(res.msg || "Error");
-    } else {
-      return res.data;
+      showToast(res.msg || "Error");
+      return Promise.reject(new Error(res.msg || "Error"));
     }
+    return res.data;
   },
   (error: AxiosError) => {
-    showToast(error.message);
-    return Promise.reject(error.message);
+    const status = error.response?.status;
+    if (status === 401) {
+      const userStore = useUserStore();
+      userStore.$reset();
+      window.location.hash = "#/login";
+    }
+    const message =
+      (error.response?.data as any)?.msg || error.message || "Network Error";
+    showToast(message);
+    return Promise.reject(error);
   },
 );
 
@@ -75,26 +87,31 @@ export const http = {
 export default service;
 ```
 
+### 主要特点
+
+- **请求拦截器**：自动从 Pinia store 注入 `Authorization` token
+- **响应拦截器**：统一处理业务错误码和 HTTP 错误
+- **401 处理**：自动清除登录态并跳转登录页
+- **泛型支持**：`http.get<UserInfo>(url)` 获得正确的类型推导
+
 ## useFetchApi 封装
 
 项目同时提供了基于 `@vueuse/core` 的 `createFetch` 封装，支持响应式的请求：
 
 ```typescript
 import { createFetch } from "@vueuse/core";
-import { useCookies } from "@vueuse/integrations/useCookies";
 import { showNotify } from "vant";
+import { useUserStore } from "@/store/modules/user";
 
 const useFetchApi = createFetch({
   baseUrl: "",
   options: {
     async beforeFetch({ options }) {
-      const myToken =
-        useCookies().get(
-          (import.meta.env.VITE_TOKEN_KEY as string) || "Authorization",
-        ) || "";
+      const userStore = useUserStore();
+      const token = userStore.token || "";
       options.headers = {
         ...options.headers,
-        Authorization: `Bearer ${myToken}`,
+        Authorization: `Bearer ${token}`,
       };
       return { options };
     },
@@ -107,6 +124,8 @@ const useFetchApi = createFetch({
 
 export default useFetchApi;
 ```
+
+> 两种请求方案均统一从 Pinia `useUserStore` 获取 token，保持认证策略一致。
 
 ## 接口管理
 

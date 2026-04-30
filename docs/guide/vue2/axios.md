@@ -30,7 +30,7 @@ service.interceptors.request.use(
       });
     }
     if (store.getters.token) {
-      config.headers["X-Token"] = "";
+      config.headers["X-Token"] = store.getters.token;
     }
     return config;
   },
@@ -38,7 +38,7 @@ service.interceptors.request.use(
     // do something with request error
     console.log(error); // for debug
     return Promise.reject(error);
-  }
+  },
 );
 // respone拦截器
 service.interceptors.response.use(
@@ -48,7 +48,7 @@ service.interceptors.response.use(
     if (res.status && res.status !== 200) {
       // 登录超时,重新登录
       if (res.status === 401) {
-        store.dispatch("FedLogOut").then(() => {
+        store.dispatch("fedLogOut").then(() => {
           location.reload();
         });
       }
@@ -61,7 +61,7 @@ service.interceptors.response.use(
     Toast.clear();
     console.log("err" + error); // for debug
     return Promise.reject(error);
-  }
+  },
 );
 export default service;
 ```
