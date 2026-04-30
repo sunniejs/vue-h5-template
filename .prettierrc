@@ -4,14 +4,11 @@
   "singleQuote": true,
   "trailingComma": "none",
   "semi": false,
-  "wrap_line_length": 120,
-  "wrap_attributes": "auto",
   "proseWrap": "always",
   "arrowParens": "avoid",
   "bracketSpacing": true,
   "jsxBracketSameLine": true,
   "useTabs": false,
-  "eslintIntegration":true,
   "overrides": [
     {
       "files": ".prettierrc",

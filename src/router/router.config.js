@@ -25,5 +25,10 @@ export const constantRouterMap = [
         meta: { title: '关于我', keepAlive: false }
       }
     ]
+  },
+  // 404 catch-all
+  {
+    path: '*',
+    redirect: '/home'
   }
 ]

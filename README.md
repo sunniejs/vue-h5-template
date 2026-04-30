@@ -1,6 +1,10 @@
-# vue-h5-template
+# vue2-h5-template
 
-基于 vue-cli4.0 + webpack 4 + vant ui + sass+ rem 适配方案+axios 封装，构建手机端模板脚手架
+基于 Vue 2.7 + Vue CLI 5 + Vant 2 + Sass + viewport 适配方案 + Axios 封装，构建手机端模板脚手架
+
+如果你想使用 Vue 3 版本，请查看 [vue-h5-template](https://github.com/sunniejs/vue-h5-template/tree/vue-h5-template)
+
+详细文档请查看 [在线文档](https://sunniejs.github.io/vue-h5-template/)
 
 掘金: [vue-cli4 vant rem 移动端框架方案](https://juejin.im/post/5cfefc73f265da1bba58f9f7)
 
@@ -12,44 +16,43 @@
 
 ### Node 版本要求
 
-`Vue CLI` 需要 Node.js 8.9 或更高版本 (推荐 8.11.0+)。你可以使用 [nvm](https://github.com/nvm-sh/nvm) 或
+推荐 Node.js 14+（建议 16+），你可以使用 [nvm](https://github.com/nvm-sh/nvm) 或
 [nvm-windows](https://github.com/coreybutler/nvm-windows) 在同一台电脑中管理多个 Node 版本。
-
-本示例 Node.js 12.14.1
 
 ### 启动项目
 
 ```bash
-
 git clone https://github.com/sunniejs/vue-h5-template.git
 
 cd vue-h5-template
 
-npm install
+# 切换到 vue2 分支
+git checkout vue2-h5-template
 
-npm run serve
+yarn install
+
+yarn serve
 ```
 
 <span id="top">目录</span>
 
-- √ Vue-cli4
 - [√ 配置多环境变量](#env)
 - [√ rem 适配方案](#rem)
-- [√ vm 适配方案](#vm)
+- [√ vw 适配方案](#vw)
 - [√ VantUI 组件按需加载](#vant)
 - [√ Sass 全局样式](#sass)
 - [√ Vuex 状态管理](#vuex)
 - [√ Vue-router](#router)
 - [√ Axios 封装及接口管理](#axios)
-- [√ Webpack 4 vue.config.js 基础配置](#base)
+- [√ vue.config.js 基础配置](#base)
 - [√ 配置 alias 别名](#alias)
 - [√ 配置 proxy 跨域](#proxy)
 - [√ 配置 打包分析](#bundle)
-- [√ 配置 externals 引入 cdn 资源 ](#externals)
-- [√ 去掉 console.log ](#console)
+- [√ 配置 externals 引入 cdn 资源](#externals)
+- [√ 去掉 console.log](#console)
 - [√ splitChunks 单独打包第三方模块](#chunks)
 - [√ 添加 IE 兼容 ](#ie)
-- [√ Eslint+Pettier 统一开发规范 ](#pettier)
+- [√ ESLint + Prettier 统一开发规范](#pettier)
 
 ### <span id="env">✅ 配置多环境变量 </span>
 
