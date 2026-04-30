@@ -23,7 +23,6 @@
 </template>
 
 <script lang="ts" setup name="BasicLayoutPage">
-  import { useRouter } from 'vue-router';
   import { Home, Horizontal, My, Location } from '@nutui/icons-vue';
 
   const tabItem = [
@@ -41,15 +40,18 @@
 
   const showBorder = ref(true);
 
+  const route = useRoute();
+
   watch(
-    () => router,
-    () => {
-      const judgeRoute = tabItem.some((item) => item.key === router.currentRoute.value.path.replace('/', ''));
-      activeTab.value = tabItem.findIndex((item) => item.key === router.currentRoute.value.path.replace('/', ''));
+    () => route.path,
+    (path) => {
+      const currentKey = path.replace('/', '');
+      const judgeRoute = tabItem.some((item) => item.key === currentKey);
+      activeTab.value = tabItem.findIndex((item) => item.key === currentKey);
       tabbarVisible.value = judgeRoute;
       showBorder.value = judgeRoute;
     },
-    { deep: true, immediate: true },
+    { immediate: true },
   );
 
   const tabSwitch = (_item: any, index: number) => {

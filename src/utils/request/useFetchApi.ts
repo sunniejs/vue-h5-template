@@ -1,15 +1,16 @@
 import { createFetch } from '@vueuse/core';
-import { useCookies } from '@vueuse/integrations/useCookies';
 import { showNotify } from 'vant';
+import { useUserStore } from '@/store/modules/user';
 
 const useFetchApi = createFetch({
   baseUrl: '',
   options: {
     async beforeFetch({ options }) {
-      const myToken = useCookies().get((import.meta.env.VITE_TOKEN_KEY as string) || 'Authorization') || '';
+      const userStore = useUserStore();
+      const token = userStore.token || '';
       options.headers = {
         ...options.headers,
-        Authorization: `Bearer ${myToken}`,
+        Authorization: `Bearer ${token}`,
       };
       return { options };
     },

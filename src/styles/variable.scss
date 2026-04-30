@@ -1,0 +1,16 @@
+// CSS custom properties (light theme defaults)
+:root {
+  --color-text: #213547;
+  --color-text-secondary: #666;
+  --color-background: #fff;
+  --color-background-soft: #f5f5f5;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-text: rgb(255 255 255 / 87%);
+    --color-text-secondary: rgb(255 255 255 / 60%);
+    --color-background: #1a1a1a;
+    --color-background-soft: #2c2c2c;
+  }
+}

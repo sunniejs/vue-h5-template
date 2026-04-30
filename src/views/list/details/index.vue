@@ -35,17 +35,20 @@
   import { detailsData } from '../data';
   import { Dshop, Dongdong, Cart } from '@nutui/icons-vue';
 
-  const router = useRouter();
+  const route = useRoute();
   const page = ref(1);
 
   const details = reactive<any>({ data: {} });
 
   watch(
-    () => router,
-    (val) => {
-      details.data = detailsData.find((_item, index) => index === parseInt(val.currentRoute.value.query.id as string));
+    () => route.query.id,
+    (id) => {
+      const index = Number(id);
+      if (!Number.isNaN(index)) {
+        details.data = detailsData.find((_item, i) => i === index) ?? {};
+      }
     },
-    { deep: true, immediate: true },
+    { immediate: true },
   );
 </script>
 
