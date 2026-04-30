@@ -2,11 +2,11 @@
 layout: home
 
 title: Vue-H5-Template
-titleTemplate: 一个快速开发的vue h5移动端脚手架
+titleTemplate: 一个快速开发的 Vue H5 移动端脚手架
 
 hero:
   name: Vue-H5-Template
-  text: 一个快速开发的Vue H5移动端脚手架
+  text: 一个快速开发的 Vue H5 移动端脚手架
   image:
     src: https://cdn.jsdelivr.net/gh/fonghehe/picture/vue-h5-template/logo.png
     alt: sunnie
@@ -15,20 +15,20 @@ hero:
       text: 开始
       link: /guide/
     - theme: alt
-      text: Github仓库
+      text: Github 仓库
       link: https://github.com/sunniejs/vue-h5-template
 
 features:
-  - icon: 💡
-    title: 开箱即用
-    details: 集成vue2、vue3的移动端快速开发模版，学习成本低，易上手
+  - icon: 🚀
+    title: 最新技术栈
+    details: Vue 3.5 + Vite 7 + TypeScript 5.9 + Pinia，保持与官方同步更新
+  - icon: 📱
+    title: 多 UI 组件库
+    details: 同时集成 Vant、NutUI、Varlet 三大移动端组件库，按需自动引入
   - icon: 📦
     title: 代码规范
-    details: 完整的eslint、prettier、stylelint规范，加上husky，帮助你更好的管理代码
+    details: ESLint flat config + Prettier + Stylelint + Husky + lint-staged 全链路规范
   - icon: 🛠️
-    title: 配置优化
-    details: 完整配置的vue脚手架插件和优化，让你专注于业务开发，更高效
-  - icon: ⚙️
-    title: More
-    details: 加入我们，更多能力等你挖掘....
+    title: 丰富插件
+    details: Mock、Eruda 调试、PWA、图片压缩、gzip、多语言、Docker 部署等开箱即用
 ---

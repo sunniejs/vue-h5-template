@@ -12,12 +12,25 @@ base: './',
 base: '/app/',
 ```
 
+完整配置：
+
 ```javascript
 export default function ({ command, mode }: ConfigEnv): UserConfig {
   const isProduction = command === "build";
   const root = process.cwd();
   const env = loadEnv(mode, root);
   const viteEnv = wrapperEnv(env);
+
+  const devOptimizeDepsInclude: Array<string> = ["eruda"];
+  // 开发环境自动扫描 UI 库组件目录，优化依赖预构建
+  if (!isProduction) {
+    const uiLibraries = [
+      { name: "vant/es", path: "node_modules/vant/es" },
+      { name: "@nutui/nutui/dist/packages", path: "node_modules/@nutui/nutui/dist/packages" },
+      { name: "@varlet/ui/es", path: "node_modules/@varlet/ui/es" },
+    ];
+    // ...自动将组件样式加入 optimizeDeps.include
+  }
 
   return {
     base: "/",
@@ -37,7 +50,7 @@ export default function ({ command, mode }: ConfigEnv): UserConfig {
       minify: "terser",
       terserOptions: {
         compress: {
-          //生产环境时移除console
+          // 生产环境时移除 console
           drop_console: true,
           drop_debugger: true,
         },
@@ -52,6 +65,13 @@ export default function ({ command, mode }: ConfigEnv): UserConfig {
         },
       },
     },
+    optimizeDeps: {
+      include: [...devOptimizeDepsInclude],
+    },
   };
 }
 ```
+
+## optimizeDeps 说明
+
+项目在开发环境下会自动扫描 Vant、NutUI、Varlet 组件目录，将组件样式文件加入 `optimizeDeps.include`，避免首次加载组件时出现页面刷新，提升开发体验。
