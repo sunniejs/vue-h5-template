@@ -19,7 +19,7 @@
     "@varlet/ui": "^3.15.1",
     "@vueuse/core": "14.1.0",
     "@vueuse/integrations": "14.1.0",
-    "axios": "1.13.2",
+    "axios": "1.16.1",
     "dayjs": "^1.11.20",
     "mitt": "^3.0.1",
     "pinia": "^3.0.4",
