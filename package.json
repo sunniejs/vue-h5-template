@@ -100,7 +100,7 @@
     "vite-plugin-restart": "^2.0.0",
     "vite-plugin-svg-icons": "^2.0.1",
     "vite-plugin-vue-setup-extend-plus": "^0.1.0",
-    "vitest": "^4.1.5",
+    "vitest": "^4.1.0",
     "vue-eslint-parser": "^10.4.0",
     "vue-tsc": "^3.2.7"
   },
