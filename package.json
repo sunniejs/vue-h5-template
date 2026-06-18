@@ -89,7 +89,7 @@
     "typescript": "5.9.3",
     "unplugin-auto-import": "^21.0.0",
     "unplugin-vue-components": "^31.1.0",
-    "vite": "^7.3.2",
+    "vite": "^7.3.5",
     "vite-plugin-compression": "^0.5.1",
     "vite-plugin-imagemin": "^0.6.1",
     "vite-plugin-mock": "^3.0.2",
