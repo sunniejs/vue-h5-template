@@ -1,34 +1,32 @@
 ---
 layout: home
 
-title: Vue-H5-Template
-titleTemplate: 一个快速开发的 Vue H5 移动端脚手架
-
 hero:
-  name: Vue-H5-Template
-  text: 一个快速开发的 Vue H5 移动端脚手架
+  name: Vue H5 Template
+  text: Vue 3 移动端工程模板
+  tagline: Vite 7、TypeScript、Pinia、Vue I18n 与移动端工程能力开箱即用
   image:
     src: https://cdn.jsdelivr.net/gh/fonghehe/picture/vue-h5-template/logo.png
-    alt: sunnie
+    alt: Vue H5 Template
   actions:
     - theme: brand
-      text: 开始
-      link: /guide/
+      text: 开始使用
+      link: /guide/start
     - theme: alt
-      text: Github 仓库
-      link: https://github.com/sunniejs/vue-h5-template
+      text: 查看架构
+      link: /guide/architecture
 
 features:
-  - icon: 🚀
-    title: 最新技术栈
-    details: Vue 3.5 + Vite 7 + TypeScript 5.9 + Pinia，保持与官方同步更新
+  - icon: ⚡
+    title: 现代技术栈
+    details: Vue 3.5、Vite 7、TypeScript 5.9、Pinia 3 和 Vue Router 4。
   - icon: 📱
-    title: 多 UI 组件库
-    details: 同时集成 Vant、NutUI、Varlet 三大移动端组件库，按需自动引入
-  - icon: 📦
-    title: 代码规范
-    details: ESLint flat config + Prettier + Stylelint + Husky + lint-staged 全链路规范
-  - icon: 🛠️
-    title: 丰富插件
-    details: Mock、Eruda 调试、PWA、图片压缩、gzip、多语言、Docker 部署等开箱即用
+    title: 移动端基础能力
+    details: viewport 适配、安全区、移动端调试、PWA 与二维码预览。
+  - icon: 🧩
+    title: 多 UI 示例
+    details: Vant、NutUI 和 Varlet 按需导入，方便比较后为业务项目做减法。
+  - icon: ✅
+    title: 可验证的工程链路
+    details: ESLint、类型检查、Vitest、生产构建与 GitHub Actions。
 ---

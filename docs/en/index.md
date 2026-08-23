@@ -1,0 +1,32 @@
+---
+layout: home
+
+hero:
+  name: Vue H5 Template
+  text: A production-ready Vue 3 mobile starter
+  tagline: Vite 7, TypeScript, Pinia, Vue I18n, and practical mobile tooling
+  image:
+    src: https://cdn.jsdelivr.net/gh/fonghehe/picture/vue-h5-template/logo.png
+    alt: Vue H5 Template
+  actions:
+    - theme: brand
+      text: Get Started
+      link: /en/guide/start
+    - theme: alt
+      text: Architecture
+      link: /en/guide/architecture
+
+features:
+  - icon: ⚡
+    title: Modern stack
+    details: Vue 3.5, Vite 7, TypeScript 5.9, Pinia 3, and Vue Router 4.
+  - icon: 📱
+    title: Mobile foundations
+    details: Viewport conversion, safe areas, mobile debugging, PWA, and QR previews.
+  - icon: 🧩
+    title: Multiple UI examples
+    details: On-demand Vant, NutUI, and Varlet integration to evaluate before choosing one.
+  - icon: ✅
+    title: Verifiable workflow
+    details: ESLint, type checking, Vitest, production builds, and GitHub Actions.
+---

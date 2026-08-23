@@ -1,10 +1,20 @@
 {
+  "name": "vue-h5-template-docs",
+  "private": true,
+  "type": "module",
+  "packageManager": "pnpm@9.15.9",
   "devDependencies": {
     "vitepress": "^1.6.4",
-    "vue": "^3.2.47"
+    "vue": "^3.5.33"
   },
   "scripts": {
-    "start": "vitepress dev docs --host 0.0.0.0",
-    "build": "vitepress build docs"
+    "dev": "vitepress dev docs --host 0.0.0.0",
+    "build": "vitepress build docs",
+    "preview": "vitepress preview docs --host 0.0.0.0",
+    "check": "pnpm build"
+  },
+  "engines": {
+    "node": ">=20.10.0",
+    "pnpm": ">=9.12.0"
   }
 }
