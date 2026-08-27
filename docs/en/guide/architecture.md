@@ -1,43 +1,34 @@
 # Architecture
 
-## Directory Responsibilities
+v2 makes directory boundaries explicit so contributors and coding agents do not have to guess where code belongs.
+
+## Layers
 
 ```text
-├── build/
-│   ├── utils.ts                 # Environment parsing and defaults
-│   └── vite/
-│       ├── plugins/             # Vite plugin factories
-│       └── proxy.ts             # Development proxy
-├── mock/                        # Local mock endpoints
-├── public/                      # Static files copied as-is
-├── src/
-│   ├── api/                     # API parameters, result types, and functions
-│   ├── layout/                  # Navbar, content area, and tabbar
-│   ├── locales/                 # Locale loader and JSON messages
-│   ├── router/                  # History router and explicit route table
-│   ├── store/                   # Pinia stores
-│   ├── styles/                  # Global styles and SCSS variables
-│   ├── utils/request/           # Axios client, interceptors, and typed methods
-│   └── views/                   # Pages
-├── tests/                       # Vitest tests
-└── types/                       # Global and module declarations
+views -> components / composables -> api modules / services -> transport / types
+main  -> plugins / router / store
+build -> Vite plugins
 ```
 
-## Runtime Flow
+- `src/api/client.ts` owns Axios, interceptors, response unwrapping, and `ApiError` only.
+- `src/api/modules` declares domain endpoints without Toast, Router, or component behavior.
+- `src/services` contains framework-independent providers, protocol parsers, and adapters.
+- `src/composables` orchestrates Vue reactivity and lifecycle.
+- `src/store` contains client state only; TanStack Query owns server state.
+- `src/views` is the route composition layer; non-core pages are lazy-loaded.
 
-1. `src/main.ts` creates the Vue app and installs Router, Vue I18n, and Pinia.
-2. `src/router/routes.ts` lazy-loads pages; `src/layout/index.vue` provides the mobile shell.
-3. Pages call `http` through `src/api`; the request interceptor reads the token from the user store.
-4. The response interceptor unwraps the common response. Business or HTTP 401 responses clear auth state and navigate to login.
-5. `src/locales/index.ts` lazy-loads JSON by locale and namespace.
+## Router Decision
 
-## Build Flow
+The project keeps an explicit router table. At the current scale, `RouteRecordRaw` is easier to review for permissions, layouts, titles, KeepAlive, and bundle boundaries. The old `vite-plugin-pages` integration was not restored. If page count eventually justifies file conventions, evaluate `unplugin-vue-router` as a complete typed-routes, meta, layout, and migration-testing change.
 
-`vite.config.mts` composes focused modules:
+## Build
 
-- `build/utils.ts` converts string environment values and applies defaults.
-- `build/vite/proxy.ts` proxies `/api` when `VITE_API_TARGET` is configured.
-- `build/vite/plugins` conditionally enables Mock, Eruda, PWA, HTTPS, Gzip, and bundle reports.
-- Production uses esbuild minification and separates Vue runtime and UI libraries into vendor chunks.
+Vite 8 uses Rolldown. `VITE_UI_FRAMEWORK` selects one UI resolver and demo alias. AI Chat, Query examples, and secondary pages use dynamic imports. SVG sprites are always available; Sharp/SVGO, PWA, gzip, and bundle reports are feature flags.
 
-Commit generated `types/auto-imports.d.ts` and `types/components.d.ts` so a fresh checkout can type-check immediately.
+## Protected Constraints
+
+- The request layer does not import UI or Router.
+- The Service Worker does not cache APIs by default.
+- Three UI libraries never enter the same production graph.
+- AI and Markdown output is sanitized.
+- pnpm is the only package manager.

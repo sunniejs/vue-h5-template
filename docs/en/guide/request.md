@@ -1,44 +1,35 @@
-# Requests and Authentication
+# Requests and OpenAPI
 
-## Response Contract
+## Call Flow
 
-`src/utils/request/index.ts` expects:
-
-```ts
-interface ApiResponse<T = unknown> {
-  code: number
-  data: T
-  msg: string
-}
+```text
+View / Query composable
+  -> src/api/modules/*.ts
+  -> apiClient
+  -> Axios interceptor
+  -> ApiResponse<T> / ApiError
 ```
 
-`http.get/post/put/delete<T>()` checks the business code and returns `data` directly.
+Pages do not import Axios. Module functions own URLs, parameters, and result types. Pages narrow caught unknown values with `isApiError(error)`.
 
-## Define an API
+## Types
 
-```ts
-export interface LoginParams {
-  name: string
-  password: string
-}
+- `ApiResponse<T>`: common backend envelope.
+- `ApiError`: `business | http | timeout | network | cancelled | unknown`.
+- `PaginationParams` / `PaginationResponse<T>`: pagination contracts.
 
-export interface LoginResult {
-  name: string
-  age: number
-  token: string
-}
+The request interceptor adds a Bearer token and `X-Request-ID` when configured. The response interceptor separates business and HTTP failures. A runtime 401 handler clears the session and navigates without importing Router into the client.
 
-export function loginPassword(params: LoginParams): Promise<LoginResult> {
-  return http.post<LoginResult>('/login', params)
-}
+## OpenAPI
+
+The repository includes `openapi/schema.yaml`:
+
+```bash
+pnpm api:generate
 ```
 
-API paths are relative to `VITE_API_BASE_URL`. With the defaults, this request is sent to `/api/login`.
+Output is written to `src/types/api/generated.d.ts`. Replace the schema or command input with the real backend, commit both schema and generated output, and let CI typecheck contract drift. Never edit generated types manually.
 
-## Token and 401 Handling
+## Security
 
-- The request interceptor reads the user store and sets `Authorization: Bearer <token>`.
-- Only the token is persisted; user details remain in memory.
-- A business `code === 401` or HTTP 401 resets the store and navigates to `/login` through Vue Router.
-
-Adapt the success code, header name, and error presentation to your backend contract.
+`VITE_*` values ship to the browser; never put keys there. The example token uses `sessionStorage`; production should prefer SameSite, Secure, HttpOnly cookies and a BFF. Redirects accept only same-origin absolute paths beginning with a single `/`.

@@ -1,34 +1,27 @@
 # Deployment
 
-## Static Build
+## Build
 
 ```bash
+pnpm check
 pnpm build
 ```
 
-Assets are written to `dist`. Because the app uses history routing, the static server must fall back to `index.html` for unknown frontend paths.
+Output is written to `dist`. The Dockerfile serves it with Nginx, and `try_files` falls back to `index.html` for history routing.
 
-## Docker
+## Environment Capabilities
 
-```bash
-docker build -t vue-h5-template .
-docker run --rm -p 8080:80 vue-h5-template
-```
+- `VITE_PWA_ENABLED=true`: generate manifest and Service Worker.
+- `VITE_IMAGE_OPTIMIZE=true`: optimize production images with Sharp/SVGO.
+- `VITE_USE_COMPRESS=true`: emit `.gz`; disable when the CDN already compresses.
+- `VITE_USE_REPORT=true`: emit a bundle report; regular CI should not open it.
 
-The provided `Dockerfile` uses Nginx Alpine and copies the repository's `nginx.conf`.
+PWA never caches `/api`. If offline data is required, design NetworkFirst/StaleWhileRevalidate per public, non-sensitive, expirable resource. Never make all authenticated APIs CacheFirst.
 
-## API Routing
+## AI Streaming
 
-The sample Nginx configuration focuses on static assets and history fallback. Production API targets, TLS, CSP, HSTS, and caching depend on your domain and gateway architecture and should not be hard-coded into a generic template.
+Nginx/CDNs must disable buffering and transformation for SSE endpoints, extend read timeouts, and preserve chunked responses. Provider keys stay server-side. If a platform cannot proxy POST SSE, implement a fetch ReadableStream or NDJSON Provider while retaining the `ChatProvider` interface.
 
-## Optional Build Features
+## Security Headers
 
-```ini
-VITE_USE_COMPRESS=true
-VITE_USE_REPORT=true
-VITE_USE_PWA=true
-```
-
-- Serving generated Gzip files requires matching server configuration.
-- Bundle reports are diagnostic artifacts and should not be published.
-- Replace application metadata, icons, and caching rules before enabling PWA.
+The example Nginx config provides frame, MIME, referrer, and permissions baselines. Production CSP must match actual APIs, image CDNs, monitoring domains, and same-origin PWA workers. Do not rely on deprecated `X-XSS-Protection` instead of CSP.

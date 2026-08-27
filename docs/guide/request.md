@@ -1,44 +1,35 @@
-# 请求与鉴权
+# 请求与 OpenAPI
 
-## 响应约定
+## 调用链
 
-`src/utils/request/index.ts` 使用以下统一结构：
-
-```ts
-interface ApiResponse<T = unknown> {
-  code: number
-  data: T
-  msg: string
-}
+```text
+View / Query composable
+  -> src/api/modules/*.ts
+  -> apiClient
+  -> Axios interceptor
+  -> ApiResponse<T> / ApiError
 ```
 
-`http.get/post/put/delete<T>()` 会校验业务码并直接返回 `data`，API 模块不需要重复解包。
+页面不得直接导入 Axios。模块函数负责 URL、参数和返回类型；页面用 `isApiError(error)` 收窄未知错误。
 
-## 定义 API
+## 类型
 
-```ts
-export interface LoginParams {
-  name: string
-  password: string
-}
+- `ApiResponse<T>`：后端统一响应体。
+- `ApiError`：`business | http | timeout | network | cancelled | unknown`。
+- `PaginationParams` / `PaginationResponse<T>`：分页契约。
 
-export interface LoginResult {
-  name: string
-  age: number
-  token: string
-}
+请求拦截器按需加入 Bearer Token 和 `X-Request-ID`。响应拦截器区分业务错误与 HTTP 错误；401 通过运行时 handler 清理会话并跳转，不让 client 直接导入 Router。
 
-export function loginPassword(params: LoginParams): Promise<LoginResult> {
-  return http.post<LoginResult>('/login', params)
-}
+## OpenAPI
+
+仓库带有 `openapi/schema.yaml`：
+
+```bash
+pnpm api:generate
 ```
 
-接口路径相对于 `VITE_API_BASE_URL`。默认配置下，上述请求地址是 `/api/login`。
+生成结果为 `src/types/api/generated.d.ts`。真实项目替换 Schema 或命令输入地址后，应提交 Schema 与生成文件，并在 CI 运行 typecheck。不要手工修改生成文件。
 
-## 令牌与 401
+## 安全
 
-- 请求拦截器从 `useUserStore` 读取令牌并设置 `Authorization: Bearer <token>`。
-- 用户 Store 只持久化令牌，用户详情保留在内存中。
-- 业务响应 `code === 401` 或 HTTP 状态 401 都会重置 Store，并通过 Vue Router 进入 `/login`。
-
-真实项目应根据后端约定调整成功业务码、令牌头名称和错误消息展示方式。
+`VITE_*` 会进入浏览器产物，禁止放 API 密钥。示例 Token 使用 `sessionStorage`；生产优先使用 SameSite、Secure、HttpOnly Cookie/BFF。重定向只接受以单 `/` 开头的站内路径。

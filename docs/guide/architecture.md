@@ -1,43 +1,34 @@
 # 项目架构
 
-## 目录职责
+v2 的目标是让目录本身表达边界，让开发者和 Coding Agent 不需要猜测代码应该放在哪里。
+
+## 分层
 
 ```text
-├── build/
-│   ├── utils.ts                 # 环境变量解析与默认值
-│   └── vite/
-│       ├── plugins/             # Vite 插件工厂
-│       └── proxy.ts             # 开发代理
-├── mock/                        # 本地 Mock 接口
-├── public/                      # 不经 Vite 转换的静态资源
-├── src/
-│   ├── api/                     # 请求参数与响应类型、API 函数
-│   ├── layout/                  # 导航栏、内容区和底部 Tabbar
-│   ├── locales/                 # 语言加载器与 JSON 语言包
-│   ├── router/                  # history 路由与手写路由表
-│   ├── store/                   # Pinia Store
-│   ├── styles/                  # 全局样式和 SCSS 变量
-│   ├── utils/request/           # Axios 实例、拦截器与泛型方法
-│   └── views/                   # 页面
-├── tests/                       # Vitest 测试
-└── types/                       # 全局与模块类型声明
+views -> components / composables -> api modules / services -> transport / types
+main  -> plugins / router / store
+build -> Vite plugins
 ```
 
-## 运行链路
+- `src/api/client.ts` 只处理 Axios、拦截器、解包和 `ApiError`。
+- `src/api/modules` 按业务域声明接口，不包含 Toast、Router 或组件逻辑。
+- `src/services` 放框架无关的 Provider、协议解析器和 Adapter。
+- `src/composables` 负责 Vue 响应式与生命周期编排。
+- `src/store` 只保存 Client State；Server State 交给 TanStack Query。
+- `src/views` 是路由级组合层，非首页页面均懒加载。
 
-1. `src/main.ts` 创建 Vue 应用并安装 Router、Vue I18n 和 Pinia。
-2. `src/router/routes.ts` 懒加载页面；`src/layout/index.vue` 提供移动端壳层。
-3. 页面通过 `src/api` 调用 `http`，请求拦截器读取用户 Store 中的令牌。
-4. 响应拦截器解包统一响应体；遇到业务码或 HTTP 状态 401 时清理登录态并进入登录页。
-5. `src/locales/index.ts` 按语言和命名空间懒加载 JSON。
+## 路由决策
 
-## 构建链路
+项目继续使用显式手写 Router。当前页面规模下，显式 `RouteRecordRaw` 更容易审查权限、Layout、title、KeepAlive 和 bundle 边界。旧 `vite-plugin-pages` 没有恢复；若未来页面达到需要文件约定的规模，应优先评估 `unplugin-vue-router`，并把 typed routes、meta、layout 和迁移测试作为完整方案引入。
 
-`vite.config.mts` 只负责组合配置：
+## 构建
 
-- `build/utils.ts` 将字符串环境变量转换为布尔值并提供默认值。
-- `build/vite/proxy.ts` 在配置 `VITE_API_TARGET` 后代理 `/api`。
-- `build/vite/plugins` 根据环境开关启用 Mock、Eruda、PWA、HTTPS、Gzip 和分析报告。
-- 生产构建使用 esbuild 压缩，并按 Vue 运行时和 UI 库拆分 vendor chunk。
+Vite 8 使用 Rolldown。`VITE_UI_FRAMEWORK` 选择唯一 UI resolver 与 demo alias；AI Chat、Query 示例和非核心页面走动态 import。SVG Sprite 始终可用；Sharp/SVGO、PWA、Gzip 和 bundle report 都由环境变量控制。
 
-自动生成的 `types/auto-imports.d.ts` 与 `types/components.d.ts` 需要提交，确保新安装后可直接类型检查。
+## 受保护的约束
+
+- 请求层不依赖 UI 或 Router。
+- Service Worker 不默认缓存 API。
+- 三套 UI 不同时进入 production graph。
+- AI/Markdown 输出必须净化。
+- pnpm 是唯一包管理器。

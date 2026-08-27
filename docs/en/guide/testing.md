@@ -1,29 +1,27 @@
-# Quality
+# Testing and Quality
 
-## Local Verification
+## Commands
 
 ```bash
+pnpm lint
+pnpm typecheck
+pnpm test
+pnpm test:coverage
+pnpm test:e2e
+pnpm build
 pnpm check
 ```
 
-This command runs:
+`check` runs lint, typecheck, Vitest, and build. Browser cost keeps E2E separate locally and explicit in CI.
 
-1. ESLint across source, mock, build, tests, and config files.
-2. `vue-tsc --build` for Vue SFC and TypeScript checks.
-3. Vitest unit tests.
-4. A Vite production build.
+## Current Coverage
 
-## Test Structure
+Vitest and Vue Test Utils cover URL redirects, request errors, API modules, the user store, SSE parsing, the streaming composable, safe Markdown, Login Form, and Chat Composer. Core thresholds are 60% for lines/statements/functions and 50% branches; v2 currently reports 72.25% lines.
 
-`tests/router/routes.test.ts` provides a small baseline for primary tabs, details, login, and fallback routes. Add tests around:
+Playwright uses a Pixel 7 profile for Home, Login, Mock API, AI Streaming/Stop, and 401 Redirect.
 
-- API parameter and response transformations
-- Store transitions and persistence boundaries
-- Route guards and authorization
-- Conditional rendering and user interactions
+## Principles
 
-Component tests use `@vue/test-utils` with jsdom.
+Test public behavior, not trivial getters or static copy. Protocol parsing, auth, errors, and cancellation are high-risk shared logic and require unit tests. Route, mock, login, and streaming critical paths require E2E coverage.
 
-## CI
-
-`.github/workflows/ci.yml` installs from the frozen lockfile and runs lint, typecheck, test, and build on pushes and pull requests.
+GitHub Actions uses the pnpm cache, installs dependencies once, runs `check`, installs Chromium, then runs E2E.
