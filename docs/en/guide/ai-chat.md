@@ -6,7 +6,10 @@ Vercel AI SDK supports Vue, but the template only needs text streaming, cancella
 
 ```ts
 interface ChatProvider {
-  chat(messages: readonly ChatMessage[], options?: ChatOptions): AsyncIterable<ChatChunk>
+  chat(
+    messages: readonly ChatMessage[],
+    options?: ChatOptions,
+  ): AsyncIterable<ChatChunk>;
 }
 ```
 
@@ -22,6 +25,8 @@ OpenAI, Claude, Gemini, DeepSeek, or Vercel data-stream adapters can be added wi
 6. Stop calls `AbortController.abort()` immediately and marks the message stopped.
 
 The development mock is real chunked SSE middleware, not a one-shot timeout. Production mock is disabled. A real server should retain `text/event-stream`, disable proxy buffering, and handle client disconnects.
+
+The companion FastAPI AI service lives in the separate backend workspace. It implements the same `/api/ai/chat` protocol with mock/OpenAI-compatible providers, optional Redis rate limiting, a service token, request IDs, health checks, and tests. Conventional authentication and CRUD belong to the Gin service so the two runtimes do not overlap.
 
 ## Markdown Security
 

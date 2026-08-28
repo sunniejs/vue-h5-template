@@ -6,7 +6,10 @@ Vercel AI SDK 已支持 Vue，但模板只需要文本流、取消、重试和 P
 
 ```ts
 interface ChatProvider {
-  chat(messages: readonly ChatMessage[], options?: ChatOptions): AsyncIterable<ChatChunk>
+  chat(
+    messages: readonly ChatMessage[],
+    options?: ChatOptions,
+  ): AsyncIterable<ChatChunk>;
 }
 ```
 
@@ -22,6 +25,8 @@ interface ChatProvider {
 6. Stop 调用 `AbortController.abort()`，请求立即终止并标记 stopped。
 
 开发 Mock 是真实 chunked SSE middleware，不是一次性 `setTimeout` 响应。生产环境 Mock 默认关闭，真实后端需要保持 `text/event-stream`、关闭代理缓冲，并及时处理客户端断开。
+
+配套 FastAPI AI 服务位于独立 backend 工作区，提供相同的 `/api/ai/chat` 协议、Mock/OpenAI-compatible Provider、可选 Redis 限流、服务 Token、Request ID、健康检查与测试。常规认证和 CRUD 由 Gin 服务负责，避免两个运行时职责重叠。
 
 ## Markdown 安全
 
