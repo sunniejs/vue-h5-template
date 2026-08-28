@@ -18,7 +18,7 @@
 - 业务样式按 750px 设计稿转换。
 - Vant、NutUI 和 Varlet 的依赖样式按 375px 设计宽度转换。
 - 小于或等于 1px 的值不转换，避免细边框被放大。
-- 默认目标为 Android 8+、iOS 12+ 和 Chrome 80+。
+- 默认目标为 Android 8+、iOS 15+ 和 Chrome 80+。
 
 ## 安全区与滚动
 

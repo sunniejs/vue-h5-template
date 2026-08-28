@@ -18,7 +18,7 @@ For a product project:
 - Application styles use a 750px design width.
 - Vant, NutUI, and Varlet dependency styles use a 375px design width.
 - Values at or below 1px are preserved for thin borders.
-- Default targets are Android 8+, iOS 12+, and Chrome 80+.
+- Default targets are Android 8+, iOS 15+, and Chrome 80+.
 
 ## Safe Areas and Scrolling
 
