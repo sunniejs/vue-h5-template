@@ -16,7 +16,7 @@ pnpm check
 
 ## Current Coverage
 
-Vitest and Vue Test Utils cover URL redirects, request errors, API modules, the user store, SSE parsing, the streaming composable, safe Markdown, Login Form, and Chat Composer. Core thresholds are 60% for lines/statements/functions and 50% branches; v2 currently reports 72.25% lines.
+Vitest and Vue Test Utils cover URL redirects, request errors, API modules, the user store, SSE parsing, the streaming composable, safe Markdown, Login Form, and Chat Composer. Core thresholds are 60% for lines/statements/functions and 50% branches; v2 currently reports 76.68% lines.
 
 Playwright uses a Pixel 7 profile for Home, three-language switching, Login, Mock API, AI Streaming/Stop, and 401 Redirect. The backend workspace adds `scripts/smoke.py`, which verifies Gin login/Project CRUD and authenticated FastAPI SSE through the real Vue proxy.
 

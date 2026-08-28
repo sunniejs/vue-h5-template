@@ -16,7 +16,7 @@ pnpm check
 
 ## 当前覆盖
 
-Vitest + Vue Test Utils 覆盖 URL/Redirect、请求错误、API modules、user Store、SSE parser、streaming composable、安全 Markdown、Login Form 和 Chat Composer。核心范围门槛为 lines/statements/functions 60%，branches 50%；v2 实测 lines 72.25%。
+Vitest + Vue Test Utils 覆盖 URL/Redirect、请求错误、API modules、user Store、SSE parser、streaming composable、安全 Markdown、Login Form 和 Chat Composer。核心范围门槛为 lines/statements/functions 60%，branches 50%；v2 实测 lines 76.68%。
 
 Playwright 使用 Pixel 7 配置覆盖 Home、三语言切换、Login、Mock API、AI Streaming/Stop 与 401 Redirect。后端工作区的 `scripts/smoke.py` 额外通过真实 Vue 代理验证 Gin 登录/Project CRUD 和 FastAPI 鉴权 SSE。
 
