@@ -20,9 +20,11 @@ View / Query composable
 
 请求拦截器按需加入 Bearer Token 和 `X-Request-ID`。响应拦截器区分业务错误与 HTTP 错误；401 通过运行时 handler 清理会话并跳转，不让 client 直接导入 Router。
 
+`src/api/modules/projects.ts` 是真实 Gin CRUD 示例。`/examples/projects` 使用 TanStack Query 管理分页列表和 Mutation，页面不保存 Server State。统一响应的 `code` 接受整个 2xx 区间，因此 HTTP 201 创建响应仍能正确解包。
+
 ## OpenAPI
 
-仓库带有 `openapi/schema.yaml`：
+仓库带有包含 Gin 业务接口与 FastAPI Streaming 契约的 `openapi/schema.yaml`：
 
 ```bash
 pnpm api:generate

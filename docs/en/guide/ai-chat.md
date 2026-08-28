@@ -28,6 +28,8 @@ The development mock is real chunked SSE middleware, not a one-shot timeout. Pro
 
 The companion FastAPI AI service lives in the separate backend workspace. It implements the same `/api/ai/chat` protocol with mock/OpenAI-compatible providers, optional Redis rate limiting, a service token, request IDs, health checks, and tests. Conventional authentication and CRUD belong to the Gin service so the two runtimes do not overlap.
 
+During real integration, `FetchStreamChatProvider` forwards the JWT issued by Gin. FastAPI validates the same secret, issuer, and audience and rate-limits by user subject. Invalid or expired tokens invoke the same 401 session cleanup used by Axios. Compose enables `AI_AUTH_REQUIRED=true`, while the frontend-only mock mode remains directly explorable.
+
 ## Markdown Security
 
 Markdown-it disables raw HTML, then DOMPurify removes script, iframe, form, style, and dangerous URLs. Never trust model HTML. Shiki is intentionally not a default dependency; load it dynamically inside the AI route when advanced highlighting is needed.

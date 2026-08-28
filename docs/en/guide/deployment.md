@@ -18,6 +18,20 @@ Output is written to `dist`. The Dockerfile serves it with Nginx, and `try_files
 
 PWA never caches `/api`. If offline data is required, design NetworkFirst/StaleWhileRevalidate per public, non-sensitive, expirable resource. Never make all authenticated APIs CacheFirst.
 
+## Local Real-backend Integration
+
+```bash
+cd /Users/fong/Workspace/personal/backend/vue-h5-template
+docker compose up --build
+
+cd /Users/fong/Workspace/personal/frontend/vue/vue-h5-template/vue-h5-template
+pnpm dev:integration
+```
+
+Sign in with `demo / demo1234`. `.env.integration` sends `/api` to Gin on 8002 and gives the more specific `/api/ai` route to FastAPI on 8001. Run `python3 scripts/smoke.py` from the backend workspace to verify login, CRUD, and SSE through the Vue proxy.
+
+Gin defaults to SQLite with versions recorded in `schema_migrations`; production can select PostgreSQL with `DATABASE_DRIVER=postgres`. Both backends must share the JWT secret, issuer, and audience, while provider keys remain exclusively in FastAPI.
+
 ## AI Streaming
 
 Nginx/CDNs must disable buffering and transformation for SSE endpoints, extend read timeouts, and preserve chunked responses. Provider keys stay server-side. If a platform cannot proxy POST SSE, implement a fetch ReadableStream or NDJSON Provider while retaining the `ChatProvider` interface.

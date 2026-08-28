@@ -28,6 +28,8 @@ interface ChatProvider {
 
 配套 FastAPI AI 服务位于独立 backend 工作区，提供相同的 `/api/ai/chat` 协议、Mock/OpenAI-compatible Provider、可选 Redis 限流、服务 Token、Request ID、健康检查与测试。常规认证和 CRUD 由 Gin 服务负责，避免两个运行时职责重叠。
 
+真实联调时，Gin 登录 JWT 会由 `FetchStreamChatProvider` 自动加入 AI 请求。FastAPI 使用同一 `JWT_SECRET`、issuer 和 audience 验证用户，并按用户 subject 限流；无效或过期 Token 会触发与 Axios 相同的 401 会话清理。Compose 默认设置 `AI_AUTH_REQUIRED=true`，纯前端 Mock 模式仍可直接体验页面。
+
 ## Markdown 安全
 
 Markdown-it 禁止 raw HTML，渲染结果再由 DOMPurify 移除脚本、iframe、form、style 和危险 URL。不要直接信任模型 HTML。较重的 Shiki 没有默认安装；需要高亮时应在 AI route 内动态加载。

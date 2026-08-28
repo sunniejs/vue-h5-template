@@ -20,9 +20,11 @@ Pages do not import Axios. Module functions own URLs, parameters, and result typ
 
 The request interceptor adds a Bearer token and `X-Request-ID` when configured. The response interceptor separates business and HTTP failures. A runtime 401 handler clears the session and navigates without importing Router into the client.
 
+`src/api/modules/projects.ts` is the real Gin CRUD example. `/examples/projects` uses TanStack Query for its paginated list and mutations, so the page never stores server state. The envelope accepts the full successful 2xx range, allowing an HTTP 201 create response to unwrap normally.
+
 ## OpenAPI
 
-The repository includes `openapi/schema.yaml`:
+The repository includes `openapi/schema.yaml` with both Gin business APIs and the FastAPI streaming contract:
 
 ```bash
 pnpm api:generate
