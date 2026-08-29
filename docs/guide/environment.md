@@ -15,11 +15,13 @@ Vite 会合并 `.env` 和当前模式文件，`build/utils.ts` 再将功能开�
 | `VITE_USE_COMPRESS`    | `false`   | 生成 Gzip 文件                      |
 | `VITE_USE_REPORT`      | `false`   | 生成构建产物分析报告                |
 | `VITE_USE_HTTPS`       | `false`   | 启用本地 HTTPS                      |
-| `VITE_USE_PWA`         | `false`   | 启用 PWA                            |
+| `VITE_PWA_ENABLED`     | `false`   | 启用 PWA                            |
+| `VITE_IMAGE_OPTIMIZE`  | `false`   | 仅在生产构建优化图片                |
+| `VITE_UI_FRAMEWORK`    | `vant`    | 构建期选择 Vant/NutUI/Varlet        |
 
 ## Mock 模式
 
-`.env.development` 默认启用 Mock。示例登录请求最终访问 `/api/login`，由 `mock/index.ts` 响应。
+`.env.development` 默认启用 Mock。登录请求访问 `/api/auth/login`，商品列表与管理访问 `/api/products` 和 `/api/admin/products`，均由 `mock/index.ts` 按真实契约响应。
 
 ## 连接真实后端
 

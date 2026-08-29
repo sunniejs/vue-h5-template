@@ -10,6 +10,8 @@ const zhSidebar = [
       { text: "项目介绍", link: "/guide/" },
       { text: "快速开始", link: "/guide/start" },
       { text: "项目架构", link: "/guide/architecture" },
+      { text: "后端服务与联调", link: "/guide/backend" },
+      { text: "商城示例", link: "/guide/commerce" },
       { text: "环境与构建", link: "/guide/environment" },
       { text: "请求与鉴权", link: "/guide/request" },
       { text: "状态管理", link: "/guide/state-management" },
@@ -31,6 +33,8 @@ const enSidebar = [
       { text: "Introduction", link: "/en/guide/" },
       { text: "Getting Started", link: "/en/guide/start" },
       { text: "Architecture", link: "/en/guide/architecture" },
+      { text: "Backend Integration", link: "/en/guide/backend" },
+      { text: "Commerce Example", link: "/en/guide/commerce" },
       { text: "Environment & Build", link: "/en/guide/environment" },
       { text: "Requests & Auth", link: "/en/guide/request" },
       { text: "State Management", link: "/en/guide/state-management" },
@@ -41,6 +45,29 @@ const enSidebar = [
       { text: "Deployment", link: "/en/guide/deployment" },
       { text: "Migrate to v2", link: "/en/guide/migration-v2" },
       { text: "Contributing", link: "/en/guide/contributing" },
+    ],
+  },
+];
+
+const jaSidebar = [
+  {
+    text: "ガイド",
+    items: [
+      { text: "プロジェクト紹介", link: "/ja/guide/" },
+      { text: "クイックスタート", link: "/ja/guide/start" },
+      { text: "アーキテクチャ", link: "/ja/guide/architecture" },
+      { text: "バックエンド連携", link: "/ja/guide/backend" },
+      { text: "コマース実装例", link: "/ja/guide/commerce" },
+      { text: "環境とビルド", link: "/ja/guide/environment" },
+      { text: "リクエストと認証", link: "/ja/guide/request" },
+      { text: "状態管理", link: "/ja/guide/state-management" },
+      { text: "AI Chat", link: "/ja/guide/ai-chat" },
+      { text: "UI フレームワーク", link: "/ja/guide/ui-framework" },
+      { text: "国際化", link: "/ja/guide/i18n" },
+      { text: "テスト", link: "/ja/guide/testing" },
+      { text: "デプロイ", link: "/ja/guide/deployment" },
+      { text: "v2 移行", link: "/ja/guide/migration-v2" },
+      { text: "コントリビューション", link: "/ja/guide/contributing" },
     ],
   },
 ];
@@ -98,6 +125,32 @@ export default defineConfig({
         socialLinks,
         footer: {
           message: "Released under the MIT License",
+          copyright: "Copyright © 2022-present Fonghehe",
+        },
+      },
+    },
+    ja: {
+      label: "日本語",
+      lang: "ja-JP",
+      link: "/ja/",
+      title: "Vue H5 Template",
+      description: "Vue 3、Vite 8、TypeScript によるモダンなモバイル H5 テンプレート",
+      themeConfig: {
+        nav: [
+          { text: "ガイド", link: "/ja/guide/" },
+          { text: "GitHub", link: repository },
+        ],
+        sidebar: jaSidebar,
+        outline: { label: "目次" },
+        docFooter: { prev: "前へ", next: "次へ" },
+        lastUpdated: { text: "最終更新" },
+        editLink: {
+          pattern: `${repository}/edit/docs/docs/:path`,
+          text: "GitHub で編集",
+        },
+        socialLinks,
+        footer: {
+          message: "MIT License で公開",
           copyright: "Copyright © 2022-present Fonghehe",
         },
       },

@@ -28,9 +28,9 @@ cd /Users/fong/Workspace/personal/frontend/vue/vue-h5-template/vue-h5-template
 pnpm dev:integration
 ```
 
-使用 `demo / demo1234` 登录。`.env.integration` 将 `/api` 转发到 Gin 8002，将 `/api/ai` 优先转发到 FastAPI 8001。后端目录的 `python3 scripts/smoke.py` 会通过 Vue 代理验证完整登录、CRUD 和 SSE 链路。
+使用 `demo / demo1234` 登录。`.env.integration` 将 `/api` 转发到 Gin 8002，将 `/api/ai` 优先转发到 FastAPI 8001。后端目录的 `python3 scripts/smoke.py` 会通过 Vue 代理验证登录、商品 CRUD、PostgreSQL 持久化和 SSE 链路。
 
-Gin 本地默认 SQLite，并用 `schema_migrations` 保存版本；生产可通过 `DATABASE_DRIVER=postgres` 切换 PostgreSQL。两个后端必须共享 JWT secret、issuer 和 audience，供应商密钥只存在 FastAPI。
+Gin 的本地集成与生产默认使用 PostgreSQL 17，并用 `schema_migrations` 保存版本；SQLite 只保留给快速、隔离的单元测试。两个后端必须共享 JWT secret、issuer 和 audience，供应商密钥只存在 FastAPI。
 
 ## AI Streaming
 

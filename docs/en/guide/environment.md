@@ -15,11 +15,13 @@ Vite merges `.env` with the active mode file. `build/utils.ts` then converts fea
 | `VITE_USE_COMPRESS`    | `false`   | Generate Gzip assets                            |
 | `VITE_USE_REPORT`      | `false`   | Generate a bundle analysis report               |
 | `VITE_USE_HTTPS`       | `false`   | Enable local HTTPS                              |
-| `VITE_USE_PWA`         | `false`   | Enable PWA support                              |
+| `VITE_PWA_ENABLED`     | `false`   | Enable PWA support                              |
+| `VITE_IMAGE_OPTIMIZE`  | `false`   | Optimize images in production builds only      |
+| `VITE_UI_FRAMEWORK`    | `vant`    | Select Vant, NutUI, or Varlet at build time     |
 
 ## Mock Mode
 
-`.env.development` enables Mock by default. The example login request resolves to `/api/login`, which is handled by `mock/index.ts`.
+`.env.development` enables Mock by default. Login uses `/api/auth/login`; the catalog and administration use `/api/products` and `/api/admin/products`. `mock/index.ts` implements the same contracts.
 
 ## Use a Real Backend
 

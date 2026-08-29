@@ -28,9 +28,9 @@ cd /Users/fong/Workspace/personal/frontend/vue/vue-h5-template/vue-h5-template
 pnpm dev:integration
 ```
 
-Sign in with `demo / demo1234`. `.env.integration` sends `/api` to Gin on 8002 and gives the more specific `/api/ai` route to FastAPI on 8001. Run `python3 scripts/smoke.py` from the backend workspace to verify login, CRUD, and SSE through the Vue proxy.
+Sign in with `demo / demo1234`. `.env.integration` sends `/api` to Gin on 8002 and gives the more specific `/api/ai` route to FastAPI on 8001. Run `python3 scripts/smoke.py` from the backend workspace to verify login, product CRUD, PostgreSQL persistence, and SSE through the Vue proxy.
 
-Gin defaults to SQLite with versions recorded in `schema_migrations`; production can select PostgreSQL with `DATABASE_DRIVER=postgres`. Both backends must share the JWT secret, issuer, and audience, while provider keys remain exclusively in FastAPI.
+Gin uses PostgreSQL 17 for local integration and production with versions recorded in `schema_migrations`; SQLite remains only for fast, isolated unit tests. Both backends must share the JWT secret, issuer, and audience, while provider keys remain exclusively in FastAPI.
 
 ## AI Streaming
 
