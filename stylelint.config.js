@@ -1,6 +1,13 @@
-module.exports = {
+export default {
   extends: ['stylelint-config-standard', 'stylelint-config-recess-order'],
-  ignoreFiles: ['**/*.js', '**/*.jsx', '**/*.tsx', '**/*.ts', '**/*.json', '**/*.md'],
+  ignoreFiles: [
+    '**/*.js',
+    '**/*.jsx',
+    '**/*.tsx',
+    '**/*.ts',
+    '**/*.json',
+    '**/*.md',
+  ],
   overrides: [
     {
       customSyntax: 'postcss-html',
@@ -22,11 +29,14 @@ module.exports = {
     },
     {
       customSyntax: 'postcss-scss',
-      extends: ['stylelint-config-recommended-scss', 'stylelint-config-recommended-vue/scss'],
+      extends: [
+        'stylelint-config-recommended-scss',
+        'stylelint-config-recommended-vue/scss',
+      ],
       files: ['*.scss', '**/*.scss'],
     },
   ],
-  plugins: ['stylelint-order', '@stylistic/stylelint-plugin', 'stylelint-prettier', 'stylelint-scss'],
+  plugins: ['stylelint-order', '@stylistic/stylelint-plugin', 'stylelint-scss'],
   rules: {
     'at-rule-no-deprecated': null,
     'at-rule-no-unknown': [
@@ -85,7 +95,6 @@ module.exports = {
       ],
       { severity: 'error' },
     ],
-    'prettier/prettier': true,
     'rule-empty-line-before': [
       'always',
       {

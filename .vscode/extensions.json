@@ -13,7 +13,7 @@
     // i18n 插件
     "Lokalise.i18n-ally",
     // CSS 变量提示
-    "vunguyentuan.vscode-css-variables",
+    "vunguyentuan.vscode-css-variables"
   ],
   "unwantedRecommendations": [
     // 和 volar 冲突

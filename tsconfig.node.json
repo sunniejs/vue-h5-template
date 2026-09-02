@@ -6,13 +6,16 @@
     "cypress.config.*",
     "nightwatch.conf.*",
     "playwright.config.*",
+    "e2e/**/*.ts",
     "build/**/*.ts",
-    "types/**/*.d.ts",
-    "types/**/*.ts"
+    "types/env.d.ts",
+    "types/global.d.ts",
+    "types/module.d.ts"
   ],
   "compilerOptions": {
     "composite": true,
     "noEmit": true,
+    "allowImportingTsExtensions": true,
     "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.node.tsbuildinfo",
 
     "module": "ESNext",

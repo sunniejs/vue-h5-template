@@ -1,61 +1,95 @@
 <template>
-  <div class="login">
-    <h2>登录</h2>
-    <nut-form ref="ruleForm" :model-value="formData">
-      <nut-form-item label="用户名" required prop="name" :rules="[{ required: true, message: '请输入用户名' }]">
-        <nut-input v-model="formData.name" placeholder="请输入用户名" type="text" />
-      </nut-form-item>
-      <nut-form-item label="密码" required prop="pwd" :rules="[{ required: true, message: '请输入密码' }]">
-        <nut-input v-model="formData.pwd" placeholder="请输入密码" type="password" />
-      </nut-form-item>
-      <nut-button block type="info" @click="submit"> 登录 </nut-button>
-    </nut-form>
-  </div>
+  <main class="login-page">
+    <RouterLink to="/home" class="back-link"
+      >‹ {{ t('common.login.back') }}</RouterLink
+    >
+    <section class="login-card surface-card">
+      <SvgIcon name="logo" />
+      <span>{{ t('common.login.eyebrow') }}</span>
+      <h1>{{ t('common.login.title') }}</h1>
+      <p>{{ t(loginDescriptionKey) }}</p>
+      <LoginForm :loading="loading" :error="errorMessage" @submit="login" />
+    </section>
+  </main>
 </template>
 
 <script setup lang="ts">
-  import router from '@/router';
-  import { reactive, ref } from 'vue';
-  import { useUserStore } from '@/store/modules/user';
+import { ref } from 'vue';
+import { useRoute, useRouter } from 'vue-router';
+import { useI18n } from 'vue-i18n';
+import type { LoginParams } from '@/api/modules/auth';
+import { useUserStore } from '@/store/modules/user';
+import { isApiError } from '@/types/api/common';
+import { getSafeRedirect } from '@/utils/url';
 
-  const userStore = useUserStore();
-  const formData = reactive({
-    name: '',
-    pwd: '',
-  });
-  const ruleForm = ref<any>(null);
-  const submit = () => {
-    ruleForm.value.validate().then(async ({ valid, errors }: any) => {
-      if (valid) {
-        const userInfo = await userStore.login();
-        console.log(userInfo);
-        if (userInfo) {
-          router.push({ path: '/member' });
-        }
-      } else {
-        console.log('error submit!!', errors);
-      }
-    });
-  };
+const router = useRouter();
+const route = useRoute();
+const userStore = useUserStore();
+const { t } = useI18n();
+const loginDescriptionKey =
+  String(import.meta.env.VITE_USE_MOCK) === 'true'
+    ? 'common.login.description'
+    : 'common.login.realDescription';
+const loading = ref(false);
+const errorMessage = ref('');
+const login = async (params: LoginParams) => {
+  loading.value = true;
+  errorMessage.value = '';
+  try {
+    await userStore.login(params);
+    await router.replace(getSafeRedirect(route.query.redirect, '/member'));
+  } catch (error) {
+    errorMessage.value = isApiError(error)
+      ? error.message
+      : t('common.login.failed');
+  } finally {
+    loading.value = false;
+  }
+};
 </script>
 
 <style scoped lang="scss">
-  .login {
-    padding: 20px;
+.login-page {
+  min-height: 100dvh;
+  padding: calc(var(--space-5) + env(safe-area-inset-top)) var(--space-5)
+    calc(var(--space-5) + env(safe-area-inset-bottom));
+  background: var(--color-background);
+}
 
-    h2 {
-      text-align: center;
-      letter-spacing: 10px;
-    }
+.back-link {
+  color: var(--color-text-secondary);
+  text-decoration: none;
+}
 
-    .nut-form-item {
-      margin-bottom: 20px;
-      background: #f2f3f5;
-      border-radius: 20px;
+.login-card {
+  max-width: 28rem;
+  padding: var(--space-6);
+  margin: 7vh auto 0;
 
-      input {
-        background: transparent;
-      }
-    }
+  .svg-icon {
+    font-size: 1.75rem;
+    color: var(--color-primary);
   }
+
+  > span {
+    display: block;
+    margin-top: var(--space-5);
+    font-size: var(--text-caption);
+    font-weight: 650;
+    color: var(--color-text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+  }
+
+  h1 {
+    margin: var(--space-2) 0;
+    font-size: var(--text-page-title);
+    font-weight: 680;
+  }
+
+  > p {
+    margin: 0 0 var(--space-6);
+    color: var(--color-text-secondary);
+  }
+}
 </style>

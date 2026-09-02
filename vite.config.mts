@@ -1,92 +1,90 @@
-import { createVitePlugins } from './build/vite/plugins';
-import type  { ConfigEnv, UserConfig } from 'vite';
+import { createVitePlugins } from './build/vite/plugins/index.ts';
+import { createViteProxy } from './build/vite/proxy.ts';
+import type { ConfigEnv, UserConfig } from 'vite';
 import { loadEnv } from 'vite';
-import { wrapperEnv } from './build/utils';
+import { wrapperEnv } from './build/utils.ts';
 import { fileURLToPath, URL } from 'node:url';
-import { readdirSync, statSync } from 'node:fs';
-import { dirname } from 'node:path';
 
 // https://vitejs.dev/config/
-export default function ({ command, mode }: ConfigEnv): UserConfig {
+export default function defineViteConfig({
+  command,
+  mode,
+}: ConfigEnv): UserConfig {
   const isProduction = command === 'build';
   const root = process.cwd();
-  const env = loadEnv(mode, root);
+  const fileEnv = loadEnv(mode, root, '');
+  const processEnv = Object.fromEntries(
+    Object.entries(process.env).filter(
+      (entry): entry is [string, string] =>
+        entry[0].startsWith('VITE_') && typeof entry[1] === 'string',
+    ),
+  );
+  const env = { ...fileEnv, ...processEnv };
   const viteEnv = wrapperEnv(env);
-
-  const devOptimizeDepsInclude: Array<string> = ['eruda'];
-  if (!isProduction) {
-    const excludedDirs = ['utils', 'style', 'composables'];
-    const __dirname = dirname(fileURLToPath(import.meta.url));
-
-    // 需要自动优化的 UI 库
-    const uiLibraries = [
-      { name: 'vant/es', path: 'node_modules/vant/es' },
-      { name: '@nutui/nutui/dist/packages', path: 'node_modules/@nutui/nutui/dist/packages' },
-      { name: '@varlet/ui/es', path: 'node_modules/@varlet/ui/es' },
-    ];
-
-    uiLibraries.forEach((lib) => {
-      try {
-        const dirNames = readdirSync(`${__dirname}/${lib.path}`);
-        dirNames
-          .filter((dirName) => {
-            const fullPath = `${__dirname}/${lib.path}/${dirName}`;
-            const isDir = statSync(fullPath).isDirectory();
-            const isExcluded = excludedDirs.includes(dirName);
-            return isDir && !isExcluded;
-          })
-          .forEach((dirName) => {
-            if (lib.name === '@nutui/nutui/dist/packages') {
-              if (dirName !== 'locale') {
-                devOptimizeDepsInclude.push(`${lib.name}/${dirName}/style/css`);
-              }
-            } else if (lib.name === 'vant/es') {
-              devOptimizeDepsInclude.push(`${lib.name}/${dirName}/style/index`);
-            } else {
-              devOptimizeDepsInclude.push(`${lib.name}/${dirName}/style/index.mjs`);
-            }
-          });
-      } catch (err) {
-        console.warn(`Failed to read directory for ${lib.name}: ${err}`);
-      }
-    });
-  }
+  const uiDemoPath = fileURLToPath(
+    new URL(`src/views/ui/${viteEnv.VITE_UI_FRAMEWORK}.vue`, import.meta.url),
+  );
 
   return {
     base: '/',
     root,
     resolve: {
       alias: {
-        '@': fileURLToPath(new URL('./src', import.meta.url)),
-        '#': fileURLToPath(new URL('./types', import.meta.url))
+        '@': fileURLToPath(new URL('src', import.meta.url)),
+        '#': fileURLToPath(new URL('types', import.meta.url)),
+        '#ui-demo': uiDemoPath,
       },
     },
     server: {
       host: true,
       hmr: true,
+      proxy: createViteProxy(viteEnv),
+      forwardConsole: true,
     },
     plugins: createVitePlugins(viteEnv, isProduction),
+    esbuild: isProduction
+      ? {
+          drop: ['console', 'debugger'],
+        }
+      : undefined,
     build: {
-      minify: 'terser',
-      terserOptions: {
-        compress: {
-          //生产环境时移除console
-          drop_console: true,
-          drop_debugger: true,
+      target: ['es2019', 'safari15'],
+      manifest: true,
+      // 使用 esbuild 压缩：比 terser 快数倍，且原生支持移除 console/debugger
+      minify: 'esbuild',
+      rollupOptions: {
+        output: {
+          // 拆分 vendor，避免单个 chunk 过大、改善缓存命中率与并行加载
+          manualChunks(id) {
+            if (!id.includes('node_modules')) return undefined;
+            if (id.includes('@vant')) return 'vendor-vant';
+            if (id.includes('@nutui')) return 'vendor-nutui';
+            if (id.includes('@varlet')) return 'vendor-varlet';
+            if (id.includes('@tanstack')) return 'vendor-query';
+            if (id.includes('markdown-it') || id.includes('dompurify'))
+              return 'vendor-markdown';
+            if (
+              /[\\/]node_modules[\\/](vue|vue-router|pinia|vue-i18n)[\\/]/.test(
+                id,
+              )
+            ) {
+              return 'vendor-vue';
+            }
+            return 'vendor';
+          },
         },
       },
     },
     css: {
       preprocessorOptions: {
         scss: {
-          // 配置 nutui 全局 scss 变量
-         additionalData: `@use "@/styles/variable.scss" as *;@use "@nutui/nutui/dist/styles/variables.scss" as *;`,
-         quietDeps: true,
+          additionalData:
+            viteEnv.VITE_UI_FRAMEWORK === 'nutui'
+              ? `@use "@/styles/variable.scss" as *;@use "@nutui/nutui/dist/styles/variables.scss" as *;`
+              : `@use "@/styles/variable.scss" as *;`,
+          quietDeps: true,
         },
       },
-    },
-    optimizeDeps: {
-      include: [...devOptimizeDepsInclude],
     },
   };
 }

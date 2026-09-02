@@ -1,0 +1,784 @@
+openapi: 3.0.3
+info:
+  title: Vue H5 Template API Contract
+  version: 2.0.0
+servers:
+  - url: /api
+paths:
+  /auth/login:
+    post:
+      operationId: login
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LoginRequest'
+      responses:
+        '200':
+          description: Login result
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/ApiResponse'
+                  - type: object
+                    properties:
+                      data:
+                        $ref: '#/components/schemas/LoginResult'
+  /user/profile:
+    get:
+      operationId: getUserProfile
+      responses:
+        '200':
+          description: Current user
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/ApiResponse'
+                  - type: object
+                    properties:
+                      data:
+                        $ref: '#/components/schemas/UserProfile'
+  /examples/tasks:
+    get:
+      operationId: getTasks
+      responses:
+        '200':
+          description: Task list
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/ApiResponse'
+                  - type: object
+                    properties:
+                      data:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/Task'
+  /examples/tasks/{id}/toggle:
+    post:
+      operationId: toggleTask
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Updated task
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/ApiResponse'
+                  - type: object
+                    properties:
+                      data:
+                        $ref: '#/components/schemas/Task'
+  /examples/feed:
+    get:
+      operationId: getFeed
+      parameters:
+        - in: query
+          name: cursor
+          schema:
+            type: integer
+            minimum: 0
+        - in: query
+          name: limit
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 20
+      responses:
+        '200':
+          description: Cursor feed
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse'
+  /examples/{scenario}:
+    get:
+      operationId: triggerRequestErrorExample
+      description: Development-only request error fixtures exposed by Mock and Gin.
+      parameters:
+        - in: path
+          name: scenario
+          required: true
+          schema:
+            type: string
+            enum:
+              [
+                bad-request,
+                unauthorized,
+                forbidden,
+                not-found,
+                conflict,
+                validation,
+                server-error,
+                timeout,
+              ]
+      responses:
+        '200':
+          description: Business validation or delayed success fixture
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse'
+        '400':
+          description: Bad request fixture
+        '401':
+          description: Unauthorized fixture
+        '403':
+          description: Forbidden fixture
+        '404':
+          description: Not found fixture
+        '409':
+          description: Conflict fixture
+        '500':
+          description: Server error fixture
+  /projects:
+    get:
+      operationId: listProjects
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: query
+          name: page
+          schema:
+            type: integer
+            minimum: 1
+        - in: query
+          name: pageSize
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 100
+      responses:
+        '200':
+          description: Paginated projects owned by the current user
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/ApiResponse'
+                  - type: object
+                    properties:
+                      data:
+                        $ref: '#/components/schemas/ProjectPage'
+    post:
+      operationId: createProject
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProjectInput'
+      responses:
+        '201':
+          description: Created project
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/ApiResponse'
+                  - type: object
+                    properties:
+                      data:
+                        $ref: '#/components/schemas/Project'
+  /projects/{id}:
+    get:
+      operationId: getProject
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: '#/components/parameters/ProjectId'
+      responses:
+        '200':
+          description: Project
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse'
+    patch:
+      operationId: updateProject
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: '#/components/parameters/ProjectId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProjectUpdateInput'
+      responses:
+        '200':
+          description: Updated project
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse'
+    delete:
+      operationId: deleteProject
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: '#/components/parameters/ProjectId'
+      responses:
+        '200':
+          description: Deletion result
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse'
+  /products:
+    get:
+      operationId: listProducts
+      parameters:
+        - $ref: '#/components/parameters/Page'
+        - $ref: '#/components/parameters/PageSize'
+        - in: query
+          name: keyword
+          schema:
+            type: string
+        - in: query
+          name: category
+          schema:
+            type: string
+        - in: query
+          name: sort
+          schema:
+            type: string
+            enum: [featured, sales, price_asc, price_desc]
+      responses:
+        '200':
+          description: Public on-sale product catalog
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/ApiResponse'
+                  - type: object
+                    properties:
+                      data:
+                        $ref: '#/components/schemas/ProductPage'
+  /products/{id}:
+    get:
+      operationId: getProduct
+      parameters:
+        - $ref: '#/components/parameters/ProductId'
+      responses:
+        '200':
+          description: Public product detail
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/ApiResponse'
+                  - type: object
+                    properties:
+                      data:
+                        $ref: '#/components/schemas/Product'
+  /admin/products:
+    get:
+      operationId: listAdminProducts
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: '#/components/parameters/Page'
+        - $ref: '#/components/parameters/PageSize'
+        - in: query
+          name: keyword
+          schema:
+            type: string
+        - in: query
+          name: status
+          schema:
+            $ref: '#/components/schemas/ProductStatus'
+      responses:
+        '200':
+          description: Product management list
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/ApiResponse'
+                  - type: object
+                    properties:
+                      data:
+                        $ref: '#/components/schemas/ProductPage'
+    post:
+      operationId: createProduct
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProductInput'
+      responses:
+        '201':
+          description: Created product
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse'
+  /admin/products/{id}:
+    patch:
+      operationId: updateProduct
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: '#/components/parameters/ProductId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProductUpdateInput'
+      responses:
+        '200':
+          description: Updated product
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse'
+    delete:
+      operationId: deleteProduct
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: '#/components/parameters/ProductId'
+      responses:
+        '200':
+          description: Soft-deleted product
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse'
+  /ai/chat:
+    post:
+      operationId: streamChat
+      security:
+        - bearerAuth: []
+        - {}
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ChatRequest'
+      responses:
+        '200':
+          description: Server-sent ChatChunk events
+          content:
+            text/event-stream:
+              schema:
+                type: string
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+  parameters:
+    Page:
+      in: query
+      name: page
+      schema:
+        type: integer
+        minimum: 1
+    PageSize:
+      in: query
+      name: pageSize
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 50
+    ProjectId:
+      in: path
+      name: id
+      required: true
+      schema:
+        type: integer
+        minimum: 1
+    ProductId:
+      in: path
+      name: id
+      required: true
+      schema:
+        type: integer
+        minimum: 1
+  schemas:
+    ApiResponse:
+      type: object
+      required: [code, data, msg]
+      properties:
+        code:
+          type: integer
+        data: {}
+        msg:
+          type: string
+        requestId:
+          type: string
+    LoginRequest:
+      type: object
+      required: [name, password]
+      properties:
+        name:
+          type: string
+          minLength: 1
+        password:
+          type: string
+          minLength: 1
+    LoginResult:
+      type: object
+      required: [name, token]
+      properties:
+        name:
+          type: string
+        token:
+          type: string
+        expiresIn:
+          type: integer
+    UserProfile:
+      type: object
+      required: [id, name, role, plan]
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        role:
+          type: string
+          enum: [admin, member]
+        plan:
+          type: string
+          enum: [free, pro]
+    Task:
+      type: object
+      required: [id, title, done]
+      properties:
+        id:
+          type: integer
+        title:
+          type: string
+        done:
+          type: boolean
+    FeedItem:
+      type: object
+      required: [id, title, summary, category]
+      properties:
+        id:
+          type: integer
+        title:
+          type: string
+        summary:
+          type: string
+        category:
+          type: string
+    Project:
+      type: object
+      required: [id, ownerId, name, description, status, createdAt, updatedAt]
+      properties:
+        id:
+          type: integer
+        ownerId:
+          type: integer
+        name:
+          type: string
+        description:
+          type: string
+        status:
+          $ref: '#/components/schemas/ProjectStatus'
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+    ProjectStatus:
+      type: string
+      enum: [active, paused, archived]
+    ProjectInput:
+      type: object
+      required: [name]
+      properties:
+        name:
+          type: string
+          minLength: 1
+          maxLength: 120
+        description:
+          type: string
+          maxLength: 5000
+        status:
+          $ref: '#/components/schemas/ProjectStatus'
+    ProjectUpdateInput:
+      type: object
+      properties:
+        name:
+          type: string
+          minLength: 1
+          maxLength: 120
+        description:
+          type: string
+          maxLength: 5000
+        status:
+          $ref: '#/components/schemas/ProjectStatus'
+    ProjectPage:
+      type: object
+      required: [list, total, page, pageSize, hasMore]
+      properties:
+        list:
+          type: array
+          items:
+            $ref: '#/components/schemas/Project'
+        total:
+          type: integer
+        page:
+          type: integer
+        pageSize:
+          type: integer
+        hasMore:
+          type: boolean
+    Product:
+      type: object
+      required:
+        [
+          id,
+          sku,
+          name,
+          subtitle,
+          description,
+          category,
+          brand,
+          coverUrl,
+          priceCents,
+          originalPriceCents,
+          stock,
+          sales,
+          rating,
+          status,
+          featured,
+          createdAt,
+          updatedAt,
+        ]
+      properties:
+        id:
+          type: integer
+        sku:
+          type: string
+        name:
+          $ref: '#/components/schemas/LocalizedText'
+        subtitle:
+          $ref: '#/components/schemas/LocalizedText'
+        description:
+          $ref: '#/components/schemas/LocalizedText'
+        category:
+          type: string
+        brand:
+          type: string
+        coverUrl:
+          type: string
+        priceCents:
+          type: integer
+          format: int64
+        originalPriceCents:
+          type: integer
+          format: int64
+        stock:
+          type: integer
+        sales:
+          type: integer
+        rating:
+          type: number
+          format: double
+        status:
+          $ref: '#/components/schemas/ProductStatus'
+        featured:
+          type: boolean
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+    ProductStatus:
+      type: string
+      enum: [draft, on_sale, sold_out]
+    LocalizedText:
+      type: object
+      required: [zh-CN, en-US, ja-JP]
+      properties:
+        zh-CN:
+          type: string
+          minLength: 1
+        en-US:
+          type: string
+          minLength: 1
+        ja-JP:
+          type: string
+          minLength: 1
+    ProductInput:
+      type: object
+      required:
+        [
+          sku,
+          name,
+          subtitle,
+          description,
+          category,
+          brand,
+          coverUrl,
+          priceCents,
+          originalPriceCents,
+          stock,
+          sales,
+          rating,
+          status,
+          featured,
+        ]
+      properties:
+        sku:
+          type: string
+          minLength: 1
+          maxLength: 64
+        name:
+          $ref: '#/components/schemas/LocalizedText'
+        subtitle:
+          $ref: '#/components/schemas/LocalizedText'
+        description:
+          $ref: '#/components/schemas/LocalizedText'
+        category:
+          type: string
+          minLength: 1
+          maxLength: 60
+        brand:
+          type: string
+          minLength: 1
+          maxLength: 80
+        coverUrl:
+          type: string
+          minLength: 1
+          maxLength: 500
+        priceCents:
+          type: integer
+          minimum: 0
+        originalPriceCents:
+          type: integer
+          minimum: 0
+        stock:
+          type: integer
+          minimum: 0
+        sales:
+          type: integer
+          minimum: 0
+        rating:
+          type: number
+          minimum: 0
+          maximum: 5
+        status:
+          $ref: '#/components/schemas/ProductStatus'
+        featured:
+          type: boolean
+    ProductUpdateInput:
+      type: object
+      properties:
+        sku:
+          type: string
+          minLength: 1
+          maxLength: 64
+        name:
+          $ref: '#/components/schemas/LocalizedText'
+        subtitle:
+          $ref: '#/components/schemas/LocalizedText'
+        description:
+          $ref: '#/components/schemas/LocalizedText'
+        category:
+          type: string
+          minLength: 1
+          maxLength: 60
+        brand:
+          type: string
+          minLength: 1
+          maxLength: 80
+        coverUrl:
+          type: string
+          minLength: 1
+          maxLength: 500
+        priceCents:
+          type: integer
+          minimum: 0
+        originalPriceCents:
+          type: integer
+          minimum: 0
+        stock:
+          type: integer
+          minimum: 0
+        sales:
+          type: integer
+          minimum: 0
+        rating:
+          type: number
+          minimum: 0
+          maximum: 5
+        status:
+          $ref: '#/components/schemas/ProductStatus'
+        featured:
+          type: boolean
+    ProductPage:
+      type: object
+      required: [list, total, page, pageSize, hasMore]
+      properties:
+        list:
+          type: array
+          items:
+            $ref: '#/components/schemas/Product'
+        total:
+          type: integer
+        page:
+          type: integer
+        pageSize:
+          type: integer
+        hasMore:
+          type: boolean
+    DeleteResult:
+      type: object
+      required: [deleted, id]
+      properties:
+        deleted:
+          type: boolean
+        id:
+          type: integer
+    ChatMessage:
+      type: object
+      required: [role, content]
+      properties:
+        role:
+          type: string
+          enum: [system, user, assistant]
+        content:
+          type: string
+          minLength: 1
+          maxLength: 20000
+    ChatRequest:
+      type: object
+      required: [messages]
+      properties:
+        conversationId:
+          type: string
+          maxLength: 120
+        messages:
+          type: array
+          minItems: 1
+          maxItems: 100
+          items:
+            $ref: '#/components/schemas/ChatMessage'

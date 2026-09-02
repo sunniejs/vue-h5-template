@@ -5,12 +5,22 @@
  */
 
 import Components from 'unplugin-vue-components/vite';
-import { VueUseComponentsResolver } from 'unplugin-vue-components/resolvers';
 import NutUIResolver from '@nutui/auto-import-resolver';
 import { VarletImportResolver } from '@varlet/import-resolver';
 import { VantResolver } from '@vant/auto-import-resolver';
+import type { ComponentResolver } from 'unplugin-vue-components';
 
-export const ConfigAutoComponentsPlugin = () => {
+function createUiResolvers(
+  framework: ViteEnv['VITE_UI_FRAMEWORK'],
+): ComponentResolver[] {
+  if (framework === 'nutui') return [NutUIResolver()];
+  if (framework === 'varlet') return VarletImportResolver();
+  return [VantResolver()];
+}
+
+export const ConfigAutoComponentsPlugin = (
+  framework: ViteEnv['VITE_UI_FRAMEWORK'],
+) => {
   return Components({
     dirs: ['src/components'],
     extensions: ['vue', 'md'],
@@ -21,6 +31,6 @@ export const ConfigAutoComponentsPlugin = () => {
     directives: true,
     include: [/\.vue$/, /\.vue\?vue/, /\.md$/],
     exclude: [/[\\/]node_modules[\\/]/, /[\\/]\.git[\\/]/, /[\\/]\.nuxt[\\/]/],
-    resolvers: [VueUseComponentsResolver(), VantResolver(), VarletImportResolver(), NutUIResolver()],
+    resolvers: createUiResolvers(framework),
   });
 };

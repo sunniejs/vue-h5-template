@@ -13,9 +13,17 @@
     "mock/**/*.ts",
     "build/**/*.ts"
   ],
-  "exclude": ["src/**/__tests__/*", "node_modules", "tests/server/**/*.ts", "dist", "**/*.js"],
+  "exclude": [
+    "src/**/__tests__/*",
+    "node_modules",
+    "tests/server/**/*.ts",
+    "dist",
+    "**/*.js"
+  ],
   "compilerOptions": {
     "composite": true,
+    "allowImportingTsExtensions": true,
+    "baseUrl": ".",
     "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.app.tsbuildinfo",
     "paths": {
       "@/*": ["./src/*"]

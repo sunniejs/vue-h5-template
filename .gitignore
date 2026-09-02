@@ -13,8 +13,18 @@ dev-dist
 dist-ssr
 *.local
 .eslintcache
-types/auto-imports.d.ts
-types/components.d.ts
+coverage
+playwright-report
+test-results
+
+# 说明：types/auto-imports.d.ts 与 types/components.d.ts 由 unplugin 在 dev/build 时
+# 自动重新生成，但需要提交到仓库，否则新 clone 的项目 pnpm typecheck 会失败
+
+# unplugin-auto-import 生成的 eslintrc 片段，项目已改用 oxlint，无人引用
+.eslintrc-auto-import.json
+
+# WorkBuddy 的项目记忆目录（本机工作日志与长期笔记，不入库）
+.workbuddy/
 
 # Editor directories and files
 !.vscode/extensions.json

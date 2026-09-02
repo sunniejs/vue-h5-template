@@ -8,8 +8,8 @@ import type { PluginOption } from 'vite';
 
 export const ConfigVisualizerPlugin = () => {
   return visualizer({
-    filename: './node_modules/.cache/visualizer/stats.html',
-    open: true,
+    filename: './dist/stats.html',
+    open: false,
     gzipSize: true,
     brotliSize: true,
   }) as PluginOption;

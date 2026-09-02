@@ -3,23 +3,38 @@ import App from './App.vue';
 import { setupI18n } from '@/locales';
 import router from '@/router';
 import store from '@/store';
-import './assets/font/iconfont.css';
+import { useUserStore } from '@/store/modules/user';
+import { configureApiClient } from '@/api/client';
+import { configureStreamingClient } from '@/services/ai/fetchStreamProvider';
+import { setupVueQuery } from '@/plugins/query';
+import 'virtual:svg-icons-register';
 import '@/styles/index.scss';
 
-import '@nutui/nutui/dist/packages/toast/style/css';
-import '@nutui/nutui/dist/packages/notify/style/css';
-import '@nutui/nutui/dist/packages/dialog/style/css';
-import '@nutui/nutui/dist/packages/imagepreview/style/css';
+async function bootstrap() {
+  const app = createApp(App);
 
-const app = createApp(App);
+  app.use(store);
+  const userStore = useUserStore(store);
 
-// 路由
-app.use(router);
+  const clientRuntime = {
+    getAccessToken: () => userStore.token || undefined,
+    onUnauthorized: () => {
+      userStore.logout();
+      if (router.currentRoute.value.name !== 'login') {
+        return router.replace({
+          name: 'login',
+          query: { redirect: router.currentRoute.value.fullPath },
+        });
+      }
+    },
+  };
+  configureApiClient(clientRuntime);
+  configureStreamingClient(clientRuntime);
 
-// 国际化
-await setupI18n(app);
+  setupVueQuery(app);
+  await setupI18n(app);
+  app.use(router);
+  app.mount('#app');
+}
 
-// 状态管理
-app.use(store);
-
-app.mount('#app');
+void bootstrap();

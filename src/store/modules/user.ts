@@ -1,36 +1,40 @@
-import { loginPassword } from '@/api';
+import { loginPassword } from '@/api/modules/auth';
+import type { LoginParams, LoginResult } from '@/api/modules/auth';
 import { defineStore } from 'pinia';
 
-interface StoreUser {
+interface UserState {
   token: string;
-  info: Record<any, any>;
+  info: LoginResult | null;
 }
 
 export const useUserStore = defineStore('user', {
-  state: (): StoreUser => ({
+  state: (): UserState => ({
     token: '',
-    info: {},
+    info: null,
   }),
   getters: {
-    getUserInfo(): any {
-      return this.info || {};
+    getUserInfo(): LoginResult | null {
+      return this.info;
     },
   },
   actions: {
-    setInfo(info: any) {
-      this.info = info ?? '';
+    setInfo(info: LoginResult) {
+      this.info = info;
     },
-    async login() {
-      const res = await loginPassword();
+    async login(params: LoginParams): Promise<LoginResult> {
+      const res = await loginPassword(params);
       this.setInfo(res);
-      if (res?.token) {
+      if (res.token) {
         this.token = res.token;
       }
       return res;
     },
+    logout() {
+      this.$reset();
+    },
   },
   persist: {
     pick: ['token'],
-    storage: localStorage,
+    storage: sessionStorage,
   },
 });

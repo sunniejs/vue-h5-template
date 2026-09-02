@@ -6,48 +6,45 @@
 import type { PluginOption } from 'vite';
 import vue from '@vitejs/plugin-vue';
 import vueJsx from '@vitejs/plugin-vue-jsx';
-import { ConfigSvgIconsPlugin } from './svgIcons';
-import { ConfigAutoComponentsPlugin } from './component';
-import { ConfigAutoImportPlugin } from './autoImport';
-import { ConfigMockPlugin } from './mock';
-import { ConfigCompressPlugin } from './compress';
-import { ConfigPagesPlugin } from './pages';
-import { ConfigRestartPlugin } from './restart';
-import { ConfigProgressPlugin } from './progress';
-import { ConfigErudaPlugin } from './eruda';
-import { ConfigImageminPlugin } from './imagemin';
-import { ConfigVisualizerPlugin } from './visualizer';
-import { ConfigSslPlugin } from './ssl';
-import { ConfigQrcodePlugin } from './qrcode';
-import { ConfigPwaPlugin } from './pwa';
+import { ConfigAutoComponentsPlugin } from './component.ts';
+import { ConfigAutoImportPlugin } from './autoImport.ts';
+import { ConfigMockPlugin } from './mock.ts';
+import { ConfigCompressPlugin } from './compress.ts';
+import { ConfigProgressPlugin } from './progress.ts';
+import { ConfigErudaPlugin } from './eruda.ts';
+import { ConfigVisualizerPlugin } from './visualizer.ts';
+import { ConfigSslPlugin } from './ssl.ts';
+import { ConfigPwaPlugin } from './pwa.ts';
+import { ConfigSvgIconsPlugin } from './svgIcons.ts';
+import { ConfigImageOptimizerPlugin } from './imageOptimizer.ts';
+import { ConfigAiMockPlugin } from './aiMock.ts';
 
 export function createVitePlugins(env: ViteEnv, isBuild: boolean) {
-  const { VITE_USE_MOCK, VITE_USE_ERUDA, VITE_USE_COMPRESS, VITE_USE_REPORT, VITE_USE_HTTPS, VITE_USE_PWA } = env;
+  const {
+    VITE_USE_MOCK,
+    VITE_USE_ERUDA,
+    VITE_USE_COMPRESS,
+    VITE_USE_REPORT,
+    VITE_USE_HTTPS,
+    VITE_PWA_ENABLED,
+    VITE_IMAGE_OPTIMIZE,
+    VITE_UI_FRAMEWORK,
+  } = env;
 
   const vitePlugins: (PluginOption | PluginOption[])[] = [
     // vue支持
     vue(),
     // JSX支持
     vueJsx(),
+    ConfigSvgIconsPlugin(),
   ];
 
-  // 自动按需引入组件
-  vitePlugins.push(ConfigAutoComponentsPlugin());
-
-  // 自动按需引入依赖
-  vitePlugins.push(ConfigAutoImportPlugin());
-
-  // 自动生成路由
-  vitePlugins.push(ConfigPagesPlugin());
-
-  // 监听配置文件改动重启
-  vitePlugins.push(ConfigRestartPlugin());
-
-  // 构建时显示进度条
-  vitePlugins.push(ConfigProgressPlugin());
-
-  // svg 图标
-  vitePlugins.push(ConfigSvgIconsPlugin(isBuild));
+  // 自动按需引入组件、依赖 + 构建时显示进度条
+  vitePlugins.push(
+    ConfigAutoComponentsPlugin(VITE_UI_FRAMEWORK),
+    ConfigAutoImportPlugin(VITE_UI_FRAMEWORK),
+    ConfigProgressPlugin(),
+  );
 
   // eruda调试工具
   if (VITE_USE_ERUDA) {
@@ -61,7 +58,7 @@ export function createVitePlugins(env: ViteEnv, isBuild: boolean) {
 
   // 数据 mock
   if (VITE_USE_MOCK) {
-    vitePlugins.push(ConfigMockPlugin(isBuild));
+    vitePlugins.push(ConfigAiMockPlugin(), ConfigMockPlugin(isBuild));
   }
 
   if (VITE_USE_HTTPS) {
@@ -69,22 +66,18 @@ export function createVitePlugins(env: ViteEnv, isBuild: boolean) {
     vitePlugins.push(ConfigSslPlugin());
   }
 
-  if (VITE_USE_PWA) {
+  if (VITE_PWA_ENABLED) {
     vitePlugins.push(ConfigPwaPlugin());
   }
 
   if (isBuild) {
+    if (VITE_IMAGE_OPTIMIZE) {
+      vitePlugins.push(ConfigImageOptimizerPlugin());
+    }
     // 开启.gz压缩
     if (VITE_USE_COMPRESS) {
       vitePlugins.push(ConfigCompressPlugin());
-      // 图片压缩
-      vitePlugins.push(ConfigImageminPlugin());
     }
-  }
-
-  if (!isBuild) {
-    // 开启二维码插件
-    vitePlugins.push(ConfigQrcodePlugin());
   }
 
   return vitePlugins;

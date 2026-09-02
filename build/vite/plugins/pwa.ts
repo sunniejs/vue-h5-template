@@ -8,34 +8,20 @@ import { VitePWA } from 'vite-plugin-pwa';
 export const ConfigPwaPlugin = () => {
   return VitePWA({
     registerType: 'autoUpdate',
-    includeAssets: ['favicon.svg', 'robots.txt', 'apple-touch-icon.png'],
+    includeAssets: ['favicon.ico', 'logo-320.png', 'logo-512.png'],
     devOptions: {
-      enabled: true,
-      type: 'module',
+      enabled: false,
     },
     manifest: {
       name: 'Vue-H5-Template',
       short_name: 'Vue-H5-Template',
-      description: '一个使用 Vite 和 Vue3构建的应用',
-      theme_color: '#ffffff',
-      background_color: '#ffffff',
+      description: 'Modern Vue 3 mobile H5 application template',
+      theme_color: '#4f46e5',
+      background_color: '#f6f7fb',
       display: 'standalone',
       orientation: 'portrait',
       scope: '/',
       start_url: '/',
-      screenshots: [
-        {
-          src: 'logo-320.png',
-          sizes: '320x320',
-          type: 'image/png',
-        },
-        {
-          src: 'logo-512.png',
-          sizes: '512x512',
-          type: 'image/png',
-          form_factor: 'wide',
-        },
-      ],
       icons: [
         {
           src: 'logo-320.png',
@@ -50,33 +36,18 @@ export const ConfigPwaPlugin = () => {
       ],
     },
     workbox: {
-      // 全局模式匹配
-      globPatterns: ['**/*.{css,js,html,svg,png,ico,txt,woff2}'], // 运行时缓存配置
+      globPatterns: ['**/*.{css,js,html,svg,png,webp,ico,txt,woff2}'],
+      navigateFallback: '/index.html',
+      navigateFallbackDenylist: [/^\/api\//],
       runtimeCaching: [
         {
-          // API 请求缓存
-          urlPattern: ({ url }) => url.pathname.startsWith('/api'),
-          handler: 'CacheFirst',
-          options: {
-            cacheName: 'api-cache',
-            expiration: {
-              maxEntries: 10,
-              maxAgeSeconds: 60 * 60 * 24, // 1天
-            },
-            cacheableResponse: {
-              statuses: [0, 200],
-            },
-          },
-        },
-        {
-          // 图片缓存
           urlPattern: /\.(?:png|jpg|jpeg|svg|gif|webp)$/,
-          handler: 'CacheFirst',
+          handler: 'StaleWhileRevalidate',
           options: {
             cacheName: 'images-cache',
             expiration: {
               maxEntries: 60,
-              maxAgeSeconds: 60 * 60 * 24 * 30, // 30天
+              maxAgeSeconds: 60 * 60 * 24 * 30,
             },
           },
         },
