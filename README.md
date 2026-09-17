@@ -1,5 +1,7 @@
 # Vue H5 Template v2
 
+简体中文 | [English](./README.en.md) | [日本語](./README.ja.md)
+
 面向真实移动 H5 业务的 Vue 3 工程模板。v2 不是组件库 Playground：它提供类型安全请求、OpenAPI 类型生成、TanStack Query、可中止的 Streaming AI Chat、PWA、SVG Sprite、production 图片优化、单选 UI 框架以及有意义的测试基线。
 
 [在线文档（简体中文）](https://sunniejs.github.io/vue-h5-template/) · [English docs](https://sunniejs.github.io/vue-h5-template/en/) · [日本語ドキュメント](https://sunniejs.github.io/vue-h5-template/ja/) · [迁移到 v2](https://sunniejs.github.io/vue-h5-template/guide/migration-v2)
@@ -86,6 +88,10 @@ src/
 2. 运行 `pnpm api:generate`；
 3. API module 从 `src/types/api/generated.d.ts` 引用 schema；
 4. 提交 Schema 与生成文件，让 CI 的 typecheck 检查契约漂移。
+
+## 商品收藏与聊天建议
+
+商品详情通过 `GET /api/product/favorite?id=1` 查询当前用户的收藏状态，通过 `POST /api/product/favorite` 提交明确的布尔状态。查询需要登录，只允许访问公开商品；重复写入保持幂等。收藏控件阻止重复提交，并隔离切换账号后的旧请求。聊天页从 AI 网关读取 `GET /api/ai/suggestions?locale=zh-CN`，离线或失败时保留本地翻译建议。支持 `en-US`、`zh-CN`、`ja-JP`，不会调用模型。两个服务同时支持 `/api/v1` 路径。
 
 ## AI Provider
 

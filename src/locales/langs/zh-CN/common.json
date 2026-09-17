@@ -26,7 +26,12 @@
     "login": "登录",
     "offline": "离线"
   },
-  "language": { "label": "语言", "zh": "中文", "en": "英语", "ja": "日语" },
+  "language": {
+    "label": "语言",
+    "zh": "中文",
+    "en": "英语",
+    "ja": "日语"
+  },
   "global": {
     "back": "返回",
     "backHome": "返回首页",
@@ -119,7 +124,11 @@
       "priceAsc": "价格从低到高",
       "priceDesc": "价格从高到低"
     },
-    "status": { "draft": "草稿", "on_sale": "在售", "sold_out": "售罄" },
+    "status": {
+      "draft": "草稿",
+      "on_sale": "在售",
+      "sold_out": "售罄"
+    },
     "detail": {
       "quality": "品质保障",
       "shipping": "快速发货",
@@ -173,7 +182,11 @@
       "editorLabel": "商品编辑器",
       "operationFailed": "商品操作失败",
       "deleteConfirm": "确定删除“{name}”吗？"
-    }
+    },
+    "favorite": "收藏商品",
+    "unfavorite": "取消收藏",
+    "favoriteLogin": "登录后收藏商品",
+    "favoriteFailed": "收藏更新失败，请重试。"
   },
   "cart": {
     "eyebrow": "移动购物车",
@@ -248,8 +261,16 @@
     "updatedAt": "更新于 {date}",
     "unknownError": "项目操作失败",
     "deleteConfirm": "确定删除“{name}”吗？",
-    "mode": { "create": "新建", "edit": "编辑", "view": "项目详情" },
-    "status": { "active": "进行中", "paused": "已暂停", "archived": "已归档" }
+    "mode": {
+      "create": "新建",
+      "edit": "编辑",
+      "view": "项目详情"
+    },
+    "status": {
+      "active": "进行中",
+      "paused": "已暂停",
+      "archived": "已归档"
+    }
   },
   "mobile": {
     "eyebrow": "移动 Web API",
@@ -351,7 +372,11 @@
     "nextStatus": "切换状态",
     "delete": "删除",
     "unknownError": "项目操作失败",
-    "status": { "active": "进行中", "paused": "已暂停", "archived": "已归档" }
+    "status": {
+      "active": "进行中",
+      "paused": "已暂停",
+      "archived": "已归档"
+    }
   },
   "ai": {
     "open": "AI 助手",

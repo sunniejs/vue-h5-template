@@ -1,7 +1,8 @@
 export interface ApiResponse<T> {
   code: number;
   data: T;
-  msg: string;
+  msg?: string;
+  message?: string;
   requestId?: string;
 }
 

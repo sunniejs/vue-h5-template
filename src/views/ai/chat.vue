@@ -113,20 +113,37 @@
 
 <script setup lang="ts">
 import { computed, nextTick, ref, useTemplateRef, watch } from 'vue';
+import { useQuery } from '@tanstack/vue-query';
+import { getChatSuggestions } from '@/api/modules/ai';
 import { useRouter } from 'vue-router';
 import { useI18n } from 'vue-i18n';
 import { useStreamingChat } from '@/composables/useStreamingChat';
 import { useVisualViewport } from '@/composables/useVisualViewport';
 
 const router = useRouter();
-const { t, tm } = useI18n();
+const { t, tm, locale } = useI18n();
 const { messages, streaming, error, sendMessage, stop, regenerate, clear } =
   useStreamingChat();
 const { viewportHeight } = useVisualViewport();
 const messageList = useTemplateRef<HTMLElement>('messageList');
 const showScrollButton = ref(false);
 const copiedId = ref('');
-const prompts = computed(() => tm('common.ai.prompts') as string[]);
+const suggestionsQuery = useQuery({
+  queryKey: computed(() => ['ai-suggestions', locale.value]),
+  queryFn: ({ signal }) =>
+    getChatSuggestions(
+      locale.value,
+      signal,
+      import.meta.env.VITE_AI_API_BASE_URL || '/api/ai',
+    ),
+  retry: false,
+  staleTime: 300_000,
+});
+const prompts = computed(() =>
+  suggestionsQuery.data.value?.length
+    ? suggestionsQuery.data.value
+    : (tm('common.ai.prompts') as string[]),
+);
 const pageStyle = computed(() => ({
   height: viewportHeight.value ? `${viewportHeight.value}px` : '100dvh',
 }));

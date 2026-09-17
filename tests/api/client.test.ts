@@ -81,3 +81,25 @@ describe('api client', () => {
     expect(normalizeApiError('bad')).toBeInstanceOf(ApiError);
   });
 });
+
+it('accepts real service envelopes and preserves their error messages', async () => {
+  axiosInstance.defaults.adapter = async (config) => ({
+    data: { code: 0, message: 'ok', data: true },
+    status: 200,
+    statusText: 'OK',
+    headers: new AxiosHeaders(),
+    config,
+  });
+  await expect(apiClient.get('/product/favorite')).resolves.toBe(true);
+  axiosInstance.defaults.adapter = async (config) => ({
+    data: { code: 422, message: 'Invalid favorite', data: null },
+    status: 200,
+    statusText: 'OK',
+    headers: new AxiosHeaders(),
+    config,
+  });
+  await expect(apiClient.get('/product/favorite')).rejects.toMatchObject({
+    message: 'Invalid favorite',
+    code: 422,
+  });
+});

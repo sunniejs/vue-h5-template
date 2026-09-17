@@ -448,7 +448,62 @@ function success<T>(data: T, requestId?: string) {
   return { code: 200, msg: 'ok', data, requestId };
 }
 
+const favorites = new Map<string, Set<number>>();
+function favoriteResponse(
+  { body, query, headers }: MockContext,
+  write = false,
+) {
+  if (!headers.authorization)
+    return { code: 401, msg: 'Sign in required', data: null };
+  const id = Number(write ? body.productId : query.id);
+  if (!products.some((product) => product.id === id))
+    return { code: 404, msg: 'Product not found', data: null };
+  const owner = headers.authorization;
+  const saved = favorites.get(owner) ?? new Set<number>();
+  if (write) {
+    if (typeof body.favorite !== 'boolean')
+      return { code: 422, msg: 'favorite must be a boolean', data: null };
+    if (body.favorite) saved.add(id);
+    else saved.delete(id);
+    favorites.set(owner, saved);
+  }
+  return success({ productId: id, favorite: saved.has(id) });
+}
+
 export default [
+  {
+    url: '/api/product/favorite',
+    method: 'get',
+    response: (context: MockContext) => favoriteResponse(context),
+  },
+  {
+    url: '/api/product/favorite',
+    method: 'post',
+    response: (context: MockContext) => favoriteResponse(context, true),
+  },
+  {
+    url: '/api/ai/suggestions',
+    method: 'get',
+    response: ({ query }: MockContext) => {
+      if (query.locale === 'zh-CN')
+        return success([
+          '帮我比较商品，看看哪款更适合我。',
+          '下单前需要确认哪些信息？',
+          '解释一下 AI 流式回复是怎么实现的。',
+        ]);
+      if (query.locale === 'ja-JP')
+        return success([
+          '商品の比較を手伝ってください。',
+          '注文前に確認することは？',
+          'AI のストリーミングの仕組みを教えてください。',
+        ]);
+      return success([
+        'Help me compare products before buying.',
+        'What should I check before placing an order?',
+        'Explain how streaming AI responses work.',
+      ]);
+    },
+  },
   {
     url: '/api/auth/login',
     method: 'post',
@@ -459,7 +514,11 @@ export default [
           : 'Demo User';
       currentUserName = name;
       return success(
-        { name, token: 'mock-token-v2', expiresIn: 7200 },
+        {
+          name,
+          token: `mock-token-v2-${encodeURIComponent(name)}`,
+          expiresIn: 7200,
+        },
         headers['x-request-id'],
       );
     },

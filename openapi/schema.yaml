@@ -5,6 +5,76 @@ info:
 servers:
   - url: /api
 paths:
+  /ai/suggestions:
+    get:
+      operationId: getChatSuggestions
+      parameters:
+        - in: query
+          name: locale
+          schema:
+            type: string
+            enum: [en-US, zh-CN, ja-JP]
+            default: en-US
+      responses:
+        '200':
+          description: Localized starter prompts without a model call
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/ApiResponse'
+                  - type: object
+                    properties:
+                      data:
+                        type: array
+                        items:
+                          type: string
+  /product/favorite:
+    get:
+      operationId: getFavoriteStatus
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: query
+          name: id
+          required: true
+          schema:
+            type: integer
+            minimum: 1
+      responses:
+        '200':
+          description: Current user's favorite state
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/ApiResponse'
+                  - type: object
+                    properties:
+                      data:
+                        $ref: '#/components/schemas/FavoriteResult'
+    post:
+      operationId: setProductFavorite
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FavoriteRequest'
+      responses:
+        '200':
+          description: Saved favorite state
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/ApiResponse'
+                  - type: object
+                    properties:
+                      data:
+                        $ref: '#/components/schemas/FavoriteResult'
   /auth/login:
     post:
       operationId: login
@@ -418,15 +488,36 @@ components:
         type: integer
         minimum: 1
   schemas:
+    FavoriteRequest:
+      type: object
+      required: [productId, favorite]
+      properties:
+        productId:
+          type: integer
+          minimum: 1
+        favorite:
+          type: boolean
+    FavoriteResult:
+      type: object
+      required: [productId, favorite]
+      properties:
+        productId:
+          type: integer
+        favorite:
+          type: boolean
     ApiResponse:
       type: object
-      required: [code, data, msg]
+      required: [code, data]
       properties:
         code:
           type: integer
         data: {}
         msg:
           type: string
+          description: Legacy mock response message
+        message:
+          type: string
+          description: Gin and FastAPI response message
         requestId:
           type: string
     LoginRequest:

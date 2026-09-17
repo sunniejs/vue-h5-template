@@ -42,6 +42,7 @@
             ><span>{{ t('common.shop.sales', { count: product.sales }) }}</span
             ><span>{{ t('common.shop.stock', { count: product.stock }) }}</span>
           </div>
+          <FavoriteButton :product-id="productId" :session="user.token" />
         </section>
         <section class="service-strip">
           <span>✓ {{ t('common.shop.detail.quality') }}</span
@@ -99,6 +100,8 @@
 </template>
 
 <script setup lang="ts">
+import FavoriteButton from '@/components/shop/FavoriteButton.vue';
+import { useUserStore } from '@/store/modules/user';
 import { computed, ref } from 'vue';
 import { useQuery } from '@tanstack/vue-query';
 import { useI18n } from 'vue-i18n';
@@ -115,6 +118,7 @@ const route = useRoute();
 const router = useRouter();
 const { locale, t } = useI18n();
 const cart = useCartStore();
+const user = useUserStore();
 const productId = computed(() => Number(route.params.id));
 const productQuery = useQuery({
   queryKey: computed(() => ['products', productId.value]),

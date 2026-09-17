@@ -72,7 +72,9 @@ test('mock API returns type-safe server data', async ({ request }) => {
 
 test('AI chat renders streaming chunks and can stop', async ({ page }) => {
   await page.goto('/ai/chat');
-  await page.getByRole('button', { name: '解释这个模板的流式架构' }).click();
+  await page
+    .getByRole('button', { name: '解释一下 AI 流式回复是怎么实现的。' })
+    .click();
   await expect(page.getByText(/Vue is a progressive/)).toBeVisible();
   const stop = page.getByRole('button', { name: '停止生成' });
   if (await stop.isVisible()) await stop.click();
@@ -157,4 +159,35 @@ test('delivery workspace supports create, view, edit, filter and delete', async 
   page.once('dialog', (dialog) => dialog.accept());
   await row.getByRole('button', { name: '删除' }).click();
   await expect(row).toHaveCount(0);
+});
+
+test('favorite state survives reload and can be removed', async ({ page }) => {
+  await page.goto('/login');
+  await page.getByLabel('用户名').fill('Favorite Tester');
+  await page.getByLabel('密码').fill('secret');
+  await page.getByRole('button', { name: '登录', exact: true }).click();
+  await expect(page).toHaveURL(/\/member$/);
+  await page.goto('/shop/products/1');
+  const button = page.locator('.favorite-control button');
+  await expect(button).toBeEnabled();
+  await button.click();
+  await expect(button).toHaveAttribute('aria-pressed', 'true');
+  await page.reload();
+  await expect(button).toHaveAttribute('aria-pressed', 'true');
+  await button.click();
+  await expect(button).toHaveAttribute('aria-pressed', 'false');
+});
+
+test('chat uses server suggestions and falls back offline', async ({
+  page,
+}) => {
+  await page.goto('/ai/chat');
+  await expect(
+    page.getByRole('button', { name: '下单前需要确认哪些信息？' }),
+  ).toBeVisible();
+  await page.route('**/api/ai/suggestions**', (route) => route.abort());
+  await page.reload();
+  await expect(
+    page.getByRole('button', { name: '解释这个模板的流式架构' }),
+  ).toBeVisible();
 });

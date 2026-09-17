@@ -182,7 +182,11 @@
       "editorLabel": "Product editor",
       "operationFailed": "Product operation failed",
       "deleteConfirm": "Delete “{name}”?"
-    }
+    },
+    "favorite": "Save product",
+    "unfavorite": "Remove from favorites",
+    "favoriteLogin": "Sign in to save products",
+    "favoriteFailed": "Could not update favorites. Please try again."
   },
   "cart": {
     "eyebrow": "Mobile cart",
@@ -257,8 +261,16 @@
     "updatedAt": "Updated {date}",
     "unknownError": "Project operation failed",
     "deleteConfirm": "Delete “{name}”?",
-    "mode": { "create": "Create", "edit": "Edit", "view": "Project details" },
-    "status": { "active": "Active", "paused": "Paused", "archived": "Archived" }
+    "mode": {
+      "create": "Create",
+      "edit": "Edit",
+      "view": "Project details"
+    },
+    "status": {
+      "active": "Active",
+      "paused": "Paused",
+      "archived": "Archived"
+    }
   },
   "mobile": {
     "eyebrow": "MOBILE WEB APIs",
@@ -360,7 +372,11 @@
     "nextStatus": "Change status",
     "delete": "Delete",
     "unknownError": "Project operation failed",
-    "status": { "active": "Active", "paused": "Paused", "archived": "Archived" }
+    "status": {
+      "active": "Active",
+      "paused": "Paused",
+      "archived": "Archived"
+    }
   },
   "ai": {
     "open": "AI Assistant",

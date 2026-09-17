@@ -26,7 +26,12 @@
     "login": "ログイン",
     "offline": "オフライン"
   },
-  "language": { "label": "言語", "zh": "中国語", "en": "英語", "ja": "日本語" },
+  "language": {
+    "label": "言語",
+    "zh": "中国語",
+    "en": "英語",
+    "ja": "日本語"
+  },
   "global": {
     "back": "戻る",
     "backHome": "ホームへ戻る",
@@ -177,7 +182,11 @@
       "editorLabel": "商品エディター",
       "operationFailed": "商品操作に失敗しました",
       "deleteConfirm": "「{name}」を削除しますか？"
-    }
+    },
+    "favorite": "お気に入りに追加",
+    "unfavorite": "お気に入りから削除",
+    "favoriteLogin": "ログインして商品を保存",
+    "favoriteFailed": "お気に入りを更新できませんでした。もう一度お試しください。"
   },
   "cart": {
     "eyebrow": "モバイルカート",
@@ -252,7 +261,11 @@
     "updatedAt": "{date} 更新",
     "unknownError": "プロジェクト操作に失敗しました",
     "deleteConfirm": "「{name}」を削除しますか？",
-    "mode": { "create": "作成", "edit": "編集", "view": "プロジェクト詳細" },
+    "mode": {
+      "create": "作成",
+      "edit": "編集",
+      "view": "プロジェクト詳細"
+    },
     "status": {
       "active": "進行中",
       "paused": "一時停止",

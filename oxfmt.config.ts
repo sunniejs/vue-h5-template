@@ -5,6 +5,8 @@ import { defineConfig } from 'oxfmt';
  * 详见：https://oxc.rs/docs/guide/usage/formatter/config-file-reference.html
  */
 export default defineConfig({
+  // Vite plugins own these declarations; formatting them is overwritten on build.
+  ignorePatterns: ['types/auto-imports.d.ts', 'types/components.d.ts'],
   /**
    * 单行长度，适配 prettier 的 80
    * Default：100

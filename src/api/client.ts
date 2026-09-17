@@ -52,14 +52,17 @@ export function normalizeApiError(error: unknown): ApiError {
     });
 
   const { status, data, headers } = axiosError.response;
-  return new ApiError(data?.msg || axiosError.message || `HTTP ${status}`, {
-    kind: 'http',
-    code: data?.code,
-    status,
-    requestId: data?.requestId ?? headers['x-request-id'],
-    details: data,
-    cause: error,
-  });
+  return new ApiError(
+    data?.msg || data?.message || axiosError.message || `HTTP ${status}`,
+    {
+      kind: 'http',
+      code: data?.code,
+      status,
+      requestId: data?.requestId ?? headers['x-request-id'],
+      details: data,
+      cause: error,
+    },
+  );
 }
 
 export const axiosInstance: AxiosInstance = axios.create({
@@ -83,14 +86,17 @@ axiosInstance.interceptors.request.use((config: InternalAxiosRequestConfig) => {
 axiosInstance.interceptors.response.use(
   (response: AxiosResponse<ApiResponse<unknown>>) => {
     const payload = response.data;
-    if (payload.code < 200 || payload.code >= 300) {
-      const error = new ApiError(payload.msg || 'Request failed', {
-        kind: 'business',
-        code: payload.code,
-        status: response.status,
-        requestId: payload.requestId,
-        details: payload,
-      });
+    if (payload.code !== 0 && (payload.code < 200 || payload.code >= 300)) {
+      const error = new ApiError(
+        payload.msg || payload.message || 'Request failed',
+        {
+          kind: 'business',
+          code: payload.code,
+          status: response.status,
+          requestId: payload.requestId,
+          details: payload,
+        },
+      );
       if (payload.code === 401) void runtime.onUnauthorized?.();
       return Promise.reject(error);
     }
