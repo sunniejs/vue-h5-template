@@ -37,3 +37,19 @@ Markdown-it 禁止 raw HTML，渲染结果再由 DOMPurify 移除脚本、iframe
 ## 移动端
 
 页面使用 VisualViewport 跟随软键盘高度，输入栏包含 safe-area，textarea 自动增高，用户离开底部时显示 Scroll To Bottom，且不会强制抢回滚动位置。
+
+## 按语言加载聊天建议
+
+聊天空状态通过 JSON 请求加载 `GET /api/ai/suggestions`。Query 按语言区分，五分钟内视为新鲜数据，不自动重试。加载中、结果为空或请求失败时继续显示本地翻译建议。点击建议仍走原有发送与停止流程，不改变 SSE 协议，也不保存会话历史。
+
+客户端把 `zh-*` 映射为 `zh-CN`、`ja-*` 映射为 `ja-JP`，其他语言映射为 `en-US`。FastAPI 本身只接受这三个精确值，省略时默认 `en-US`，非法值返回 HTTP 422。语言由显式 `locale` 查询参数决定，不能只依赖 `Accept-Language`。
+
+单应用通过 `VITE_AI_API_BASE_URL`（默认 `/api/ai`）请求建议，通过 `VITE_AI_API_TARGET` 配置开发代理；常规业务请求发往 Gin。JSON 请求位于 `src/api/modules/ai.ts`，流式协议仍由 Provider/composable 管理。
+
+```ts
+import { getChatSuggestions } from '@/api/modules/ai';
+
+const prompts = await getChatSuggestions(locale, signal, '/api/ai');
+```
+
+[API](./request.md) · [测试](./testing.md)

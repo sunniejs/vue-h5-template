@@ -37,3 +37,19 @@ Markdown-it disables raw HTML, then DOMPurify removes script, iframe, form, styl
 ## Mobile Behavior
 
 VisualViewport tracks the software keyboard, the composer includes safe-area padding, the textarea auto-grows, and a Scroll To Bottom control appears when the user reads older messages without forcing scroll position.
+
+## Localized starter prompts
+
+The chat empty state loads `GET /api/ai/suggestions` as a JSON request. The query is separated by language, remains fresh for five minutes, and disables automatic retries. While loading, on an empty result, or after failure, translated local prompts remain usable. Selecting a prompt follows the existing send/stop flow; this request does not change the SSE protocol or persist a conversation.
+
+The client maps `zh-*` to `zh-CN`, `ja-*` to `ja-JP`, and other languages to `en-US`. FastAPI itself only accepts those three exact values; omission defaults to `en-US`, and unsupported values return HTTP 422. The explicit `locale` query parameter selects the prompts; do not rely on `Accept-Language` alone.
+
+The single app uses `VITE_AI_API_BASE_URL` (default `/api/ai`) for suggestions and `VITE_AI_API_TARGET` for the development proxy. Business traffic uses the Gin target. `src/api/modules/ai.ts` owns this JSON call; streaming stays in the provider/composable.
+
+```ts
+import { getChatSuggestions } from '@/api/modules/ai';
+
+const prompts = await getChatSuggestions(locale, signal, '/api/ai');
+```
+
+[API](./request.md) · [Tests](./testing.md)

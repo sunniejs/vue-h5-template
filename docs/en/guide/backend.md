@@ -1,38 +1,42 @@
-# Backend Services and Local Integration
+# Backend integration
 
-## Why there are two repositories
+The business service runs Go/Gin on 8002 and owns authentication, products and favorites; FastAPI runs on 8001 and owns AI JSON/SSE. Start each service using its own quick-start instructions, then run the frontend with the committed `.env.integration`:
 
-Backend workloads are split by runtime and scaling profile:
-
-- `vue-h5-template-business-service`: Gin + PostgreSQL for login, profiles, projects, and product CRUD.
-- `vue-h5-template-ai-service`: FastAPI + Redis for AI providers, authenticated SSE, and quotas.
-
-Their languages, dependencies, CI, and release cycles differ. They share a JWT contract but no source imports. The parent backend directory is local Compose orchestration, not a third repository. Each backend repository has Chinese, English, and Japanese guides on its `docs` branch.
-
-## Start the complete stack
+```text
+VITE_USE_MOCK=false
+VITE_API_BASE_URL=/api
+VITE_AI_API_BASE_URL=/api/ai
+VITE_API_TARGET=http://127.0.0.1:8002
+VITE_AI_API_TARGET=http://127.0.0.1:8001
+VITE_REQUEST_ID_ENABLED=true
+VITE_PWA_ENABLED=false
+```
 
 ```bash
-cd /Users/fong/Workspace/personal/backend/vue-h5-template
-docker compose up --build -d
-docker compose ps
-
-cd /Users/fong/Workspace/personal/frontend/vue/vue-h5-template/vue-h5-template
-pnpm install
 pnpm dev:integration
 ```
 
-Open the URL printed by Vite and sign in with `demo` / `demo1234`. `/shop` is public, `/shop/admin/products` provides authenticated administration, and `/ai/chat` streams through FastAPI.
+## Contract differences to resolve
+
+The Vite proxy forwards requests; it does not translate API contracts. Before treating a full browser flow as integrated, reconcile these differences:
+
+- Login: frontend sends `name` and reads `token`; Gin expects `username` and returns `accessToken`.
+- Profile: frontend requests `/api/user/profile`; Gin exposes `/api/user/info`.
+- Catalog: frontend requests `/api/products` and `/api/products/:id`, using localized `name` and `priceCents`; Gin exposes `/api/product/list` and `/api/product/detail?id=…`, returning `title` and `price`.
+- Project CRUD exists in the frontend contract, but the current Gin router does not register Project endpoints.
+
+## New feature boundaries
+
+The favorite GET/POST paths match Gin, but require a Gin-issued JWT and an existing public product ID. A frontend Mock token is not valid for the real services. AI suggestions are public JSON and can be checked independently of login. The browser session cannot be assumed integrated simply because the transport accepts the service envelope.
+
+## Verification
+
+Use API-level checks below before browser integration. Obtain `BUSINESS_USER_JWT` from the business service’s actual login response; use its development account configuration, not old documentation credentials. Browser E2E against Mock does not establish real database or cross-service integration.
 
 ```bash
-cd /Users/fong/Workspace/personal/backend/vue-h5-template
-SMOKE_BASE_URL=http://127.0.0.1:5173 python3 scripts/smoke.py
+curl -s 'http://127.0.0.1:8001/api/ai/suggestions?locale=ja-JP'
+curl -s 'http://127.0.0.1:8002/api/product/favorite?id=1' \
+  -H "Authorization: Bearer $BUSINESS_USER_JWT"
 ```
 
-The smoke test verifies the Vue proxy, Gin login and product CRUD, PostgreSQL persistence, and authenticated FastAPI streaming, then removes temporary records.
-
-## PostgreSQL and DataGrip
-
-Compose exposes PostgreSQL 17 on `localhost:5432`, database `vue_h5_business`, user `vue_h5`, password `vue_h5_local`. Create a PostgreSQL DataGrip source and install the official JDBC driver when prompted. Inspect `products`, `users`, `projects`, and `schema_migrations`. These credentials are local-only and must be replaced in production.
-
-`docker compose stop` or `docker compose down` preserves the database volume. Run `docker compose down -v` only when you intentionally want irreversible local data removal.
-
+[API](./request.md) · [AI Chat](./ai-chat.md) · [Commerce](./commerce.md)
