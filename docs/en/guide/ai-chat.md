@@ -52,4 +52,12 @@ import { getChatSuggestions } from '@/api/modules/ai';
 const prompts = await getChatSuggestions(locale, signal, '/api/ai');
 ```
 
+## Stream completion and cleanup
+
+The parser accepts both the legacy mock's `start.conversationId` / `done` and FastAPI's `start.id` / `finish`, mapping them to the internal `ChatChunk` contract. UTF-8 characters and CRLF separators may span transport chunks. A terminal event stops consumption; early exit or parsing failure cancels the reader and releases its lock. Failed HTTP responses retain the server's `message` and request ID.
+
+Stop and clear immediately release the busy state and request transport cancellation. A custom provider that ignores cancellation still cannot overwrite a newer conversation's messages, ID, usage or error. Inside component setup or a Vue effect scope, scope disposal stops generation automatically. Outside a scope, the caller must invoke `stop()`.
+
+Scrolling watches message count, the final message's content and generation status after DOM updates, avoiding a deep traversal of the full history for every token. Clipboard failure shows feedback that expires after 1.2 seconds; starting a new conversation or disposing the component invalidates pending copy results.
+
 [API](./request.md) · [Tests](./testing.md)

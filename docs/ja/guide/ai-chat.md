@@ -22,4 +22,12 @@ import { getChatSuggestions } from '@/api/modules/ai';
 const prompts = await getChatSuggestions(locale, signal, '/api/ai');
 ```
 
+## ストリームの終了と後処理
+
+パーサーは旧 Mock の `start.conversationId` / `done` と FastAPI の `start.id` / `finish` の両方を受け取り、内部の `ChatChunk` に変換します。UTF-8 の文字や CRLF 区切りが通信チャンクをまたいでも処理できます。終了イベントで読み取りを終え、途中終了や解析失敗時には reader をキャンセルしてロックを解放します。HTTP エラーではサーバーの `message` と Request ID を保持します。
+
+停止やクリアでは送信中の状態をすぐに解除し、通信のキャンセルを要求します。独自 Provider がキャンセルを無視しても、古い応答が新しい会話のメッセージ、ID、使用量、エラーを書き換えることはありません。コンポーネントの setup または Vue effect scope 内で使う場合、scope の破棄時に自動停止します。scope 外では呼び出し側で `stop()` を実行してください。
+
+スクロールはメッセージ数、最後のメッセージ本文、生成状態だけを DOM 更新後に監視し、トークンごとの全履歴走査を避けます。コピー失敗時には案内を表示し、1.2 秒後に消去します。新しい会話の開始やコンポーネントの破棄後に、古いコピー結果は表示されません。
+
 [API](./request.md) · [テスト](./testing.md)

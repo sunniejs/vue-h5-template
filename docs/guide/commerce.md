@@ -36,4 +36,10 @@ POST /api/product/favorite
 
 响应包装兼容不会自动转换路径或业务字段。单应用商品模块仍使用 `/api/products` 与多语言 `name`／`priceCents`，当前 Gin 商品接口为 `/api/product/list` 与 `title`／`price`；登录也存在 `name`／`token` 与 `username`／`accessToken` 的差异。完整联调前需要核对其余契约或增加明确的领域适配。新增收藏路径已与 Gin 对齐，但鉴权仍需要兼容的已签发 JWT。
 
+## 详情链接与页面复用
+
+详情页仅接受正整数十进制 ID，数值必须在 JavaScript 安全整数范围内。缺失、重复、负数、小数、指数写法或超范围 ID 不会触发详情请求，而是显示无效链接提示和返回商品列表的入口。
+
+同一详情组件切换商品时，数量重置为 1，并清除上一件商品的操作提示。库存刷新时数量收敛到可用范围；缺货或未上架时禁用详情页购买和数量操作。远程详情继续由 TanStack Query 管理并传递 `AbortSignal`，不复制进购物车状态。
+
 [API](./request.md) · [测试](./testing.md)

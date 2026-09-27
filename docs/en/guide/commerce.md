@@ -34,4 +34,10 @@ POST /api/product/favorite
 
 Response-envelope compatibility does not adapt endpoint names or domain fields. This app’s catalog still uses `/api/products` and localized `name`/`priceCents`; the current Gin catalog exposes `/api/product/list` and `title`/`price`. Login also differs (`name`/`token` versus `username`/`accessToken`). Check the remaining contracts or add explicit domain adapters before claiming full integration. The new favorite paths match Gin; their authenticated use still requires a compatible issued JWT.
 
+## Detail links and reused pages
+
+The detail page accepts only positive decimal integer IDs within JavaScript's safe integer range. Missing, repeated, negative, fractional, exponential or oversized IDs show an invalid-link message and a link back to the catalog without requesting a detail record.
+
+Switching products in the same component resets quantity to 1 and clears the previous purchase feedback. A stock refresh clamps quantity to the available range; unavailable or unlisted products disable detail-page purchase and quantity controls. TanStack Query continues to own remote detail data and forwards `AbortSignal`; the cart does not become a second server cache.
+
 [API](./request.md) · [Tests](./testing.md)

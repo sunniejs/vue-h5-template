@@ -52,4 +52,12 @@ import { getChatSuggestions } from '@/api/modules/ai';
 const prompts = await getChatSuggestions(locale, signal, '/api/ai');
 ```
 
+## 流的结束与清理
+
+解析器同时支持旧 Mock 的 `start.conversationId` / `done` 和 FastAPI 的 `start.id` / `finish`，对外统一成 `ChatChunk`。UTF-8 字符和 CRLF 分隔符可以跨网络分片；遇到结束事件后停止消费，提前退出或解析失败时取消 reader 并释放锁。HTTP 失败响应会保留服务端的 `message` 与 Request ID。
+
+停止或清空会立即释放发送状态，并请求取消底层传输。即使自定义 Provider 忽略取消，旧响应也不能改写新会话的消息、ID、用量或错误。在组件 setup 或 Vue effect scope 内使用时，销毁 scope 会自动停止生成；在 scope 外使用时由调用方执行 `stop()`。
+
+聊天滚动只监听消息数量、最后一条内容和生成状态，在 DOM 更新后处理，避免每个 token 深度遍历全部历史。复制失败会显示提示；提示在 1.2 秒后清除，新对话或组件销毁后不再显示旧复制结果。
+
 [API](./request.md) · [测试](./testing.md)
