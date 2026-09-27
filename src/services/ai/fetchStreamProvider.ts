@@ -29,7 +29,9 @@ async function readError(response: Response): Promise<ApiError> {
     payload = undefined;
   }
   return new ApiError(
-    payload?.msg || `AI request failed (${response.status})`,
+    payload?.message ||
+      payload?.msg ||
+      `AI request failed (${response.status})`,
     {
       kind: 'http',
       code: payload?.code,

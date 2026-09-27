@@ -1,4 +1,10 @@
-import { computed, ref, shallowRef } from 'vue';
+import {
+  computed,
+  getCurrentScope,
+  onScopeDispose,
+  ref,
+  shallowRef,
+} from 'vue';
 import { defaultChatProvider } from '@/services/ai/fetchStreamProvider';
 import type { ChatMessage, ChatProvider, ChatUsage } from '@/types/ai';
 
@@ -21,6 +27,8 @@ export function useStreamingChat(provider: ChatProvider = defaultChatProvider) {
   const conversationId = ref(createId('conversation'));
   const usage = ref<ChatUsage | null>(null);
   const streaming = computed(() => activeController.value !== null);
+  let activeAssistant: ChatMessage | undefined;
+  let disposed = false;
 
   const run = async (context: ChatMessage[]) => {
     messages.value.push(createMessage('assistant', '', 'streaming'));
@@ -28,6 +36,7 @@ export function useStreamingChat(provider: ChatProvider = defaultChatProvider) {
     if (!assistant) return;
     const controller = new AbortController();
     activeController.value = controller;
+    activeAssistant = assistant;
     error.value = null;
     usage.value = null;
 
@@ -36,6 +45,8 @@ export function useStreamingChat(provider: ChatProvider = defaultChatProvider) {
         signal: controller.signal,
         conversationId: conversationId.value,
       })) {
+        if (activeController.value !== controller || controller.signal.aborted)
+          return;
         if (chunk.type === 'start') conversationId.value = chunk.conversationId;
         if (chunk.type === 'delta') assistant.content += chunk.delta;
         if (chunk.type === 'usage')
@@ -46,10 +57,11 @@ export function useStreamingChat(provider: ChatProvider = defaultChatProvider) {
         if (chunk.type === 'error') throw new Error(chunk.message);
         if (chunk.type === 'done') break;
       }
-      assistant.status = 'ready';
+      if (activeController.value === controller) assistant.status = 'ready';
       // catch 参数若命名为 error 会遮蔽外层 error ref，故用 caught 并禁用命名规则
       // oxlint-disable-next-line unicorn/catch-error-name
     } catch (caught) {
+      if (activeController.value !== controller) return;
       if (controller.signal.aborted) {
         assistant.status = 'stopped';
       } else {
@@ -59,19 +71,36 @@ export function useStreamingChat(provider: ChatProvider = defaultChatProvider) {
         error.value = normalized;
       }
     } finally {
-      if (activeController.value === controller) activeController.value = null;
+      if (activeController.value === controller) {
+        activeController.value = null;
+        activeAssistant = undefined;
+      }
     }
   };
 
   const sendMessage = async (content: string) => {
     const normalized = content.trim();
-    if (!normalized || streaming.value) return;
+    if (!normalized || streaming.value || disposed) return;
     const userMessage = createMessage('user', normalized);
     messages.value.push(userMessage);
     await run([...messages.value]);
   };
 
-  const stop = () => activeController.value?.abort();
+  const stop = () => {
+    const controller = activeController.value;
+    if (!controller) return;
+    activeController.value = null;
+    if (activeAssistant) activeAssistant.status = 'stopped';
+    activeAssistant = undefined;
+    controller.abort();
+  };
+
+  if (getCurrentScope()) {
+    onScopeDispose(() => {
+      disposed = true;
+      stop();
+    });
+  }
 
   const findLastMessageIndex = (
     predicate: (message: ChatMessage) => boolean,
@@ -84,7 +113,7 @@ export function useStreamingChat(provider: ChatProvider = defaultChatProvider) {
   };
 
   const regenerate = async (assistantId?: string) => {
-    if (streaming.value) return;
+    if (streaming.value || disposed) return;
     const targetIndex = assistantId
       ? messages.value.findIndex((message) => message.id === assistantId)
       : findLastMessageIndex((message) => message.role === 'assistant');

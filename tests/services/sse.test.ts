@@ -1,4 +1,4 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, it, vi } from 'vitest';
 import { parseSseEvent, parseSseStream } from '@/services/ai/sse';
 
 describe('sSE parser', () => {
@@ -54,4 +54,60 @@ describe('sSE parser', () => {
       { type: 'done' },
     ]);
   });
+
+  it('accepts FastAPI events across UTF-8 and CRLF byte boundaries', async () => {
+    const data = new TextEncoder().encode(
+      'data: {"type":"start","id":"fastapi-id"}\r\n\r\n' +
+        'data: {"type":"delta","delta":"你好、Vue"}\r\n\r\n' +
+        'data: {"type":"finish","reason":"stop"}\r\n\r\n',
+    );
+    const stream = new ReadableStream<Uint8Array>({
+      start(controller) {
+        for (const byte of data) controller.enqueue(Uint8Array.of(byte));
+        controller.close();
+      },
+    });
+    const chunks = [];
+    for await (const chunk of parseSseStream(stream)) chunks.push(chunk);
+    expect(chunks).toEqual([
+      { type: 'start', conversationId: 'fastapi-id' },
+      { type: 'delta', delta: '你好、Vue' },
+      { type: 'done' },
+    ]);
+    expect(stream.locked).toBe(false);
+  });
+
+  it.each(['early return', 'invalid event'])(
+    'cancels the transport after %s',
+    async (scenario) => {
+      const cancel = vi.fn();
+      const stream = new ReadableStream<Uint8Array>({
+        start(controller) {
+          controller.enqueue(
+            new TextEncoder().encode(
+              scenario === 'early return'
+                ? 'data: {"type":"delta","delta":"Hi"}\n\n'
+                : 'data: {"type":"unknown"}\n\n',
+            ),
+          );
+        },
+        cancel,
+      });
+      const events = parseSseStream(stream)[Symbol.asyncIterator]();
+      let failure: unknown;
+      try {
+        await events.next();
+        await events.return?.();
+      } catch (error) {
+        failure = error;
+      }
+      expect(failure instanceof Error ? failure.message : undefined).toBe(
+        scenario === 'invalid event'
+          ? 'Unsupported chat stream event'
+          : undefined,
+      );
+      expect(cancel).toHaveBeenCalledOnce();
+      expect(stream.locked).toBe(false);
+    },
+  );
 });

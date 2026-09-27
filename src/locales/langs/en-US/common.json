@@ -140,7 +140,9 @@
       "decreaseQuantity": "Decrease quantity",
       "increaseQuantity": "Increase quantity",
       "cartAdded": "Added {count} item(s) to your cart",
-      "checkoutDemo": "Selected {count} item(s); connect your checkout in a real project"
+      "checkoutDemo": "Selected {count} item(s); connect your checkout in a real project",
+      "invalidProduct": "This product link is invalid. Please return to the catalog.",
+      "backProducts": "Back to products"
     },
     "editor": {
       "editEyebrow": "EDIT PRODUCT",
@@ -401,7 +403,8 @@
       "How should Vue Query and Pinia divide responsibilities?",
       "Explain this template's streaming architecture",
       "Write a Vue 3 composable example"
-    ]
+    ],
+    "copyFailed": "Unable to copy. Please select and copy the text manually."
   },
   "ui": {
     "eyebrow": "Build-time selection",

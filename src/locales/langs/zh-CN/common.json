@@ -140,7 +140,9 @@
       "decreaseQuantity": "减少数量",
       "increaseQuantity": "增加数量",
       "cartAdded": "已将 {count} 件商品加入购物车",
-      "checkoutDemo": "已选择 {count} 件商品；支付流程可在业务项目中接入"
+      "checkoutDemo": "已选择 {count} 件商品；支付流程可在业务项目中接入",
+      "invalidProduct": "商品链接无效，请返回商品列表。",
+      "backProducts": "返回商品列表"
     },
     "editor": {
       "editEyebrow": "编辑商品",
@@ -401,7 +403,8 @@
       "Vue Query 和 Pinia 应该如何分工？",
       "解释这个模板的流式架构",
       "写一个 Vue 3 组合式函数示例"
-    ]
+    ],
+    "copyFailed": "复制失败，请选择文本后手动复制。"
   },
   "ui": {
     "eyebrow": "构建期单选",

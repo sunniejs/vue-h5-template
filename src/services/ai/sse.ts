@@ -12,8 +12,9 @@ export function parseSseEvent(event: string): ChatChunk | null {
   if (!value || typeof value !== 'object' || !('type' in value))
     throw new Error('Invalid chat stream event');
   const chunk = value as Record<string, unknown>;
-  if (chunk.type === 'start' && typeof chunk.conversationId === 'string') {
-    return { type: 'start', conversationId: chunk.conversationId };
+  if (chunk.type === 'start') {
+    const id = chunk.conversationId ?? chunk.id;
+    if (typeof id === 'string') return { type: 'start', conversationId: id };
   }
   if (chunk.type === 'delta' && typeof chunk.delta === 'string')
     return { type: 'delta', delta: chunk.delta };
@@ -28,7 +29,7 @@ export function parseSseEvent(event: string): ChatChunk | null {
       outputTokens: chunk.outputTokens,
     };
   }
-  if (chunk.type === 'done') return { type: 'done' };
+  if (chunk.type === 'done' || chunk.type === 'finish') return { type: 'done' };
   if (chunk.type === 'error' && typeof chunk.message === 'string')
     return { type: 'error', message: chunk.message };
   throw new Error('Unsupported chat stream event');
@@ -40,10 +41,15 @@ export async function* parseSseStream(
   const reader = stream.getReader();
   const decoder = new TextDecoder();
   let buffer = '';
+  let completed = false;
   try {
     while (true) {
       const { value, done } = await reader.read();
-      buffer += decoder.decode(value, { stream: !done }).replace(/\r\n/g, '\n');
+      buffer = (buffer + decoder.decode(value, { stream: !done })).replace(
+        /\r\n/g,
+        '\n',
+      );
+      if (done) completed = true;
       let boundary = buffer.indexOf('\n\n');
       while (boundary >= 0) {
         const event = buffer.slice(0, boundary);
@@ -57,6 +63,10 @@ export async function* parseSseStream(
     const finalChunk = parseSseEvent(buffer);
     if (finalChunk) yield finalChunk;
   } finally {
-    reader.releaseLock();
+    try {
+      if (!completed) await reader.cancel().catch(() => undefined);
+    } finally {
+      reader.releaseLock();
+    }
   }
 }

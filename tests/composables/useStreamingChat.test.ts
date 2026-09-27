@@ -1,5 +1,5 @@
-import { effect, stop } from 'vue';
-import { describe, expect, it } from 'vitest';
+import { effect, effectScope, stop } from 'vue';
+import { describe, expect, it, vi } from 'vitest';
 import { useStreamingChat } from '@/composables/useStreamingChat';
 import type { ChatProvider } from '@/types/ai';
 
@@ -86,6 +86,114 @@ describe('useStreamingChat', () => {
     await pending;
     expect(chat.messages.value[chat.messages.value.length - 1]?.status).toBe(
       'stopped',
+    );
+    expect(chat.streaming.value).toBe(false);
+  });
+
+  it.each(['stop', 'clear'] as const)(
+    '%s detaches a late provider before starting a new conversation',
+    async (action) => {
+      let releaseOld!: () => void;
+      let releaseNew!: () => void;
+      const oldGate = new Promise<void>((resolve) => {
+        releaseOld = resolve;
+      });
+      const newGate = new Promise<void>((resolve) => {
+        releaseNew = resolve;
+      });
+      let attempts = 0;
+      let oldSignal: AbortSignal | undefined;
+      const chat = useStreamingChat({
+        async *chat(_messages, options) {
+          if (++attempts === 1) {
+            oldSignal = options?.signal;
+            await oldGate;
+            yield { type: 'start', conversationId: 'stale-conversation' };
+            yield { type: 'usage', inputTokens: 999, outputTokens: 999 };
+            throw new Error('Late failure');
+          }
+          yield { type: 'start', conversationId: 'new-conversation' };
+          yield { type: 'delta', delta: 'New ' };
+          await newGate;
+          yield { type: 'delta', delta: 'response' };
+        },
+      });
+      const oldRequest = chat.sendMessage('Old question');
+      chat[action]();
+      expect(oldSignal?.aborted).toBe(true);
+      expect(chat.streaming.value).toBe(false);
+      expect(chat.messages.value[chat.messages.value.length - 1]?.status).toBe(
+        action === 'clear' ? undefined : 'stopped',
+      );
+      const newRequest = chat.sendMessage('New question');
+      await vi.waitFor(() =>
+        expect(
+          chat.messages.value[chat.messages.value.length - 1]?.content,
+        ).toBe('New '),
+      );
+      releaseOld();
+      await oldRequest;
+      expect(chat.conversationId.value).toBe('new-conversation');
+      expect(chat.usage.value).toBeNull();
+      expect(chat.error.value).toBeNull();
+      expect(chat.streaming.value).toBe(true);
+      releaseNew();
+      await newRequest;
+      expect(chat.messages.value[chat.messages.value.length - 1]?.content).toBe(
+        'New response',
+      );
+      expect(chat.messages.value[chat.messages.value.length - 1]?.status).toBe(
+        'ready',
+      );
+    },
+  );
+
+  it('ignores a late rejection after clear', async () => {
+    let fail!: (reason: Error) => void;
+    const pendingFailure = new Promise<void>((_resolve, reject) => {
+      fail = reject;
+    });
+    const chat = useStreamingChat({
+      async *chat() {
+        await pendingFailure;
+        yield { type: 'done' };
+      },
+    });
+    const pending = chat.sendMessage('Hello');
+    chat.clear();
+    fail(new Error('stale error'));
+    await pending;
+    expect(chat.messages.value).toEqual([]);
+    expect(chat.error.value).toBeNull();
+  });
+
+  it('aborts on scope disposal and prevents further requests', async () => {
+    const scope = effectScope();
+    let release!: () => void;
+    const gate = new Promise<void>((resolve) => {
+      release = resolve;
+    });
+    let signal: AbortSignal | undefined;
+    const chat = scope.run(() =>
+      useStreamingChat({
+        async *chat(_messages, options) {
+          signal = options?.signal;
+          await gate;
+          yield { type: 'delta', delta: 'late' };
+        },
+      }),
+    );
+    if (!chat) throw new Error('Unable to create chat scope');
+    const pending = chat.sendMessage('Hello');
+    scope.stop();
+    expect(signal?.aborted).toBe(true);
+    release();
+    await pending;
+    await chat.sendMessage('After leaving');
+    await chat.regenerate();
+    expect(chat.messages.value).toHaveLength(2);
+    expect(chat.messages.value[chat.messages.value.length - 1]?.content).toBe(
+      '',
     );
     expect(chat.streaming.value).toBe(false);
   });

@@ -191,3 +191,62 @@ test('chat uses server suggestions and falls back offline', async ({
     page.getByRole('button', { name: '解释这个模板的流式架构' }),
   ).toBeVisible();
 });
+
+test('invalid product links show a recovery path without requesting detail', async ({
+  page,
+}) => {
+  const requests: string[] = [];
+  page.on('request', (request) => {
+    if (new URL(request.url()).pathname.startsWith('/api/products/'))
+      requests.push(request.url());
+  });
+  for (const id of ['abc', '0', '9007199254740992']) {
+    await page.goto(`/shop/products/${id}`);
+    await expect(page.getByRole('alert')).toContainText('商品链接无效');
+    await expect(
+      page.getByRole('link', { name: '返回商品列表' }),
+    ).toHaveAttribute('href', '/shop');
+  }
+  expect(requests).toEqual([]);
+  await page.getByRole('link', { name: '返回商品列表' }).click();
+  await expect(page).toHaveURL(/\/shop$/);
+});
+
+test('FastAPI stream finishes correctly and clipboard denial has feedback', async ({
+  page,
+}) => {
+  await page.addInitScript(() => {
+    Object.defineProperty(navigator, 'clipboard', {
+      configurable: true,
+      value: {
+        writeText: async () => {
+          throw new DOMException('Denied', 'NotAllowedError');
+        },
+      },
+    });
+  });
+  await page.route('**/api/ai/chat', (route) =>
+    route.fulfill({
+      contentType: 'text/event-stream',
+      body:
+        'data: {"type":"start","id":"fastapi-browser"}\r\n\r\n' +
+        'data: {"type":"delta","delta":"FastAPI browser answer"}\r\n\r\n' +
+        'data: {"type":"finish","reason":"stop"}\r\n\r\n' +
+        'data: {"type":"delta","delta":"STALE TRAILER"}\r\n\r\n',
+    }),
+  );
+  await page.goto('/ai/chat');
+  await page.getByRole('textbox').fill('Hello');
+  await page.getByRole('textbox').press('Enter');
+  await expect(
+    page.getByText('FastAPI browser answer', { exact: true }),
+  ).toBeVisible();
+  await expect(
+    page.getByRole('button', { name: '重新生成', exact: true }),
+  ).toBeVisible();
+  await expect(page.getByText('STALE TRAILER', { exact: false })).toHaveCount(
+    0,
+  );
+  await page.getByRole('button', { name: '复制', exact: true }).click();
+  await expect(page.getByRole('status')).toContainText('复制失败');
+});

@@ -1,6 +1,88 @@
+<script setup lang="ts">
+import FavoriteButton from '@/components/shop/FavoriteButton.vue';
+import { useUserStore } from '@/store/modules/user';
+import { computed, shallowRef, watch } from 'vue';
+import { useQuery } from '@tanstack/vue-query';
+import { useI18n } from 'vue-i18n';
+import { RouterLink, useRoute, useRouter } from 'vue-router';
+import { getProduct } from '@/api/modules/products';
+import { useCartStore } from '@/store/modules/cart';
+import {
+  formatProductPrice,
+  getLocalizedText,
+  getSafeProductImage,
+  parseProductId,
+} from '@/utils/product';
+
+const route = useRoute();
+const router = useRouter();
+const { locale, t } = useI18n();
+const cart = useCartStore();
+const user = useUserStore();
+const productId = computed(() => parseProductId(route.params.id));
+const productQuery = useQuery({
+  queryKey: computed(() => ['products', productId.value]),
+  queryFn: ({ signal }) => {
+    if (productId.value === undefined) throw new Error('Invalid product ID');
+    return getProduct(productId.value, signal);
+  },
+  enabled: computed(() => productId.value !== undefined),
+});
+const product = computed(() => productQuery.data.value);
+const name = computed(() =>
+  product.value ? getLocalizedText(product.value.name, locale.value) : '',
+);
+const subtitle = computed(() =>
+  product.value ? getLocalizedText(product.value.subtitle, locale.value) : '',
+);
+const description = computed(() =>
+  product.value
+    ? getLocalizedText(product.value.description, locale.value)
+    : '',
+);
+const quantity = shallowRef(1);
+const actionMessage = shallowRef('');
+watch(productId, () => {
+  quantity.value = 1;
+  actionMessage.value = '';
+});
+const available = computed(
+  () =>
+    !!product.value &&
+    product.value.stock > 0 &&
+    product.value.status === 'on_sale',
+);
+watch(
+  () => product.value?.stock,
+  (stock) => {
+    if (stock !== undefined)
+      quantity.value = Math.max(1, Math.min(quantity.value, stock));
+  },
+);
+const addToCart = () => {
+  if (!product.value || !available.value) return;
+  cart.add(product.value, quantity.value);
+  actionMessage.value = t('common.shop.detail.cartAdded', {
+    count: quantity.value,
+  });
+};
+const showBuyAction = () => {
+  if (!available.value) return;
+  actionMessage.value = t('common.shop.detail.checkoutDemo', {
+    count: quantity.value,
+  });
+};
+</script>
+
 <template>
   <div class="product-detail">
-    <div v-if="productQuery.isPending.value" class="detail-state">
+    <div v-if="productId === undefined" class="detail-state" role="alert">
+      <p>{{ t('common.shop.detail.invalidProduct') }}</p>
+      <RouterLink to="/shop">{{
+        t('common.shop.detail.backProducts')
+      }}</RouterLink>
+    </div>
+    <div v-else-if="productQuery.isPending.value" class="detail-state">
       {{ t('common.global.loading') }}
     </div>
     <div
@@ -13,7 +95,7 @@
         {{ t('common.global.retry') }}
       </button>
     </div>
-    <template v-else-if="product">
+    <template v-else-if="product && productId !== undefined">
       <section class="product-media">
         <img :src="getSafeProductImage(product.coverUrl)" :alt="name" /><button
           type="button"
@@ -77,6 +159,7 @@
           <button
             type="button"
             :aria-label="t('common.shop.detail.decreaseQuantity')"
+            :disabled="!available || quantity <= 1"
             @click="quantity = Math.max(1, quantity - 1)"
           >
             −</button
@@ -84,76 +167,30 @@
           ><button
             type="button"
             :aria-label="t('common.shop.detail.increaseQuantity')"
+            :disabled="!available || quantity >= product.stock"
             @click="quantity = Math.min(product.stock, quantity + 1)"
           >
             ＋
           </button>
         </div>
-        <button type="button" @click="addToCart">
-          {{ t('common.shop.detail.addCart') }}</button
-        ><button class="buy" type="button" @click="showBuyAction">
+        <button type="button" :disabled="!available" @click="addToCart">
+          {{
+            available
+              ? t('common.shop.detail.addCart')
+              : t('common.shop.status.sold_out')
+          }}</button
+        ><button
+          class="buy"
+          type="button"
+          :disabled="!available"
+          @click="showBuyAction"
+        >
           {{ t('common.shop.detail.buyNow') }}
         </button>
       </footer>
     </template>
   </div>
 </template>
-
-<script setup lang="ts">
-import FavoriteButton from '@/components/shop/FavoriteButton.vue';
-import { useUserStore } from '@/store/modules/user';
-import { computed, ref } from 'vue';
-import { useQuery } from '@tanstack/vue-query';
-import { useI18n } from 'vue-i18n';
-import { useRoute, useRouter } from 'vue-router';
-import { getProduct } from '@/api/modules/products';
-import { useCartStore } from '@/store/modules/cart';
-import {
-  formatProductPrice,
-  getLocalizedText,
-  getSafeProductImage,
-} from '@/utils/product';
-
-const route = useRoute();
-const router = useRouter();
-const { locale, t } = useI18n();
-const cart = useCartStore();
-const user = useUserStore();
-const productId = computed(() => Number(route.params.id));
-const productQuery = useQuery({
-  queryKey: computed(() => ['products', productId.value]),
-  queryFn: ({ signal }) => getProduct(productId.value, signal),
-  enabled: computed(
-    () => Number.isInteger(productId.value) && productId.value > 0,
-  ),
-});
-const product = computed(() => productQuery.data.value);
-const name = computed(() =>
-  product.value ? getLocalizedText(product.value.name, locale.value) : '',
-);
-const subtitle = computed(() =>
-  product.value ? getLocalizedText(product.value.subtitle, locale.value) : '',
-);
-const description = computed(() =>
-  product.value
-    ? getLocalizedText(product.value.description, locale.value)
-    : '',
-);
-const quantity = ref(1);
-const actionMessage = ref('');
-const addToCart = () => {
-  if (!product.value) return;
-  cart.add(product.value, quantity.value);
-  actionMessage.value = t('common.shop.detail.cartAdded', {
-    count: quantity.value,
-  });
-};
-const showBuyAction = () => {
-  actionMessage.value = t('common.shop.detail.checkoutDemo', {
-    count: quantity.value,
-  });
-};
-</script>
 
 <style scoped lang="scss">
 .product-detail {
@@ -334,6 +371,11 @@ dd {
   background: var(--color-background-soft);
   border: 1px solid var(--color-border);
   border-radius: var(--radius-md);
+}
+
+.purchase-bar button:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
 }
 
 .quantity button {

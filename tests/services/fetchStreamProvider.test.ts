@@ -70,4 +70,26 @@ describe('fetchStreamChatProvider', () => {
     });
     expect(onUnauthorized).toHaveBeenCalledOnce();
   });
+
+  it('preserves the FastAPI message and trace on a failed request', async () => {
+    vi.stubGlobal(
+      'fetch',
+      vi.fn(async () =>
+        Response.json(
+          {
+            code: 429,
+            message: 'Too many requests',
+            data: null,
+          },
+          { status: 429, headers: { 'X-Request-ID': 'fastapi-trace' } },
+        ),
+      ),
+    );
+    const provider = new FetchStreamChatProvider('/api/ai/chat');
+    await expect(provider.chat([]).next()).rejects.toMatchObject({
+      message: 'Too many requests',
+      status: 429,
+      requestId: 'fastapi-trace',
+    });
+  });
 });

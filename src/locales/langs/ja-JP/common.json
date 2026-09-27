@@ -140,7 +140,9 @@
       "decreaseQuantity": "数量を減らす",
       "increaseQuantity": "数量を増やす",
       "cartAdded": "{count} 点をカートに追加しました",
-      "checkoutDemo": "{count} 点を選択しました。実案件では決済フローを接続できます"
+      "checkoutDemo": "{count} 点を選択しました。実案件では決済フローを接続できます",
+      "invalidProduct": "商品リンクが無効です。商品一覧に戻ってください。",
+      "backProducts": "商品一覧に戻る"
     },
     "editor": {
       "editEyebrow": "商品を編集",
@@ -401,7 +403,8 @@
       "Vue Query と Pinia の役割分担は？",
       "このテンプレートのストリーミング設計を説明して",
       "Vue 3 composable の例を書いて"
-    ]
+    ],
+    "copyFailed": "コピーできませんでした。テキストを選択して手動でコピーしてください。"
   },
   "ui": {
     "eyebrow": "ビルド時選択",
