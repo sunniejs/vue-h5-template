@@ -84,6 +84,7 @@ import {
   computed,
   onBeforeUnmount,
   onMounted,
+  onScopeDispose,
   useTemplateRef,
   watch,
 } from 'vue';
@@ -98,6 +99,10 @@ import { getFeed, getTasks, toggleTask } from '@/api/modules/examples';
 import type { Task } from '@/api/modules/examples';
 
 const queryClient = useQueryClient();
+let disposed = false;
+onScopeDispose(() => {
+  disposed = true;
+});
 const { t } = useI18n();
 const tasksQuery = useQuery({
   queryKey: ['examples', 'tasks'],
@@ -105,10 +110,12 @@ const tasksQuery = useQuery({
 });
 const toggleMutation = useMutation({
   mutationFn: toggleTask,
-  onSuccess: (updated) =>
+  onSuccess: (updated) => {
+    if (disposed) return;
     queryClient.setQueryData<Task[]>(['examples', 'tasks'], (current = []) =>
       current.map((task) => (task.id === updated.id ? updated : task)),
-    ),
+    );
+  },
 });
 const feedQuery = useInfiniteQuery({
   queryKey: ['examples', 'feed'],

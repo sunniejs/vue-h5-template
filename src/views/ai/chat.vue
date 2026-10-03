@@ -405,7 +405,8 @@ watch(
   margin-top: var(--space-2);
 
   button {
-    min-height: 2rem;
+    min-width: var(--touch-target);
+    min-height: var(--touch-target);
     padding: 0 var(--space-2);
     font-size: var(--text-caption);
     color: var(--color-text-secondary);

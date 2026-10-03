@@ -9,7 +9,7 @@ export function usePullToRefresh({
   onRefresh,
   threshold = 64,
 }: PullToRefreshOptions) {
-  const startY = ref(0);
+  const startY = ref<number | null>(null);
   const distance = ref(0);
   const refreshing = ref(false);
   const ready = computed(() => distance.value >= threshold);
@@ -20,12 +20,18 @@ export function usePullToRefresh({
   };
 
   const onTouchStart = (event: TouchEvent) => {
-    if (refreshing.value || !isAtTop(event)) return;
-    startY.value = event.touches[0]?.clientY ?? 0;
+    if (refreshing.value) return;
+    reset();
+    if (!isAtTop(event)) return;
+    startY.value = event.touches[0]?.clientY ?? null;
   };
 
   const onTouchMove = (event: TouchEvent) => {
-    if (!startY.value || refreshing.value || !isAtTop(event)) return;
+    if (startY.value === null || refreshing.value) return;
+    if (!isAtTop(event)) {
+      reset();
+      return;
+    }
     const currentY = event.touches[0]?.clientY ?? startY.value;
     distance.value = Math.min(
       88,
@@ -34,12 +40,12 @@ export function usePullToRefresh({
   };
 
   const reset = () => {
-    startY.value = 0;
+    startY.value = null;
     distance.value = 0;
   };
 
   const onTouchEnd = async () => {
-    if (!startY.value) return;
+    if (startY.value === null || refreshing.value) return;
     if (!ready.value) {
       reset();
       return;
@@ -54,5 +60,13 @@ export function usePullToRefresh({
     }
   };
 
-  return { distance, onTouchEnd, onTouchMove, onTouchStart, ready, refreshing };
+  return {
+    distance,
+    onTouchEnd,
+    onTouchMove,
+    onTouchStart,
+    onTouchCancel: reset,
+    ready,
+    refreshing,
+  };
 }

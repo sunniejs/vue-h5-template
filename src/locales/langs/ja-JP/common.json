@@ -285,6 +285,8 @@
     "clipboardDescription": "Clipboard API でテキストをコピーします。",
     "copy": "サンプルをコピー",
     "copied": "サンプルをコピーしました",
+    "copyFailed": "コピーに失敗しました。ブラウザの権限を確認して再試行してください。",
+    "shareFailed": "共有に失敗しました。ブラウザの権限を確認して再試行してください。",
     "share": "システム共有",
     "shareDescription": "Web Share 対応時のみ利用し、非対応時は無効にします。",
     "shareAction": "このページを共有",

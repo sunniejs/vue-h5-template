@@ -285,6 +285,8 @@
     "clipboardDescription": "Copies text through the Clipboard API.",
     "copy": "Copy sample text",
     "copied": "Sample text copied",
+    "copyFailed": "Copy failed. Check browser permissions and try again.",
+    "shareFailed": "Sharing failed. Check browser permissions and try again.",
     "share": "System share",
     "shareDescription": "Uses Web Share when available and disables the action otherwise.",
     "shareAction": "Share this page",

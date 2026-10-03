@@ -29,8 +29,9 @@
         v-model.trim="keyword"
         type="search"
         autocomplete="off"
+        :aria-label="t('common.shop.admin.searchPlaceholder')"
         :placeholder="t('common.shop.admin.searchPlaceholder')"
-      /><select v-model="status">
+      /><select v-model="status" :aria-label="t('common.workspace.filter')">
         <option value="">{{ t('common.shop.admin.allStatus') }}</option>
         <option value="draft">{{ t('common.shop.status.draft') }}</option>
         <option value="on_sale">{{ t('common.shop.status.on_sale') }}</option>
@@ -380,7 +381,7 @@ header > button {
 }
 
 .row-actions button {
-  min-height: 2.25rem;
+  min-height: var(--touch-target);
   padding: 0 var(--space-3);
   color: var(--color-text-secondary);
   background: transparent;

@@ -83,8 +83,11 @@ describe('aPI modules', () => {
   it('keeps paths, bodies and abort signals inside typed modules', async () => {
     mocks.post.mockResolvedValue({ token: 'token' });
     const login = { name: 'Ada', password: 'secret' };
-    await loginPassword(login);
-    expect(mocks.post).toHaveBeenCalledWith('/auth/login', login);
+    const loginController = new AbortController();
+    await loginPassword(login, loginController.signal);
+    expect(mocks.post).toHaveBeenCalledWith('/auth/login', login, {
+      signal: loginController.signal,
+    });
 
     const controller = new AbortController();
     mocks.get.mockResolvedValue([]);

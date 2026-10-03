@@ -36,7 +36,7 @@
 <script setup lang="ts">
 import { nextTick, ref, useTemplateRef } from 'vue';
 import { useI18n } from 'vue-i18n';
-defineProps<{ disabled?: boolean; streaming?: boolean }>();
+const props = defineProps<{ disabled?: boolean; streaming?: boolean }>();
 const emit = defineEmits<{ send: [content: string]; stop: [] }>();
 const { t } = useI18n();
 const input = ref('');
@@ -49,6 +49,7 @@ const resize = () => {
   element.style.height = `${Math.min(element.scrollHeight, 220)}px`;
 };
 const submit = () => {
+  if (props.disabled || props.streaming || composing.value) return;
   const content = input.value.trim();
   if (!content) return;
   emit('send', content);
@@ -56,7 +57,12 @@ const submit = () => {
   void nextTick(resize);
 };
 const handleKeydown = (event: KeyboardEvent) => {
-  if (event.key === 'Enter' && !event.shiftKey && !composing.value) {
+  if (
+    event.key === 'Enter' &&
+    !event.shiftKey &&
+    !composing.value &&
+    !event.isComposing
+  ) {
     event.preventDefault();
     submit();
   }
@@ -72,6 +78,11 @@ const handleKeydown = (event: KeyboardEvent) => {
   background: var(--color-surface);
   border: 1px solid var(--color-border-strong);
   border-radius: var(--radius-lg);
+
+  &:focus-within {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 2px;
+  }
 }
 
 textarea {
@@ -92,8 +103,8 @@ button {
   display: grid;
   flex: 0 0 auto;
   place-items: center;
-  width: 2.25rem;
-  height: 2.25rem;
+  width: var(--touch-target);
+  height: var(--touch-target);
   color: var(--color-primary-contrast);
   background: var(--color-primary);
   border: 0;

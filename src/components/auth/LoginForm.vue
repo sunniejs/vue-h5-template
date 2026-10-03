@@ -31,14 +31,14 @@ import { computed, ref } from 'vue';
 import { useI18n } from 'vue-i18n';
 import type { LoginParams } from '@/api/modules/auth';
 
-defineProps<{ loading?: boolean; error?: string }>();
+const props = defineProps<{ loading?: boolean; error?: string }>();
 const emit = defineEmits<{ submit: [params: LoginParams] }>();
 const { t } = useI18n();
 const name = ref('');
 const password = ref('');
 const canSubmit = computed(() => Boolean(name.value && password.value));
 const submit = () => {
-  if (canSubmit.value)
+  if (canSubmit.value && !props.loading)
     emit('submit', { name: name.value, password: password.value });
 };
 </script>

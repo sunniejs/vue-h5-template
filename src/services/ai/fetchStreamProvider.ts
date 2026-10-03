@@ -69,7 +69,13 @@ export class FetchStreamChatProvider implements ChatProvider {
     });
 
     if (!response.ok) {
-      if (response.status === 401) void runtime.onUnauthorized?.();
+      const currentToken = runtime.getAccessToken?.();
+      if (
+        response.status === 401 &&
+        headers.get('Authorization') ===
+          (currentToken ? `Bearer ${currentToken}` : null)
+      )
+        void runtime.onUnauthorized?.();
       throw await readError(response);
     }
     if (!response.body)

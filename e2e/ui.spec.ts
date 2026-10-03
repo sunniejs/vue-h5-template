@@ -1,5 +1,68 @@
 import { expect, test } from '@playwright/test';
 
+test('chat and cart controls keep 44px targets on narrow screens', async ({
+  page,
+}) => {
+  for (const width of [320, 768, 1440]) {
+    await page.setViewportSize({ width, height: 844 });
+    await page.goto('/ai/chat');
+    const send = page.getByRole('button', { name: '发送消息' });
+    const box = await send.boundingBox();
+    expect(box?.width).toBeGreaterThanOrEqual(44);
+    expect(box?.height).toBeGreaterThanOrEqual(44);
+    const input = page.getByRole('textbox');
+    await input.focus();
+    const focus = await page
+      .locator('.chat-composer')
+      .evaluate((element) => getComputedStyle(element).outlineStyle);
+    expect(focus).toBe('solid');
+    expect(
+      await page.evaluate(
+        () => document.documentElement.scrollWidth - window.innerWidth,
+      ),
+    ).toBeLessThanOrEqual(0);
+  }
+  await page.setViewportSize({ width: 320, height: 700 });
+  await page.goto('/shop');
+  await page
+    .getByRole('button', { name: /将Aurora 降噪耳机加入购物车/ })
+    .click();
+  await page.getByRole('link', { name: '打开购物车' }).click();
+  const buttons = page.locator('.line-actions button');
+  await expect(buttons).toHaveCount(3);
+  for (const button of await buttons.all()) {
+    const box = await button.boundingBox();
+    if (!box) throw new Error('Expected visible cart control bounds');
+    expect(box.width).toBeGreaterThanOrEqual(44);
+    expect(box.height).toBeGreaterThanOrEqual(44);
+    expect(box.x + box.width).toBeLessThanOrEqual(320);
+  }
+});
+
+test('chat composer remains visible when the visual viewport shrinks', async ({
+  page,
+}) => {
+  await page.goto('/ai/chat');
+  await page.getByRole('textbox').fill('Draft before keyboard resize');
+  await page.evaluate(() => {
+    const viewport = window.visualViewport;
+    if (!viewport) throw new Error('Visual viewport is required');
+    Object.defineProperty(viewport, 'height', {
+      configurable: true,
+      value: 400,
+    });
+    viewport.dispatchEvent(new Event('resize'));
+  });
+  await expect(page.locator('.chat-page')).toHaveCSS('height', '400px');
+  const composer = await page.locator('.chat-composer').boundingBox();
+  if (!composer) throw new Error('Expected visible chat composer bounds');
+  expect(composer.y).toBeGreaterThanOrEqual(0);
+  expect(composer.y + composer.height).toBeLessThanOrEqual(400);
+  await expect(page.getByRole('textbox')).toHaveValue(
+    'Draft before keyboard resize',
+  );
+});
+
 test('layout remains restrained on mobile, tablet and desktop', async ({
   page,
 }) => {

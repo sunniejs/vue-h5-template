@@ -285,6 +285,8 @@
     "clipboardDescription": "通过 Clipboard API 复制文本。",
     "copy": "复制示例文本",
     "copied": "示例文本已复制",
+    "copyFailed": "复制失败，请检查浏览器权限后重试。",
+    "shareFailed": "分享失败，请检查浏览器权限后重试。",
     "share": "系统分享",
     "shareDescription": "支持时调用 Web Share，不支持时禁用操作。",
     "shareAction": "分享当前页",

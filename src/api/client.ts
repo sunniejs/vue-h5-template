@@ -27,6 +27,28 @@ function createRequestId() {
   );
 }
 
+function isCurrentSession(config?: InternalAxiosRequestConfig): boolean {
+  const token = runtime.getAccessToken?.();
+  return (
+    config?.headers.get('Authorization') ===
+    (token ? `Bearer ${token}` : undefined)
+  );
+}
+
+function isApiResponse(value: unknown): value is ApiResponse<unknown> {
+  return (
+    typeof value === 'object' &&
+    value !== null &&
+    'code' in value &&
+    typeof value.code === 'number' &&
+    Number.isInteger(value.code) &&
+    'data' in value &&
+    (!('msg' in value) || typeof value.msg === 'string') &&
+    (!('message' in value) || typeof value.message === 'string') &&
+    (!('requestId' in value) || typeof value.requestId === 'string')
+  );
+}
+
 export function normalizeApiError(error: unknown): ApiError {
   if (error instanceof ApiError) return error;
   if (!axios.isAxiosError(error)) {
@@ -84,8 +106,17 @@ axiosInstance.interceptors.request.use((config: InternalAxiosRequestConfig) => {
 });
 
 axiosInstance.interceptors.response.use(
-  (response: AxiosResponse<ApiResponse<unknown>>) => {
+  (response: AxiosResponse<unknown>) => {
     const payload = response.data;
+    if (!isApiResponse(payload))
+      return Promise.reject(
+        new ApiError('Invalid API response', {
+          kind: 'unknown',
+          status: response.status,
+          requestId: response.headers['x-request-id'],
+          details: payload,
+        }),
+      );
     if (payload.code !== 0 && (payload.code < 200 || payload.code >= 300)) {
       const error = new ApiError(
         payload.msg || payload.message || 'Request failed',
@@ -97,14 +128,20 @@ axiosInstance.interceptors.response.use(
           details: payload,
         },
       );
-      if (payload.code === 401) void runtime.onUnauthorized?.();
+      if (payload.code === 401 && isCurrentSession(response.config))
+        void runtime.onUnauthorized?.();
       return Promise.reject(error);
     }
     return response;
   },
   (error: unknown) => {
     const apiError = normalizeApiError(error);
-    if (apiError.status === 401) void runtime.onUnauthorized?.();
+    if (
+      apiError.status === 401 &&
+      axios.isAxiosError(error) &&
+      isCurrentSession(error.config)
+    )
+      void runtime.onUnauthorized?.();
     return Promise.reject(apiError);
   },
 );

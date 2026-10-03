@@ -63,13 +63,24 @@ const { isOnline } = useNetworkStatus();
 const feedback = ref('');
 const canShare = computed(() => typeof navigator.share === 'function');
 const copyText = async () => {
-  await navigator.clipboard.writeText('Vue H5 Template v2');
-  feedback.value = t('common.mobile.copied');
+  feedback.value = '';
+  try {
+    await navigator.clipboard.writeText('Vue H5 Template v2');
+    feedback.value = t('common.mobile.copied');
+  } catch {
+    feedback.value = t('common.mobile.copyFailed');
+  }
 };
 const sharePage = async () => {
   if (!canShare.value) return;
-  await navigator.share({ title: document.title, url: window.location.href });
-  feedback.value = t('common.mobile.shared');
+  feedback.value = '';
+  try {
+    await navigator.share({ title: document.title, url: window.location.href });
+    feedback.value = t('common.mobile.shared');
+  } catch (error) {
+    if (error instanceof DOMException && error.name === 'AbortError') return;
+    feedback.value = t('common.mobile.shareFailed');
+  }
 };
 </script>
 

@@ -1,5 +1,76 @@
 import { expect, test } from '@playwright/test';
 
+test('switching accounts in one SPA session never reuses the previous profile', async ({
+  page,
+}) => {
+  await page.route('**/api/user/profile', async (route) => {
+    const authorization = route.request().headers()['authorization'] ?? '';
+    const name = decodeURIComponent(
+      authorization.replace('Bearer mock-token-v2-', ''),
+    );
+    await route.fulfill({
+      json: { code: 200, data: { id: 1, name, role: 'admin', plan: 'pro' } },
+    });
+  });
+  await page.goto('/login');
+  for (const name of ['Account A', 'Account B']) {
+    await page.getByLabel('用户名').fill(name);
+    await page.getByLabel('密码').fill('secret');
+    await page.getByRole('button', { name: '登录', exact: true }).click();
+    await expect(page).toHaveURL(/\/member$/);
+    await expect(
+      page.getByRole('heading', { name, exact: true }),
+    ).toBeVisible();
+    if (name === 'Account A') {
+      await page.getByRole('button', { name: '退出登录' }).click();
+      await page
+        .getByRole('navigation')
+        .getByRole('link', { name: '我的', exact: true })
+        .click();
+      await page.locator('.guest-card a').click();
+    } else {
+      await expect(
+        page.getByRole('heading', { name: 'Account A', exact: true }),
+      ).toHaveCount(0);
+    }
+  }
+});
+
+test('a streaming chat preserves the next draft and can send it after stopping', async ({
+  page,
+}) => {
+  let release: (() => void) | undefined;
+  const held = new Promise<void>((resolve) => {
+    release = resolve;
+  });
+  await page.route('**/api/ai/chat', async (route) => {
+    await held;
+    await route.fulfill({
+      contentType: 'text/event-stream',
+      body: 'data: [DONE]\n\n',
+    });
+  });
+  try {
+    await page.goto('/ai/chat');
+    const input = page.getByRole('textbox');
+    await input.fill('First question');
+    await input.press('Enter');
+    await expect(page.getByRole('button', { name: '停止生成' })).toBeVisible();
+    await input.fill('Next question');
+    await input.press('Enter');
+    await expect(input).toHaveValue('Next question');
+    await expect(page.locator('.message--user')).toHaveCount(1);
+    await page.getByRole('button', { name: '停止生成' }).click();
+    await expect(input).toHaveValue('Next question');
+    release?.();
+    await input.press('Enter');
+    await expect(page.locator('.message--user')).toHaveCount(2);
+    await expect(input).toHaveValue('');
+  } finally {
+    release?.();
+  }
+});
+
 test('home presents the product template', async ({ page }) => {
   await page.goto('/home');
   await expect(page.getByRole('heading', { name: /Vue 3 起点/ })).toBeVisible();

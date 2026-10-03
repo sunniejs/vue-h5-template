@@ -2,6 +2,24 @@ import { describe, expect, it, vi } from 'vitest';
 import { parseSseEvent, parseSseStream } from '@/services/ai/sse';
 
 describe('sSE parser', () => {
+  it('accepts CR-only line endings across individual transport bytes', async () => {
+    const bytes = new TextEncoder().encode(
+      'data: {"type":"delta","delta":"你好"}\r\rdata: [DONE]\r\r',
+    );
+    const stream = new ReadableStream<Uint8Array>({
+      start(controller) {
+        for (const byte of bytes) controller.enqueue(Uint8Array.of(byte));
+        controller.close();
+      },
+    });
+    const chunks = [];
+    for await (const chunk of parseSseStream(stream)) chunks.push(chunk);
+    expect(chunks).toEqual([
+      { type: 'delta', delta: '你好' },
+      { type: 'done' },
+    ]);
+    expect(stream.locked).toBe(false);
+  });
   it('validates individual chat events', () => {
     expect(
       parseSseEvent('data: {"type":"start","conversationId":"conversation-1"}'),

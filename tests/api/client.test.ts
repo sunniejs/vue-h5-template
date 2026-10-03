@@ -18,6 +18,66 @@ afterEach(() => {
 });
 
 describe('api client', () => {
+  it.each([
+    null,
+    '<html>Proxy error</html>',
+    { data: true },
+    { code: '200', data: true },
+    { code: 200 },
+  ])('rejects malformed JSON envelopes as ApiError: %j', async (data) => {
+    axiosInstance.defaults.adapter = async (config) => ({
+      data,
+      status: 200,
+      statusText: 'OK',
+      headers: new AxiosHeaders(),
+      config,
+    });
+    await expect(apiClient.get('/test')).rejects.toMatchObject({
+      name: 'ApiError',
+      kind: 'unknown',
+      message: 'Invalid API response',
+    });
+  });
+  it.each(['http', 'business'])(
+    'does not expire a new session for an old %s 401',
+    async (kind) => {
+      let token = 'old-token';
+      const onUnauthorized = vi.fn();
+      configureApiClient({ getAccessToken: () => token, onUnauthorized });
+      let respond: (() => void) | undefined;
+      axiosInstance.defaults.adapter = (config) =>
+        new Promise((resolve, reject) => {
+          respond = () => {
+            const response = {
+              data: { code: 401, data: null, msg: 'Expired' },
+              status: kind === 'http' ? 401 : 200,
+              statusText: 'Expired',
+              headers: new AxiosHeaders(),
+              config,
+            };
+            if (kind === 'http')
+              reject(
+                new AxiosError(
+                  'Expired',
+                  'ERR_BAD_REQUEST',
+                  config,
+                  undefined,
+                  response,
+                ),
+              );
+            else resolve(response);
+          };
+        });
+      const request = apiClient.get('/private');
+      const outcome = request.catch((error: unknown) => error);
+      await vi.waitFor(() => expect(respond).toBeTypeOf('function'));
+      token = 'new-token';
+      respond?.();
+      await expect(outcome).resolves.toMatchObject({ name: 'ApiError' });
+      expect(onUnauthorized).not.toHaveBeenCalled();
+    },
+  );
+
   it('injects auth and request id, then unwraps data', async () => {
     vi.stubEnv('VITE_REQUEST_ID_ENABLED', 'true');
     configureApiClient({ getAccessToken: () => 'token-123' });

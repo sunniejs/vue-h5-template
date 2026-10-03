@@ -173,7 +173,7 @@ const checkout = () => {
 .select-line {
   display: grid;
   place-items: center;
-  min-width: 1.5rem;
+  min-width: var(--touch-target);
   min-height: var(--touch-target);
 }
 
@@ -218,6 +218,7 @@ input[type='checkbox'] {
 
 .line-actions {
   display: flex;
+  flex-wrap: wrap;
   gap: var(--space-2);
   align-items: center;
   justify-content: space-between;
@@ -226,14 +227,14 @@ input[type='checkbox'] {
 
 .quantity-control {
   display: grid;
-  grid-template-columns: 2rem 2rem 2rem;
+  grid-template-columns: var(--touch-target) 2rem var(--touch-target);
   align-items: center;
   text-align: center;
   border: 1px solid var(--color-border);
   border-radius: var(--radius-sm);
 
   button {
-    min-height: 2rem;
+    min-height: var(--touch-target);
     color: var(--color-text);
     background: transparent;
     border: 0;
@@ -241,7 +242,8 @@ input[type='checkbox'] {
 }
 
 .remove-line {
-  min-height: 2rem;
+  min-width: var(--touch-target);
+  min-height: var(--touch-target);
   padding: 0;
   color: var(--color-danger);
   background: transparent;

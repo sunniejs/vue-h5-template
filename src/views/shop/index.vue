@@ -4,6 +4,7 @@
     @touchstart.passive="onTouchStart"
     @touchmove.passive="onTouchMove"
     @touchend="onTouchEnd"
+    @touchcancel="onTouchCancel"
   >
     <div
       class="pull-indicator"
@@ -200,12 +201,19 @@ const products = computed(
 const applySearch = () => {
   keyword.value = searchInput.value;
 };
-const { distance, onTouchEnd, onTouchMove, onTouchStart, ready, refreshing } =
-  usePullToRefresh({
-    onRefresh: async () => {
-      await productsQuery.refetch();
-    },
-  });
+const {
+  distance,
+  onTouchEnd,
+  onTouchMove,
+  onTouchStart,
+  onTouchCancel,
+  ready,
+  refreshing,
+} = usePullToRefresh({
+  onRefresh: async () => {
+    await productsQuery.refetch();
+  },
+});
 let messageTimer: ReturnType<typeof setTimeout> | undefined;
 const addToCart = (product: Product) => {
   cart.add(product);
@@ -300,7 +308,7 @@ onBeforeUnmount(() => {
   }
 
   select {
-    min-height: 2.25rem;
+    min-height: var(--touch-target);
     color: var(--color-text);
     background: var(--color-surface);
     border: 1px solid var(--color-border);
@@ -316,7 +324,8 @@ onBeforeUnmount(() => {
 
   button {
     flex: 0 0 auto;
-    min-height: 2.5rem;
+    min-width: var(--touch-target);
+    min-height: var(--touch-target);
     padding: 0;
     margin-bottom: -1px;
     color: var(--color-text-secondary);
@@ -337,7 +346,7 @@ onBeforeUnmount(() => {
 }
 
 .catalog-heading .button-secondary {
-  min-height: 2.25rem;
+  min-height: var(--touch-target);
   padding: 0 var(--space-3);
   font-size: var(--text-secondary);
 }

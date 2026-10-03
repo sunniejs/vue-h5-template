@@ -365,7 +365,7 @@ dd {
 
 .quantity {
   display: grid;
-  grid-template-columns: repeat(3, 38px);
+  grid-template-columns: var(--touch-target) 2rem var(--touch-target);
   align-items: center;
   text-align: center;
   background: var(--color-background-soft);

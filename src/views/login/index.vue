@@ -14,7 +14,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue';
+import { onScopeDispose, ref } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 import { useI18n } from 'vue-i18n';
 import type { LoginParams } from '@/api/modules/auth';
@@ -32,13 +32,16 @@ const loginDescriptionKey =
     : 'common.login.realDescription';
 const loading = ref(false);
 const errorMessage = ref('');
+onScopeDispose(() => userStore.cancelLogin());
 const login = async (params: LoginParams) => {
+  if (loading.value) return;
   loading.value = true;
   errorMessage.value = '';
   try {
     await userStore.login(params);
     await router.replace(getSafeRedirect(route.query.redirect, '/member'));
   } catch (error) {
+    if (isApiError(error) && error.kind === 'cancelled') return;
     errorMessage.value = isApiError(error)
       ? error.message
       : t('common.login.failed');
@@ -57,6 +60,9 @@ const login = async (params: LoginParams) => {
 }
 
 .back-link {
+  display: inline-flex;
+  align-items: center;
+  min-height: var(--touch-target);
   color: var(--color-text-secondary);
   text-decoration: none;
 }

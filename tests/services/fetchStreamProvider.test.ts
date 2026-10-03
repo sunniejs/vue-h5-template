@@ -14,6 +14,30 @@ afterEach(() => {
 });
 
 describe('fetchStreamChatProvider', () => {
+  it('does not expire a new session for a previous stream request', async () => {
+    let token = 'old-token';
+    const onUnauthorized = vi.fn();
+    configureStreamingClient({ getAccessToken: () => token, onUnauthorized });
+    let respond: ((response: Response) => void) | undefined;
+    vi.stubGlobal(
+      'fetch',
+      vi.fn(
+        () =>
+          new Promise<Response>((resolve) => {
+            respond = resolve;
+          }),
+      ),
+    );
+    const request = new FetchStreamChatProvider('/api/ai/chat').chat([]).next();
+    const outcome = request.catch((error: unknown) => error);
+    token = 'new-token';
+    respond?.(
+      Response.json({ code: 401, msg: 'Expired', data: null }, { status: 401 }),
+    );
+    await expect(outcome).resolves.toMatchObject({ status: 401 });
+    expect(onUnauthorized).not.toHaveBeenCalled();
+  });
+
   it('forwards the Gin access token and request id to FastAPI', async () => {
     vi.stubEnv('VITE_REQUEST_ID_ENABLED', 'true');
     configureStreamingClient({ getAccessToken: () => 'gin-jwt' });

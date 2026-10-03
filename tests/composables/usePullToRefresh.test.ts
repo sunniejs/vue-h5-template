@@ -6,6 +6,47 @@ function touchEvent(currentTarget: HTMLElement, clientY: number): TouchEvent {
 }
 
 describe('usePullToRefresh', () => {
+  it('cancels a pull without refreshing and accepts the next gesture', async () => {
+    const page = document.createElement('main');
+    page.className = 'page-scroll';
+    const onRefresh = vi.fn().mockResolvedValue(undefined);
+    const pull = usePullToRefresh({ onRefresh });
+    pull.onTouchStart(touchEvent(page, 100));
+    pull.onTouchMove(touchEvent(page, 280));
+    pull.onTouchCancel();
+    await pull.onTouchEnd();
+    expect(onRefresh).not.toHaveBeenCalled();
+    expect(pull.distance.value).toBe(0);
+    pull.onTouchStart(touchEvent(page, 100));
+    pull.onTouchMove(touchEvent(page, 280));
+    await pull.onTouchEnd();
+    expect(onRefresh).toHaveBeenCalledOnce();
+  });
+  it('allows a pull starting at the top edge of the viewport', async () => {
+    const page = document.createElement('main');
+    page.className = 'page-scroll';
+    const onRefresh = vi.fn().mockResolvedValue(undefined);
+    const pull = usePullToRefresh({ onRefresh });
+    pull.onTouchStart(touchEvent(page, 0));
+    pull.onTouchMove(touchEvent(page, 180));
+    await pull.onTouchEnd();
+    expect(onRefresh).toHaveBeenCalledOnce();
+  });
+
+  it('discards a gesture when the scroller leaves the top', async () => {
+    const page = document.createElement('main');
+    page.className = 'page-scroll';
+    const onRefresh = vi.fn().mockResolvedValue(undefined);
+    const pull = usePullToRefresh({ onRefresh });
+    pull.onTouchStart(touchEvent(page, 100));
+    pull.onTouchMove(touchEvent(page, 280));
+    page.scrollTop = 20;
+    pull.onTouchMove(touchEvent(page, 290));
+    await pull.onTouchEnd();
+    expect(onRefresh).not.toHaveBeenCalled();
+    expect(pull.distance.value).toBe(0);
+  });
+
   it('refreshes only after pulling past the threshold at the top', async () => {
     const scroller = document.createElement('main');
     scroller.className = 'page-scroll';

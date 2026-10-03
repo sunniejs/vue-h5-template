@@ -2,7 +2,7 @@ import type { ChatChunk } from '@/types/ai';
 
 export function parseSseEvent(event: string): ChatChunk | null {
   const payload = event
-    .split(/\r?\n/)
+    .split(/\r\n?|\n/)
     .filter((line) => line.startsWith('data:'))
     .map((line) => line.slice(5).trimStart())
     .join('\n');
@@ -42,13 +42,18 @@ export async function* parseSseStream(
   const decoder = new TextDecoder();
   let buffer = '';
   let completed = false;
+  let skipLineFeed = false;
   try {
     while (true) {
       const { value, done } = await reader.read();
-      buffer = (buffer + decoder.decode(value, { stream: !done })).replace(
-        /\r\n/g,
-        '\n',
-      );
+      const text = decoder.decode(value, { stream: !done });
+      if (text) {
+        // A CR ends a line immediately; swallow its optional LF even across reads.
+        const content =
+          skipLineFeed && text.startsWith('\n') ? text.slice(1) : text;
+        buffer += content.replace(/\r\n?/g, '\n');
+        skipLineFeed = text.endsWith('\r');
+      }
       if (done) completed = true;
       let boundary = buffer.indexOf('\n\n');
       while (boundary >= 0) {

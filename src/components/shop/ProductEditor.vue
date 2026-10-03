@@ -381,7 +381,7 @@ textarea {
 }
 
 .locale-tabs button {
-  min-height: 2.25rem;
+  min-height: var(--touch-target);
   padding: 0 var(--space-2);
   color: var(--color-text-secondary);
   background: transparent;

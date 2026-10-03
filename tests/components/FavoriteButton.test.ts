@@ -1,4 +1,4 @@
-import { enableAutoUnmount, mount } from '@vue/test-utils';
+import { enableAutoUnmount, flushPromises, mount } from '@vue/test-utils';
 import { QueryClient, VueQueryPlugin } from '@tanstack/vue-query';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import FavoriteButton from '@/components/shop/FavoriteButton.vue';
@@ -35,6 +35,29 @@ function render(session = 'session-a') {
   });
 }
 describe('favorite interaction', () => {
+  it('does not repopulate cleared private cache after the control is disposed', async () => {
+    let finish:
+      | ((value: { productId: number; favorite: boolean }) => void)
+      | undefined;
+    vi.mocked(setProductFavorite).mockReturnValueOnce(
+      new Promise((resolve) => {
+        finish = resolve;
+      }),
+    );
+    const wrapper = render();
+    const client = clients[clients.length - 1];
+    if (!client)
+      throw new Error('Expected a query client for the mounted control');
+    await vi.waitFor(() =>
+      expect(wrapper.get('button').attributes('disabled')).toBeUndefined(),
+    );
+    await wrapper.get('button').trigger('click');
+    client.clear();
+    wrapper.unmount();
+    finish?.({ productId: 1, favorite: true });
+    await flushPromises();
+    expect(client.getQueryCache().findAll()).toEqual([]);
+  });
   it('does not request private state before login', () => {
     const wrapper = render('');
     expect(wrapper.find('a').exists()).toBe(true);

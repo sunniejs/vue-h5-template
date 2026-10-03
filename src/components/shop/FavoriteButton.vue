@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, ref, useId, watch } from 'vue';
+import { computed, onScopeDispose, ref, useId, watch } from 'vue';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/vue-query';
 import { RouterLink } from 'vue-router';
 import { useI18n } from 'vue-i18n';
@@ -12,6 +12,10 @@ const { t } = useI18n();
 const scope = useId();
 const generation = ref(0);
 const client = useQueryClient();
+let disposed = false;
+onScopeDispose(() => {
+  disposed = true;
+});
 const key = computed(() => [
   'favorite',
   scope,
@@ -36,6 +40,11 @@ const mutation = useMutation({
     key: readonly unknown[];
   }) => setProductFavorite(input.id, input.favorite),
   onSuccess: (data, input) => {
+    if (
+      disposed ||
+      !input.key.every((entry, index) => entry === key.value[index])
+    )
+      return;
     client.setQueryData(input.key, data);
   },
 });

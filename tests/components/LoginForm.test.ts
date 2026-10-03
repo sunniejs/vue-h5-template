@@ -3,6 +3,14 @@ import { mount } from '@vue/test-utils';
 import LoginForm from '@/components/auth/LoginForm.vue';
 
 describe('loginForm', () => {
+  it('ignores form resubmission while credentials are being checked', async () => {
+    const wrapper = mount(LoginForm, { props: { loading: true } });
+    await wrapper.get('#username').setValue('Ada');
+    await wrapper.get('#password').setValue('secret');
+    await wrapper.get('form').trigger('submit');
+    expect(wrapper.emitted('submit')).toBeUndefined();
+    wrapper.unmount();
+  });
   it('submits validated credentials without exposing password state', async () => {
     const wrapper = mount(LoginForm);
     await wrapper.get('#username').setValue('Ada');
