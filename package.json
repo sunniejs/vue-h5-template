@@ -33,7 +33,7 @@
     "@tanstack/vue-query": "^5.102.8",
     "@varlet/ui": "^3.20.6",
     "axios": "1.20.0",
-    "dompurify": "^3.4.14",
+    "dompurify": "^3.4.16",
     "markdown-it": "^15.0.0",
     "pinia": "^3.0.4",
     "pinia-plugin-persistedstate": "^4.7.1",
