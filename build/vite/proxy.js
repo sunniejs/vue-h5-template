@@ -1,18 +1,26 @@
-import { API_BASE_URL, API_TARGET_URL, MOCK_API_BASE_URL, MOCK_API_TARGET_URL } from '../constant';
+import { escapeRegex } from '../utils';
 
-const init = {
-  // test
-  [API_BASE_URL]: {
-    target: API_TARGET_URL,
-    changeOrigin: true,
-    rewrite: (path) => path.replace(new RegExp(`^${API_BASE_URL}`), ''),
-  },
-  // mock
-  [MOCK_API_BASE_URL]: {
-    target: MOCK_API_TARGET_URL,
-    changeOrigin: true,
-    rewrite: (path) => path.replace(new RegExp(`^${MOCK_API_BASE_URL}`), ''),
-  },
-};
-
-export default init;
+/**
+ * 开发环境代理配置
+ * - AI 路径可优先转发给独立 FastAPI 服务，其他 /api 请求转发给 Gin
+ * - 未配置目标时，/api 请求由 vite-plugin-mock 在开发环境响应
+ */
+export function createViteProxy(env) {
+  const proxy = {};
+  const apiBaseUrl = env.VITE_API_BASE_URL || '/api';
+  const aiApiBaseUrl = env.VITE_AI_API_BASE_URL || `${apiBaseUrl}/ai`;
+  if (env.VITE_AI_API_TARGET) {
+    proxy[aiApiBaseUrl] = {
+      target: env.VITE_AI_API_TARGET,
+      changeOrigin: true,
+    };
+  }
+  if (env.VITE_API_TARGET) {
+    proxy[apiBaseUrl] = {
+      target: env.VITE_API_TARGET,
+      changeOrigin: true,
+      rewrite: env.VITE_API_PROXY_REWRITE ? (path) => path.replace(new RegExp(`^${escapeRegex(apiBaseUrl)}(?=/|\\?|$)`), '') : undefined,
+    };
+  }
+  return proxy;
+}

@@ -13,8 +13,6 @@ dev-dist
 dist-ssr
 *.local
 .eslintcache
-types/auto-imports.d.ts
-types/components.d.ts
 
 # Editor directories and files
 !.vscode/extensions.json
@@ -26,3 +24,8 @@ types/components.d.ts
 *.njsproj
 *.sln
 *.sw?
+
+# Test reports
+coverage/
+playwright-report/
+test-results/

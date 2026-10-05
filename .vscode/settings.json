@@ -1,6 +1,4 @@
 {
-  "typescript.tsdk": "./node_modules/typescript/lib",
-  "typescript.preferences.autoImportFileExcludePatterns": ["vue-router"],
   "npm.packageManager": "pnpm",
   "editor.tabSize": 2,
   "editor.defaultFormatter": "esbenp.prettier-vscode",
@@ -60,12 +58,6 @@
     "@/": "${workspaceRoot}/src"
   },
   "[javascriptreact]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
-  },
-  "[typescript]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
-  },
-  "[typescriptreact]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
   "[html]": {

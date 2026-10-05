@@ -1,39 +1,46 @@
-import { loginPassword } from '@/api';
-import { useCookies } from '@vueuse/integrations/useCookies';
+import { loginPassword } from '@/api/modules/auth';
 import { defineStore } from 'pinia';
-
-const { VITE_TOKEN_KEY } = import.meta.env;
-const token = useCookies().get(VITE_TOKEN_KEY);
-console.log(token);
-
+import { ApiError } from '@/types/api/common';
+const pendingLogins = new WeakMap();
 export const useUserStore = defineStore('user', {
   state: () => ({
-    token: 'token',
-    info: {},
+    token: '',
+    info: null,
   }),
   getters: {
     getUserInfo() {
-      return this.info || {};
+      return this.info;
     },
   },
   actions: {
     setInfo(info) {
-      this.info = info ?? '';
+      this.info = info;
     },
-    async login() {
+    async login(params) {
+      this.cancelLogin();
+      const controller = new AbortController();
+      pendingLogins.set(this, controller);
       try {
-        const res = await loginPassword(); // 调用登录接口
-        this.setInfo(res); // 设置用户信息
-        this.token = res.token; // 假设返回的 res 包含 token
+        const res = await loginPassword(params, controller.signal);
+        if (controller.signal.aborted) throw new ApiError('Login cancelled', { kind: 'cancelled' });
+        this.setInfo(res);
+        if (res.token) this.token = res.token;
         return res;
-      } catch (error) {
-        console.error('Login failed', error);
-        throw error;
+      } finally {
+        if (pendingLogins.get(this) === controller) pendingLogins.delete(this);
       }
+    },
+    cancelLogin() {
+      pendingLogins.get(this)?.abort();
+      pendingLogins.delete(this);
+    },
+    logout() {
+      this.cancelLogin();
+      this.$reset();
     },
   },
   persist: {
     pick: ['token'],
-    storage: localStorage,
+    storage: sessionStorage,
   },
 });
