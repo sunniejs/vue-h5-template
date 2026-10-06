@@ -18,3 +18,7 @@ yarn-error.log*
 *.njsproj
 *.sln
 *.sw?
+
+/coverage/
+/test-results/
+/playwright-report/

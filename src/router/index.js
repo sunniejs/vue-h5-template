@@ -1,30 +1,33 @@
-import Vue from 'vue'
+import Vue, { watch } from 'vue'
 import Router from 'vue-router'
-import { constantRouterMap } from './router.config.js'
-
-// hack router push callback
-const originalPush = Router.prototype.push
-Router.prototype.push = function push(location, onResolve, onReject) {
-  if (onResolve || onReject) return originalPush.call(this, location, onResolve, onReject)
-  return originalPush.call(this, location).catch(err => err)
-}
+import { locale, t } from '@/locales'
+import store from '@/store'
+import routes from './routes'
 
 Vue.use(Router)
 
-const createRouter = () =>
-  new Router({
-    // mode: 'history', // 如果你是 history模式 需要配置vue.config.js publicPath
-    // base: process.env.BASE_URL,
-    scrollBehavior: () => ({ y: 0 }),
-    routes: constantRouterMap
-  })
-
+const createRouter = () => new Router({ routes, scrollBehavior: () => ({ x: 0, y: 0 }) })
 const router = createRouter()
 
-// Detail see: https://github.com/vuejs/vue-router/issues/1234#issuecomment-357941465
+router.beforeEach((to, from, next) => {
+  if (to.meta.requiresAuth && !store.getters.token) {
+    next({ name: 'login', query: { redirect: to.fullPath } })
+  } else if (to.meta.guestOnly && store.getters.token) {
+    next({ name: 'member' })
+  } else {
+    next()
+  }
+})
+
+function updateDocumentTitle() {
+  document.title = `${t(router.currentRoute.meta.title || 'common.title')} · Vue H5`
+}
+
+router.afterEach(updateDocumentTitle)
+watch(locale, updateDocumentTitle)
+
 export function resetRouter() {
-  const newRouter = createRouter()
-  router.matcher = newRouter.matcher // reset router
+  router.matcher = createRouter().matcher
 }
 
 export default router

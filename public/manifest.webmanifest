@@ -1,0 +1,15 @@
+{
+  "id": "./",
+  "name": "H5 Studio",
+  "short_name": "H5 Studio",
+  "description": "A mobile H5 starter",
+  "start_url": "./#/home",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#f7f7f8",
+  "theme_color": "#f7f7f8",
+  "icons": [
+    { "src": "logo-320.png", "sizes": "320x320", "type": "image/png" },
+    { "src": "logo-512.png", "sizes": "512x512", "type": "image/png" }
+  ]
+}

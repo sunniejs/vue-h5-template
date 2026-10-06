@@ -1,31 +1,40 @@
-// 兼容 IE
-// https://github.com/zloirock/core-js/blob/master/docs/2019-03-19-core-js-3-babel-and-a-look-into-the-future.md#babelpolyfill
-import 'core-js/stable'
-import 'regenerator-runtime/runtime'
-
 import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
 import store from './store'
-
-// 设置 js中可以访问 $cdn
+import { configureApiClient } from '@/api/client'
+import { configureStreamingClient } from '@/services/ai/fetchStreamProvider'
+import { restoreLanguage } from '@/locales'
+import { registerOfflineShell } from '@/plugins/offline'
+import { setupVueQuery } from '@/plugins/query'
+import SvgIcon from '@/components/common/SvgIcon.vue'
 import { $cdn } from '@/config'
-Vue.prototype.$cdn = $cdn
-
-// 全局引入按需引入UI库 vant
-import '@/plugins/vant'
-// 引入全局样式
-import '@/assets/css/index.scss'
-// 移动端适配
-import 'amfe-flexible'
-
-// filters
+import '@/styles/index.scss'
 import './filters'
-Vue.config.productionTip = false
 
-new Vue({
-  el: '#app',
-  router,
-  store,
-  render: h => h(App)
-})
+Vue.config.productionTip = false
+Vue.prototype.$cdn = $cdn
+Vue.component('SvgIcon', SvgIcon)
+setupVueQuery(Vue)
+restoreLanguage()
+
+const clientRuntime = {
+  getAccessToken: () => store.getters.token || undefined,
+  onUnauthorized: () => {
+    store.dispatch('fedLogOut')
+    if (router.currentRoute.name !== 'login') {
+      const redirect = router.currentRoute.fullPath
+      router.replace(
+        { name: 'login', query: { redirect } },
+        () => {},
+        () => {}
+      )
+    }
+  }
+}
+configureApiClient(clientRuntime)
+configureStreamingClient(clientRuntime)
+
+new Vue({ router, store, render: h => h(App) }).$mount('#app')
+
+registerOfflineShell()

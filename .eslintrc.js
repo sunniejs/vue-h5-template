@@ -1,7 +1,9 @@
 module.exports = {
   root: true,
   env: {
-    node: true
+    node: true,
+    browser: true,
+    es2020: true
   },
   extends: ['plugin:vue/essential', 'eslint:recommended', 'plugin:prettier/recommended'],
   parserOptions: {

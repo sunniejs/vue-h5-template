@@ -1,0 +1,96 @@
+<template>
+  <main class="login-page">
+    <RouterLink to="/home" class="back-link">‹ {{ t('common.login.back') }}</RouterLink>
+    <section class="login-card surface-card">
+      <SvgIcon name="logo" />
+      <span>{{ t('common.login.eyebrow') }}</span>
+      <h1>{{ t('common.login.title') }}</h1>
+      <p>{{ t(loginDescriptionKey) }}</p>
+      <LoginForm :loading="loading" :error="errorMessage" @submit="login" />
+    </section>
+  </main>
+</template>
+
+<script setup>
+import LoginForm from '@/components/auth/LoginForm.vue'
+import { onScopeDispose, ref } from 'vue'
+import { useRoute, useRouter } from 'vue-router/composables'
+import { useI18n } from '@/locales'
+import { useUserStore } from '@/store/accessors'
+import { isApiError } from '@/types/api/common'
+import { getSafeRedirect } from '@/utils/url'
+const router = useRouter()
+const route = useRoute()
+const userStore = useUserStore()
+const { t } = useI18n()
+const loginDescriptionKey =
+  process.env.NODE_ENV === 'development' && process.env.VUE_APP_USE_MOCK === 'true'
+    ? 'common.login.description'
+    : 'common.login.realDescription'
+const loading = ref(false)
+const errorMessage = ref('')
+onScopeDispose(() => userStore.cancelLogin())
+const login = async params => {
+  if (loading.value) return
+  loading.value = true
+  errorMessage.value = ''
+  try {
+    await userStore.login(params)
+    await router.replace(getSafeRedirect(route.query.redirect, '/member'))
+  } catch (error) {
+    if (isApiError(error) && error.kind === 'cancelled') return
+    errorMessage.value = isApiError(error) ? error.message : t('common.login.failed')
+  } finally {
+    loading.value = false
+  }
+}
+</script>
+
+<style scoped lang="scss">
+.login-page {
+  min-height: 100dvh;
+  padding: calc(var(--space-5) + env(safe-area-inset-top)) var(--space-5)
+    calc(var(--space-5) + env(safe-area-inset-bottom));
+  background: var(--color-background);
+}
+
+.back-link {
+  display: inline-flex;
+  align-items: center;
+  min-height: var(--touch-target);
+  color: var(--color-text-secondary);
+  text-decoration: none;
+}
+
+.login-card {
+  max-width: 28rem;
+  padding: var(--space-6);
+  margin: 7vh auto 0;
+
+  .svg-icon {
+    font-size: 1.75rem;
+    color: var(--color-primary);
+  }
+
+  > span {
+    display: block;
+    margin-top: var(--space-5);
+    font-size: var(--text-caption);
+    font-weight: 650;
+    color: var(--color-text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+  }
+
+  h1 {
+    margin: var(--space-2) 0;
+    font-size: var(--text-page-title);
+    font-weight: 680;
+  }
+
+  > p {
+    margin: 0 0 var(--space-6);
+    color: var(--color-text-secondary);
+  }
+}
+</style>
