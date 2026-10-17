@@ -1,6 +1,6 @@
 {
   "name": "vue-h5-template",
-  "version": "2.0.0",
+  "version": "2.1.0",
   "private": true,
   "type": "module",
   "packageManager": "pnpm@9.15.9",
