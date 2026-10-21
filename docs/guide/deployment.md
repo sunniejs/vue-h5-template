@@ -39,3 +39,9 @@ Nginx/CDN 对 SSE endpoint 必须关闭缓冲与变换、延长 read timeout，�
 ## 安全 Headers
 
 模板 Nginx 提供 frame、MIME、referrer 和 permissions 基线。生产 CSP 必须结合真实 API、图片 CDN、监控域名配置；启用 PWA 时允许同源 worker。不要继续使用已废弃的 `X-XSS-Protection` 代替 CSP。
+
+## 本文档站的发布
+
+应用和文档使用独立分支：`vue-h5-template` 保存应用源码，`docs` 保存本 VitePress 源码，`gh-pages` 保存生成后的静态页面。推送 `docs` 后，发布工作流执行 `pnpm install --frozen-lockfile`、`pnpm build`，将 `docs/.vitepress/dist` 发布到 `gh-pages` 根目录，再请求 GitHub Pages 构建。pnpm 版本只由 `package.json` 的 `packageManager` 指定，避免与 Action 的 `version` 重复配置。
+
+仓库 Pages 的分支发布来源保持 `gh-pages` / `/(root)`。上文应用构建的 `dist` 不用于文档站；也不要直接发布 Markdown 源码。核对发布时应检查 Actions 成功、`gh-pages` 提交更新，以及中、英、日页面的线上内容。

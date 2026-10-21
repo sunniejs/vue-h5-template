@@ -39,3 +39,9 @@ Nginx/CDNs must disable buffering and transformation for SSE endpoints, extend r
 ## Security Headers
 
 The example Nginx config provides frame, MIME, referrer, and permissions baselines. Production CSP must match actual APIs, image CDNs, monitoring domains, and same-origin PWA workers. Do not rely on deprecated `X-XSS-Protection` instead of CSP.
+
+## Publishing this documentation site
+
+The branches have separate roles: `vue-h5-template` holds application source, `docs` holds this VitePress source, and `gh-pages` holds generated pages. A push to `docs` runs `pnpm install --frozen-lockfile` and `pnpm build`, publishes `docs/.vitepress/dist` to the root of `gh-pages`, then requests a GitHub Pages build. Only `package.json` supplies the pnpm `packageManager` version; duplicating it in the Action's `version` input can prevent deployment.
+
+Keep the repository's branch publishing source at `gh-pages` / `/(root)`. The application's `dist` above is not the documentation output, and Markdown source should not be published directly. Confirm success in Actions, an updated `gh-pages` commit and the live Chinese, English and Japanese pages.

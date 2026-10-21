@@ -7,6 +7,7 @@ on:
 
 permissions:
   contents: write
+  pages: write
 
 concurrency:
   group: documentation
@@ -21,8 +22,7 @@ jobs:
 
       - name: Setup pnpm
         uses: pnpm/action-setup@v4
-        with:
-          version: 9
+        # package.json is the single source of truth for the pnpm version.
 
       - name: Setup Node.js
         uses: actions/setup-node@v5
@@ -40,4 +40,13 @@ jobs:
         uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_branch: gh-pages
           publish_dir: docs/.vitepress/dist
+          enable_jekyll: false
+
+      # A push made with GITHUB_TOKEN does not trigger another Pages build.
+      # Explicitly request a build from the configured gh-pages publishing source.
+      - name: Request GitHub Pages build
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh api --method POST "repos/${GITHUB_REPOSITORY}/pages/builds"
