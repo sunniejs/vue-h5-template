@@ -20,12 +20,13 @@ function createUiResolvers(
 
 export const ConfigAutoComponentsPlugin = (
   framework: ViteEnv['VITE_UI_FRAMEWORK'],
+  writeDeclarations = true,
 ) => {
   return Components({
     dirs: ['src/components'],
     extensions: ['vue', 'md'],
     deep: true,
-    dts: 'types/components.d.ts',
+    dts: writeDeclarations && 'types/components.d.ts',
     directoryAsNamespace: false,
     globalNamespaces: [],
     directives: true,

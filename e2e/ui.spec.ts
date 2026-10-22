@@ -63,6 +63,33 @@ test('chat composer remains visible when the visual viewport shrinks', async ({
   );
 });
 
+test('the app shell follows the visual viewport without dynamic viewport units', async ({
+  page,
+}) => {
+  await page.addInitScript(() => {
+    const supports = CSS.supports.bind(CSS);
+    CSS.supports = (property: string, value?: string) => {
+      if (property === 'height' && value === '1dvh') return false;
+      return value === undefined
+        ? supports(property)
+        : supports(property, value);
+    };
+  });
+  await page.goto('/home');
+  const shell = page.locator('.app-shell');
+  await expect(shell).toBeVisible();
+
+  await page.evaluate(() => {
+    const viewport = window.visualViewport;
+    if (!viewport) throw new Error('Visual viewport is required');
+    Object.defineProperty(viewport, 'height', { value: 450 });
+    viewport.dispatchEvent(new Event('resize'));
+  });
+
+  await expect(shell).toHaveCSS('height', '450px');
+  await expect(page.getByRole('navigation')).toBeInViewport();
+});
+
 test('layout remains restrained on mobile, tablet and desktop', async ({
   page,
 }) => {
@@ -147,6 +174,7 @@ test('mobile routes use consistent page gutters without horizontal overflow', as
   await page.getByLabel('用户名').fill('layout-tester');
   await page.getByLabel('密码').fill('secret');
   await page.getByRole('button', { name: '登录', exact: true }).click();
+  await expect(page).toHaveURL(/\/member$/);
   const routes = [
     { path: '/home', gutter: 16 },
     { path: '/shop', gutter: 16 },

@@ -106,7 +106,6 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue';
 import { useI18n } from 'vue-i18n';
 import type { Product } from '@/api/modules/products';
 import { useCartStore } from '@/store/modules/cart';
@@ -119,8 +118,10 @@ import {
 const cart = useCartStore();
 const { locale, t } = useI18n();
 const checkoutMessage = ref('');
+
 const productName = (product: Product) =>
   getLocalizedText(product.name, locale.value);
+
 const checkout = () => {
   checkoutMessage.value = t('common.cart.checkoutDemo', {
     count: cart.selectedCount,

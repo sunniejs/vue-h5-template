@@ -1,7 +1,5 @@
 <script setup lang="ts">
-import { computed, onScopeDispose, ref, useId, watch } from 'vue';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/vue-query';
-import { RouterLink } from 'vue-router';
 import { useI18n } from 'vue-i18n';
 import {
   getProductFavorite,
@@ -13,9 +11,11 @@ const scope = useId();
 const generation = ref(0);
 const client = useQueryClient();
 let disposed = false;
+
 onScopeDispose(() => {
   disposed = true;
 });
+
 const key = computed(() => [
   'favorite',
   scope,
@@ -48,6 +48,7 @@ const mutation = useMutation({
     client.setQueryData(input.key, data);
   },
 });
+
 watch(
   () => props.session,
   () => {
@@ -56,10 +57,12 @@ watch(
   },
   { flush: 'sync' },
 );
+
 watch(
   () => props.productId,
   () => mutation.reset(),
 );
+
 function toggle() {
   if (
     !favorite.data.value ||

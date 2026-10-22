@@ -80,6 +80,7 @@ const languageOptions: Array<{ value: SupportedLocale; label: string }> = [
   { value: 'en-US', label: 'common.language.en' },
   { value: 'ja-JP', label: 'common.language.ja' },
 ];
+
 const changeLanguage = (event: Event) =>
   void setLang((event.target as HTMLSelectElement).value);
 </script>

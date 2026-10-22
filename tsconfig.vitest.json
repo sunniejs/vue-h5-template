@@ -1,11 +1,11 @@
 {
   "extends": "./tsconfig.app.json",
+  "include": ["tests/**/*.ts", "src/**/*.d.ts", "types/**/*.d.ts"],
   "exclude": [],
   "compilerOptions": {
-    "composite": true,
+    "composite": false,
+    "incremental": true,
     "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.vitest.tsbuildinfo",
-
-    "lib": [],
-    "types": ["node", "jsdom"]
+    "types": ["node", "jsdom", "pinia-plugin-persistedstate"]
   }
 }

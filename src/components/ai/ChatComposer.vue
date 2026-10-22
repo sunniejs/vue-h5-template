@@ -34,7 +34,6 @@
 </template>
 
 <script setup lang="ts">
-import { nextTick, ref, useTemplateRef } from 'vue';
 import { useI18n } from 'vue-i18n';
 const props = defineProps<{ disabled?: boolean; streaming?: boolean }>();
 const emit = defineEmits<{ send: [content: string]; stop: [] }>();
@@ -42,12 +41,14 @@ const { t } = useI18n();
 const input = ref('');
 const composing = ref(false);
 const textarea = useTemplateRef<HTMLTextAreaElement>('textarea');
+
 const resize = () => {
   const element = textarea.value;
   if (!element) return;
   element.style.height = 'auto';
   element.style.height = `${Math.min(element.scrollHeight, 220)}px`;
 };
+
 const submit = () => {
   if (props.disabled || props.streaming || composing.value) return;
   const content = input.value.trim();
@@ -56,6 +57,7 @@ const submit = () => {
   input.value = '';
   void nextTick(resize);
 };
+
 const handleKeydown = (event: KeyboardEvent) => {
   if (
     event.key === 'Enter' &&

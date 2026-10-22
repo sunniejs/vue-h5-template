@@ -150,7 +150,6 @@
 </template>
 
 <script setup lang="ts">
-import { computed, onBeforeUnmount, ref } from 'vue';
 import { useInfiniteQuery } from '@tanstack/vue-query';
 import { useI18n } from 'vue-i18n';
 import { getProducts } from '@/api/modules/products';
@@ -198,9 +197,11 @@ const productsQuery = useInfiniteQuery({
 const products = computed(
   () => productsQuery.data.value?.pages.flatMap((page) => page.list) ?? [],
 );
+
 const applySearch = () => {
   keyword.value = searchInput.value;
 };
+
 const {
   distance,
   onTouchEnd,
@@ -215,6 +216,7 @@ const {
   },
 });
 let messageTimer: ReturnType<typeof setTimeout> | undefined;
+
 const addToCart = (product: Product) => {
   cart.add(product);
   cartMessage.value = t('common.shop.addedToCart', { count: cart.itemCount });
@@ -223,6 +225,7 @@ const addToCart = (product: Product) => {
     cartMessage.value = '';
   }, 1800);
 };
+
 onBeforeUnmount(() => {
   if (messageTimer) clearTimeout(messageTimer);
 });

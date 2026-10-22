@@ -195,6 +195,7 @@ test('delivery workspace supports create, view, edit, filter and delete', async 
   await page.getByLabel('用户名').fill('workspace-tester');
   await page.getByLabel('密码').fill('secret');
   await page.getByRole('button', { name: '登录', exact: true }).click();
+  await expect(page).toHaveURL(/\/member$/);
   await page.goto('/examples/workspace');
 
   const projectName = `Playwright delivery ${Date.now()}`;

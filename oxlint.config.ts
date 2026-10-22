@@ -8,6 +8,7 @@ import { defineConfig } from 'oxlint';
  * + unicorn + import + vue + vitest + node 等插件。
  */
 export default defineConfig({
+  options: { typeAware: true },
   // —— plugins：oxlint 支持的插件，将默认开启的也显式配置 ——
   // type: eslint | react | unicorn | typescript | oxc |
   //       import | jsdoc | jest | vitest | jsx-a11y | nextjs |
@@ -205,12 +206,12 @@ export default defineConfig({
     'typescript/triple-slash-reference': 'error',
     'typescript/unified-signatures': 'error',
 
-    // typescript 类型感知规则：oxlint 暂不支持，关闭
-    'typescript/await-thenable': 'off',
+    // 先启用能发现异步控制流错误的类型感知规则。
+    'typescript/await-thenable': 'error',
     'typescript/consistent-return': 'off',
     'typescript/no-base-to-string': 'off',
     'typescript/no-duplicate-type-constituents': 'off',
-    'typescript/no-floating-promises': 'off',
+    'typescript/no-floating-promises': 'error',
     'typescript/no-misused-spread': 'off',
     'typescript/no-redundant-type-constituents': 'off',
     'typescript/no-unnecessary-boolean-literal-compare': 'off',

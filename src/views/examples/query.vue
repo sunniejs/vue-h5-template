@@ -81,14 +81,6 @@
 
 <script setup lang="ts">
 import {
-  computed,
-  onBeforeUnmount,
-  onMounted,
-  onScopeDispose,
-  useTemplateRef,
-  watch,
-} from 'vue';
-import {
   useInfiniteQuery,
   useMutation,
   useQuery,
@@ -100,9 +92,11 @@ import type { Task } from '@/api/modules/examples';
 
 const queryClient = useQueryClient();
 let disposed = false;
+
 onScopeDispose(() => {
   disposed = true;
 });
+
 const { t } = useI18n();
 const tasksQuery = useQuery({
   queryKey: ['examples', 'tasks'],
@@ -133,14 +127,18 @@ const feedTitleKeys = [
   'architectureTitle',
 ] as const;
 const feedCategoryKeys = ['performance', 'ai', 'architecture'] as const;
+
 const getFeedTitle = (id: number) =>
   t(`common.query.feedItems.${feedTitleKeys[(id - 1) % feedTitleKeys.length]}`);
+
 const getFeedCategory = (id: number) =>
   t(
     `common.query.feedItems.${feedCategoryKeys[(id - 1) % feedCategoryKeys.length]}`,
   );
+
 const loadMoreTarget = useTemplateRef<HTMLButtonElement>('loadMoreTarget');
 let observer: IntersectionObserver | undefined;
+
 onMounted(() => {
   observer = new IntersectionObserver(
     ([entry]) => {
@@ -155,10 +153,12 @@ onMounted(() => {
   );
   if (loadMoreTarget.value) observer.observe(loadMoreTarget.value);
 });
+
 watch(loadMoreTarget, (target, previousTarget) => {
   if (previousTarget) observer?.unobserve(previousTarget);
   if (target) observer?.observe(target);
 });
+
 onBeforeUnmount(() => observer?.disconnect());
 </script>
 

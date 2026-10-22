@@ -210,7 +210,6 @@
 </template>
 
 <script setup lang="ts">
-import { computed, reactive, ref } from 'vue';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/vue-query';
 import { useI18n } from 'vue-i18n';
 import {
@@ -253,12 +252,15 @@ const dialogTitle = computed(() =>
     ? t('common.workspace.createTitle')
     : (selectedProject.value?.name ?? t('common.workspace.title')),
 );
+
 const refresh = () => queryClient.invalidateQueries({ queryKey: ['projects'] });
+
 const showError = (error: unknown) => {
   mutationError.value = isApiError(error)
     ? error.message
     : t('common.workspace.unknownError');
 };
+
 const saveMutation = useMutation({
   mutationFn: ({
     id,
@@ -278,6 +280,7 @@ const deleteMutation = useMutation({
   onSuccess: refresh,
   onError: showError,
 });
+
 const resetForm = (project?: Project) =>
   Object.assign(
     form,
@@ -289,27 +292,32 @@ const resetForm = (project?: Project) =>
         }
       : { name: '', description: '', status: 'active' },
   );
+
 const openCreate = () => {
   selectedProject.value = null;
   mutationError.value = '';
   resetForm();
   dialogMode.value = 'create';
 };
+
 const openDetails = (project: Project) => {
   selectedProject.value = project;
   mutationError.value = '';
   dialogMode.value = 'view';
 };
+
 const openEdit = (project: Project) => {
   selectedProject.value = project;
   mutationError.value = '';
   resetForm(project);
   dialogMode.value = 'edit';
 };
+
 const closeDialog = () => {
   dialogMode.value = null;
   selectedProject.value = null;
 };
+
 const saveProject = () => {
   mutationError.value = '';
   saveMutation.mutate({
@@ -321,6 +329,7 @@ const saveProject = () => {
     },
   });
 };
+
 const removeProject = (project: Project) => {
   mutationError.value = '';
   // 跨 UI 框架的简单删除确认，使用原生 confirm 避免引入框架耦合
@@ -330,6 +339,7 @@ const removeProject = (project: Project) => {
   )
     deleteMutation.mutate(project.id);
 };
+
 const formatDate = (value: string) =>
   new Intl.DateTimeFormat(locale.value, { dateStyle: 'medium' }).format(
     new Date(value),

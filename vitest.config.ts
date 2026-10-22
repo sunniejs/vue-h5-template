@@ -1,9 +1,15 @@
 import { defineConfig } from 'vitest/config';
 import { fileURLToPath, URL } from 'node:url';
 import vue from '@vitejs/plugin-vue';
+import { ConfigAutoImportPlugin } from './build/vite/plugins/autoImport.ts';
+import { ConfigAutoComponentsPlugin } from './build/vite/plugins/component.ts';
 
 export default defineConfig({
-  plugins: [vue()],
+  plugins: [
+    vue(),
+    ConfigAutoComponentsPlugin('vant', false),
+    ConfigAutoImportPlugin('vant', false),
+  ],
   resolve: {
     alias: {
       '@': fileURLToPath(new URL('src', import.meta.url)),

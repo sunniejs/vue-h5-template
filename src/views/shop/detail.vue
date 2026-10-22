@@ -1,10 +1,7 @@
 <script setup lang="ts">
-import FavoriteButton from '@/components/shop/FavoriteButton.vue';
 import { useUserStore } from '@/store/modules/user';
-import { computed, shallowRef, watch } from 'vue';
 import { useQuery } from '@tanstack/vue-query';
 import { useI18n } from 'vue-i18n';
-import { RouterLink, useRoute, useRouter } from 'vue-router';
 import { getProduct } from '@/api/modules/products';
 import { useCartStore } from '@/store/modules/cart';
 import {
@@ -42,16 +39,19 @@ const description = computed(() =>
 );
 const quantity = shallowRef(1);
 const actionMessage = shallowRef('');
+
 watch(productId, () => {
   quantity.value = 1;
   actionMessage.value = '';
 });
+
 const available = computed(
   () =>
     !!product.value &&
     product.value.stock > 0 &&
     product.value.status === 'on_sale',
 );
+
 watch(
   () => product.value?.stock,
   (stock) => {
@@ -59,6 +59,7 @@ watch(
       quantity.value = Math.max(1, Math.min(quantity.value, stock));
   },
 );
+
 const addToCart = () => {
   if (!product.value || !available.value) return;
   cart.add(product.value, quantity.value);
@@ -66,6 +67,7 @@ const addToCart = () => {
     count: quantity.value,
   });
 };
+
 const showBuyAction = () => {
   if (!available.value) return;
   actionMessage.value = t('common.shop.detail.checkoutDemo', {

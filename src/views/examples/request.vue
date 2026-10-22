@@ -64,7 +64,6 @@
 </template>
 
 <script setup lang="ts">
-import { computed, reactive, ref } from 'vue';
 import { useI18n } from 'vue-i18n';
 import { triggerRequestError } from '@/api/modules/requestExamples';
 import type { RequestErrorScenario } from '@/api/modules/requestExamples';
@@ -139,6 +138,7 @@ const scenarios = computed<
     description: t('common.request.scenarios.timeoutDescription'),
   },
 ]);
+
 const runScenario = async (scenario: RequestErrorScenario) => {
   pending.value = scenario;
   results[scenario] = undefined;

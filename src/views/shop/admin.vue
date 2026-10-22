@@ -104,7 +104,6 @@
 </template>
 
 <script setup lang="ts">
-import { computed, ref } from 'vue';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/vue-query';
 import { useI18n } from 'vue-i18n';
 import {
@@ -156,13 +155,16 @@ const onSaleCount = computed(
 const lowStockCount = computed(
   () => products.value.filter((item) => item.stock < 20).length,
 );
+
 const refresh = () =>
   queryClient.invalidateQueries({ queryKey: ['admin-products'] });
+
 const showError = (error: unknown) => {
   mutationError.value = isApiError(error)
     ? error.message
     : t('common.shop.admin.operationFailed');
 };
+
 const saveMutation = useMutation({
   mutationFn: (input: ProductInput) =>
     selectedProduct.value
@@ -179,24 +181,29 @@ const deleteMutation = useMutation({
   onSuccess: () => refresh(),
   onError: showError,
 });
+
 const openCreate = () => {
   selectedProduct.value = null;
   mutationError.value = '';
   editorOpen.value = true;
 };
+
 const openEdit = (product: Product) => {
   selectedProduct.value = product;
   mutationError.value = '';
   editorOpen.value = true;
 };
+
 const closeEditor = () => {
   editorOpen.value = false;
   selectedProduct.value = null;
 };
+
 const save = (input: ProductInput) => {
   mutationError.value = '';
   saveMutation.mutate(input);
 };
+
 const remove = (product: Product) => {
   // 跨 UI 框架的简单删除确认，使用原生 confirm 避免引入框架耦合
   if (

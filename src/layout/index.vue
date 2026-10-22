@@ -1,5 +1,5 @@
 <template>
-  <div class="app-shell">
+  <div class="app-shell" :style="{ height: layoutHeight }">
     <header
       v-if="!route.meta.hideHeader"
       class="top-bar"
@@ -89,9 +89,8 @@
 </template>
 
 <script setup lang="ts">
-import { computed } from 'vue';
 import { useI18n } from 'vue-i18n';
-import { useRoute, useRouter } from 'vue-router';
+import { useLayoutViewportHeight } from '@/composables/useLayoutViewportHeight';
 import { useNetworkStatus } from '@/composables/useNetworkStatus';
 import { setLang } from '@/locales';
 import type { SupportedLocale } from '@/locales';
@@ -101,6 +100,7 @@ const route = useRoute();
 const router = useRouter();
 const { locale, t } = useI18n();
 const { isOnline } = useNetworkStatus();
+const layoutHeight = useLayoutViewportHeight();
 const rootNames = new Set(['home', 'shop', 'examples', 'member']);
 const isRootPage = computed(() => rootNames.has(String(route.name)));
 const pageTitle = computed(() =>
@@ -119,6 +119,7 @@ const languageOptions: Array<{ value: SupportedLocale; label: string }> = [
   { value: 'en-US', label: 'common.language.en' },
   { value: 'ja-JP', label: 'common.language.ja' },
 ];
+
 const changeLanguage = (event: Event) =>
   void setLang((event.target as HTMLSelectElement).value);
 </script>

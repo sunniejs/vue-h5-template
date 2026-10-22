@@ -14,8 +14,6 @@
 </template>
 
 <script setup lang="ts">
-import { onScopeDispose, ref } from 'vue';
-import { useRoute, useRouter } from 'vue-router';
 import { useI18n } from 'vue-i18n';
 import type { LoginParams } from '@/api/modules/auth';
 import { useUserStore } from '@/store/modules/user';
@@ -32,7 +30,9 @@ const loginDescriptionKey =
     : 'common.login.realDescription';
 const loading = ref(false);
 const errorMessage = ref('');
+
 onScopeDispose(() => userStore.cancelLogin());
+
 const login = async (params: LoginParams) => {
   if (loading.value) return;
   loading.value = true;

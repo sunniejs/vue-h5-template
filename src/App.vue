@@ -1,11 +1,11 @@
 <script setup lang="ts">
-import { ref, watch } from 'vue';
 import { useQueryClient } from '@tanstack/vue-query';
 import { useUserStore } from '@/store/modules/user';
 
 const user = useUserStore();
 const queryClient = useQueryClient();
 const sessionVersion = ref(0);
+
 watch(
   () => user.token,
   () => {

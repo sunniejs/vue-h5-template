@@ -42,35 +42,13 @@ export default function defineViteConfig({
       forwardConsole: true,
     },
     plugins: createVitePlugins(viteEnv, isProduction),
-    esbuild: isProduction
-      ? {
-          drop: ['console', 'debugger'],
-        }
-      : undefined,
     build: {
       target: ['es2019', 'safari15'],
       manifest: true,
-      // 使用 esbuild 压缩：比 terser 快数倍，且原生支持移除 console/debugger
-      minify: 'esbuild',
-      rollupOptions: {
+      rolldownOptions: {
         output: {
-          // 拆分 vendor，避免单个 chunk 过大、改善缓存命中率与并行加载
-          manualChunks(id) {
-            if (!id.includes('node_modules')) return undefined;
-            if (id.includes('@vant')) return 'vendor-vant';
-            if (id.includes('@nutui')) return 'vendor-nutui';
-            if (id.includes('@varlet')) return 'vendor-varlet';
-            if (id.includes('@tanstack')) return 'vendor-query';
-            if (id.includes('markdown-it') || id.includes('dompurify'))
-              return 'vendor-markdown';
-            if (
-              /[\\/]node_modules[\\/](vue|vue-router|pinia|vue-i18n)[\\/]/.test(
-                id,
-              )
-            ) {
-              return 'vendor-vue';
-            }
-            return 'vendor';
+          minify: {
+            compress: { dropConsole: true, dropDebugger: true },
           },
         },
       },

@@ -6,7 +6,6 @@
 </template>
 
 <script setup lang="ts">
-import { computed } from 'vue';
 import type { SvgIconName } from '@/types/icon';
 
 const props = defineProps<{ name: SvgIconName; title?: string }>();

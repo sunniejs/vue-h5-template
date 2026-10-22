@@ -1,18 +1,6 @@
 <script setup lang="ts">
-import {
-  computed,
-  nextTick,
-  onScopeDispose,
-  shallowRef,
-  useTemplateRef,
-  watch,
-} from 'vue';
-import ChatComposer from '@/components/ai/ChatComposer.vue';
-import SafeMarkdown from '@/components/ai/SafeMarkdown.vue';
-import SvgIcon from '@/components/common/SvgIcon.vue';
 import { useQuery } from '@tanstack/vue-query';
 import { getChatSuggestions } from '@/api/modules/ai';
-import { useRouter } from 'vue-router';
 import { useI18n } from 'vue-i18n';
 import { useStreamingChat } from '@/composables/useStreamingChat';
 import { useVisualViewport } from '@/composables/useVisualViewport';
@@ -28,18 +16,22 @@ const copiedId = shallowRef('');
 const copyNotice = shallowRef('');
 let copyVersion = 0;
 let copyTimer: ReturnType<typeof setTimeout> | undefined;
+
 const resetCopy = () => {
   copyVersion += 1;
   clearTimeout(copyTimer);
   copiedId.value = '';
   copyNotice.value = '';
 };
+
 onScopeDispose(resetCopy);
+
 const clearChat = () => {
   resetCopy();
   showScrollButton.value = false;
   clear();
 };
+
 const suggestionsQuery = useQuery({
   queryKey: computed(() => ['ai-suggestions', locale.value]),
   queryFn: ({ signal }) =>
@@ -59,6 +51,7 @@ const prompts = computed(() =>
 const pageStyle = computed(() => ({
   height: viewportHeight.value ? `${viewportHeight.value}px` : '100dvh',
 }));
+
 const isNearBottom = () => {
   const element = messageList.value;
   return (
@@ -66,6 +59,7 @@ const isNearBottom = () => {
     element.scrollHeight - element.scrollTop - element.clientHeight < 160
   );
 };
+
 const scrollToBottom = (behavior: ScrollBehavior = 'auto') =>
   void nextTick(() =>
     messageList.value?.scrollTo({
@@ -73,13 +67,16 @@ const scrollToBottom = (behavior: ScrollBehavior = 'auto') =>
       behavior,
     }),
   );
+
 const updateScrollState = () => {
   showScrollButton.value = !isNearBottom();
 };
+
 const send = (content: string) => {
   void sendMessage(content);
   scrollToBottom();
 };
+
 const copyMessage = async (id: string, content: string) => {
   resetCopy();
   const version = copyVersion;
@@ -93,6 +90,7 @@ const copyMessage = async (id: string, content: string) => {
   }
   copyTimer = setTimeout(resetCopy, 1200);
 };
+
 watch(
   [
     () => messages.value.length,

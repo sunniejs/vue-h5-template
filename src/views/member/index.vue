@@ -46,10 +46,8 @@
 </template>
 
 <script setup lang="ts">
-import { computed } from 'vue';
 import { useQuery } from '@tanstack/vue-query';
 import { useI18n } from 'vue-i18n';
-import { useRouter } from 'vue-router';
 import { getUserProfile } from '@/api/modules/user';
 import { useUserStore } from '@/store/modules/user';
 const router = useRouter();
@@ -60,6 +58,7 @@ const profileQuery = useQuery({
   queryFn: ({ signal }) => getUserProfile(signal),
   enabled: computed(() => Boolean(userStore.token)),
 });
+
 const logout = async () => {
   userStore.logout();
   await router.replace('/home');

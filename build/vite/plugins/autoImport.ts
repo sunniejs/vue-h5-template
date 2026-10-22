@@ -18,12 +18,13 @@ function createUiResolvers(
 
 export const ConfigAutoImportPlugin = (
   framework: ViteEnv['VITE_UI_FRAMEWORK'],
+  writeDeclarations = true,
 ) => {
   return AutoImport({
-    dts: 'types/auto-imports.d.ts',
+    dts: writeDeclarations && 'types/auto-imports.d.ts',
     imports: ['vue', 'pinia', 'vue-router'],
     eslintrc: {
-      enabled: true,
+      enabled: writeDeclarations,
     },
     resolvers: createUiResolvers(framework),
   });

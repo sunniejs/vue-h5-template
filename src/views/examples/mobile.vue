@@ -54,7 +54,6 @@
 </template>
 
 <script setup lang="ts">
-import { computed, ref } from 'vue';
 import { useI18n } from 'vue-i18n';
 import { useNetworkStatus } from '@/composables/useNetworkStatus';
 
@@ -62,6 +61,7 @@ const { t } = useI18n();
 const { isOnline } = useNetworkStatus();
 const feedback = ref('');
 const canShare = computed(() => typeof navigator.share === 'function');
+
 const copyText = async () => {
   feedback.value = '';
   try {
@@ -71,6 +71,7 @@ const copyText = async () => {
     feedback.value = t('common.mobile.copyFailed');
   }
 };
+
 const sharePage = async () => {
   if (!canShare.value) return;
   feedback.value = '';

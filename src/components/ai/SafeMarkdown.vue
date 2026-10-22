@@ -4,11 +4,11 @@
 </template>
 
 <script setup lang="ts">
-import { ref, watch } from 'vue';
 import { renderSafeMarkdown } from '@/utils/markdown';
 const props = defineProps<{ source: string }>();
 const html = ref('');
 let renderVersion = 0;
+
 watch(
   () => props.source,
   async (source) => {

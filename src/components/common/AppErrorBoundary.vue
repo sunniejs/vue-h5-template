@@ -11,15 +11,16 @@
 </template>
 
 <script setup lang="ts">
-import { onErrorCaptured, ref } from 'vue';
 import { useI18n } from 'vue-i18n';
 
 const { t } = useI18n();
 const error = ref<Error | null>(null);
+
 onErrorCaptured((captured) => {
   error.value = captured;
   return false;
 });
+
 const recover = () => window.location.reload();
 </script>
 

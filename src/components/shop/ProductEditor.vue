@@ -175,7 +175,6 @@
 </template>
 
 <script setup lang="ts">
-import { reactive, ref, watch } from 'vue';
 import { useI18n } from 'vue-i18n';
 import type {
   LocalizedText,
@@ -214,11 +213,13 @@ const locales = localeTabs.map((item) => item.value);
 const categories = ['digital', 'lifestyle', 'home', 'outdoor'] as const;
 const activeLocale = ref<LocaleKey>('zh-CN');
 const validationError = ref('');
+
 const emptyLocalized = (): LocalizedText => ({
   'zh-CN': '',
   'en-US': '',
   'ja-JP': '',
 });
+
 const blankForm = (): EditorForm => ({
   sku: '',
   name: emptyLocalized(),
@@ -235,6 +236,7 @@ const blankForm = (): EditorForm => ({
   status: 'draft',
   featured: false,
 });
+
 const form = reactive<EditorForm>(blankForm());
 
 watch(
